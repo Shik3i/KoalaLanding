@@ -154,12 +154,17 @@ const langCode = localeLangCodes[locale];
 
         if (fromOrder < 99 && toOrder < 99) {
           doc.setAttribute('data-transition-type', 'horizontal');
-          event.direction = toOrder > fromOrder ? 'forward' : 'back';
+          if (fromOrder === toOrder) {
+            const fromDepth = fromPath.split('/').filter(Boolean).length;
+            const toDepth = toPath.split('/').filter(Boolean).length;
+            event.direction = toDepth >= fromDepth ? 'forward' : 'back';
+          } else {
+            event.direction = toOrder > fromOrder ? 'forward' : 'back';
+          }
         } else if (toOrder === 99) {
           doc.setAttribute('data-transition-type', 'vertical-up');
         } else if (fromOrder === 99 && toOrder < 99) {
-          doc.setAttribute('data-transition-type', 'horizontal');
-          event.direction = 'back';
+          doc.setAttribute('data-transition-type', 'vertical-down');
         }
       });
 
