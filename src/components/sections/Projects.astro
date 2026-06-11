@@ -51,9 +51,13 @@ const categoryIcons: Record<string, string> = {
 
     <!-- Category Filter Tabs -->
     <div class="project-filter-container">
-      <nav class="project-filter" aria-label={tr['categories.title'] ?? 'Project categories'}>
+      <nav class="project-filter" role="tablist" aria-label={tr['categories.title'] ?? 'Project categories'}>
         <button
           class="filter-btn active"
+          role="tab"
+          aria-selected="true"
+          tabindex="0"
+          aria-controls="homepage-project-grid"
           data-category="all"
           data-desc={tr['categories.all.desc'] ?? 'All open-source tools and utilities built by KoalaStuff.'}
         >
@@ -65,6 +69,10 @@ const categoryIcons: Record<string, string> = {
           return (
             <button
               class="filter-btn"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              aria-controls="homepage-project-grid"
               data-category={cat}
               data-desc={tr[`categories.${cat}.desc`] ?? ''}
             >
@@ -83,7 +91,7 @@ const categoryIcons: Record<string, string> = {
     </div>
 
     <!-- Unified projects grid -->
-    <div class="project-grid">
+    <div class="project-grid" id="homepage-project-grid">
       {nonFeatured.map((project) => (
         <div class="project-grid-item" data-category={project.category}>
           <ProjectCard project={project} locale={locale} translations={tr} />

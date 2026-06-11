@@ -91,21 +91,27 @@
       });
     }
 
-    // Dynamic Hover Coordinates for Radial Glow Effect
-    const trackGlow = (e: MouseEvent, card: HTMLElement) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-    };
+    // Dynamic Hover Coordinates for Radial Glow Effect (only for hover-capable pointer devices)
+    if (window.matchMedia('(hover: hover)').matches) {
+      let frameId: number | null = null;
+      const trackGlow = (e: MouseEvent, card: HTMLElement) => {
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      };
 
-    const attachGlowListeners = () => {
-      document.querySelectorAll('.project-card, .featured-project, .tracker-row').forEach((card) => {
-        card.addEventListener('mousemove', (e) => trackGlow(e as MouseEvent, card as HTMLElement));
-      });
-    };
-    attachGlowListeners();
+      const attachGlowListeners = () => {
+        document.querySelectorAll('.project-card, .featured-project, .tracker-row').forEach((card) => {
+          card.addEventListener('mousemove', (e) => trackGlow(e as MouseEvent, card as HTMLElement));
+        });
+      };
+      attachGlowListeners();
+    }
 
     // Interactive Project Category Filter tabs
     const filterContainer = document.querySelector('.project-filter');
@@ -113,11 +119,19 @@
     const activeDesc = document.querySelector('.category-header__desc');
 
     if (filterContainer) {
-      const buttons = filterContainer.querySelectorAll('.filter-btn');
+      const buttons = Array.from(filterContainer.querySelectorAll('.filter-btn')) as HTMLButtonElement[];
+      
       buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
-          buttons.forEach((b) => b.classList.remove('active'));
+          // Update accessibility active states
+          buttons.forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+            b.setAttribute('tabindex', '-1');
+          });
           btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          btn.setAttribute('tabindex', '0');
 
           const category = btn.getAttribute('data-category') || 'all';
 
@@ -154,6 +168,33 @@
             }
           });
         });
+      });
+
+      // Keyboard arrow navigation (Roving Tabindex) for accessibility tablist
+      filterContainer.addEventListener('keydown', (e: Event) => {
+        const keyEvent = e as KeyboardEvent;
+        const activeIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+        if (activeIndex === -1) return;
+
+        let nextIndex = activeIndex;
+        if (keyEvent.key === 'ArrowRight' || keyEvent.key === 'ArrowDown') {
+          keyEvent.preventDefault();
+          nextIndex = (activeIndex + 1) % buttons.length;
+        } else if (keyEvent.key === 'ArrowLeft' || keyEvent.key === 'ArrowUp') {
+          keyEvent.preventDefault();
+          nextIndex = (activeIndex - 1 + buttons.length) % buttons.length;
+        } else if (keyEvent.key === 'Home') {
+          keyEvent.preventDefault();
+          nextIndex = 0;
+        } else if (keyEvent.key === 'End') {
+          keyEvent.preventDefault();
+          nextIndex = buttons.length - 1;
+        }
+
+        if (nextIndex !== activeIndex) {
+          buttons[nextIndex].focus();
+          buttons[nextIndex].click(); // Select tab automatically on focus shift
+        }
       });
     }
   });

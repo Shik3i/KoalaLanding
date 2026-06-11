@@ -50,22 +50,20 @@ const categoryIcons: Record<string, string> = {
         <p class="section__subtitle">
           A tracker-style log of all KoalaStuff tools, browser extensions, and experiments.
         </p>
-      </div>
-
       <!-- Category Filter Tabs -->
       <div class="project-filter-container" style="margin-bottom: var(--space-6);">
-        <nav class="project-filter" aria-label={tr['categories.title'] ?? 'Project categories'}>
-          <button class="filter-btn active" data-category="all">{tr['categories.all'] ?? 'All'}</button>
-          <button class="filter-btn" data-category="browser-extension">
+        <nav class="project-filter" role="tablist" aria-label={tr['categories.title'] ?? 'Project categories'}>
+          <button class="filter-btn active" role="tab" aria-selected="true" tabindex="0" aria-controls="projects-tracker-rows" data-category="all">{tr['categories.all'] ?? 'All'}</button>
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="browser-extension">
             <span aria-hidden="true">🧩</span> {tr['categories.browser-extension'] ?? 'Extensions'}
           </button>
-          <button class="filter-btn" data-category="web">
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="web">
             <span aria-hidden="true">🌐</span> {tr['categories.web'] ?? 'Web'}
           </button>
-          <button class="filter-btn" data-category="desktop">
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="desktop">
             <span aria-hidden="true">🖥</span> {tr['categories.desktop'] ?? 'Desktop'}
           </button>
-          <button class="filter-btn" data-category="experiment">
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="experiment">
             <span aria-hidden="true">🧪</span> {tr['categories.experiment'] ?? 'Experiments'}
           </button>
         </nav>
@@ -83,7 +81,7 @@ const categoryIcons: Record<string, string> = {
         </div>
 
         <!-- Rows -->
-        <div class="projects-tracker__rows">
+        <div class="projects-tracker__rows" id="projects-tracker-rows">
           {sortedProjects.map((project) => {
             const statusLabel = tr[`status.${project.status}`] ?? project.status;
             const statusClass = `status-dot--${project.status}`;
