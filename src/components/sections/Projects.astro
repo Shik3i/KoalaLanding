@@ -168,8 +168,22 @@ const categoryIcons: Record<string, string> = {
     const disclaimer = document.getElementById('experimental-disclaimer');
     if (!toggleBtn || !projectGrid || !toggleContainer) return;
 
-    // Read from localStorage
-    const savedState = localStorage.getItem('koalastuff_show_experimental');
+    const getSavedState = () => {
+      try {
+        return localStorage.getItem('koalastuff_show_experimental');
+      } catch {
+        return null;
+      }
+    };
+    const saveState = (value: boolean) => {
+      try {
+        localStorage.setItem('koalastuff_show_experimental', String(value));
+      } catch {
+        // Storage may be unavailable in private or restricted browsing contexts.
+      }
+    };
+
+    const savedState = getSavedState();
     let isShowing = savedState === 'true';
 
     const updateDOM = () => {
@@ -179,6 +193,7 @@ const categoryIcons: Record<string, string> = {
         toggleBtn.setAttribute('aria-expanded', 'true');
         if (disclaimer) {
           disclaimer.classList.add('is-active');
+          disclaimer.setAttribute('aria-hidden', 'false');
           disclaimer.style.height = disclaimer.scrollHeight + 32 + 'px'; // +32 for padding
           setTimeout(() => { if(isShowing) disclaimer.style.height = 'auto'; }, 300);
         }
@@ -195,6 +210,7 @@ const categoryIcons: Record<string, string> = {
         toggleBtn.setAttribute('aria-expanded', 'false');
         if (disclaimer) {
           disclaimer.classList.remove('is-active');
+          disclaimer.setAttribute('aria-hidden', 'true');
           disclaimer.style.height = '0px';
         }
       }
@@ -204,7 +220,7 @@ const categoryIcons: Record<string, string> = {
 
     toggleBtn.addEventListener('click', () => {
       isShowing = !isShowing;
-      localStorage.setItem('koalastuff_show_experimental', isShowing ? 'true' : 'false');
+      saveState(isShowing);
       
       if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const main = document.getElementById('main-content');

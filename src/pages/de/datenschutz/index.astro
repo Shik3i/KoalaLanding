@@ -21,11 +21,11 @@ const tr = await loadTranslations(locale);
       <article class="legal-content">
         <h1>Datenschutzerklärung</h1>
 
-        <p>Stand: 10. Juni 2026</p>
+        <p>Stand: 11. Juni 2026</p>
 
         <h2>1. Überblick</h2>
         <p>
-          Diese Datenschutzerklärung gilt für die Website <strong>koalastuff.net</strong>. Die Website ist eine statische Seite ohne Backend, ohne Datenbank, ohne Analyse-Tools, ohne Tracking, ohne Cookies (außer freiwillige Speicherung der Theme-Einstellung) und ohne Drittanbieter-Skripte oder -Einbettungen.
+          Diese Datenschutzerklärung gilt für die Website <strong>koalastuff.net</strong>. Die Website ist eine statische Seite ohne Backend, ohne Datenbank, ohne Analyse-Tools, ohne Tracking, ohne Cookies und ohne Drittanbieter-Skripte oder -Einbettungen. Die Projektübersicht stellt eine direkte Anfrage an die GitHub-API, um aktuelle Aktualisierungsdaten der Repositories anzuzeigen.
         </p>
 
         <h2>2. Verantwortliche Stelle</h2>
@@ -49,20 +49,25 @@ const tr = await loadTranslations(locale);
 
         <h2>4. Lokaler Speicher (localStorage)</h2>
         <p>
-          Diese Website kann Ihre Theme-Einstellung (dunkel oder hell) lokal in Ihrem Browser über <code>localStorage</code> speichern. Dieser Wert verlässt Ihr Gerät nicht und wird nicht für Tracking, Analysen oder andere Zwecke verwendet. Sie können ihn jederzeit durch Löschen des lokalen Speichers Ihres Browsers für diese Domain entfernen.
+          Diese Website kann Ihre Theme-Einstellung (dunkel oder hell), Ihre Einstellung zur Anzeige experimenteller Projekte und einen temporären Cache öffentlicher GitHub-Repository-Daten lokal in Ihrem Browser über <code>localStorage</code> speichern. Diese Werte werden nicht für Tracking oder Analysen verwendet. Sie können sie jederzeit durch Löschen des lokalen Speichers Ihres Browsers für diese Domain entfernen.
         </p>
 
-        <h2>5. Serverprotokolle</h2>
+        <h2>5. Anfrage an die GitHub-API</h2>
+        <p>
+          Beim Öffnen der Projektübersicht kann Ihr Browser öffentliche Repository-Metadaten direkt von <a href="https://api.github.com/" rel="noopener noreferrer">api.github.com</a> abrufen. Dabei erhält GitHub technische Verbindungsdaten wie Ihre IP-Adresse, Browserinformationen und den Zeitpunkt der Anfrage. Die Antwort wird lokal bis zu sechs Stunden zwischengespeichert, um wiederholte Anfragen zu reduzieren. GitHub verarbeitet diese Daten nach seiner eigenen Datenschutzerklärung.
+        </p>
+
+        <h2>6. Serverprotokolle</h2>
         <p>
           Unser Webserver (Caddy) auf einem VPS erstellt standardmäßige Zugriffsprotokolle (z. B. IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs) zur Gewährleistung der Serverstabilität und Diagnose technischer Probleme. Diese Logs werden automatisch nach 7 Tagen gelöscht und nicht mit Personen verknüpft oder zur Nachverfolgung verwendet.
         </p>
 
-        <h2>6. Externe Links</h2>
+        <h2>7. Externe Links</h2>
         <p>
           Die Website enthält Links zu externen Websites (GitHub, dev.to, Browser-Extension-Stores). Diese haben ihre eigenen Datenschutzrichtlinien. KoalaStuff ist nicht verantwortlich für die Datenschutzpraktiken dieser Seiten.
         </p>
 
-        <h2>7. Ihre Rechte (DSGVO)</h2>
+        <h2>8. Ihre Rechte (DSGVO)</h2>
         <p>
           Sie haben das Recht auf Auskunft, Berichtigung oder Löschung Ihrer personenbezogenen Daten. Da wir keine Daten dauerhaft speichern, ist eine Zuordnung von IP-Adressen in temporären Logdateien zu bestimmten Personen technisch in der Regel unmöglich.
         </p>
@@ -70,7 +75,7 @@ const tr = await loadTranslations(locale);
           Sie haben außerdem das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren.
         </p>
 
-        <h2>8. Kontakt</h2>
+        <h2>9. Kontakt</h2>
         <p>
           Bei datenschutzbezogenen Fragen: admin@koalastuff.net
         </p>

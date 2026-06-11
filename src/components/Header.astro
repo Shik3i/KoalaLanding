@@ -79,6 +79,8 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
           id="theme-toggle"
           class="theme-toggle"
           aria-label={tr['nav.switchToLight'] ?? 'Switch to light theme'}
+          data-label-light={tr['nav.switchToLight'] ?? 'Switch to light theme'}
+          data-label-dark={tr['nav.switchToDark'] ?? 'Switch to dark theme'}
           title={tr['nav.toggleTheme'] ?? 'Toggle theme'}
           aria-pressed="false"
           type="button"
@@ -104,12 +106,12 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
         <!-- Language switcher -->
         <nav class="lang-switcher" aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}>
           <button
-             id="lang-switcher-btn"
+            id="lang-switcher-btn"
             class="lang-switcher__btn"
-            aria-haspopup="listbox"
             aria-expanded="false"
             aria-controls="lang-switcher-dropdown"
             title={tr['nav.switchLanguage'] ?? 'Switch language'}
+            type="button"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px;">
               <circle cx="12" cy="12" r="10"></circle>
@@ -124,16 +126,13 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
           <div
             id="lang-switcher-dropdown"
             class="lang-switcher__dropdown"
-            role="listbox"
-            aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}
           >
             {locales.map((l) => (
               <a
                 href={getLocalePath(l, basePath)}
                 hreflang={localeLangCodes[l]}
-                aria-current={l === locale ? 'true' : undefined}
-                role="option"
-                aria-selected={l === locale}
+                lang={localeLangCodes[l]}
+                aria-current={l === locale ? 'page' : undefined}
               >
                 {localeNames[l]}
               </a>

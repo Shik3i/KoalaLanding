@@ -15,6 +15,7 @@
 
   // AbortController to clean up listeners from previous astro:page-load
   let pageLoadController: AbortController | null = null;
+  let bgCanvasController: { canvas: HTMLCanvasElement; destroy: () => void } | null = null;
 
   function getStoredTheme(): string | null {
     try {
@@ -36,10 +37,16 @@
     document.documentElement.dataset.theme = theme;
     const btn = document.getElementById('theme-toggle');
     if (btn) {
+      const lightLabel = btn.dataset.labelLight ?? 'Switch to light theme';
+      const darkLabel = btn.dataset.labelDark ?? 'Switch to dark theme';
       btn.setAttribute('aria-label',
-        theme === DARK ? 'Switch to light theme' : 'Switch to dark theme'
+        theme === DARK ? lightLabel : darkLabel
       );
       btn.setAttribute('aria-pressed', theme === LIGHT ? 'true' : 'false');
+    }
+    const themeColor = document.getElementById('theme-color');
+    if (themeColor) {
+      themeColor.setAttribute('content', theme === LIGHT ? '#ffffff' : '#0d0d0d');
     }
   }
 
@@ -70,21 +77,63 @@
     const langBtn = document.getElementById('lang-switcher-btn');
     const langDropdown = document.getElementById('lang-switcher-dropdown');
     if (langBtn && langDropdown) {
-      langBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = langDropdown.classList.toggle('is-open');
-        langBtn.setAttribute('aria-expanded', String(isOpen));
-      }, { signal });
-      document.addEventListener('click', () => {
+      const langLinks = Array.from(langDropdown.querySelectorAll('a'));
+      const closeLanguageMenu = (restoreFocus = false) => {
+        if (!langDropdown.classList.contains('is-open')) return;
         langDropdown.classList.remove('is-open');
         langBtn.setAttribute('aria-expanded', 'false');
-      }, { signal });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          langDropdown.classList.remove('is-open');
-          langBtn.setAttribute('aria-expanded', 'false');
-          langBtn.focus();
+        if (restoreFocus) langBtn.focus();
+      };
+      const openLanguageMenu = (focusTarget?: 'first' | 'last' | 'current') => {
+        langDropdown.classList.add('is-open');
+        langBtn.setAttribute('aria-expanded', 'true');
+        if (!focusTarget || langLinks.length === 0) return;
+        const target = focusTarget === 'last'
+          ? langLinks.at(-1)
+          : focusTarget === 'current'
+            ? langLinks.find((link) => link.getAttribute('aria-current') === 'page') ?? langLinks[0]
+            : langLinks[0];
+        target?.focus();
+      };
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (langDropdown.classList.contains('is-open')) {
+          closeLanguageMenu();
+        } else {
+          openLanguageMenu();
         }
+      }, { signal });
+      langBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLanguageMenu('current');
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          openLanguageMenu('last');
+        } else if (e.key === 'Escape') {
+          closeLanguageMenu(true);
+        }
+      }, { signal });
+      document.addEventListener('click', () => {
+        closeLanguageMenu();
+      }, { signal });
+      langDropdown.addEventListener('click', (e) => e.stopPropagation(), { signal });
+      langDropdown.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeLanguageMenu(true);
+          return;
+        }
+        const currentIndex = langLinks.indexOf(document.activeElement as HTMLAnchorElement);
+        if (currentIndex < 0) return;
+        let nextIndex = currentIndex;
+        if (e.key === 'ArrowDown') nextIndex = (currentIndex + 1) % langLinks.length;
+        else if (e.key === 'ArrowUp') nextIndex = (currentIndex - 1 + langLinks.length) % langLinks.length;
+        else if (e.key === 'Home') nextIndex = 0;
+        else if (e.key === 'End') nextIndex = langLinks.length - 1;
+        else return;
+        e.preventDefault();
+        langLinks[nextIndex]?.focus();
       }, { signal });
     }
 
@@ -250,10 +299,12 @@
     // Interactive Background Canvas Floating Constellation Mesh
     const initBgCanvas = () => {
       const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
-      if (!canvas) return;
+      if (!canvas) return null;
 
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (!ctx) return null;
+      const canvasController = new AbortController();
+      const canvasSignal = canvasController.signal;
 
       interface Particle {
         x: number;
@@ -269,6 +320,8 @@
       }
 
       let particles: Particle[] = [];
+      let viewportWidth = window.innerWidth;
+      let viewportHeight = window.innerHeight;
       const spacing = 50; // Spacious 50px grid
       const magnetRadius = 180;
       const spring = 0.05;
@@ -288,7 +341,7 @@
         } else {
           startAnimation();
         }
-      }, { signal });
+      }, { signal: canvasSignal });
 
       // Colors matching user preference dataset.theme
       let isLight = document.documentElement.dataset.theme === 'light';
@@ -314,8 +367,8 @@
 
       const initGrid = () => {
         particles = [];
-        const w = canvas.width;
-        const h = canvas.height;
+        const w = viewportWidth;
+        const h = viewportHeight;
         const cols = Math.ceil(w / spacing) + 1;
         const rows = Math.ceil(h / spacing) + 1;
 
@@ -347,15 +400,21 @@
       };
 
       const resize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        viewportWidth = window.innerWidth;
+        viewportHeight = window.innerHeight;
+        const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+        canvas.width = Math.round(viewportWidth * pixelRatio);
+        canvas.height = Math.round(viewportHeight * pixelRatio);
+        canvas.style.width = `${viewportWidth}px`;
+        canvas.style.height = `${viewportHeight}px`;
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         initGrid();
         if (isReducedMotion) {
           drawStatic();
         }
       };
 
-      window.addEventListener('resize', resize, { signal });
+      window.addEventListener('resize', resize, { signal: canvasSignal });
       resize();
 
       // Mouse tracking
@@ -367,38 +426,38 @@
 
       window.addEventListener('mousemove', (e) => {
         setMousePos(e.clientX, e.clientY);
-      }, { signal });
+      }, { signal: canvasSignal });
 
       window.addEventListener('mouseleave', () => {
         mouse.active = false;
         mouse.x = -1000;
         mouse.y = -1000;
-      }, { signal });
+      }, { signal: canvasSignal });
 
       // Touch tracking for mobile support
       window.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
           setMousePos(e.touches[0].clientX, e.touches[0].clientY);
         }
-      }, { signal, passive: true });
+      }, { signal: canvasSignal, passive: true });
 
       window.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
           setMousePos(e.touches[0].clientX, e.touches[0].clientY);
         }
-      }, { signal, passive: true });
+      }, { signal: canvasSignal, passive: true });
 
       window.addEventListener('touchend', () => {
         mouse.active = false;
         mouse.x = -1000;
         mouse.y = -1000;
-      }, { signal });
+      }, { signal: canvasSignal });
 
       let animationFrameId: number | null = null;
 
       const drawStatic = () => {
         updateColors();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, viewportWidth, viewportHeight);
         
         ctx.fillStyle = dotColor;
         for (let i = 0; i < particles.length; i++) {
@@ -411,29 +470,49 @@
 
       const animate = () => {
         updateColors();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, viewportWidth, viewportHeight);
 
         // 1. Draw Constellation lines between particles
         ctx.lineWidth = 0.8;
+        const spatialGrid = new Map<string, number[]>();
+        for (let i = 0; i < particles.length; i++) {
+          const particle = particles[i];
+          const cellX = Math.floor(particle.x / maxConnectDist);
+          const cellY = Math.floor(particle.y / maxConnectDist);
+          const key = `${cellX},${cellY}`;
+          const cell = spatialGrid.get(key);
+          if (cell) cell.push(i);
+          else spatialGrid.set(key, [i]);
+        }
+
         for (let i = 0; i < particles.length; i++) {
           const p1 = particles[i];
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const distSq = dx * dx + dy * dy;
-            const maxSq = maxConnectDist * maxConnectDist;
-            
-            if (distSq < maxSq) {
-              const dist = Math.sqrt(distSq);
-              const opacity = (1 - dist / maxConnectDist) * 0.15;
-              ctx.strokeStyle = isLight 
-                ? `hsla(212, 100%, 48%, ${opacity * 0.75})` 
-                : `hsla(212, 100%, 65%, ${opacity * 1.1})`;
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.stroke();
+          const cellX = Math.floor(p1.x / maxConnectDist);
+          const cellY = Math.floor(p1.y / maxConnectDist);
+          for (let offsetX = -1; offsetX <= 1; offsetX++) {
+            for (let offsetY = -1; offsetY <= 1; offsetY++) {
+              const neighbors = spatialGrid.get(`${cellX + offsetX},${cellY + offsetY}`);
+              if (!neighbors) continue;
+              for (const j of neighbors) {
+                if (j <= i) continue;
+                const p2 = particles[j];
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distSq = dx * dx + dy * dy;
+                const maxSq = maxConnectDist * maxConnectDist;
+
+                if (distSq < maxSq) {
+                  const dist = Math.sqrt(distSq);
+                  const opacity = (1 - dist / maxConnectDist) * 0.15;
+                  ctx.strokeStyle = isLight
+                    ? `hsla(212, 100%, 48%, ${opacity * 0.75})`
+                    : `hsla(212, 100%, 65%, ${opacity * 1.1})`;
+                  ctx.beginPath();
+                  ctx.moveTo(p1.x, p1.y);
+                  ctx.lineTo(p2.x, p2.y);
+                  ctx.stroke();
+                }
+              }
             }
           }
         }
@@ -544,7 +623,23 @@
       } else {
         drawStatic();
       }
+
+      return {
+        canvas,
+        destroy: () => {
+          cancelAnimation();
+          themeObserver.disconnect();
+          canvasController.abort();
+        }
+      };
     };
-    initBgCanvas();
+    const currentCanvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
+    if (bgCanvasController && bgCanvasController.canvas !== currentCanvas) {
+      bgCanvasController.destroy();
+      bgCanvasController = null;
+    }
+    if (!bgCanvasController) {
+      bgCanvasController = initBgCanvas();
+    }
   });
 })();

@@ -1,1 +1,1 @@
-(function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var d=document.documentElement;if(t==='light'){d.dataset.theme='light'}else{d.dataset.theme='dark'}})();
+(function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var l=t==='light';document.documentElement.dataset.theme=l?'light':'dark';var m=document.getElementById('theme-color');if(m)m.setAttribute('content',l?'#ffffff':'#0d0d0d')})();

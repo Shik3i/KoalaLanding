@@ -26,6 +26,10 @@ const siteUrl = 'https://koalastuff.net';
 const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
 const ogImageUrl = `${siteUrl}${ogImage}`;
 const langCode = localeLangCodes[locale];
+const defaultLocalePath = getLocalePath(
+  defaultLocale,
+  canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''),
+);
 ---
 
 <!doctype html>
@@ -42,8 +46,7 @@ const langCode = localeLangCodes[locale];
     <meta name="author" content="Timo (KoalaStuff)" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta id="theme-color" name="theme-color" content="#0d0d0d" />
     <meta name="darkreader-lock" />
     <ClientRouter />
 
@@ -57,7 +60,7 @@ const langCode = localeLangCodes[locale];
         href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''))}`}
       />
     ))}
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${canonicalPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${defaultLocalePath}`} />
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
@@ -122,7 +125,7 @@ const langCode = localeLangCodes[locale];
     </div>
 
     <!-- Interactive Canvas Particle Grid -->
-    <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+    <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true" transition:persist="background-canvas"></canvas>
 
     <!-- Skip link for keyboard users -->
     <a href="#main-content" class="skip-link">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>

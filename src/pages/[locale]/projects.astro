@@ -160,7 +160,12 @@ const jsonLdData = {
       try {
         const cacheKey = 'koalastuff_github_repos';
         let data = null;
-        const cached = localStorage.getItem(cacheKey);
+        let cached = null;
+        try {
+          cached = localStorage.getItem(cacheKey);
+        } catch {
+          // Continue without a cache when storage is unavailable.
+        }
         
         if (cached) {
           const parsed = JSON.parse(cached);
@@ -173,7 +178,11 @@ const jsonLdData = {
           const res = await fetch('https://api.github.com/users/Shik3i/repos?sort=updated&per_page=100');
           if (!res.ok) return;
           data = await res.json();
-          localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+          } catch {
+            // The live data still works when storage is unavailable.
+          }
         }
 
         const repoDates = new Map();

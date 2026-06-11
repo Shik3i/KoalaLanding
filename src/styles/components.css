@@ -141,6 +141,9 @@
   box-shadow: var(--shadow-lg);
   padding: var(--space-2);
   z-index: 200;
+  max-height: min(24rem, calc(100vh - 5rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .lang-switcher__dropdown.is-open { display: block; }
 .lang-switcher__dropdown a {
@@ -261,8 +264,24 @@
   color: var(--c-text);
   font-size: var(--text-base);
 }
+.site-footer__logo {
+  display: flex;
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.site-footer__logo picture {
+  display: contents;
+}
 .site-footer__brand img,
-.site-footer__brand svg { width: 1.25rem; height: 1.25rem; }
+.site-footer__brand svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  max-width: none;
+  object-fit: contain;
+  aspect-ratio: 1;
+}
 
 .site-footer__tagline {
   font-size: var(--text-sm);

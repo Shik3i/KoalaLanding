@@ -32,7 +32,9 @@ try {
     <div class="site-footer__inner">
       <div class="site-footer__brand-group">
         <div class="site-footer__brand">
-          <Picture src={footerLogo} formats={['avif', 'webp']} densities={[1, 2]} alt="" width={20} height={20} />
+          <span class="site-footer__logo" aria-hidden="true">
+            <Picture src={footerLogo} formats={['avif', 'webp']} densities={[1, 2]} alt="" width={20} height={20} />
+          </span>
           <span>KoalaStuff</span>
         </div>
         <p class="site-footer__tagline">
