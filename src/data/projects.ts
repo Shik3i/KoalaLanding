@@ -87,6 +87,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Desktop App', 'Free', 'Local-first', 'Privacy-first'],
     links: {
+      website: 'https://pull.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaPull',
     },
     assets: {
@@ -109,6 +110,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Browser Extension', 'Free', 'Privacy-first'],
     links: {
+      website: 'https://clicker.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaClicker',
     },
     assets: {
@@ -149,6 +151,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Browser Extension', 'Gaming', 'WIP'],
     links: {
+      website: 'https://flyff.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaFlyff',
     },
     assets: {},
@@ -191,6 +194,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Web App', 'Dashboard', 'Self-hosted'],
     links: {
+      website: 'https://startpage.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaStartpage',
     },
     assets: {},
@@ -211,6 +215,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Web App', 'Self-hostable', 'Developer Tools'],
     links: {
+      website: 'https://snippets.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaSnippets',
     },
     assets: {},
@@ -231,6 +236,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Web App', 'Developer Tools', 'Shared Timer'],
     links: {
+      website: 'https://web.koalastuff.net',
       github: 'https://github.com/Shik3i/Antigrav',
     },
     assets: {},
@@ -251,6 +257,7 @@ export const projects: Project[] = [
     },
     tags: ['Experiment', 'Early'],
     links: {
+      website: 'https://news.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaNews',
     },
     assets: {},

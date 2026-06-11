@@ -24,7 +24,16 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
   <main id="main-content" class="section">
     <div class="container container--blog-index">
       <div class="section__header" style="margin-bottom: var(--space-12);">
-        <h1 class="section__title">Blog</h1>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h1 class="section__title" style="margin-bottom: 0;">Blog</h1>
+          <a href="/rss.xml" class="rss-link" title="RSS Feed" aria-label="RSS Feed">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 11a9 9 0 0 1 9 9"></path>
+              <path d="M4 4a16 16 0 0 1 16 16"></path>
+              <circle cx="5" cy="19" r="1"></circle>
+            </svg>
+          </a>
+        </div>
         <p class="section__subtitle">
           Updates, deep-dives and thoughts around open-source, web development and automation.
         </p>
@@ -89,5 +98,20 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
     font-size: var(--text-base);
     color: var(--c-text-faint);
     line-height: 1.6;
+  }
+  .rss-link {
+    display: inline-flex;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    color: var(--c-text-muted);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    transition: all 0.2s ease;
+  }
+  .rss-link:hover {
+    color: hsl(25, 90%, 60%);
+    border-color: hsl(25, 90%, 60%);
+    box-shadow: 0 4px 12px hsla(25, 90%, 60%, 0.15);
+    transform: translateY(-2px);
   }
 </style>
