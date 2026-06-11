@@ -56,7 +56,12 @@
 </style>
 
 <script>
+  let backToTopController = null;
   document.addEventListener('astro:page-load', () => {
+    if (backToTopController) backToTopController.abort();
+    backToTopController = new AbortController();
+    const signal = backToTopController.signal;
+
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
 
@@ -70,14 +75,14 @@
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    window.addEventListener('scroll', toggleVisibility, { passive: true, signal });
     
     btn.addEventListener('click', () => {
       window.scrollTo({
         top: 0,
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
-    });
+    }, { signal });
 
     toggleVisibility(); // Initial check
   });

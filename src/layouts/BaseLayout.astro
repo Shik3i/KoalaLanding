@@ -137,6 +137,7 @@ const langCode = localeLangCodes[locale];
     </script>
     <script>
       let pageObserver = null;
+      let isInitialLoad = true;
       document.addEventListener('astro:before-preparation', (event) => {
         const fromPath = event.from.pathname || new URL(event.from, location.href).pathname;
         const toPath = event.to.pathname || new URL(event.to, location.href).pathname;
@@ -194,11 +195,12 @@ const langCode = localeLangCodes[locale];
 
         // Move focus to main content after view transitions
         const main = document.getElementById('main-content');
-        if (main && document.activeElement && !main.contains(document.activeElement)) {
+        if (!isInitialLoad && main && document.activeElement && !main.contains(document.activeElement)) {
           main.setAttribute('tabindex', '-1');
           main.focus({ preventScroll: true });
           main.addEventListener('blur', () => main.removeAttribute('tabindex'), { once: true });
         }
+        isInitialLoad = false;
       });
     </script>
   </body>

@@ -324,8 +324,10 @@ ul, ol { list-style: none; }
 
 /* Remove default outline for mouse users and programmatic containers */
 :focus:not(:focus-visible),
-#main-content:focus {
-  outline: none;
+#main-content:focus,
+#main-content:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* --- Reduced Motion --- */

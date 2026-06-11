@@ -993,7 +993,7 @@
 
 /* ---- ABOUT ---- */
 .about-block {
-  max-width: 44rem;
+  max-width: var(--max-width);
   margin-inline: auto;
   text-align: center;
 }
