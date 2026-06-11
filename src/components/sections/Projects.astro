@@ -84,7 +84,7 @@ const categoryIcons: Record<string, string> = {
       </nav>
 
       <div class="experimental-toggle-container" id="experimental-toggle-container">
-        <button id="experimental-toggle-btn" class="btn btn-ghost" aria-expanded="false" title={tr['projects.disclaimerText'] ?? 'These projects are Work In Progress or experimental. They may have bugs and are not yet intended for general public use. Use at your own risk!'} style="padding: 0.4em 0.8em; font-size: var(--text-xs); border: 1px dashed var(--c-border);">
+        <button id="experimental-toggle-btn" class="btn btn-ghost" aria-expanded="false" aria-controls="homepage-project-grid" title={tr['projects.disclaimerText'] ?? 'These projects are Work In Progress or experimental. They may have bugs and are not yet intended for general public use. Use at your own risk!'} style="padding: 0.4em 0.8em; font-size: var(--text-xs); border: 1px dashed var(--c-border);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"></path><path d="M14 9.3V1.99"></path><path d="M8.5 2h7"></path><path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path><path d="M5.52 16h12.96"></path></svg>
           <span>{tr['projects.showExperimentalShort'] ?? 'Show WIP / Experimental'}</span>
         </button>

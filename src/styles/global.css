@@ -606,7 +606,7 @@ ul, ol { list-style: none; }
 
 @media (min-width: 1920px) {
   :root {
-    --max-width: 96%;
+    --max-width: 120rem;
     --max-width-text: 72rem;
   }
 }

@@ -465,18 +465,6 @@
   gap: var(--space-5);
 }
 
-@media (min-aspect-ratio: 21/9) {
-  .project-grid {
-    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
-  }
-}
-
-@media (min-aspect-ratio: 32/9) {
-  .project-grid {
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-  }
-}
-
 .project-card {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
@@ -591,6 +579,8 @@
   position: relative;
   overflow: hidden;
   margin-bottom: var(--space-12);
+  margin-inline: auto;
+  max-width: 72rem;
   transition: border-color var(--dur-base) var(--ease-out),
               box-shadow var(--dur-base) var(--ease-out);
   z-index: 1;
