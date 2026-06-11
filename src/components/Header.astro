@@ -68,6 +68,7 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
           id="theme-toggle"
           class="theme-toggle"
           aria-label={tr['nav.switchToLight'] ?? 'Switch to light theme'}
+          title={tr['nav.toggleTheme'] ?? 'Toggle theme'}
           aria-pressed="false"
           type="button"
         >
@@ -97,6 +98,7 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
             aria-haspopup="listbox"
             aria-expanded="false"
             aria-controls="lang-switcher-dropdown"
+            title={tr['nav.switchLanguage'] ?? 'Switch language'}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px;">
               <circle cx="12" cy="12" r="10"></circle>
@@ -135,6 +137,7 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
           aria-expanded="false"
           aria-controls="mobile-nav"
           aria-label={tr['nav.openMenu'] ?? 'Open menu'}
+          title={tr['nav.openMenu'] ?? 'Open menu'}
           type="button"
         >
           <span></span>

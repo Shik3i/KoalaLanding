@@ -172,6 +172,26 @@ const jsonLdData = {
           repoDates.set(repo.full_name.toLowerCase(), new Date(repo.pushed_at || repo.updated_at));
         });
 
+        // Dynamically sort the DOM elements based on latest update
+        const grid = document.getElementById('projects-tracker-rows');
+        if (grid) {
+          const cards = Array.from(grid.children);
+          cards.sort((a, b) => {
+            const elA = a.querySelector('.github-last-updated');
+            const elB = b.querySelector('.github-last-updated');
+            const repoA = elA ? elA.getAttribute('data-github-repo')?.toLowerCase() : null;
+            const repoB = elB ? elB.getAttribute('data-github-repo')?.toLowerCase() : null;
+            
+            const dateA = repoA && repoDates.has(repoA) ? repoDates.get(repoA).getTime() : 0;
+            const dateB = repoB && repoDates.has(repoB) ? repoDates.get(repoB).getTime() : 0;
+            
+            return dateB - dateA; // Newest first
+          });
+          
+          // Re-append in correct order
+          cards.forEach(card => grid.appendChild(card));
+        }
+
         document.querySelectorAll('.github-last-updated').forEach(el => {
           const repoPath = el.getAttribute('data-github-repo');
           if (!repoPath) return;

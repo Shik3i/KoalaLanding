@@ -22,9 +22,9 @@ const categories = [
 ] as const;
 
 const categoryIcons: Record<string, string> = {
-  'desktop': '🖥',
-  'web': '🌐',
-  'extensions': '🧩',
+  'desktop': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
+  'web': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
+  'extensions': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.611c-.47.47-1.088.706-1.705.706s-1.233-.235-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.406 2.406 0 0 1 2 12c0-.638.25-1.278.706-1.704l1.568-1.568c.23-.23.338-.556.289-.878-.07-.493-.504-.84-.968-1.02a2.5 2.5 0 1 1 3.237-3.237c.18.464.527.894 1.02.967.322.049.648-.059.877-.289l1.568-1.568A2.406 2.406 0 0 1 12 2c.638 0 1.278.25 1.704.706l1.568 1.568c.23.23.556.338.878.289.493-.07.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"></path></svg>',
 };
 ---
 
@@ -58,6 +58,7 @@ const categoryIcons: Record<string, string> = {
           aria-controls="homepage-project-grid"
           data-category="all"
           data-desc={tr['categories.all.desc'] ?? 'All open-source tools and utilities built by KoalaStuff.'}
+          title={tr['categories.all'] ?? 'All'}
         >
           {tr['categories.all'] ?? 'All'}
         </button>
@@ -73,8 +74,9 @@ const categoryIcons: Record<string, string> = {
               aria-controls="homepage-project-grid"
               data-category={cat}
               data-desc={tr[`categories.${cat}.desc`] ?? ''}
+              title={tr[`categories.${cat}`] ?? cat}
             >
-              <span aria-hidden="true">{categoryIcons[cat]}</span>
+              <span aria-hidden="true" set:html={categoryIcons[cat]} style="display: flex;"></span>
               {tr[`categories.${cat}`] ?? cat}
             </button>
           );
@@ -88,18 +90,9 @@ const categoryIcons: Record<string, string> = {
       </div>
     </div>
 
-    <!-- Unified projects grid -->
-    <div class="project-grid" id="homepage-project-grid">
-      {nonFeatured.map((project) => (
-        <div class="project-grid-item" data-category={project.category} data-experimental={project.status !== 'active' ? 'true' : 'false'}>
-          <ProjectCard project={project} locale={locale} translations={tr} />
-        </div>
-      ))}
-    </div>
-
     <!-- Experimental Projects Toggle -->
-    <div class="experimental-toggle-container">
-      <button id="experimental-toggle-btn" class="btn btn-ghost" aria-expanded="false">
+    <div class="experimental-toggle-container" id="experimental-toggle-container">
+      <button id="experimental-toggle-btn" class="btn btn-ghost" aria-expanded="false" title={tr['projects.showExperimental'] ?? 'Show WIP & Experimental Projects'}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"></path><path d="M14 9.3V1.99"></path><path d="M8.5 2h7"></path><path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path><path d="M5.52 16h12.96"></path></svg>
         <span>{tr['projects.showExperimental'] ?? 'Show WIP & Experimental Projects'}</span>
       </button>
@@ -110,6 +103,15 @@ const categoryIcons: Record<string, string> = {
           {tr['projects.disclaimerText'] ?? 'These projects are heavily Work In Progress or experimental proofs of concept. They may have bugs, lack documentation, and are not yet intended for general public use. Use them at your own risk!'}
         </div>
       </div>
+    </div>
+
+    <!-- Unified projects grid -->
+    <div class="project-grid" id="homepage-project-grid">
+      {nonFeatured.map((project) => (
+        <div class="project-grid-item" data-category={project.category} data-experimental={project.status !== 'active' ? 'true' : 'false'}>
+          <ProjectCard project={project} locale={locale} translations={tr} />
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -144,7 +146,7 @@ const categoryIcons: Record<string, string> = {
     color: hsla(30, 90%, 60%, 1);
   }
 
-  #homepage-project-grid.show-experimental + .experimental-toggle-container .experimental-disclaimer {
+  .experimental-toggle-container.is-active .experimental-disclaimer {
     opacity: 1;
     visibility: visible;
     padding: var(--space-4);
@@ -159,9 +161,10 @@ const categoryIcons: Record<string, string> = {
 <script>
   document.addEventListener('astro:page-load', () => {
     const toggleBtn = document.getElementById('experimental-toggle-btn');
+    const toggleContainer = document.getElementById('experimental-toggle-container');
     const projectGrid = document.getElementById('homepage-project-grid');
     const disclaimer = document.getElementById('experimental-disclaimer');
-    if (!toggleBtn || !projectGrid) return;
+    if (!toggleBtn || !projectGrid || !toggleContainer) return;
 
     // Read from localStorage
     const savedState = localStorage.getItem('koalastuff_show_experimental');
@@ -170,6 +173,7 @@ const categoryIcons: Record<string, string> = {
     const updateDOM = () => {
       if (isShowing) {
         projectGrid.classList.add('show-experimental');
+        toggleContainer.classList.add('is-active');
         toggleBtn.setAttribute('aria-expanded', 'true');
         if (disclaimer) {
           disclaimer.style.height = disclaimer.scrollHeight + 32 + 'px'; // +32 for padding
@@ -184,6 +188,7 @@ const categoryIcons: Record<string, string> = {
 
       } else {
         projectGrid.classList.remove('show-experimental');
+        toggleContainer.classList.remove('is-active');
         toggleBtn.setAttribute('aria-expanded', 'false');
         if (disclaimer) {
           disclaimer.style.height = '0px';
