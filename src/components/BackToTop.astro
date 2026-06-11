@@ -12,7 +12,7 @@
     position: fixed;
     bottom: var(--space-6);
     right: var(--space-6);
-    z-index: 50;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,8 @@
     if (!btn) return;
 
     const toggleVisibility = () => {
-      if (window.scrollY > 500) {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop > 500) {
         btn.classList.add('is-visible');
       } else {
         btn.classList.remove('is-visible');

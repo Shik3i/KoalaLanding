@@ -322,8 +322,11 @@ ul, ol { list-style: none; }
   border-radius: var(--radius-sm);
 }
 
-/* Remove default outline for mouse users */
-:focus:not(:focus-visible) { outline: none; }
+/* Remove default outline for mouse users and programmatic containers */
+:focus:not(:focus-visible),
+#main-content:focus {
+  outline: none;
+}
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
