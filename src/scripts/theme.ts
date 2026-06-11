@@ -13,6 +13,9 @@
   const DARK = 'dark';
   const LIGHT = 'light';
 
+  // AbortController to clean up listeners from previous astro:page-load
+  let pageLoadController: AbortController | null = null;
+
   function getStoredTheme(): string | null {
     try {
       return localStorage.getItem(STORAGE_KEY);
@@ -49,13 +52,18 @@
 
   // Init on astro:page-load (runs on initial load and after view transitions)
   document.addEventListener('astro:page-load', () => {
+    // ---- Clean up listeners from previous navigation ----
+    if (pageLoadController) pageLoadController.abort();
+    pageLoadController = new AbortController();
+    const signal = pageLoadController.signal;
+
     const stored = getStoredTheme();
     const theme = stored ?? DARK;
     applyTheme(theme);
 
     const btn = document.getElementById('theme-toggle');
     if (btn) {
-      btn.addEventListener('click', toggleTheme);
+      btn.addEventListener('click', toggleTheme, { signal });
     }
 
     // Language switcher dropdown
@@ -66,18 +74,18 @@
         e.stopPropagation();
         const isOpen = langDropdown.classList.toggle('is-open');
         langBtn.setAttribute('aria-expanded', String(isOpen));
-      });
+      }, { signal });
       document.addEventListener('click', () => {
         langDropdown.classList.remove('is-open');
         langBtn.setAttribute('aria-expanded', 'false');
-      });
+      }, { signal });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           langDropdown.classList.remove('is-open');
           langBtn.setAttribute('aria-expanded', 'false');
           langBtn.focus();
         }
-      });
+      }, { signal });
     }
 
     // Mobile nav
@@ -87,7 +95,14 @@
       mobileBtn.addEventListener('click', () => {
         const isOpen = mobileNav.classList.toggle('is-open');
         mobileBtn.setAttribute('aria-expanded', String(isOpen));
-      });
+      }, { signal });
+      mobileNav.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          mobileNav.classList.remove('is-open');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          mobileBtn.focus();
+        }
+      }, { signal });
     }
 
     // Dynamic Hover Coordinates for Radial Glow Effect (only for hover-capable pointer devices)
@@ -106,7 +121,7 @@
 
       const attachGlowListeners = () => {
         document.querySelectorAll('.project-card, .featured-project, .tracker-row').forEach((card) => {
-          card.addEventListener('mousemove', (e) => trackGlow(e as MouseEvent, card as HTMLElement));
+          card.addEventListener('mousemove', (e) => trackGlow(e as MouseEvent, card as HTMLElement), { signal });
         });
       };
       attachGlowListeners();
@@ -271,7 +286,7 @@
         } else {
           startAnimation();
         }
-      });
+      }, { signal });
 
       // Colors matching user preference dataset.theme
       let isLight = document.documentElement.dataset.theme === 'light';
@@ -338,7 +353,7 @@
         }
       };
 
-      window.addEventListener('resize', resize);
+      window.addEventListener('resize', resize, { signal });
       resize();
 
       // Mouse tracking
@@ -350,32 +365,32 @@
 
       window.addEventListener('mousemove', (e) => {
         setMousePos(e.clientX, e.clientY);
-      });
+      }, { signal });
 
       window.addEventListener('mouseleave', () => {
         mouse.active = false;
         mouse.x = -1000;
         mouse.y = -1000;
-      });
+      }, { signal });
 
       // Touch tracking for mobile support
       window.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
           setMousePos(e.touches[0].clientX, e.touches[0].clientY);
         }
-      }, { passive: true });
+      }, { signal, passive: true });
 
       window.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
           setMousePos(e.touches[0].clientX, e.touches[0].clientY);
         }
-      }, { passive: true });
+      }, { signal, passive: true });
 
       window.addEventListener('touchend', () => {
         mouse.active = false;
         mouse.x = -1000;
         mouse.y = -1000;
-      });
+      }, { signal });
 
       let animationFrameId: number | null = null;
 

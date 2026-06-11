@@ -136,17 +136,27 @@ const langCode = localeLangCodes[locale];
       import '../scripts/theme.ts';
     </script>
     <script>
+      let pageObserver = null;
       document.addEventListener('astro:page-load', () => {
-        const observer = new IntersectionObserver((entries) => {
+        if (pageObserver) pageObserver.disconnect();
+        pageObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-revealed');
-              observer.unobserve(entry.target);
+              pageObserver.unobserve(entry.target);
             }
           });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => pageObserver.observe(el));
+
+        // Move focus to main content after view transitions
+        const main = document.getElementById('main-content');
+        if (main && document.activeElement && !main.contains(document.activeElement)) {
+          main.setAttribute('tabindex', '-1');
+          main.focus({ preventScroll: true });
+          main.addEventListener('blur', () => main.removeAttribute('tabindex'), { once: true });
+        }
       });
     </script>
   </body>
