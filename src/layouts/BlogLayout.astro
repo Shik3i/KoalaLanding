@@ -60,7 +60,7 @@ const tr = await loadTranslations(locale);
                 {pubDate && author && <span class="meta-separator">•</span>}
                 {author && <span class="blog-author">{author}</span>}
               </div>
-              <button class="copy-link-btn" type="button" aria-label="Copy link" onclick="navigator.clipboard.writeText(window.location.href); const t=this.lastChild; const o=t.textContent; t.textContent=' Copied!'; setTimeout(()=>{t.textContent=o},2000);">
+              <button id="copy-link-btn" class="copy-link-btn" type="button" aria-label="Copy link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; display: inline-block; vertical-align: middle;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                 <span>Copy Link</span>
               </button>
@@ -310,7 +310,24 @@ const tr = await loadTranslations(locale);
   }
 
   .blog-content :global(img) {
-    border-radius: var(--radius-md);
-    margin-block: var(--space-8);
+    border-radius: 4px;
+    margin-bottom: var(--space-4);
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.getElementById('copy-link-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href);
+        const span = copyBtn.querySelector('span');
+        if (span) {
+          const original = span.textContent;
+          span.textContent = ' Copied!';
+          setTimeout(() => { span.textContent = original; }, 2000);
+        }
+      });
+    }
+  });
+</script>
