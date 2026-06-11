@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="nl" data-theme="dark"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge"><!-- Primary Meta --><title>I added a local audio compressor to my browser extension — KoalaStuff Blog</title><meta name="description" content="How I built a local Web Audio API compressor directly into KoalaSync to normalize loud explosions and quiet dialogue."><meta name="robots" content="index, follow"><meta name="author" content="Timo (KoalaStuff)"><meta name="generator" content="Astro v6.4.6"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.DQAK6ZHT.js"></script><!-- Canonical & hreflang --><link rel="canonical" href="https://koalastuff.net/nl/blog/local-audio-compressor"><link rel="alternate" hreflang="en" href="https://koalastuff.net/blog/local-audio-compressor"><link rel="alternate" hreflang="de" href="https://koalastuff.net/de/blog/local-audio-compressor"><link rel="alternate" hreflang="fr" href="https://koalastuff.net/fr/blog/local-audio-compressor"><link rel="alternate" hreflang="es" href="https://koalastuff.net/es/blog/local-audio-compressor"><link rel="alternate" hreflang="it" href="https://koalastuff.net/it/blog/local-audio-compressor"><link rel="alternate" hreflang="nl" href="https://koalastuff.net/nl/blog/local-audio-compressor"><link rel="alternate" hreflang="pl" href="https://koalastuff.net/pl/blog/local-audio-compressor"><link rel="alternate" hreflang="pt" href="https://koalastuff.net/pt/blog/local-audio-compressor"><link rel="alternate" hreflang="tr" href="https://koalastuff.net/tr/blog/local-audio-compressor"><link rel="alternate" hreflang="ja" href="https://koalastuff.net/ja/blog/local-audio-compressor"><link rel="alternate" hreflang="ko" href="https://koalastuff.net/ko/blog/local-audio-compressor"><link rel="alternate" hreflang="zh" href="https://koalastuff.net/zh/blog/local-audio-compressor"><link rel="alternate" hreflang="uk" href="https://koalastuff.net/uk/blog/local-audio-compressor"><link rel="alternate" hreflang="x-default" href="https://koalastuff.net/nl/blog/local-audio-compressor"><!-- OpenGraph --><meta property="og:type" content="website"><meta property="og:site_name" content="KoalaStuff"><meta property="og:title" content="I added a local audio compressor to my browser extension — KoalaStuff Blog"><meta property="og:description" content="How I built a local Web Audio API compressor directly into KoalaSync to normalize loud explosions and quiet dialogue."><meta property="og:url" content="https://koalastuff.net/nl/blog/local-audio-compressor"><meta property="og:image" content="https://koalastuff.net/assets/brand/og-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="nl"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="I added a local audio compressor to my browser extension — KoalaStuff Blog"><meta name="twitter:description" content="How I built a local Web Audio API compressor directly into KoalaSync to normalize loud explosions and quiet dialogue."><meta name="twitter:image" content="https://koalastuff.net/assets/brand/og-preview.png"><!-- Favicons --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Font preloads (self-hosted Inter) --><link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin="anonymous"><link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin="anonymous"><!-- JSON-LD: WebSite + Person --><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://koalastuff.net/#website","url":"https://koalastuff.net","name":"KoalaStuff","description":"Small open-source tools for real annoyances.","inLanguage":"en","author":{"@id":"https://koalastuff.net/#person"}},{"@type":"Person","@id":"https://koalastuff.net/#person","name":"Timo","url":"https://github.com/Shik3i","sameAs":["https://github.com/Shik3i","https://dev.to/hungrykoala"]}]}</script><!-- Anti-flash theme script (loaded blocking from 'self' to prevent flash before render) --><script src="/anti-flash.js"></script><link rel="stylesheet" href="/_astro/utils.CaIIP0Ey.css">
+<link rel="stylesheet" href="/_astro/BlogLayout.DFdANgDV.css"><script type="module" src="/_astro/page.BOdB6yKo.js"></script></head> <body> <!-- Ambient background glow blobs --> <div class="bg-glow-blobs" aria-hidden="true"> <div class="blob blob-1"></div> <div class="blob blob-2"></div> <div class="blob blob-3"></div> </div> <!-- Interactive Canvas Particle Grid --> <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas> <!-- Skip link for keyboard users --> <a href="#main-content" class="skip-link">Skip to content</a>  <header class="site-header" role="banner"> <div class="container"> <div class="site-header__inner"> <!-- Logo --> <a href="/nl" class="site-header__logo" aria-label="KoalaStuff — Home"> <picture> <source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_ZgeShJ.avif, /_astro/koalastuff-logo-128.CMEzCEwC_ZgeShJ.avif 1x, /_astro/koalastuff-logo-128.CMEzCEwC_Z21b0fH.avif 2x" type="image/avif"><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_2fc0Yv.webp, /_astro/koalastuff-logo-128.CMEzCEwC_2fc0Yv.webp 1x, /_astro/koalastuff-logo-128.CMEzCEwC_ufT1x.webp 2x" type="image/webp">  <img src="/_astro/koalastuff-logo-128.CMEzCEwC_1nEKEB.png" srcset="/_astro/koalastuff-logo-128.CMEzCEwC_1nEKEB.png 1x, /_astro/koalastuff-logo-128.CMEzCEwC_Zmglim.png 2x" alt loading="lazy" decoding="async" width="28" height="28"> </picture> <span>KoalaStuff</span> </a> <!-- Desktop nav --> <nav class="site-header__nav" aria-label="Main navigation"> <a href="/nl/projects" data-astro-prefetch="hover">Projecten</a> <a href="/nl/blog" aria-current="page" data-astro-prefetch="hover">Blog</a> <a href="/nl#about">Over</a> <a href="/nl#faq">FAQ</a> </nav> <div class="site-header__spacer"></div> <!-- Actions --> <div class="site-header__actions"> <!-- GitHub --> <a href="https://github.com/Shik3i" class="icon-link desktop-only" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path> </svg> </a> <!-- dev.to --> <a href="https://dev.to/hungrykoala" class="icon-link desktop-only" rel="noopener noreferrer" aria-label="dev.to" title="dev.to"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"> <path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.29zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"></path> </svg> </a> <!-- Language switcher --> <nav class="lang-switcher" aria-label="Taal wisselen"> <button id="lang-switcher-btn" class="lang-switcher__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-switcher-dropdown"> <span>NL</span> <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"> <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </button> <div id="lang-switcher-dropdown" class="lang-switcher__dropdown" role="listbox" aria-label="Taal wisselen"> <a href="/blog/local-audio-compressor" hreflang="en" role="option" aria-selected="false"> 🇺🇸 English </a><a href="/de/blog/local-audio-compressor" hreflang="de" role="option" aria-selected="false"> 🇩🇪 Deutsch </a><a href="/fr/blog/local-audio-compressor" hreflang="fr" role="option" aria-selected="false"> 🇫🇷 Français </a><a href="/es/blog/local-audio-compressor" hreflang="es" role="option" aria-selected="false"> 🇪🇸 Español </a><a href="/it/blog/local-audio-compressor" hreflang="it" role="option" aria-selected="false"> 🇮🇹 Italiano </a><a href="/nl/blog/local-audio-compressor" hreflang="nl" aria-current="true" role="option" aria-selected="true"> 🇳🇱 Nederlands </a><a href="/pl/blog/local-audio-compressor" hreflang="pl" role="option" aria-selected="false"> 🇵🇱 Polski </a><a href="/pt/blog/local-audio-compressor" hreflang="pt" role="option" aria-selected="false"> 🇵🇹 Português </a><a href="/tr/blog/local-audio-compressor" hreflang="tr" role="option" aria-selected="false"> 🇹🇷 Türkçe </a><a href="/ja/blog/local-audio-compressor" hreflang="ja" role="option" aria-selected="false"> 🇯🇵 日本語 </a><a href="/ko/blog/local-audio-compressor" hreflang="ko" role="option" aria-selected="false"> 🇰🇷 한국어 </a><a href="/zh/blog/local-audio-compressor" hreflang="zh" role="option" aria-selected="false"> 🇨🇳 中文 </a><a href="/uk/blog/local-audio-compressor" hreflang="uk" role="option" aria-selected="false"> 🇺🇦 Українська </a> </div> </nav> <!-- Theme toggle --> <button id="theme-toggle" class="theme-toggle" aria-label="Overschakelen naar licht thema" aria-pressed="false" type="button"> <!-- Sun (shown in dark mode to switch to light) --> <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <!-- Moon (shown in light mode to switch to dark) --> <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <!-- Mobile menu button --> <button id="mobile-menu-btn" class="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu openen" type="button"> <span></span> <span></span> <span></span> </button> </div> </div> </div> <!-- Mobile nav --> <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation"> <div class="container"> <a href="/nl/projects" data-astro-prefetch="hover">Projecten</a> <a href="/nl/blog" aria-current="page" data-astro-prefetch="hover">Blog</a> <a href="/nl#about">Over</a> <a href="/nl#faq">FAQ</a> <div class="mobile-nav__actions"> <a href="https://github.com/Shik3i" rel="noopener noreferrer" class="link-icon"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"> <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path> </svg>
+GitHub
+</a> <a href="https://dev.to/hungrykoala" rel="noopener noreferrer" class="link-icon"> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"> <path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.29zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"></path> </svg>
+dev.to
+</a> </div> </div> </div> </header> <main id="main-content" class="section blog-layout" data-astro-cid-4dqtj3le> <div class="container container--blog" data-astro-cid-4dqtj3le> <a href="/nl/blog" class="btn btn-ghost blog-back-link" data-astro-cid-4dqtj3le> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-4dqtj3le> <line x1="19" y1="12" x2="5" y2="12" data-astro-cid-4dqtj3le></line> <polyline points="12 19 5 12 12 5" data-astro-cid-4dqtj3le></polyline> </svg> Back to Overview </a> <article class="blog-article" data-astro-cid-4dqtj3le> <header class="blog-header" data-astro-cid-4dqtj3le> <h1 class="blog-title" data-astro-cid-4dqtj3le>I added a local audio compressor to my browser extension</h1> <div class="blog-meta-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;" data-astro-cid-4dqtj3le> <div class="blog-meta" data-astro-cid-4dqtj3le> <time datetime="2026-06-10T00:00:00.000Z" data-astro-cid-4dqtj3le> 10 juni 2026 </time> <span class="meta-separator" data-astro-cid-4dqtj3le>•</span> <span class="blog-author" data-astro-cid-4dqtj3le>Timo</span> </div> <button class="copy-link-btn" type="button" aria-label="Copy link" onclick="navigator.clipboard.writeText(window.location.href); const t=this.lastChild; const o=t.textContent; t.textContent=' Copied!'; setTimeout(()=>{t.textContent=o},2000);" data-astro-cid-4dqtj3le> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; display: inline-block; vertical-align: middle;" data-astro-cid-4dqtj3le><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-4dqtj3le></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-4dqtj3le></path></svg> <span data-astro-cid-4dqtj3le>Copy Link</span> </button> </div> </header> <div class="blog-content" data-astro-cid-4dqtj3le>  <p>I recently added a new feature to my browser extension <a href="https://sync.koalastuff.net">KoalaSync</a>: a local audio compressor for browser videos.</p>
+<p>It is still a bit experimental and will probably change over time, but I wanted to write down what I built, why I built it, and what ended up being more annoying than expected.</p>
+<p>KoalaSync is mostly a watch party extension. It syncs play, pause and seeking between people watching videos together in the browser.</p>
+<p>But the new compressor is useful even when you are watching alone, because modern movie audio can be ridiculous.</p>
+<p>One minute the dialogue is so quiet that I turn the volume up.
+Thirty seconds later an explosion tries to kill my headphones.</p>
+<p>I mostly watch movies from my Emby server with friends, and I got tired of constantly adjusting the volume. VLC has had audio compression for ages. Some TVs have a “night mode”. But in the browser, you usually just get the raw audio mix from the video element.</p>
+<p>So I wanted to see if I could build something similar directly into the extension.</p>
+<hr/>
+<h2 id="the-basic-idea">The Basic Idea</h2>
+<p>The browser already has most of what I needed: the Web Audio API.</p>
+<p>More specifically, <code>DynamicsCompressorNode</code>.</p>
+<p>It all runs locally in the browser, with no separate audio service involved.</p>
+<p>The simplest version looks something like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> ctx</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AudioContext</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> src</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctx.</span><span style="color:#B392F0">createMediaElementSource</span><span style="color:#E1E4E8">(videoElement);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> compressor</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctx.</span><span style="color:#B392F0">createDynamicsCompressor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">compressor.threshold.value </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">24</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">compressor.ratio.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 8</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">compressor.knee.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 15</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">compressor.attack.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.010</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">compressor.release.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.300</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">src.</span><span style="color:#B392F0">connect</span><span style="color:#E1E4E8">(compressor);</span></span>
+<span class="line"><span style="color:#E1E4E8">compressor.</span><span style="color:#B392F0">connect</span><span style="color:#E1E4E8">(ctx.destination);</span></span></code></pre>
+<p>That takes the audio from a video element, runs it through a compressor, and sends it to the speakers.</p>
+<p>That part was honestly not the hard part.</p>
+<hr/>
+<h2 id="the-annoying-part-switching-it-on-without-pops">The Annoying Part: Switching It On Without Pops</h2>
+<p>The compressor node itself is easy.</p>
+<p>Making it feel usable inside a browser extension was more annoying.</p>
+<p>I did not want the audio to pop when enabling or disabling the compressor. A hard switch between the original signal and the compressed signal can sound pretty bad, especially when you toggle it while something is already playing.</p>
+<p>So I ended up using a dry/wet setup:</p>
+<ul>
+<li>dry path: original audio</li>
+<li>wet path: compressed audio</li>
+</ul>
+<p>When the compressor turns on, the dry signal fades out and the compressed signal fades in. When it turns off, the same thing happens in reverse.</p>
+<p>The actual implementation wraps this in a small <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/content.js#L231-L236"><code>rampGain</code></a> helper that cancels scheduled values first:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> rampGain</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">node</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">value</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">t</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> current</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> node.gain.value;</span></span>
+<span class="line"><span style="color:#E1E4E8">    node.gain.</span><span style="color:#B392F0">cancelScheduledValues</span><span style="color:#E1E4E8">(t);</span></span>
+<span class="line"><span style="color:#E1E4E8">    node.gain.</span><span style="color:#B392F0">setValueAtTime</span><span style="color:#E1E4E8">(current, t);</span></span>
+<span class="line"><span style="color:#E1E4E8">    node.gain.</span><span style="color:#B392F0">linearRampToValueAtTime</span><span style="color:#E1E4E8">(value, t </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 0.04</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>It is just a tiny 40ms ramp, but it makes the toggle feel much less rough.</p>
+<hr/>
+<h2 id="per-video-audio-chains">Per-Video Audio Chains</h2>
+<p>Another thing I had to deal with: pages can have more than one video element.</p>
+<p>And video elements can disappear when:</p>
+<ul>
+<li>you navigate</li>
+<li>a new episode loads</li>
+<li>the player re-renders itself</li>
+<li>the site swaps one media element for another</li>
+</ul>
+<p>So each video element gets its own audio chain.</p>
+<p>I cache those chains in a <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/content.js#L156"><code>WeakMap</code></a>, so when the video element disappears, the browser can clean up the related chain as well.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> audioChains</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> WeakMap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> setupAudioChain</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">videoEl</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (audioChains.</span><span style="color:#B392F0">has</span><span style="color:#E1E4E8">(videoEl)) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> audioChains.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(videoEl);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // ... create source, compressor, dryGain, compGain</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> chain</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> { compressor, dryGain, compGain, active: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8"> };</span></span>
+<span class="line"><span style="color:#E1E4E8">    audioChains.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(videoEl, chain);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> chain;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The full <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/content.js#L201-L229"><code>setupAudioChain</code></a> also creates the dry/wet gain nodes and connects everything.</p>
+<p>This is one of those things where the idea is simple, but browser pages are messy enough that it still takes some care.</p>
+<hr/>
+<h2 id="presets-instead-of-only-sliders">Presets Instead of Only Sliders</h2>
+<p>I did not want users to open the feature and immediately stare at five audio parameters.</p>
+<p>So I added a few <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/content.js#L140-L146">presets</a>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Preset</th><th>Threshold</th><th>Ratio</th><th>Attack</th><th>Release</th><th>Knee</th></tr></thead><tbody><tr><td>Recommended</td><td>-24 dB</td><td>8:1</td><td>10 ms</td><td>300 ms</td><td>15 dB</td></tr><tr><td>Dynamic Range</td><td>-18 dB</td><td>4:1</td><td>20 ms</td><td>200 ms</td><td>10 dB</td></tr><tr><td>Vocal Enhancement</td><td>-12 dB</td><td>3:1</td><td>15 ms</td><td>150 ms</td><td>5 dB</td></tr><tr><td>Smooth</td><td>-30 dB</td><td>1.5:1</td><td>30 ms</td><td>250 ms</td><td>20 dB</td></tr></tbody></table>
+<p>The default is currently “Recommended”.</p>
+<p>It is not meant to be perfect. It just tries to make dialogue easier to hear without completely destroying the sound of action scenes.</p>
+<p>There is also a custom mode where you can tweak threshold, ratio, attack, release and knee manually.</p>
+<hr/>
+<h2 id="moving-settings-out-of-the-popup">Moving Settings Out of the Popup</h2>
+<p>This was also the first time I added a proper internal extension page to KoalaSync.</p>
+<p>Before this, most settings lived inside the extension popup. That works fine for small toggles, but it gets annoying fast once you want sliders, presets, explanations and maybe more audio tools later.</p>
+<p>So the audio processing UI now opens in its own full tab at <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/audio-options.html"><code>audio-options.html</code></a>.</p>
+<p>That gives me much more space to work with, and it also leaves room for future features like an equalizer or other audio processing options.</p>
+<p>The popup is still fine for quick actions.
+But for anything that needs actual adjustment, a full page feels much better.</p>
+<p>This was one of those “small feature” changes that quietly turned into a UI decision too.</p>
+<hr/>
+<h2 id="where-it-works">Where It Works</h2>
+<p>The short version: it works best when KoalaSync can access the page’s video element.</p>
+<p>That covers a lot of normal browser playback: self-hosted media servers, many video sites, and some major streaming platforms.</p>
+<p>There are still edge cases. Some sites use unusual player setups, strict DRM implementations, embedded playback restrictions, or browser-specific behavior that prevents audio processing.</p>
+<p>When that happens, KoalaSync just leaves the audio unchanged instead of trying to force anything.</p>
+<hr/>
+<h2 id="is-this-feature-finished">Is This Feature Finished?</h2>
+<p>Not really.</p>
+<p>It works, and I already find it useful, but I still consider it experimental.</p>
+<p>Things I might change or add later:</p>
+<ul>
+<li>better presets</li>
+<li>per-site behavior</li>
+<li>equalizer support</li>
+<li>better UI explanations</li>
+<li>maybe a simple “night mode” toggle for people who do not care about compressor settings</li>
+</ul>
+<p>For now, I mostly wanted something that solves the annoying “quiet dialogue, loud explosions” problem without needing another app or external audio tool.</p>
+<hr/>
+<h2 id="links">Links</h2>
+<p>KoalaSync is free and open source.</p>
+<ul>
+<li>Website: <a href="https://sync.koalastuff.net">https://sync.koalastuff.net</a></li>
+<li>GitHub: <a href="https://github.com/Shik3i/KoalaSync">https://github.com/Shik3i/KoalaSync</a></li>
+</ul>
+<p>The relevant parts are mostly in <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/content.js#L140-L229"><code>extension/content.js</code></a> and <a href="https://github.com/Shik3i/KoalaSync/blob/main/extension/audio-options.html"><code>extension/audio-options.html</code></a> if you want to look at the implementation.</p>
+<p>I am curious if anyone else has built audio processing features inside browser extensions before. The Web Audio API is pretty nice once it works, but browser/player edge cases are definitely a thing.</p>  </div> </article> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"I added a local audio compressor to my browser extension","description":"How I built a local Web Audio API compressor directly into KoalaSync to normalize loud explosions and quiet dialogue.","datePublished":"2026-06-10T00:00:00.000Z","author":{"@type":"Person","name":"Timo","url":"https://koalastuff.net"}}</script> </div> </main> <footer class="site-footer" role="contentinfo"> <div class="container"> <div class="site-footer__inner"> <div class="site-footer__brand-group"> <div class="site-footer__brand"> <picture> <source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif, /_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif 1x, /_astro/koalastuff-logo-128.CMEzCEwC_Z1XAXzQ.avif 2x" type="image/avif"><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp, /_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp 1x, /_astro/koalastuff-logo-128.CMEzCEwC_wOUGo.webp 2x" type="image/webp">  <img src="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png" srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png 1x, /_astro/koalastuff-logo-128.CMEzCEwC_ZjGjCv.png 2x" alt loading="lazy" decoding="async" width="20" height="20"> </picture> <span>KoalaStuff</span> </div> <p class="site-footer__tagline">
+Small open-source tools for real annoyances. Browser extensions, web tools, desktop utilities and experiments.
+</p> </div> <div class="site-footer__info-group"> <div class="site-footer__links-group"> <span>© 2026 KoalaStuff</span> <span class="sep" aria-hidden="true">·</span> <span>Gemaakt door <a href="https://github.com/Shik3i" rel="noopener noreferrer">Timo</a></span> <span class="sep" aria-hidden="true">·</span> <span>Open source onder de MIT-licentie.</span> </div> <div class="site-footer__links-group site-footer__links-group--bottom"> <a href="https://ko-fi.com/koaladev" target="_blank" rel="noopener noreferrer">Ko-fi ☕</a> <span class="sep" aria-hidden="true">·</span> <span class="site-footer__version"> <a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">
+Build: <code>c231223</code> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12"> <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path> </svg> </a> </span> <span class="sep" aria-hidden="true">·</span> <a href="/privacy/">Privacy</a> <span class="sep" aria-hidden="true">·</span> <a href="/imprint/">Colofon</a> </div> </div> </div> </div> </footer>  <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top" type="button" data-astro-cid-wlspcwf4> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <line x1="12" y1="19" x2="12" y2="5" data-astro-cid-wlspcwf4></line> <polyline points="5 12 12 5 19 12" data-astro-cid-wlspcwf4></polyline> </svg> </button>  <script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.CLBnuLN-.js"></script> <!-- Theme + UI script (Astro bundles this as a static asset) --> <script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.DtEANoaV.js"></script> </body> </html>
