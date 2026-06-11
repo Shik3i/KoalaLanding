@@ -100,7 +100,7 @@ export const projects: Project[] = [
     status: 'active',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(330, 70%, 55%)',
     lastUpdated: '2026-04',
     shortDescription: {
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     status: 'wip',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(15, 80%, 55%)',
     shortDescription: {
       en: 'A lightweight cookie manager extension to view, edit, block, and export HTTP cookies with ease.',
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     status: 'wip',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(280, 75%, 55%)',
     shortDescription: {
       en: 'Utility extension for Flyff Universe players to track stats, buff timers, and party layouts.',
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     status: 'experimental',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(160, 60%, 45%)',
     lastUpdated: '2026-03',
     shortDescription: {
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     status: 'active',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(220, 80%, 55%)',
     lastUpdated: '2026-06',
     shortDescription: {
@@ -242,7 +242,7 @@ export const projects: Project[] = [
     status: 'early',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(30, 80%, 50%)',
     lastUpdated: '2026-02',
     shortDescription: {
@@ -262,7 +262,7 @@ export const projects: Project[] = [
     status: 'wip',
     featured: false,
     listed: true,
-    homepage: false,
+    homepage: true,
     accentColor: 'hsl(340, 75%, 55%)',
     shortDescription: {
       en: 'A minimal, privacy-focused blog platform using Astro and markdown for technical writings.',
