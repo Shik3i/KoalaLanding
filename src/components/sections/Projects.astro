@@ -91,10 +91,112 @@ const categoryIcons: Record<string, string> = {
     <!-- Unified projects grid -->
     <div class="project-grid" id="homepage-project-grid">
       {nonFeatured.map((project) => (
-        <div class="project-grid-item" data-category={project.category}>
+        <div class="project-grid-item" data-category={project.category} data-experimental={project.status !== 'active' ? 'true' : 'false'}>
           <ProjectCard project={project} locale={locale} translations={tr} />
         </div>
       ))}
     </div>
+
+    <!-- Experimental Projects Toggle -->
+    <div class="experimental-toggle-container">
+      <button id="experimental-toggle-btn" class="btn btn-ghost" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"></path><path d="M14 9.3V1.99"></path><path d="M8.5 2h7"></path><path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path><path d="M5.52 16h12.96"></path></svg>
+        <span>{tr['projects.showExperimental'] ?? 'Show WIP & Experimental Projects'}</span>
+      </button>
+
+      <div id="experimental-disclaimer" class="experimental-disclaimer" aria-hidden="true">
+        <div class="disclaimer-content">
+          <strong>⚠️ {tr['projects.disclaimerTitle'] ?? 'Disclaimer'}:</strong> 
+          {tr['projects.disclaimerText'] ?? 'These projects are heavily Work In Progress or experimental proofs of concept. They may have bugs, lack documentation, and are not yet intended for general public use. Use them at your own risk!'}
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  .experimental-toggle-container {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .experimental-disclaimer {
+    max-width: 600px;
+    background: hsla(30, 90%, 50%, 0.1);
+    border: 1px solid hsla(30, 90%, 50%, 0.3);
+    color: var(--c-text);
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity var(--dur-base) var(--ease-out), visibility var(--dur-base) var(--ease-out), height var(--dur-base) var(--ease-out), padding var(--dur-base) var(--ease-out);
+  }
+
+  .experimental-disclaimer strong {
+    color: hsla(30, 90%, 60%, 1);
+  }
+
+  #homepage-project-grid.show-experimental + .experimental-toggle-container .experimental-disclaimer {
+    opacity: 1;
+    visibility: visible;
+    padding: var(--space-4);
+  }
+
+  /* Hide experimental items initially */
+  #homepage-project-grid:not(.show-experimental) .project-grid-item[data-experimental="true"] {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggleBtn = document.getElementById('experimental-toggle-btn');
+    const projectGrid = document.getElementById('homepage-project-grid');
+    const disclaimer = document.getElementById('experimental-disclaimer');
+    if (!toggleBtn || !projectGrid) return;
+
+    // Read from localStorage
+    const savedState = localStorage.getItem('koalastuff_show_experimental');
+    let isShowing = savedState === 'true';
+
+    const updateDOM = () => {
+      if (isShowing) {
+        projectGrid.classList.add('show-experimental');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        if (disclaimer) {
+          disclaimer.style.height = disclaimer.scrollHeight + 32 + 'px'; // +32 for padding
+          setTimeout(() => { if(isShowing) disclaimer.style.height = 'auto'; }, 300);
+        }
+        
+        // Ensure newly revealed items get animated
+        setTimeout(() => {
+          const newItems = projectGrid.querySelectorAll('.project-grid-item[data-experimental="true"] .reveal-on-scroll');
+          newItems.forEach(el => el.classList.add('is-revealed'));
+        }, 50);
+
+      } else {
+        projectGrid.classList.remove('show-experimental');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        if (disclaimer) {
+          disclaimer.style.height = '0px';
+        }
+      }
+    };
+
+    updateDOM();
+
+    toggleBtn.addEventListener('click', () => {
+      isShowing = !isShowing;
+      localStorage.setItem('koalastuff_show_experimental', isShowing ? 'true' : 'false');
+      updateDOM();
+    });
+  });
+</script>

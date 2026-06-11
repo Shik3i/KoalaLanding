@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("copy-link-btn");e&&e.addEventListener("click",()=>{navigator.clipboard.writeText(window.location.href);const t=e.querySelector("span");if(t){const n=t.textContent;t.textContent=" Copied!",setTimeout(()=>{t.textContent=n},2e3)}})});

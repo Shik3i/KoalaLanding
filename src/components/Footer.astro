@@ -27,7 +27,7 @@ try {
 }
 ---
 
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer reveal-on-scroll" role="contentinfo">
   <div class="container">
     <div class="site-footer__inner">
       <div class="site-footer__brand-group">
@@ -51,6 +51,10 @@ try {
         <div class="site-footer__links-group site-footer__links-group--bottom">
           <a href="https://ko-fi.com/koaladev" target="_blank" rel="noopener noreferrer">Ko-fi ☕</a>
           <span class="sep" aria-hidden="true">·</span>
+          <a href={privacyHref}>{tr['footer.privacy'] ?? 'Privacy'}</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href={imprintHref}>{tr['footer.imprint'] ?? 'Imprint'}</a>
+          <span class="sep" aria-hidden="true">·</span>
           <span class="site-footer__version">
             <a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">
               Build: <code>{commitHash}</code>
@@ -59,10 +63,6 @@ try {
               </svg>
             </a>
           </span>
-          <span class="sep" aria-hidden="true">·</span>
-          <a href={privacyHref}>{tr['footer.privacy'] ?? 'Privacy'}</a>
-          <span class="sep" aria-hidden="true">·</span>
-          <a href={imprintHref}>{tr['footer.imprint'] ?? 'Imprint'}</a>
         </div>
       </div>
     </div>

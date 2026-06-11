@@ -1,0 +1,1 @@
+document.addEventListener("astro:page-load",()=>{const s=new IntersectionObserver(e=>{e.forEach(r=>{r.isIntersecting&&(r.target.classList.add("is-revealed"),s.unobserve(r.target))})},{threshold:.1});document.querySelectorAll(".reveal-on-scroll").forEach(e=>s.observe(e))});

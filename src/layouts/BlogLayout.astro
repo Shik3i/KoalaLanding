@@ -31,6 +31,9 @@ const tr = await loadTranslations(locale);
   <Header locale={locale} translations={tr} currentPath={canonicalPath} />
 
   <main id="main-content" class="section blog-layout">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" aria-hidden="true"></div>
+
     <div class="container container--blog">
       
       <a href={getLocalePath(locale, 'blog')} class="btn btn-ghost blog-back-link">
@@ -110,6 +113,24 @@ const tr = await loadTranslations(locale);
 </BaseLayout>
 
 <style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--c-accent);
+    z-index: 1000;
+    transform-origin: 0 50%;
+    animation: scroll-progress auto linear;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes scroll-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
   .container--blog {
     max-width: 1100px;
   }
@@ -316,7 +337,7 @@ const tr = await loadTranslations(locale);
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const copyBtn = document.getElementById('copy-link-btn');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {

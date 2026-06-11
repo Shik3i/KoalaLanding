@@ -63,40 +63,6 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
           </svg>
         </a>
 
-        <!-- Language switcher -->
-        <nav class="lang-switcher" aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}>
-          <button
-             id="lang-switcher-btn"
-            class="lang-switcher__btn"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-controls="lang-switcher-dropdown"
-          >
-            <span>{locale.toUpperCase()}</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div
-            id="lang-switcher-dropdown"
-            class="lang-switcher__dropdown"
-            role="listbox"
-            aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}
-          >
-            {locales.map((l) => (
-              <a
-                href={getLocalePath(l, basePath)}
-                hreflang={localeLangCodes[l]}
-                aria-current={l === locale ? 'true' : undefined}
-                role="option"
-                aria-selected={l === locale}
-              >
-                {localeNames[l]}
-              </a>
-            ))}
-          </div>
-        </nav>
-
         <!-- Theme toggle -->
         <button
           id="theme-toggle"
@@ -122,6 +88,45 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
+
+        <!-- Language switcher -->
+        <nav class="lang-switcher" aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}>
+          <button
+             id="lang-switcher-btn"
+            class="lang-switcher__btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="lang-switcher-dropdown"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span>{locale.toUpperCase()}</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="margin-left: 2px;">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div
+            id="lang-switcher-dropdown"
+            class="lang-switcher__dropdown"
+            role="listbox"
+            aria-label={tr['nav.switchLanguage'] ?? 'Switch language'}
+          >
+            {locales.map((l) => (
+              <a
+                href={getLocalePath(l, basePath)}
+                hreflang={localeLangCodes[l]}
+                aria-current={l === locale ? 'true' : undefined}
+                role="option"
+                aria-selected={l === locale}
+              >
+                {localeNames[l]}
+              </a>
+            ))}
+          </div>
+        </nav>
 
         <!-- Mobile menu button -->
         <button

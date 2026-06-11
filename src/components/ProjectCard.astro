@@ -23,8 +23,9 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
 ---
 
 <article
-  class="project-card"
+  class="project-card reveal-on-scroll"
   style={`--project-accent: ${project.accentColor ?? 'var(--c-accent)'}`}
+  data-tags={project.tags.join(',')}
 >
   <div class="project-card__header">
     <div>

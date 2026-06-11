@@ -199,7 +199,7 @@ export const projects: Project[] = [
     id: 'koalasnippets',
     name: 'KoalaSnippets',
     category: 'web',
-    status: 'early',
+    status: 'active',
     featured: false,
     listed: true,
     homepage: true,
