@@ -1,0 +1,290 @@
+---
+title: "Being a developer ruined coding as a hobby for me. Vibe coding brought it back."
+description: "I do not want to code after work. I still want to build things."
+pubDate: 2026-06-11
+author: "Timo"
+tags: ["vibe-coding", "devlog", "side-projects"]
+---
+
+I used to love coding in my free time.
+
+Back in university, it was basically my main hobby. I liked building things, breaking things, trying out random ideas, starting side projects that were probably too big, and learning new tech just because it seemed interesting.
+
+That was also the reason I wanted to become a developer in the first place.
+
+Then I actually became one.
+
+And somehow, over time, coding stopped feeling like a hobby.
+
+## When coding became work
+
+I dropped out of university after around four years and started an apprenticeship as a software developer in May 2019.
+
+A few months into working full time, the switch already started happening.
+
+A 40-hour week does not sound that dramatic on paper. But add commuting, breaks, overtime, stress, customer issues, broken promises, late-night fixes, and suddenly opening an IDE after work no longer feels like doing something fun.
+
+It feels like unpaid overtime.
+
+At my old job, there was always something burning.
+
+A customer needed something immediately. A feature had been promised in a completely unrealistic timeframe. Something had to be pushed even though everyone knew it was unfinished. Then that unfinished code had to be fixed, patched, worked around, and somehow kept alive.
+
+There was never really time to clean things up properly.
+
+No real refactors. No calm backlog work. No “let us take a few days and make this better.”
+
+Just one PRIO 1 emergency chasing the next PRIO 1 emergency.
+
+The backlog did not shrink. It just kept growing.
+
+At some point, coding became associated with stress in my head. Not creativity. Not curiosity. Not “I wonder if I can build this.”
+
+Just work.
+
+So I stopped building my own side projects.
+
+And honestly, that sucked.
+
+## I do not want to code after work. I still want to build things.
+
+That sentence probably explains it best.
+
+I do not really want to sit down after a full workday and manually type more code.
+
+But I still want to make things.
+
+I still get ideas. I still run into annoying little problems where I think, “Why does nobody offer a good solution for this?” I still like thinking about architecture, UX, deployment, tradeoffs, naming, features, edge cases, and all the weird details that turn a random idea into a usable tool.
+
+The part that drained me was not building.
+
+It was being the code monkey after already being the code monkey all day.
+
+Vibe coding changed that dynamic for me.
+
+Not because AI magically solves everything. It really does not.
+
+But because it moved me into a different role.
+
+Instead of being the person typing every line, I became the person defining the product, the architecture, the constraints, the tech stack, the rules, and the acceptance criteria.
+
+I know “AI devs” sounds a bit weird, but that is honestly how it feels sometimes: I am not outsourcing thinking, I am outsourcing the typing, scaffolding and first-pass implementation.
+
+And weirdly, that brought the fun back.
+
+## From developer to architect / product owner
+
+The biggest shift for me is that I no longer feel like I am doing the same job again after work.
+
+I am not just grinding through tickets.
+
+I am not being told that some feature needs to be rushed because someone promised it to a customer without asking the developers first.
+
+I am not forced to push code I already know will become technical debt.
+
+Instead, I get to make the decisions.
+
+I define the stack. I define the architecture. I decide what is acceptable and what is not. I can stop a feature and say, “No, this is the wrong direction.” I can throw away an implementation and ask for a different one. I can be strict about CSP, no external CDNs, static builds, self-hosted assets, build-time image optimization, or whatever else matters for the project.
+
+The AI can suggest things, but it does not get the final word.
+
+That part is important to me.
+
+I am not just asking a chatbot to “make app pls” and then uploading whatever comes out.
+
+I still know what I am doing.
+
+I studied computer science for years, even if I did not finish the degree. I coded privately before that. I completed an apprenticeship as a software developer with very good grades. I worked professionally as a .NET fullstack developer in a stressful real-world environment.
+
+I know how to define a tech stack. I know what messy code smells like. I know what architecture decisions cost later. I know when something is over-engineered, under-specified, unsafe, fragile, or just plain stupid.
+
+That does not mean I catch everything.
+
+But it means I am not blindly accepting whatever the AI gives me.
+
+## Why I do not think this is vibe-coded slop
+
+I get why people are skeptical of vibe-coded projects.
+
+A lot of them are probably garbage. Some are insecure. Some are just wrappers around the same idea everyone else is wrapping. Some look good for five minutes and fall apart the second you do anything slightly unexpected.
+
+But I do not think the problem is “AI wrote the code.”
+
+The problem is when nobody competent is directing, reviewing, testing, or caring.
+
+My process is closer to managing a small team of very fast, very annoying junior developers.
+
+I give detailed instructions. I break tasks down. I define constraints. I ask for verification steps. I make the agent run builds and tests. I review the result. I test the actual product myself. I use my own tools daily. If something feels wrong, I push back.
+
+Sometimes I let one tool build something and another tool review it.
+
+Sometimes I discuss architecture with ChatGPT or Gemini first, then let Codex, Antigravity or OpenCode implement it.
+
+Sometimes I use Reddit or Google to sanity-check a technology decision before I commit to it.
+
+The code may be generated, but the product direction is not random.
+
+And that difference matters.
+
+## KoalaSync was my first real proof point
+
+The clearest example for me is KoalaSync.
+
+KoalaSync is a free, open-source watch party browser extension. It syncs video playback between people in the same room: play, pause, seeking, episode changes, that kind of thing.
+
+The original reason I built it was simple:
+
+I watch stuff on my Emby server with friends over Discord, and manually syncing every pause, play and episode change is annoying.
+
+The usual “3, 2, 1, play” routine gets old very quickly.
+
+Most watch party tools either focus on specific streaming platforms, require accounts, do not work well with self-hosted setups, or feel too closed for what I wanted.
+
+I wanted something that worked for my own use case first:
+
+- browser-based playback
+- Emby, Jellyfin and Plex support
+- local IPs and custom domains
+- no accounts
+- no tracking
+- open source
+- optional self-hosting
+- simple room links
+
+Of course it can also work on major browser streaming sites like Netflix, Prime Video, YouTube and others, depending on the player and browser behavior.
+
+But the main reason it exists is still my own problem.
+
+I needed it. So I built it.
+
+Or more accurately: I designed it, directed it, tested it, reviewed it, and let AI agents write the code.
+
+I did not manually write a single line of KoalaSync code myself.
+
+Not even the tiny fixes.
+
+If a button needed to be slightly bluer, the AI did it.
+
+That sounds absurd, but it was also kind of the whole point.
+
+I did not want to slowly slide back into the role that made side projects feel like work again. I wanted to stay in the architect / product owner role and see if that was enough to build something real.
+
+For KoalaSync, it was.
+
+I know where things are in the codebase. I know what parts do what. I know why decisions were made. I know the backend architecture. I know the frontend structure. I know what the extension is doing and what the relay server is doing.
+
+But I did not hand-type the implementation.
+
+That is a weird sentence to write as a developer.
+
+But it is also honestly the thing that made the project possible for me.
+
+## Frontend is finally not my problem anymore
+
+I am mainly a backend developer.
+
+I have written MQTT systems, auth servers, database-heavy backend logic, APIs, and all that kind of stuff. I am comfortable there.
+
+Frontend, on the other hand, was always the part I disliked most.
+
+Not because I do not care about design. I actually care a lot about how things look and feel.
+
+But implementing frontend details manually always drained me. CSS edge cases, layout tweaks, browser weirdness, endless tiny UI adjustments — that part was never fun for me.
+
+AI-assisted coding changed that more than anything else.
+
+I can describe the design direction, the structure, the behavior, the constraints, the accessibility requirements, the CSP rules, the performance goals, and then review the output instead of fighting every pixel myself.
+
+That makes frontend work tolerable.
+
+Sometimes even fun.
+
+## KoalaPull taught me something different
+
+KoalaSync was built on technology I understand very well: HTML, CSS, JavaScript, browser extension APIs, and a JavaScript backend relay server.
+
+That was mostly me giving very direct architectural instructions.
+
+KoalaPull was different.
+
+For KoalaPull, I wanted a desktop app, but I did not want to use Electron if I could avoid it. Electron is powerful, but for a small utility it often feels heavier than necessary.
+
+So I looked into Wails.
+
+I had never worked with Wails before.
+
+That made the AI workflow different. I had to let the tools advise me more actively. I still made the decisions, but I also had to learn along the way. I compared options, read discussions, searched around, asked questions, and used the AI more like a technical guide.
+
+That was surprisingly enjoyable.
+
+Even though I did not write the code myself, I still learned a lot about the stack, the tradeoffs, and how a Wails app is structured.
+
+That is another part people sometimes miss.
+
+AI-assisted coding does not have to mean you learn nothing.
+
+If you stay involved, ask why, review decisions, and force yourself to understand the architecture, you can still learn a lot.
+
+You are just not learning by manually typing every line anymore.
+
+## The audio compressor update
+
+One of my favorite KoalaSync updates so far is the local audio compressor.
+
+Modern movie audio is often ridiculous. Dialogue is quiet, explosions are deafening, and you end up constantly adjusting the volume like your remote is part of the movie.
+
+So I added an experimental audio compressor using the Web Audio API.
+
+For that, I spun up a separate test repository and basically let DeepSeek go wild on prototypes. The goal was to test compression values, understand latency, try different settings, and figure out what actually felt usable.
+
+The final feature is not magic. It is basically browser-local audio processing using existing Web Audio APIs.
+
+But that is exactly what I like about it.
+
+It solved a real annoyance for me with a fairly simple technical approach.
+
+And because it runs locally in the browser, it fits the general KoalaSync philosophy: no extra audio service, no accounts, no tracking, no weird cloud processing.
+
+## Product Hunt went nowhere, and that is fine
+
+I also tried putting KoalaSync on Product Hunt.
+
+It got completely buried.
+
+Hundreds of projects launch there, and a free open-source watch party extension for self-hosters is probably not exactly the perfect Product Hunt growth-hack product anyway.
+
+A lot of that space feels more focused on AI hustle products, quick monetization, and slightly different versions of the same idea.
+
+That is not really what KoalaSync is.
+
+KoalaSync exists because I wanted it.
+
+If other people use it, that is great. If they give feedback and the project gets better, even better.
+
+But if it stays niche, that is also fine.
+
+The biggest win was not Product Hunt traffic.
+
+The biggest win was realizing that I can come home, relax, and build something again without it feeling like my job.
+
+## Vibe coding did not make me stop being a developer
+
+It changed which part of development I spend my free time on.
+
+I no longer want to manually code side projects after work.
+
+But I do want to design them. I do want to architect them. I do want to test them, shape them, polish them, and decide what they should become.
+
+For me, vibe coding brought back the creative part of software development.
+
+Not the corporate ticket grind.
+
+Not the late-night emergency fixes.
+
+Not the “ship it now, fix it forever” cycle.
+
+The part where you have an idea and slowly turn it into something real.
+
+That is the part I missed.
+
+And honestly, I am glad I found a way back to it.
