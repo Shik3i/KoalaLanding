@@ -30,9 +30,10 @@ const tr = await loadTranslations(locale);
 >
   <Header locale={locale} translations={tr} currentPath={canonicalPath} />
 
+  <!-- Reading Progress Bar (outside main to avoid view-transition transform issues) -->
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
   <main id="main-content" class="section blog-layout" transition:animate="slide">
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 
     <div class="container container--blog">
       
@@ -121,7 +122,6 @@ const tr = await loadTranslations(locale);
     height: 4px;
     background: var(--c-accent);
     z-index: 1000;
-    transition: width 50ms linear;
   }
 
   .container--blog {
@@ -346,6 +346,7 @@ const tr = await loadTranslations(locale);
 
     const progressBar = document.getElementById('reading-progress');
     if (progressBar) {
+      let ticking = false;
       const updateProgress = () => {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -353,8 +354,15 @@ const tr = await loadTranslations(locale);
           const progress = Math.min((scrollTop / docHeight) * 100, 100);
           progressBar.style.width = progress + '%';
         }
+        ticking = false;
       };
-      window.addEventListener('scroll', updateProgress, { passive: true });
+      const onScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
       updateProgress();
     }
   });
