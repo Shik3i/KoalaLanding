@@ -29,7 +29,7 @@ try {
 
 <footer class="site-footer" role="contentinfo">
   <div class="container">
-    <div class="site-footer__grid">
+    <div class="site-footer__grid" style="grid-template-columns: 1fr;">
       <!-- Brand col -->
       <div class="site-footer__brand-col">
         <div class="site-footer__brand">
@@ -44,28 +44,6 @@ try {
           &nbsp;·&nbsp;
           {tr['footer.rights'] ?? 'Open source under the MIT License.'}
         </p>
-      </div>
-
-      <!-- Projects col -->
-      <div class="site-footer__col">
-        <h3>{tr['footer.projects'] ?? 'Projects'}</h3>
-        <ul>
-          <li><a href="https://sync.koalastuff.net" rel="noopener noreferrer">KoalaSync</a></li>
-          <li><a href="https://github.com/Shik3i/KoalaPull" rel="noopener noreferrer">KoalaPull</a></li>
-          <li><a href="https://github.com/Shik3i/KoalaClicker" rel="noopener noreferrer">KoalaClicker</a></li>
-          <li><a href="https://github.com/Shik3i/KoalaSound" rel="noopener noreferrer">KoalaSound</a></li>
-        </ul>
-      </div>
-
-      <!-- Links col -->
-      <div class="site-footer__col">
-        <h3>Links</h3>
-        <ul>
-          <li><a href="https://github.com/Shik3i" rel="noopener noreferrer">{tr['footer.github'] ?? 'GitHub'}</a></li>
-          <li><a href="https://dev.to/hungrykoala" rel="noopener noreferrer">{tr['footer.devto'] ?? 'dev.to'}</a></li>
-          <li><a href={privacyHref}>{tr['footer.privacy'] ?? 'Privacy'}</a></li>
-          <li><a href={imprintHref}>{tr['footer.imprint'] ?? 'Imprint'}</a></li>
-        </ul>
       </div>
     </div>
 

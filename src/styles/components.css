@@ -342,6 +342,12 @@
   padding-block: var(--space-24);
   overflow: hidden;
   text-align: center;
+  /* Premium dot-grid background */
+  background-image: radial-gradient(hsl(224, 15%, 16%) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+[data-theme='light'] .hero {
+  background-image: radial-gradient(hsl(220, 10%, 86%) 1px, transparent 1px);
 }
 
 .hero__bg {
@@ -350,41 +356,8 @@
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-}
-
-/* Animated gradient blobs */
-.hero__blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.18;
-  animation: blobDrift 20s ease-in-out infinite alternate;
-}
-.hero__blob--1 {
-  width: 40vw;
-  height: 40vw;
-  background: radial-gradient(circle, hsl(218, 85%, 55%), transparent 70%);
-  top: -10%;
-  left: -5%;
-  animation-delay: 0s;
-}
-.hero__blob--2 {
-  width: 35vw;
-  height: 35vw;
-  background: radial-gradient(circle, hsl(260, 70%, 55%), transparent 70%);
-  top: 20%;
-  right: -8%;
-  animation-delay: -7s;
-}
-.hero__blob--3 {
-  width: 30vw;
-  height: 30vw;
-  background: radial-gradient(circle, hsl(145, 60%, 45%), transparent 70%);
-  bottom: -10%;
-  left: 30%;
-  animation-delay: -14s;
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
 /* Mouse-reactive glow */
@@ -398,17 +371,16 @@
   left: var(--mouse-x);
   top: var(--mouse-y);
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.8;
+  mix-blend-mode: screen;
   transition: left 0.4s var(--ease-out), top 0.4s var(--ease-out);
 }
-
-@keyframes blobDrift {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(3%, 5%) scale(1.08); }
+[data-theme='light'] .hero__glow {
+  opacity: 0.3;
+  mix-blend-mode: multiply;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__blob { animation: none; }
   .hero__glow { transition: none; }
 }
 
