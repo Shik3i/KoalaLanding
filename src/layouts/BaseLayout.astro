@@ -41,6 +41,10 @@ const langCode = localeLangCodes[locale];
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Timo (KoalaStuff)" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="darkreader-lock" />
     <ClientRouter />
 
     <!-- Canonical, hreflang & RSS -->
