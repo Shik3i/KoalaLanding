@@ -43,14 +43,25 @@ Serves the `dist/` directory locally for a production-equivalent check.
 
 ## Deployment (Caddy on VPS)
 
-Expected deployment flow:
+Since the `dist/` build output is tracked in git, the production build is executed locally before pushing. The VPS simply pulls the pre-built files and serves them.
+
+### Development Workflow (Before pushing):
 
 ```bash
-# On the VPS, in the repo directory:
-git pull
-npm install  # only needed when package.json changes
+# 1. Always run build to update dist/ output:
 npm run build
-# Caddy serves dist/ directly — no restart needed
+
+# 2. Stage, commit, and push all files (including updated dist/):
+git add -A
+git commit -m "Commit message"
+git push
+```
+
+### VPS Workflow:
+
+```bash
+# On the VPS in the repository root directory:
+git pull          # Caddy serves dist/ directly — changes are live instantly!
 ```
 
 ### Example Caddyfile
