@@ -1,4 +1,4 @@
-# 🐨 KoalaStuff Landing Page
+# KoalaStuff Landing Page
 
 The official landing page for **[koalastuff.net](https://koalastuff.net)** — a highly curated, premium static hub introducing all KoalaStuff projects, browser utilities, and open-source applications.
 
@@ -11,7 +11,8 @@ The official landing page for **[koalastuff.net](https://koalastuff.net)** — a
 
 The project is built on modern web APIs and best practices:
 
-*   **Framework**: [Astro v6](https://astro.build) configured in strict static mode (`output: 'static'`).
+*   **Framework**: [Astro v6](https://astro.build) configured in strict static mode (`output: 'static'`) with the new Content Layer API and `glob` loader.
+*   **Routing**: Native SPA-like navigation using Astro's `<ClientRouter />` (View Transitions) for instant page loads.
 *   **Language**: Strict TypeScript with strict null checks and no `any` implicit types.
 *   **Styling**: Vanilla CSS utilizing modern HSL color tokens, CSS Grid, Flexbox, and Container Queries.
 *   **Performance**: Optimized responsive image pipeline, font preloads, and zero production runtime Node.js requirements.
@@ -34,6 +35,15 @@ The background consists of three floating glow blobs that dynamically rotate, tr
 *   **MacOS App Mockups**: Featured projects are presented in simulated macOS window panels with interactive glassmorphism (`backdrop-filter`).
 *   **Mouse-Reactive spotlights**: Panels and cards feature dynamic, mouse-tracking radial gradients on pointer hover (de-activated on mobile touch devices via media queries to preserve INP).
 *   **Keyboard-accessible Roving Tab Navigation**: Interactive tab-based filters use custom roving keyboard index listeners for accessible screen-reader navigation.
+
+---
+
+## 📝 MDX Blog & RSS
+
+A fully statically generated blog is integrated, supporting standard Markdown and MDX.
+*   **Content Collections**: Posts are located in `src/content/blog/*.mdx`.
+*   **Internationalization**: The blog inherits the site's robust i18n routing (`/[locale]/blog`), keeping the UI localized while preserving the original English article content.
+*   **RSS Feed**: An auto-generated RSS feed is available at `/rss.xml`, syndicating all published articles.
 
 ---
 

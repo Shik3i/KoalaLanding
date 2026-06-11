@@ -3,6 +3,8 @@ import '../styles/global.css';
 import '../styles/components.css';
 import { locales, localeLangCodes, localeNames, getLocalePath, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
+import { ClientRouter } from 'astro:transitions';
+import BackToTop from '../components/BackToTop.astro';
 
 export interface Props {
   title: string;
@@ -39,6 +41,7 @@ const langCode = localeLangCodes[locale];
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Timo (KoalaStuff)" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
 
     <!-- Canonical & hreflang -->
     <link rel="canonical" href={canonicalUrl} />
@@ -70,8 +73,6 @@ const langCode = localeLangCodes[locale];
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Font preloads (self-hosted Inter) -->
     <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -122,6 +123,8 @@ const langCode = localeLangCodes[locale];
     <a href="#main-content" class="skip-link">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
 
     <slot />
+
+    <BackToTop />
 
     <!-- Theme + UI script (Astro bundles this as a static asset) -->
     <script>

@@ -27,7 +27,8 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
 
       <!-- Desktop nav -->
       <nav class="site-header__nav" aria-label="Main navigation">
-        <a href={getLocalePath(locale, 'projects')}>{tr['nav.projects'] ?? 'Projects'}</a>
+        <a href={getLocalePath(locale, 'projects')} aria-current={currentPath.includes('/projects') ? 'page' : undefined}>{tr['nav.projects'] ?? 'Projects'}</a>
+        <a href={getLocalePath(locale, 'blog')} aria-current={currentPath.includes('/blog') ? 'page' : undefined}>{tr['nav.blog'] ?? 'Blog'}</a>
         <a href={`${getLocalePath(locale)}#about`}>{tr['nav.about'] ?? 'About'}</a>
         <a href={`${getLocalePath(locale)}#faq`}>{tr['nav.faq'] ?? 'FAQ'}</a>
       </nav>
@@ -142,7 +143,8 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
   <!-- Mobile nav -->
   <div id="mobile-nav" class="mobile-nav" role="navigation" aria-label="Mobile navigation">
     <div class="container">
-      <a href={getLocalePath(locale, 'projects')}>{tr['nav.projects'] ?? 'Projects'}</a>
+      <a href={getLocalePath(locale, 'projects')} aria-current={currentPath.includes('/projects') ? 'page' : undefined}>{tr['nav.projects'] ?? 'Projects'}</a>
+      <a href={getLocalePath(locale, 'blog')} aria-current={currentPath.includes('/blog') ? 'page' : undefined}>{tr['nav.blog'] ?? 'Blog'}</a>
       <a href={`${getLocalePath(locale)}#about`}>{tr['nav.about'] ?? 'About'}</a>
       <a href={`${getLocalePath(locale)}#faq`}>{tr['nav.faq'] ?? 'FAQ'}</a>
       <div class="mobile-nav__actions">

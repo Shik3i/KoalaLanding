@@ -47,8 +47,8 @@
     setStoredTheme(next);
   }
 
-  // Init on DOMContentLoaded (theme is already set by inline anti-flash snippet)
-  document.addEventListener('DOMContentLoaded', () => {
+  // Init on astro:page-load (runs on initial load and after view transitions)
+  document.addEventListener('astro:page-load', () => {
     const stored = getStoredTheme();
     const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? LIGHT : DARK;
     const theme = stored ?? preferred;

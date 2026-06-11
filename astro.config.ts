@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import compressor from 'astro-compressor';
 
+import mdx from '@astrojs/mdx';
+
 export default defineConfig({
   output: 'static',
   site: 'https://koalastuff.net',
@@ -10,32 +12,29 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
   },
-  integrations: [
-    sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en',
-          de: 'de',
-          fr: 'fr',
-          es: 'es',
-          it: 'it',
-          nl: 'nl',
-          pl: 'pl',
-          pt: 'pt',
-          tr: 'tr',
-          ja: 'ja',
-          ko: 'ko',
-          zh: 'zh',
-          uk: 'uk',
-        },
+  integrations: [sitemap({
+    i18n: {
+      defaultLocale: 'en',
+      locales: {
+        en: 'en',
+        de: 'de',
+        fr: 'fr',
+        es: 'es',
+        it: 'it',
+        nl: 'nl',
+        pl: 'pl',
+        pt: 'pt',
+        tr: 'tr',
+        ja: 'ja',
+        ko: 'ko',
+        zh: 'zh',
+        uk: 'uk',
       },
-    }),
-    compressor({
-      gzip: true,
-      brotli: true,
-    }),
-  ],
+    },
+  }), compressor({
+    gzip: true,
+    brotli: true,
+  }), mdx()],
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de', 'fr', 'es', 'it', 'nl', 'pl', 'pt', 'tr', 'ja', 'ko', 'zh', 'uk'],

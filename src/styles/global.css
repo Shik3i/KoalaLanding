@@ -46,7 +46,7 @@
   --c-border-subtle: hsl(224, 15%, 13%);
   --c-text:        hsl(220, 20%, 96%);
   --c-text-muted:  hsl(220, 10%, 70%);
-  --c-text-faint:  hsl(220, 10%, 45%);
+  --c-text-faint:  hsl(220, 10%, 55%);
   --c-accent:      hsl(212, 100%, 60%);
   --c-accent-glow: hsl(212, 100%, 60%, 0.15);
 
@@ -118,7 +118,7 @@
   --c-border-subtle: hsl(220, 10%, 90%);
   --c-text:        hsl(224, 25%, 8%);
   --c-text-muted:  hsl(224, 15%, 35%);
-  --c-text-faint:  hsl(224, 10%, 55%);
+  --c-text-faint:  hsl(224, 10%, 50%);
   --c-accent:      hsl(212, 100%, 48%);
   --c-accent-glow: hsl(212, 100%, 48%, 0.1);
   --shadow-sm:  0 1px 3px hsl(220, 20%, 60%, 0.1);
@@ -358,7 +358,7 @@ ul, ol { list-style: none; }
 }
 
 .btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:active { transform: translateY(1px) scale(0.98); }
 
 .btn-primary {
   background: var(--c-accent);
@@ -534,3 +534,30 @@ ul, ol { list-style: none; }
 }
 .link-icon:hover { color: var(--c-accent); text-decoration: none; }
 .link-icon svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+
+/* --- Scroll-Driven Animations --- */
+@supports (animation-timeline: view()) {
+  .card, .tracker-row {
+    animation: fade-in-up linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 15%;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .tracker-row {
+      animation: none;
+    }
+  }
+}
+
