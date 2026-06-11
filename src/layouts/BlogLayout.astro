@@ -32,7 +32,7 @@ const tr = await loadTranslations(locale);
 
   <main id="main-content" class="section blog-layout" transition:animate="slide">
     <!-- Reading Progress Bar -->
-    <div class="reading-progress" aria-hidden="true"></div>
+    <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 
     <div class="container container--blog">
       
@@ -117,18 +117,11 @@ const tr = await loadTranslations(locale);
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 0%;
     height: 4px;
     background: var(--c-accent);
     z-index: 1000;
-    transform-origin: 0 50%;
-    animation: scroll-progress auto linear;
-    animation-timeline: scroll(root);
-  }
-
-  @keyframes scroll-progress {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    transition: width 50ms linear;
   }
 
   .container--blog {
@@ -210,7 +203,7 @@ const tr = await loadTranslations(locale);
 
   .blog-sidebar {
     position: sticky;
-    top: var(--space-8);
+    top: calc(3.5rem + var(--space-8));
   }
 
   .blog-toc {
@@ -349,6 +342,20 @@ const tr = await loadTranslations(locale);
           setTimeout(() => { span.textContent = original; }, 2000);
         }
       });
+    }
+
+    const progressBar = document.getElementById('reading-progress');
+    if (progressBar) {
+      const updateProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+          const progress = Math.min((scrollTop / docHeight) * 100, 100);
+          progressBar.style.width = progress + '%';
+        }
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
     }
   });
 </script>
