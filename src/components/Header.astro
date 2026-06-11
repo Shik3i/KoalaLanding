@@ -29,8 +29,6 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
       <nav class="site-header__nav" aria-label="Main navigation">
         <a href={getLocalePath(locale, 'projects')} aria-current={currentPath.includes('/projects') ? 'page' : undefined} data-astro-prefetch="hover">{tr['nav.projects'] ?? 'Projects'}</a>
         <a href={getLocalePath(locale, 'blog')} aria-current={currentPath.includes('/blog') ? 'page' : undefined} data-astro-prefetch="hover">{tr['nav.blog'] ?? 'Blog'}</a>
-        <a href={`${getLocalePath(locale)}#about`}>{tr['nav.about'] ?? 'About'}</a>
-        <a href={`${getLocalePath(locale)}#faq`}>{tr['nav.faq'] ?? 'FAQ'}</a>
       </nav>
 
       <div class="site-header__spacer"></div>
@@ -153,8 +151,6 @@ const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\
     <div class="container">
       <a href={getLocalePath(locale, 'projects')} aria-current={currentPath.includes('/projects') ? 'page' : undefined} data-astro-prefetch="hover">{tr['nav.projects'] ?? 'Projects'}</a>
       <a href={getLocalePath(locale, 'blog')} aria-current={currentPath.includes('/blog') ? 'page' : undefined} data-astro-prefetch="hover">{tr['nav.blog'] ?? 'Blog'}</a>
-      <a href={`${getLocalePath(locale)}#about`}>{tr['nav.about'] ?? 'About'}</a>
-      <a href={`${getLocalePath(locale)}#faq`}>{tr['nav.faq'] ?? 'FAQ'}</a>
       <div class="mobile-nav__actions">
         <a href="https://github.com/Shik3i" rel="noopener noreferrer" class="link-icon">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">

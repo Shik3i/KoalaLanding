@@ -23,7 +23,7 @@ const tr = await loadTranslations(locale);
 >
   <Header locale={locale} translations={tr} currentPath="/" />
 
-  <main id="main-content">
+  <main id="main-content" transition:animate="slide">
     <Hero locale={locale} translations={tr} />
     <Projects locale={locale} translations={tr} />
     <About translations={tr} />

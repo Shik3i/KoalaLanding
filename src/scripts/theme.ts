@@ -50,8 +50,7 @@
   // Init on astro:page-load (runs on initial load and after view transitions)
   document.addEventListener('astro:page-load', () => {
     const stored = getStoredTheme();
-    const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? LIGHT : DARK;
-    const theme = stored ?? preferred;
+    const theme = stored ?? DARK;
     applyTheme(theme);
 
     const btn = document.getElementById('theme-toggle');

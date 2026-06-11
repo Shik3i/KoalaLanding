@@ -1,1 +1,1 @@
-(function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var d=document.documentElement;if(t==='light'){d.dataset.theme='light'}else if(t==='dark'){d.dataset.theme='dark'}else if(window.matchMedia('(prefers-color-scheme: light)').matches){d.dataset.theme='light'}else{d.dataset.theme='dark'}})();
+(function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var d=document.documentElement;if(t==='light'){d.dataset.theme='light'}else{d.dataset.theme='dark'}})();
