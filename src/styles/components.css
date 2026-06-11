@@ -661,7 +661,7 @@
 /* ---- FEATURED PROJECT ---- */
 .featured-project {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: var(--space-12);
   align-items: center;
   padding: var(--space-8);
@@ -801,6 +801,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+}
+
+@media (min-width: 1280px) {
+  .featured-project__links {
+    flex-wrap: nowrap;
+  }
 }
 
 .featured-project__visual {
