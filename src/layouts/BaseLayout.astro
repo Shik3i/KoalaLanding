@@ -138,8 +138,8 @@ const langCode = localeLangCodes[locale];
     <script>
       let pageObserver = null;
       document.addEventListener('astro:before-preparation', (event) => {
-        const fromPath = new URL(event.from).pathname;
-        const toPath = new URL(event.to).pathname;
+        const fromPath = event.from.pathname || new URL(event.from, location.href).pathname;
+        const toPath = event.to.pathname || new URL(event.to, location.href).pathname;
 
         const getOrder = (p) => {
           if (p === '/' || p.match(/^\/[a-z]{2}\/?$/)) return 0;

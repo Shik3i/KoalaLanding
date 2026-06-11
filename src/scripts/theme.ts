@@ -129,7 +129,7 @@
 
     // Interactive Project Category Filter tabs
     const filterContainer = document.querySelector('.project-filter');
-    const gridItems = document.querySelectorAll('.project-grid-item, .tracker-row');
+    const gridItems = document.querySelectorAll('.project-grid-item, .tracker-row, .project-card-v2');
     const activeDesc = document.querySelector('.category-header__desc');
 
     if (filterContainer) {
