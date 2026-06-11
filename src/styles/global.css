@@ -611,48 +611,59 @@ ul, ol { list-style: none; }
   }
 }
 
-/* --- Vertical View Transitions (Legal Pages as Modals) --- */
-html[data-transition-type^="vertical-"]::view-transition-old(*),
-html[data-transition-type^="vertical-"]::view-transition-new(*),
-html[data-transition-type^="vertical-"]::view-transition-group(*) {
+/* --- Custom View Transition Names --- */
+/* By renaming the container during vertical or fade transitions, we bypass Astro's default sliding animations completely! */
+html[data-transition-type^="vertical-"] #main-content {
+  view-transition-name: custom-vertical !important;
+}
+html[data-transition-type="fade"] #main-content {
+  view-transition-name: custom-fade !important;
+}
+
+/* --- Vertical Transitions --- */
+/* Up (Home -> Legal) */
+html[data-transition-type="vertical-up"]::view-transition-old(custom-vertical) {
+  animation: scale-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 1;
+}
+html[data-transition-type="vertical-up"]::view-transition-new(custom-vertical) {
+  animation: slide-up-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 2;
+}
+
+/* Down (Legal -> Home) */
+html[data-transition-type="vertical-down"]::view-transition-old(custom-vertical) {
+  animation: slide-down-modal-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 2;
+}
+html[data-transition-type="vertical-down"]::view-transition-new(custom-vertical) {
+  animation: scale-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 1;
+}
+
+/* Disable morphing for vertical (prevents diagonal movement) */
+html[data-transition-type^="vertical-"]::view-transition-group(custom-vertical) {
   animation: none !important;
 }
 
-html[data-transition-type="vertical-up"]::view-transition-old(root) {
-  animation: scale-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 1;
+/* --- Fade Transitions (Legal -> Legal) --- */
+html[data-transition-type="fade"]::view-transition-old(custom-fade) {
+  animation: fade-out 0.3s ease-out both !important;
 }
-html[data-transition-type="vertical-up"]::view-transition-new(root) {
-  animation: slide-up-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 2;
+html[data-transition-type="fade"]::view-transition-new(custom-fade) {
+  animation: fade-in 0.3s ease-out both !important;
 }
-
-html[data-transition-type="vertical-down"]::view-transition-old(root) {
-  animation: slide-down-modal-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 2;
-}
-html[data-transition-type="vertical-down"]::view-transition-new(root) {
-  animation: scale-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 1;
+html[data-transition-type="fade"]::view-transition-group(custom-fade) {
+  animation: none !important;
 }
 
-/* Fallback for browsers without View Transitions API */
-html[data-transition-type="vertical-up"][data-astro-transition-fallback="old"] #main-content {
-  animation: scale-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 1;
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
-html[data-transition-type="vertical-up"][data-astro-transition-fallback="new"] #main-content {
-  animation: slide-up-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 2;
-}
-
-html[data-transition-type="vertical-down"][data-astro-transition-fallback="old"] #main-content {
-  animation: slide-down-modal-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 2;
-}
-html[data-transition-type="vertical-down"][data-astro-transition-fallback="new"] #main-content {
-  animation: scale-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-  z-index: 1;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes scale-down-out {

@@ -166,7 +166,7 @@ const langCode = localeLangCodes[locale];
         } else if (fromOrder === 99 && toOrder < 99) {
           doc.setAttribute('data-transition-type', 'vertical-down');
         } else if (fromOrder === 99 && toOrder === 99) {
-          doc.removeAttribute('data-transition-type');
+          doc.setAttribute('data-transition-type', 'fade');
         }
       });
 
