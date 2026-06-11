@@ -517,6 +517,17 @@
                   ctx.moveTo(p1.x, p1.y);
                   ctx.lineTo(p2.x, p2.y);
                   ctx.stroke();
+
+                  // Mutual repulsion for dynamic feeling
+                  if (distSq > 0 && distSq < 900) { // 30px radius
+                    const force = (30 - dist) / 30 * 0.04;
+                    const fx = (dx / dist) * force;
+                    const fy = (dy / dist) * force;
+                    p1.vx += fx;
+                    p1.vy += fy;
+                    p2.vx -= fx;
+                    p2.vy -= fy;
+                  }
                 }
               }
             }

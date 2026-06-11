@@ -1,0 +1,1 @@
+const e=document.querySelector(".hero__scroll-indicator");e&&window.addEventListener("scroll",()=>{window.scrollY>100?e.classList.add("is-hidden"):e.classList.remove("is-hidden")},{passive:!0});
