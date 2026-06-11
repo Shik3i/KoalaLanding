@@ -231,7 +231,7 @@
     };
     detectBrowserAndOptimizeLinks();
 
-    // Interactive Background Canvas Particle Grid
+    // Interactive Background Canvas Floating Constellation Mesh
     const initBgCanvas = () => {
       const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
       if (!canvas) return;
@@ -242,26 +242,28 @@
       interface Particle {
         x: number;
         y: number;
-        x0: number;
-        y0: number;
+        x0: number; // grid home x
+        y0: number; // grid home y
         vx: number;
         vy: number;
+        angle: number;
+        speed: number;
+        orbitRadius: number;
+        radius: number;
       }
 
       let particles: Particle[] = [];
-      const spacing = 32;
-      const repulsionRadius = 120;
-      const repulsionStrength = 1.0;
-      const spring = 0.08;
-      const friction = 0.85;
-      const dotRadius = 1.2;
+      const spacing = 50; // Spacious 50px grid
+      const magnetRadius = 180;
+      const spring = 0.05;
+      const friction = 0.82;
+      const maxConnectDist = 75; // max line draw distance between particles
 
       let mouse = { x: -1000, y: -1000, active: false };
 
       const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       let isReducedMotion = motionQuery.matches;
 
-      // Listen for reduced motion preference changes
       motionQuery.addEventListener('change', (e) => {
         isReducedMotion = e.matches;
         if (isReducedMotion) {
@@ -272,10 +274,26 @@
         }
       });
 
-      let dotColor = 'rgba(255, 255, 255, 0.09)';
-      const updateColor = () => {
-        const isLight = document.documentElement.dataset.theme === 'light';
-        dotColor = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.09)';
+      // Colors matching user preference dataset.theme
+      let isLight = document.documentElement.dataset.theme === 'light';
+      let dotColor = '';
+      let lineColor = '';
+      let tetherColor = '';
+      let activeDotColor = '';
+
+      const updateColors = () => {
+        isLight = document.documentElement.dataset.theme === 'light';
+        if (isLight) {
+          dotColor = 'hsla(212, 100%, 48%, 0.15)';
+          lineColor = 'hsla(212, 100%, 48%, 0.08)';
+          tetherColor = 'hsla(212, 100%, 48%, '; // to append opacity
+          activeDotColor = 'hsla(212, 100%, 48%, 0.8)';
+        } else {
+          dotColor = 'hsla(212, 100%, 65%, 0.2)';
+          lineColor = 'hsla(212, 100%, 60%, 0.1)';
+          tetherColor = 'hsla(212, 100%, 60%, '; // to append opacity
+          activeDotColor = 'hsla(212, 100%, 75%, 0.85)';
+        }
       };
 
       const initGrid = () => {
@@ -289,13 +307,24 @@
           for (let row = 0; row < rows; row++) {
             const x = col * spacing;
             const y = row * spacing;
+            
+            // Randomize size and drift variables
+            const radius = 1.0 + Math.random() * 1.0; // base size 1.0 - 2.0px
+            const speed = 0.005 + Math.random() * 0.01; // rads per frame
+            const orbitRadius = 6 + Math.random() * 12; // drift range 6px to 18px
+            const angle = Math.random() * Math.PI * 2;
+
             particles.push({
               x,
               y,
               x0: x,
               y0: y,
               vx: 0,
-              vy: 0
+              vy: 0,
+              angle,
+              speed,
+              orbitRadius,
+              radius
             });
           }
         }
@@ -314,10 +343,14 @@
       resize();
 
       // Mouse tracking
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
+      const setMousePos = (clientX: number, clientY: number) => {
+        mouse.x = clientX;
+        mouse.y = clientY;
         mouse.active = true;
+      };
+
+      window.addEventListener('mousemove', (e) => {
+        setMousePos(e.clientX, e.clientY);
       });
 
       window.addEventListener('mouseleave', () => {
@@ -327,11 +360,15 @@
       });
 
       // Touch tracking for mobile support
+      window.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          setMousePos(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
       window.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
-          mouse.x = e.touches[0].clientX;
-          mouse.y = e.touches[0].clientY;
-          mouse.active = true;
+          setMousePos(e.touches[0].clientX, e.touches[0].clientY);
         }
       }, { passive: true });
 
@@ -344,71 +381,120 @@
       let animationFrameId: number | null = null;
 
       const drawStatic = () => {
-        updateColor();
+        updateColors();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
         ctx.fillStyle = dotColor;
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
           ctx.beginPath();
-          ctx.arc(p.x0, p.y0, dotRadius, 0, Math.PI * 2);
+          ctx.arc(p.x0, p.y0, p.radius, 0, Math.PI * 2);
           ctx.fill();
         }
       };
 
       const animate = () => {
-        updateColor();
+        updateColors();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = dotColor;
 
+        // 1. Draw Constellation lines between particles
+        ctx.lineWidth = 0.8;
+        for (let i = 0; i < particles.length; i++) {
+          const p1 = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const distSq = dx * dx + dy * dy;
+            const maxSq = maxConnectDist * maxConnectDist;
+            
+            if (distSq < maxSq) {
+              const dist = Math.sqrt(distSq);
+              const opacity = (1 - dist / maxConnectDist) * 0.15;
+              ctx.strokeStyle = isLight 
+                ? `hsla(212, 100%, 48%, ${opacity * 0.75})` 
+                : `hsla(212, 100%, 65%, ${opacity * 1.1})`;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // 2. Physics & Draw Particles
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
 
+          // Slow organic wave drift
+          p.angle += p.speed;
+          const targetX = p.x0 + Math.cos(p.angle) * p.orbitRadius;
+          const targetY = p.y0 + Math.sin(p.angle * 0.75) * p.orbitRadius;
+
+          let ax = (targetX - p.x) * spring;
+          let ay = (targetY - p.y) * spring;
+
+          let dist = 9999;
           if (mouse.active) {
             const dx = p.x - mouse.x;
             const dy = p.y - mouse.y;
-            const dist = Math.hypot(dx, dy);
+            dist = Math.hypot(dx, dy);
 
-            if (dist < repulsionRadius) {
-              const force = (repulsionRadius - dist) / repulsionRadius;
+            if (dist < magnetRadius) {
+              const force = (magnetRadius - dist) / magnetRadius;
               const angle = Math.atan2(dy, dx);
-              // Accelerate away
-              p.vx += Math.cos(angle) * force * repulsionStrength;
-              p.vy += Math.sin(angle) * force * repulsionStrength;
+              
+              if (dist > 40) {
+                ax -= Math.cos(angle) * force * 1.4;
+                ay -= Math.sin(angle) * force * 1.4;
+              } else {
+                const repelForce = (40 - dist) / 40;
+                ax += Math.cos(angle) * repelForce * 2.0;
+                ay += Math.sin(angle) * repelForce * 2.0;
+              }
             }
           }
 
-          // Spring force back to home state
-          const ax = (p.x0 - p.x) * spring;
-          const ay = (p.y0 - p.y) * spring;
-
           p.vx += ax;
           p.vy += ay;
-
-          // Friction damping
           p.vx *= friction;
           p.vy *= friction;
-
-          // Update position
           p.x += p.vx;
           p.y += p.vy;
 
-          // Optimization: snap to home if motion is tiny to prevent floats accumulation
-          if (
-            Math.abs(p.x - p.x0) < 0.01 &&
-            Math.abs(p.y - p.y0) < 0.01 &&
-            Math.abs(p.vx) < 0.01 &&
-            Math.abs(p.vy) < 0.01
-          ) {
-            p.x = p.x0;
-            p.y = p.y0;
-            p.vx = 0;
-            p.vy = 0;
+          let currentRadius = p.radius;
+          let currentFill = dotColor;
+
+          if (dist < magnetRadius) {
+            const factor = (magnetRadius - dist) / magnetRadius;
+            currentRadius = p.radius + factor * 2.0;
+            currentFill = activeDotColor;
           }
 
-          // Render particle
+          ctx.fillStyle = currentFill;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2);
           ctx.fill();
+        }
+
+        // 3. Draw mouse-tether constellation lines
+        if (mouse.active) {
+          ctx.lineWidth = 1.0;
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            
+            if (dist < 150) {
+              const opacity = (1 - dist / 150) * 0.28;
+              ctx.strokeStyle = `${tetherColor}${opacity})`;
+              ctx.beginPath();
+              ctx.moveTo(mouse.x, mouse.y);
+              ctx.lineTo(p.x, p.y);
+              ctx.stroke();
+            }
+          }
         }
 
         animationFrameId = requestAnimationFrame(animate);
@@ -427,7 +513,6 @@
         }
       };
 
-      // Watch dataset.theme on <html> to dynamically update colors when toggling themes in static mode
       const themeObserver = new MutationObserver(() => {
         if (isReducedMotion) {
           drawStatic();
