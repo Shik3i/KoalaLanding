@@ -139,22 +139,37 @@ html {
   line-height: 1.6;
   color: var(--c-text);
   background-color: var(--c-bg);
-  /* Global premium dot-grid background */
-  background-image: radial-gradient(hsl(224, 15%, 16%) 1.2px, transparent 1.2px);
-  background-size: 32px 32px;
-  animation: gridShift 45s linear infinite;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-[data-theme='light'] html {
-  background-image: radial-gradient(hsl(220, 10%, 84%) 1.2px, transparent 1.2px);
+
+/* --- Moving Grid Background (GPU-accelerated transform) --- */
+.bg-grid-container {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-@keyframes gridShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 32px 64px; }
+.bg-grid {
+  position: absolute;
+  inset: -64px; /* bleed out to prevent gaps during animation */
+  background-image: radial-gradient(hsl(224, 15%, 18%) 1.2px, transparent 1.2px);
+  background-size: 32px 32px;
+  animation: gridMove 25s linear infinite;
+  will-change: transform;
+}
+
+[data-theme='light'] .bg-grid {
+  background-image: radial-gradient(hsl(220, 10%, 82%) 1.2px, transparent 1.2px);
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(32px, 32px); }
 }
 
 /* --- Ambient background glow blobs --- */

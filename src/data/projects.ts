@@ -255,25 +255,6 @@ export const projects: Project[] = [
     },
     assets: {},
   },
-  {
-    id: 'koalablog',
-    name: 'Koalablog',
-    category: 'web',
-    status: 'wip',
-    featured: false,
-    listed: true,
-    homepage: true,
-    accentColor: 'hsl(340, 75%, 55%)',
-    shortDescription: {
-      en: 'A minimal, privacy-focused blog platform using Astro and markdown for technical writings.',
-      de: 'Eine minimalistische, datenschutzorientierte Blog-Plattform mit Astro und Markdown für technische Beiträge.',
-    },
-    tags: ['Open Source', 'Blog', 'Astro', 'WIP'],
-    links: {
-      github: 'https://github.com/Shik3i/Koalablog',
-    },
-    assets: {},
-  },
 ];
 
 export function getListedProjects(): Project[] {
