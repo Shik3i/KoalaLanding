@@ -205,7 +205,12 @@ const categoryIcons: Record<string, string> = {
     toggleBtn.addEventListener('click', () => {
       isShowing = !isShowing;
       localStorage.setItem('koalastuff_show_experimental', isShowing ? 'true' : 'false');
-      updateDOM();
+      
+      if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.startViewTransition(() => updateDOM());
+      } else {
+        updateDOM();
+      }
     });
   });
 </script>

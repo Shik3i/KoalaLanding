@@ -137,50 +137,45 @@
       
       buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
-          // Update accessibility active states
-          buttons.forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-selected', 'false');
-            b.setAttribute('tabindex', '-1');
-          });
-          btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
-          btn.setAttribute('tabindex', '0');
+          const doFilter = () => {
+            // Update accessibility active states
+            buttons.forEach((b) => {
+              b.classList.remove('active');
+              b.setAttribute('aria-selected', 'false');
+              b.setAttribute('tabindex', '-1');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.setAttribute('tabindex', '0');
 
-          const category = btn.getAttribute('data-category') || 'all';
+            const category = btn.getAttribute('data-category') || 'all';
 
-          // Update active category description if element exists
-          const descText = btn.getAttribute('data-desc') || '';
-          if (activeDesc) {
-            activeDesc.textContent = descText;
-          }
-
-          gridItems.forEach((item) => {
-            const itemCat = item.getAttribute('data-category');
-            if (category === 'all' || itemCat === category) {
-              const htmlItem = item as HTMLElement;
-              htmlItem.style.display = '';
-              htmlItem.style.opacity = '0';
-              htmlItem.style.transform = 'scale(0.98)';
-              // Trigger reflow for transition
-              void htmlItem.offsetHeight;
-              htmlItem.style.transition = 'opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out)';
-              htmlItem.style.opacity = '1';
-              htmlItem.style.transform = 'scale(1)';
-            } else {
-              const htmlItem = item as HTMLElement;
-              htmlItem.style.opacity = '0';
-              htmlItem.style.transform = 'scale(0.98)';
-              htmlItem.style.transition = 'opacity var(--dur-fast) var(--ease-in), transform var(--dur-fast) var(--ease-in)';
-              
-              // Hide after transition
-              setTimeout(() => {
-                if (!btn.classList.contains('active') || (category !== 'all' && itemCat !== category)) {
-                  htmlItem.style.display = 'none';
-                }
-              }, 150);
+            // Update active category description if element exists
+            const descText = btn.getAttribute('data-desc') || '';
+            if (activeDesc) {
+              activeDesc.textContent = descText;
             }
-          });
+
+            gridItems.forEach((item) => {
+              const itemCat = item.getAttribute('data-category');
+              if (category === 'all' || itemCat === category) {
+                const htmlItem = item as HTMLElement;
+                htmlItem.style.display = '';
+                // Clear any manual inline styles left over
+                htmlItem.style.opacity = '';
+                htmlItem.style.transform = '';
+                htmlItem.style.transition = '';
+              } else {
+                (item as HTMLElement).style.display = 'none';
+              }
+            });
+          };
+
+          if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.startViewTransition(() => doFilter());
+          } else {
+            doFilter();
+          }
         });
       });
 

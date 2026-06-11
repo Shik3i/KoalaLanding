@@ -16,7 +16,7 @@ const tr = await loadTranslations(locale);
 >
   <Header locale={locale} translations={tr} currentPath="/imprint/" />
 
-  <main id="main-content">
+  <main id="main-content" transition:name="main" transition:animate="slide">
     <div class="container">
       <article class="legal-content">
         <h1>Imprint / Legal Notice</h1>

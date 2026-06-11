@@ -596,3 +596,57 @@ ul, ol { list-style: none; }
   }
 }
 
+/* --- Ultrawide Screen Enhancements (Only for 21:9 and wider) --- */
+@media (min-aspect-ratio: 21/9) {
+  :root {
+    --max-width: 90rem;
+    --max-width-text: 56rem;
+  }
+}
+
+@media (min-aspect-ratio: 32/9) {
+  :root {
+    --max-width: 110rem;
+    --max-width-text: 62rem;
+  }
+}
+
+/* --- Vertical View Transitions (Legal Pages) --- */
+html[data-transition-type="vertical-up"]::view-transition-old(main) {
+  animation: slide-up-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+html[data-transition-type="vertical-up"]::view-transition-new(main) {
+  animation: slide-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+@keyframes slide-up-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-40px); opacity: 0; }
+}
+
+@keyframes slide-up-in {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Active Tab Indicator Transition --- */
+.filter-btn.active {
+  view-transition-name: active-tab-indicator;
+}
+
+::view-transition-group(active-tab-indicator) {
+  animation-duration: 0.3s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* --- Mobile Touch Targets --- */
+@media (max-width: 768px) {
+  .site-footer a, 
+  .header__nav-link,
+  .icon-btn,
+  .tracker-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}

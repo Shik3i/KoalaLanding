@@ -137,6 +137,32 @@ const langCode = localeLangCodes[locale];
     </script>
     <script>
       let pageObserver = null;
+      document.addEventListener('astro:before-preparation', (event) => {
+        const fromPath = new URL(event.from).pathname;
+        const toPath = new URL(event.to).pathname;
+
+        const getOrder = (p) => {
+          if (p === '/' || p.match(/^\/[a-z]{2}\/?$/)) return 0;
+          if (p.includes('/projects')) return 1;
+          if (p.includes('/blog')) return 2;
+          return 99; // Legal pages
+        };
+
+        const fromOrder = getOrder(fromPath);
+        const toOrder = getOrder(toPath);
+        const doc = document.documentElement;
+
+        if (fromOrder < 99 && toOrder < 99) {
+          doc.setAttribute('data-transition-type', 'horizontal');
+          event.direction = toOrder > fromOrder ? 'forward' : 'back';
+        } else if (toOrder === 99) {
+          doc.setAttribute('data-transition-type', 'vertical-up');
+        } else if (fromOrder === 99 && toOrder < 99) {
+          doc.setAttribute('data-transition-type', 'horizontal');
+          event.direction = 'back';
+        }
+      });
+
       document.addEventListener('astro:page-load', () => {
         if (pageObserver) pageObserver.disconnect();
         pageObserver = new IntersectionObserver((entries) => {

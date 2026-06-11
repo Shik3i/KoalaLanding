@@ -465,6 +465,18 @@
   gap: var(--space-5);
 }
 
+@media (min-aspect-ratio: 21/9) {
+  .project-grid {
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+  }
+}
+
+@media (min-aspect-ratio: 32/9) {
+  .project-grid {
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  }
+}
+
 .project-card {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
@@ -710,6 +722,18 @@
   overflow: hidden;
   backdrop-filter: blur(12px);
   transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+
+@media (min-aspect-ratio: 21/9) {
+  .featured-project__window-card {
+    max-width: 30rem;
+  }
+}
+
+@media (min-aspect-ratio: 32/9) {
+  .featured-project__window-card {
+    max-width: 36rem;
+  }
 }
 
 .featured-project:hover .featured-project__window-card {

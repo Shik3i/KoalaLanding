@@ -32,7 +32,7 @@ const canonicalPath = getLocalePath(locale);
 >
   <Header locale={locale} translations={tr} currentPath={canonicalPath} />
 
-  <main id="main-content">
+  <main id="main-content" transition:name="main" transition:animate="slide">
     <Hero locale={locale} translations={tr} />
     <Projects locale={locale} translations={tr} />
     <About translations={tr} />
