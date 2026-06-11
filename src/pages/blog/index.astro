@@ -106,7 +106,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
     color: var(--c-text-muted);
     background: var(--c-surface);
     border: 1px solid var(--c-border);
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
   .rss-link:hover {
     color: hsl(25, 90%, 60%);

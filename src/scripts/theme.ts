@@ -414,7 +414,13 @@
         }
       };
 
-      window.addEventListener('resize', resize, { signal: canvasSignal });
+      let resizeTimeout: number | undefined;
+      const debouncedResize = () => {
+        if (resizeTimeout !== undefined) window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(resize, 150);
+      };
+
+      window.addEventListener('resize', debouncedResize, { signal: canvasSignal });
       resize();
 
       // Mouse tracking
