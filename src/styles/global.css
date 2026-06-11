@@ -363,6 +363,20 @@ ul, ol { list-style: none; }
 .text-muted { color: var(--c-text-muted); }
 .text-faint { color: var(--c-text-faint); }
 .text-accent { color: var(--c-accent); }
+.text-center { text-align: center; }
+
+.section--centered {
+  text-align: center;
+}
+
+.section__header--centered {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.section__header--centered .section__subtitle {
+  margin-inline: auto;
+}
 
 /* --- Buttons --- */
 .btn {
@@ -598,18 +612,33 @@ ul, ol { list-style: none; }
   }
 }
 
-/* --- Ultrawide Screen Enhancements (Only for 21:9 and wider) --- */
-@media (min-aspect-ratio: 21/9) {
+/* --- Responsive Container Max-Widths --- */
+@media (min-width: 1440px) {
   :root {
-    --max-width: 90rem;
-    --max-width-text: 56rem;
+    --max-width: 80rem;
+    --max-width-text: 54rem;
   }
 }
 
 @media (min-width: 1920px) {
   :root {
-    --max-width: 120rem;
-    --max-width-text: 72rem;
+    --max-width: 85rem;
+    --max-width-text: 56rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --max-width: 90rem;
+    --max-width-text: 60rem;
+  }
+}
+
+/* --- Ultrawide Screen Enhancements (Only for 21:9 and wider) --- */
+@media (min-aspect-ratio: 21/9) {
+  :root {
+    --max-width: 90rem;
+    --max-width-text: 56rem;
   }
 }
 

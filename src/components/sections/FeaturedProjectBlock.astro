@@ -46,6 +46,53 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
       {getProjectDescription(project, locale, false)}
     </p>
 
+    <!-- Visual side (Mobile only) -->
+    <div class="featured-project__visual featured-project__visual--mobile" aria-hidden="true">
+      <div class="featured-project__window-card">
+        <div class="window-header">
+          <div class="window-dot window-dot--red"></div>
+          <div class="window-dot window-dot--yellow"></div>
+          <div class="window-dot window-dot--green"></div>
+          <span class="window-title">{project.name}</span>
+        </div>
+        <div class="window-body">
+          <div class="featured-project__image-wrap">
+            {mascotSrc ? (
+              <Picture
+                src={mascotSrc}
+                formats={['avif', 'webp']}
+                densities={[1, 2]}
+                alt=""
+                class="featured-project__mascot"
+                width={320}
+                height={320}
+              />
+            ) : isIconSvg && project.assets.icon ? (
+              <img
+                src={project.assets.icon}
+                alt=""
+                class="featured-project__icon-large"
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : iconSrc ? (
+              <Picture
+                src={iconSrc}
+                formats={['avif', 'webp']}
+                densities={[1, 2]}
+                alt=""
+                class="featured-project__icon-large"
+                width={96}
+                height={96}
+              />
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p class="featured-project__desc">{description}</p>
 
     <div class="featured-project__meta">
@@ -104,8 +151,8 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
     </div>
   </div>
 
-  <!-- Visual side -->
-  <div class="featured-project__visual" aria-hidden="true">
+  <!-- Visual side (Desktop only) -->
+  <div class="featured-project__visual featured-project__visual--desktop" aria-hidden="true">
     <div class="featured-project__window-card">
       <div class="window-header">
         <div class="window-dot window-dot--red"></div>

@@ -386,6 +386,19 @@
   z-index: 1;
 }
 
+@media (min-width: 1024px) {
+  .hero {
+    min-height: calc(100dvh - 3.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--space-12);
+  }
+  .hero > .container {
+    width: 100%;
+  }
+}
+
 .hero__content {
   position: relative;
   z-index: 1;
@@ -616,6 +629,32 @@
 .featured-project--reversed .featured-project__text { order: 2; }
 .featured-project--reversed .featured-project__visual { order: 1; }
 
+/* --- Light Mode overrides for Featured Project --- */
+[data-theme='light'] .featured-project {
+  background: hsla(0, 0%, 100%, 0.6);
+  border-color: var(--c-border);
+}
+[data-theme='light'] .featured-project__window-card {
+  background: hsla(0, 0%, 100%, 0.7);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+[data-theme='light'] .window-header {
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+[data-theme='light'] .window-title {
+  color: var(--c-text-muted);
+}
+
+/* Desktop visual vs Mobile visual rendering */
+.featured-project__visual--desktop {
+  display: flex;
+}
+.featured-project__visual--mobile {
+  display: none;
+}
+
 .featured-project__text,
 .featured-project__visual {
   position: relative;
@@ -810,6 +849,13 @@
   .featured-project__window-card {
     max-width: 100%;
   }
+  .featured-project__visual--desktop {
+    display: none;
+  }
+  .featured-project__visual--mobile {
+    display: flex;
+    margin-block: var(--space-6);
+  }
 }
 
 /* ---- INTERACTIVE FILTER TABS ---- */
@@ -888,6 +934,8 @@
 /* ---- ABOUT ---- */
 .about-block {
   max-width: 44rem;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .about-block p {
@@ -903,6 +951,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: var(--space-5);
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.section--centered .trust-item {
+  align-items: center;
+  text-align: center;
 }
 
 .trust-item {
@@ -944,7 +999,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
-  max-width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
 }
 @media (min-width: 768px) {
   .faq-list {

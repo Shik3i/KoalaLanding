@@ -146,15 +146,17 @@ export const projects: Project[] = [
     homepage: true,
     accentColor: 'hsl(280, 75%, 55%)',
     shortDescription: {
-      en: 'Utility extension for Flyff Universe players to track stats, buff timers, and party layouts.',
-      de: 'Erweiterung für Flyff Universe Spieler zum Tracken von Stats, Buff-Timern und Party-Layouts.',
+      en: 'Helper extension for Flyff Universe to play two accounts simultaneously by forwarding keystrokes from the active tab to a secondary background tab (e.g., to trigger heals).',
+      de: 'Hilfs-Erweiterung für Flyff Universe, um zwei Accounts gleichzeitig zu spielen, indem Tastenanschläge vom Haupt-Tab an den Zweit-Tab weitergeleitet werden (z. B. für Heilsprüche).',
     },
     tags: ['Open Source', 'Browser Extension', 'Gaming', 'WIP'],
     links: {
       website: 'https://multibox.koalastuff.net',
-      github: 'https://github.com/Shik3i/KoalaFlyff',
+      github: 'https://github.com/Shik3i/FlyffUniverseHelper',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalaflyff/icon.png',
+    },
   },
   {
     id: 'koalasound',
@@ -197,7 +199,9 @@ export const projects: Project[] = [
       website: 'https://start.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaStartpage',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalastartpage/icon.png',
+    },
   },
   {
     id: 'koalasnippets',
@@ -218,7 +222,9 @@ export const projects: Project[] = [
       website: 'https://snippets.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaSnippets',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalasnippets/icon.png',
+    },
   },
   {
     id: 'koalaweb',
@@ -260,7 +266,9 @@ export const projects: Project[] = [
       website: 'https://news.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaNews',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalanews/icon.webp',
+    },
   },
 ];
 
