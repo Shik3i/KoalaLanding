@@ -207,7 +207,14 @@ const categoryIcons: Record<string, string> = {
       localStorage.setItem('koalastuff_show_experimental', isShowing ? 'true' : 'false');
       
       if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.startViewTransition(() => updateDOM());
+        const main = document.getElementById('main-content');
+        if (main) main.style.viewTransitionName = 'none';
+
+        const transition = document.startViewTransition(() => updateDOM());
+        
+        transition.finished.finally(() => {
+          if (main) main.style.viewTransitionName = '';
+        });
       } else {
         updateDOM();
       }

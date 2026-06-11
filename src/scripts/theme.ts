@@ -172,7 +172,14 @@
           };
 
           if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.startViewTransition(() => doFilter());
+            const main = document.getElementById('main-content');
+            if (main) main.style.viewTransitionName = 'none';
+            
+            const transition = document.startViewTransition(() => doFilter());
+            
+            transition.finished.finally(() => {
+              if (main) main.style.viewTransitionName = '';
+            });
           } else {
             doFilter();
           }

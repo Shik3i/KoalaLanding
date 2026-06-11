@@ -1,0 +1,14 @@
+# AI Agent Instructions for KoalaLanding
+
+**CRITICAL DEPLOYMENT INSTRUCTION:**
+This project does NOT build its assets on the production server. The deployment process is a simple `git pull` on the live server.
+Because of this, the `dist/` directory (which contains the built site) IS TRACKED in Git and MUST be kept perfectly in sync with the source code.
+
+Whenever you make changes to the source code (`src/`):
+1. Always run the build process: `npm run build`
+2. **ALWAYS commit everything** using `git add -A`.
+   - Do NOT just `git add src/`.
+   - You MUST ensure the updated `dist/` artifacts are included in the same commit as your source changes.
+3. Push to `master`.
+
+Failure to include the `dist/` files in your commit will break the live website, because the server will pull the new source code but continue serving the old, mismatched static assets.
