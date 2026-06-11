@@ -151,7 +151,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Browser Extension', 'Gaming', 'WIP'],
     links: {
-      website: 'https://flyff.koalastuff.net',
+      website: 'https://multibox.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaFlyff',
     },
     assets: {},
@@ -194,7 +194,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Web App', 'Dashboard', 'Self-hosted'],
     links: {
-      website: 'https://startpage.koalastuff.net',
+      website: 'https://start.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaStartpage',
     },
     assets: {},
@@ -236,7 +236,7 @@ export const projects: Project[] = [
     },
     tags: ['Open Source', 'Web App', 'Developer Tools', 'Shared Timer'],
     links: {
-      website: 'https://web.koalastuff.net',
+      website: 'https://timer.koalastuff.net',
       github: 'https://github.com/Shik3i/Antigrav',
     },
     assets: {},
