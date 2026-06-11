@@ -48,7 +48,7 @@ const categoryIcons: Record<string, string> = {
     </div>
 
     <!-- Category Filter Tabs & Toggle -->
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-4);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-4);">
       <nav class="project-filter" role="tablist" aria-label={tr['categories.title'] ?? 'Project categories'}>
         <button
           class="filter-btn active"
@@ -148,7 +148,7 @@ const categoryIcons: Record<string, string> = {
     color: hsla(30, 90%, 65%, 1);
   }
   
-  .show-experimental-active .experimental-disclaimer {
+  .experimental-disclaimer.is-active {
     opacity: 1;
     visibility: visible;
     padding: var(--space-4);
@@ -176,9 +176,9 @@ const categoryIcons: Record<string, string> = {
       if (isShowing) {
         projectGrid.classList.add('show-experimental');
         toggleContainer.classList.add('is-active');
-        document.body.classList.add('show-experimental-active');
         toggleBtn.setAttribute('aria-expanded', 'true');
         if (disclaimer) {
+          disclaimer.classList.add('is-active');
           disclaimer.style.height = disclaimer.scrollHeight + 32 + 'px'; // +32 for padding
           setTimeout(() => { if(isShowing) disclaimer.style.height = 'auto'; }, 300);
         }
@@ -192,9 +192,9 @@ const categoryIcons: Record<string, string> = {
       } else {
         projectGrid.classList.remove('show-experimental');
         toggleContainer.classList.remove('is-active');
-        document.body.classList.remove('show-experimental-active');
         toggleBtn.setAttribute('aria-expanded', 'false');
         if (disclaimer) {
+          disclaimer.classList.remove('is-active');
           disclaimer.style.height = '0px';
         }
       }
