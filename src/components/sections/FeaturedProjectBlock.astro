@@ -63,7 +63,7 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
     </div>
 
     <div class="featured-project__links">
-      {project.links.website && (
+      {project.links.website && project.status !== 'wip' && (
         <a href={project.links.website} class="btn btn-primary" rel="noopener noreferrer">
           {tr['featured.visitWebsite'] ?? 'Visit website'}
         </a>
@@ -76,12 +76,12 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
           {tr['featured.viewOnGitHub'] ?? 'View on GitHub'}
         </a>
       )}
-      {project.links.chrome && (
+      {project.links.chrome && project.status !== 'wip' && (
         <a href={project.links.chrome} class="btn btn-ghost" rel="noopener noreferrer">
           {tr['featured.chromeStore'] ?? 'Chrome Web Store'}
         </a>
       )}
-      {project.links.firefox && (
+      {project.links.firefox && project.status !== 'wip' && (
         <a href={project.links.firefox} class="btn btn-ghost" rel="noopener noreferrer">
           {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
         </a>

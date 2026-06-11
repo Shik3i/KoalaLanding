@@ -22,14 +22,10 @@
   "hero.note": "Gemaakt door Timo, een solo-ontwikkelaar uit Duitsland.",
   "categories.title": "Projecten",
   "categories.intro": "Alle projecten zijn open-source en gebouwd rondom echte gebruiksscenario's. Sommige zijn afgewerkt, andere nog pril — maar geen enkel is vaporware.",
-  "categories.browser-extension": "Browserextensies",
-  "categories.browser-extension.desc": "Kleine browsertools die vervelende workflows oplossen precies waar ze zich voordoen.",
   "categories.web": "Webapps en websites",
   "categories.web.desc": "Gehoste tools, dashboards en publieke websites binnen het KoalaStuff-ecosysteem.",
   "categories.desktop": "Desktopapplicaties",
   "categories.desktop.desc": "Lokale hulpprogramma's voor workflows die niet in de browser thuishoren.",
-  "categories.experiment": "Experimenten en vroege projecten",
-  "categories.experiment.desc": "Vroege ideeën, prototypes en dingen die nog veel kunnen veranderen.",
   "featured.visitWebsite": "Bezoek website",
   "featured.viewOnGitHub": "Bekijk op GitHub",
   "featured.chromeStore": "Chrome Web Store",
@@ -85,5 +81,8 @@
   "privacy.title": "Privacybeleid",
   "privacy.meta": "Privacybeleid van koalastuff.net — geen tracking, geen cookies, geen scripts van derden.",
   "imprint.title": "Colofon",
-  "imprint.meta": "Wettelijk colofon van koalastuff.net."
+  "imprint.meta": "Wettelijk colofon van koalastuff.net.",
+  "categories.extensions": "Browserextensies",
+  "categories.extensions.desc": "Kleine browsertools die vervelende workflows oplossen precies waar ze zich voordoen.",
+  "status.wip": "WIP"
 }

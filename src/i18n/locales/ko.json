@@ -22,14 +22,10 @@
   "hero.note": "독일의 1인 개발자 Timo가 만들었습니다.",
   "categories.title": "프로젝트",
   "categories.intro": "모든 프로젝트는 오픈소스이며 실제 사용 사례를 바탕으로 개발되었습니다. 완성도 높은 것도 있고 아직 초기 단계인 것도 있지만, 실체 없는 아이디어에 불과한 것은 없습니다.",
-  "categories.browser-extension": "브라우저 확장 프로그램",
-  "categories.browser-extension.desc": "번거로운 작업 흐름을 발생한 위치에서 직접 해결해 주는 작은 브라우저 도구.",
   "categories.web": "웹 앱 및 웹사이트",
   "categories.web.desc": "KoalaStuff 생태계에서 제공되는 호스팅 도구, 대시보드 및 공개 웹사이트.",
   "categories.desktop": "데스크톱 앱",
   "categories.desktop.desc": "브라우저에 적합하지 않은 워크플로우를 위한 로컬 유틸리티.",
-  "categories.experiment": "실험 및 초기 프로젝트",
-  "categories.experiment.desc": "초기 아이디어, 프로토타입 및 향후 변경 가능성이 높은 프로젝트.",
   "featured.visitWebsite": "웹사이트 방문",
   "featured.viewOnGitHub": "GitHub에서 보기",
   "featured.chromeStore": "Chrome 웹 스토어",
@@ -85,5 +81,8 @@
   "privacy.title": "개인정보처리방침",
   "privacy.meta": "koalastuff.net의 개인정보처리방침 — 추적 없음, 쿠키 없음, 외부 스크립트 없음.",
   "imprint.title": "임프린트",
-  "imprint.meta": "koalastuff.net 법적 고지."
+  "imprint.meta": "koalastuff.net 법적 고지.",
+  "categories.extensions": "브라우저 확장 프로그램",
+  "categories.extensions.desc": "번거로운 작업 흐름을 발생한 위치에서 직접 해결해 주는 작은 브라우저 도구.",
+  "status.wip": "WIP"
 }

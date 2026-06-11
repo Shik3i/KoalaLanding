@@ -22,14 +22,10 @@
   "hero.note": "Almanya'dan Timo adlı bağımsız bir geliştirici tarafından yapılmıştır.",
   "categories.title": "Projeler",
   "categories.intro": "Tüm projeler açık kaynaklıdır ve gerçek ihtiyaçlara yönelik üretilmiştir. Bazıları tam olgunluğa erişmiş, bazıları ise henüz yolun başında; ancak hiçbiri hayal ürünü değildir.",
-  "categories.browser-extension": "Tarayıcı Eklentileri",
-  "categories.browser-extension.desc": "Can sıkıcı iş akışlarını doğrudan gerçekleştikleri yerde çözen küçük tarayıcı araçları.",
   "categories.web": "Web Uygulamaları & Web Siteleri",
   "categories.web.desc": "KoalaStuff ekosistemindeki barındırılan araçlar, paneller ve genel web siteleri.",
   "categories.desktop": "Masaüstü Uygulamaları",
   "categories.desktop.desc": "Tarayıcıya ait olmayan iş akışları için yerel araçlar.",
-  "categories.experiment": "Deneyler & Erken Aşama Projeler",
-  "categories.experiment.desc": "İlk fikirler, prototipler ve gelecekte çokça değişebilecek şeyler.",
   "featured.visitWebsite": "Web sitesini ziyaret et",
   "featured.viewOnGitHub": "GitHub'da görüntüle",
   "featured.chromeStore": "Chrome Web Mağazası",
@@ -85,5 +81,8 @@
   "privacy.title": "Gizlilik Politikası",
   "privacy.meta": "koalastuff.net için gizlilik politikası — takip yok, çerez yok, üçüncü taraf kodları yok.",
   "imprint.title": "Künye",
-  "imprint.meta": "koalastuff.net için yasal künye."
+  "imprint.meta": "koalastuff.net için yasal künye.",
+  "categories.extensions": "Tarayıcı Eklentileri",
+  "categories.extensions.desc": "Can sıkıcı iş akışlarını doğrudan gerçekleştikleri yerde çözen küçük tarayıcı araçları.",
+  "status.wip": "WIP"
 }

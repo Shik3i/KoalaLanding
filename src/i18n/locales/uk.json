@@ -22,14 +22,10 @@
   "hero.note": "Створено Timo, розробником-одинаком із Німеччини.",
   "categories.title": "Проєкти",
   "categories.intro": "Усі проєкти мають відкритий вихідний код і створені для вирішення реальних завдань. Деякі вже відшліфовані, деякі перебувають на ранній стадії розвитку — але жоден із них не є пустушкою.",
-  "categories.browser-extension": "Розширення для браузера",
-  "categories.browser-extension.desc": "Невеликі інструменти для браузера, які спрощують роботу безпосередньо там, де це потрібно.",
   "categories.web": "Веб-додатки та веб-сайти",
   "categories.web.desc": "Хостингові інструменти, панелі керування та публічні веб-сайти в екосистемі KoalaStuff.",
   "categories.desktop": "Десктопні додатки",
   "categories.desktop.desc": "Локальні утиліти для завдань, яким не місце у браузері.",
-  "categories.experiment": "Експерименти та ранні проєкти",
-  "categories.experiment.desc": "Перші ідеї, прототипи та речі, які можуть суттєво змінитися.",
   "featured.visitWebsite": "Перейти на сайт",
   "featured.viewOnGitHub": "Переглянути на GitHub",
   "featured.chromeStore": "Chrome Web Store",
@@ -85,5 +81,8 @@
   "privacy.title": "Політика конфіденційності",
   "privacy.meta": "Політика конфіденційності для koalastuff.net — жодного відстеження, жодних cookie, жодних сторонніх скриптів.",
   "imprint.title": "Правова інформація",
-  "imprint.meta": "Правова інформація та реквізити для koalastuff.net."
+  "imprint.meta": "Правова інформація та реквізити для koalastuff.net.",
+  "categories.extensions": "Розширення для браузера",
+  "categories.extensions.desc": "Невеликі інструменти для браузера, які спрощують роботу безпосередньо там, де це потрібно.",
+  "status.wip": "WIP"
 }

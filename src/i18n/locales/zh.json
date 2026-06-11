@@ -22,14 +22,10 @@
   "hero.note": "由来自德国的独立开发者 Timo 制作。",
   "categories.title": "项目",
   "categories.intro": "所有项目都是开源的，并围绕真实使用场景构建。有些已经很完善，有些还处于早期阶段——但绝不是 PPT 项目。",
-  "categories.browser-extension": "浏览器扩展",
-  "categories.browser-extension.desc": "在日常工作流中直接解决烦人痛点的小型浏览器工具。",
   "categories.web": "Web 应用与网站",
   "categories.web.desc": "KoalaStuff 生态中托管的工具、仪表盘和公开网站。",
   "categories.desktop": "桌面应用",
   "categories.desktop.desc": "用于处理不适合在浏览器中运行的工作流的本地实用程序。",
-  "categories.experiment": "实验与早期项目",
-  "categories.experiment.desc": "早期的想法、原型以及未来可能会发生很大变化的项目。",
   "featured.visitWebsite": "访问网站",
   "featured.viewOnGitHub": "在 GitHub 上查看",
   "featured.chromeStore": "Chrome 应用商店",
@@ -85,5 +81,8 @@
   "privacy.title": "隐私政策",
   "privacy.meta": "koalastuff.net 隐私政策——无追踪，无 Cookie，无第三方脚本。",
   "imprint.title": "法律声明",
-  "imprint.meta": "koalastuff.net 的法律印记与合规声明。"
+  "imprint.meta": "koalastuff.net 的法律印记与合规声明。",
+  "categories.extensions": "浏览器扩展",
+  "categories.extensions.desc": "在日常工作流中直接解决烦人痛点的小型浏览器工具。",
+  "status.wip": "WIP"
 }

@@ -1,7 +1,7 @@
 import type { Locale } from '../i18n/config';
 
-export type ProjectCategory = 'browser-extension' | 'web' | 'desktop' | 'experiment';
-export type ProjectStatus = 'active' | 'experimental' | 'early' | 'archived';
+export type ProjectCategory = 'desktop' | 'web' | 'extensions';
+export type ProjectStatus = 'active' | 'wip' | 'experimental' | 'early' | 'archived';
 
 export interface Project {
   id: string;
@@ -39,7 +39,7 @@ export const projects: Project[] = [
   {
     id: 'koalasync',
     name: 'KoalaSync',
-    category: 'browser-extension',
+    category: 'extensions',
     status: 'active',
     featured: true,
     listed: true,
@@ -96,7 +96,7 @@ export const projects: Project[] = [
   {
     id: 'koalaclicker',
     name: 'KoalaClicker',
-    category: 'browser-extension',
+    category: 'extensions',
     status: 'active',
     featured: false,
     listed: true,
@@ -116,9 +116,47 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'koalacookies',
+    name: 'KoalaCookies',
+    category: 'extensions',
+    status: 'wip',
+    featured: false,
+    listed: true,
+    homepage: false,
+    accentColor: 'hsl(15, 80%, 55%)',
+    shortDescription: {
+      en: 'A lightweight cookie manager extension to view, edit, block, and export HTTP cookies with ease.',
+      de: 'Eine schlanke Cookie-Manager-Erweiterung zum einfachen Anzeigen, Bearbeiten, Blockieren und Exportieren von HTTP-Cookies.',
+    },
+    tags: ['Open Source', 'Browser Extension', 'Privacy-first', 'WIP'],
+    links: {
+      github: 'https://github.com/Shik3i/KoalaCookies',
+    },
+    assets: {},
+  },
+  {
+    id: 'koalaflyff',
+    name: 'KoalaFlyff',
+    category: 'extensions',
+    status: 'wip',
+    featured: false,
+    listed: true,
+    homepage: false,
+    accentColor: 'hsl(280, 75%, 55%)',
+    shortDescription: {
+      en: 'Utility extension for Flyff Universe players to track stats, buff timers, and party layouts.',
+      de: 'Erweiterung für Flyff Universe Spieler zum Tracken von Stats, Buff-Timern und Party-Layouts.',
+    },
+    tags: ['Open Source', 'Browser Extension', 'Gaming', 'WIP'],
+    links: {
+      github: 'https://github.com/Shik3i/KoalaFlyff',
+    },
+    assets: {},
+  },
+  {
     id: 'koalasound',
     name: 'KoalaSound',
-    category: 'browser-extension',
+    category: 'extensions',
     status: 'experimental',
     featured: false,
     listed: true,
@@ -184,7 +222,7 @@ export const projects: Project[] = [
     status: 'active',
     featured: false,
     listed: true,
-    homepage: true, // Visible on homepage
+    homepage: true,
     accentColor: 'hsl(190, 75%, 45%)',
     lastUpdated: '2026-05',
     shortDescription: {
@@ -200,7 +238,7 @@ export const projects: Project[] = [
   {
     id: 'koalanews',
     name: 'KoalaNews',
-    category: 'experiment',
+    category: 'web',
     status: 'early',
     featured: false,
     listed: true,
@@ -214,6 +252,25 @@ export const projects: Project[] = [
     tags: ['Experiment', 'Early'],
     links: {
       github: 'https://github.com/Shik3i/KoalaNews',
+    },
+    assets: {},
+  },
+  {
+    id: 'koalablog',
+    name: 'Koalablog',
+    category: 'web',
+    status: 'wip',
+    featured: false,
+    listed: true,
+    homepage: false,
+    accentColor: 'hsl(340, 75%, 55%)',
+    shortDescription: {
+      en: 'A minimal, privacy-focused blog platform using Astro and markdown for technical writings.',
+      de: 'Eine minimalistische, datenschutzorientierte Blog-Plattform mit Astro und Markdown für technische Beiträge.',
+    },
+    tags: ['Open Source', 'Blog', 'Astro', 'WIP'],
+    links: {
+      github: 'https://github.com/Shik3i/Koalablog',
     },
     assets: {},
   },

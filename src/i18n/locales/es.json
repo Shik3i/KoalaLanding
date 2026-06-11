@@ -22,14 +22,10 @@
   "hero.note": "Hecho por Timo, un desarrollador en solitario de Alemania.",
   "categories.title": "Proyectos",
   "categories.intro": "Todos los proyectos son open-source y están construidos en torno a casos de uso reales. Algunos están pulidos, otros aún en fase inicial — pero ninguno es vaporware.",
-  "categories.browser-extension": "Extensiones de navegador",
-  "categories.browser-extension.desc": "Pequeñas herramientas de navegador que solucionan flujos de trabajo molestos justo donde ocurren.",
   "categories.web": "Apps web y sitios",
   "categories.web.desc": "Herramientas alojadas, paneles de control y sitios públicos dentro del ecosistema KoalaStuff.",
   "categories.desktop": "Aplicaciones de escritorio",
   "categories.desktop.desc": "Utilidades locales para flujos de trabajo que no pertenecen al navegador.",
-  "categories.experiment": "Experimentos y proyectos en fase inicial",
-  "categories.experiment.desc": "Ideas tempranas, prototipos y cosas que pueden cambiar mucho.",
   "featured.visitWebsite": "Visitar sitio web",
   "featured.viewOnGitHub": "Ver en GitHub",
   "featured.chromeStore": "Chrome Web Store",
@@ -85,5 +81,8 @@
   "privacy.title": "Política de privacidad",
   "privacy.meta": "Política de privacidad de koalastuff.net — sin rastreo, sin cookies, sin scripts de terceros.",
   "imprint.title": "Aviso legal",
-  "imprint.meta": "Aviso legal de koalastuff.net."
+  "imprint.meta": "Aviso legal de koalastuff.net.",
+  "categories.extensions": "Extensiones de navegador",
+  "categories.extensions.desc": "Pequeñas herramientas de navegador que solucionan flujos de trabajo molestos justo donde ocurren.",
+  "status.wip": "WIP"
 }

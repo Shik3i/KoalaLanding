@@ -22,14 +22,10 @@
   "hero.note": "Fait par Timo, un développeur solo basé en Allemagne.",
   "categories.title": "Projets",
   "categories.intro": "Tous les projets sont open-source et construits autour de cas d'usage réels. Certains sont aboutis, d'autres encore en cours — mais aucun n'est du vaporware.",
-  "categories.browser-extension": "Extensions de navigateur",
-  "categories.browser-extension.desc": "De petits outils de navigateur qui règlent les workflows agaçants directement là où ils se produisent.",
   "categories.web": "Apps web & sites",
   "categories.web.desc": "Outils hébergés, tableaux de bord et sites publics dans l'écosystème KoalaStuff.",
   "categories.desktop": "Applications de bureau",
   "categories.desktop.desc": "Utilitaires locaux pour des workflows qui n'ont pas leur place dans le navigateur.",
-  "categories.experiment": "Expérimentations & projets en cours",
-  "categories.experiment.desc": "Des idées en gestation, des prototypes et des projets susceptibles de beaucoup évoluer.",
   "featured.visitWebsite": "Visiter le site",
   "featured.viewOnGitHub": "Voir sur GitHub",
   "featured.chromeStore": "Chrome Web Store",
@@ -85,5 +81,8 @@
   "privacy.title": "Politique de confidentialité",
   "privacy.meta": "Politique de confidentialité de koalastuff.net — pas de tracking, pas de cookies, pas de scripts tiers.",
   "imprint.title": "Mentions légales",
-  "imprint.meta": "Mentions légales de koalastuff.net."
+  "imprint.meta": "Mentions légales de koalastuff.net.",
+  "categories.extensions": "Extensions de navigateur",
+  "categories.extensions.desc": "De petits outils de navigateur qui règlent les workflows agaçants directement là où ils se produisent.",
+  "status.wip": "WIP"
 }

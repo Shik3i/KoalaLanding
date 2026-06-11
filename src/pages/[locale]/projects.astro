@@ -28,10 +28,9 @@ const sortedProjects = [...projects].sort((a, b) => {
 });
 
 const categoryIcons: Record<string, string> = {
-  'browser-extension': '🧩',
-  'web': '🌐',
   'desktop': '🖥',
-  'experiment': '🧪',
+  'web': '🌐',
+  'extensions': '🧩',
 };
 ---
 
@@ -50,21 +49,20 @@ const categoryIcons: Record<string, string> = {
         <p class="section__subtitle">
           A tracker-style log of all KoalaStuff tools, browser extensions, and experiments.
         </p>
+      </div>
+
       <!-- Category Filter Tabs -->
       <div class="project-filter-container" style="margin-bottom: var(--space-6);">
         <nav class="project-filter" role="tablist" aria-label={tr['categories.title'] ?? 'Project categories'}>
           <button class="filter-btn active" role="tab" aria-selected="true" tabindex="0" aria-controls="projects-tracker-rows" data-category="all">{tr['categories.all'] ?? 'All'}</button>
-          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="browser-extension">
-            <span aria-hidden="true">🧩</span> {tr['categories.browser-extension'] ?? 'Extensions'}
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="desktop">
+            <span aria-hidden="true">🖥</span> {tr['categories.desktop'] ?? 'Desktop'}
           </button>
           <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="web">
             <span aria-hidden="true">🌐</span> {tr['categories.web'] ?? 'Web'}
           </button>
-          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="desktop">
-            <span aria-hidden="true">🖥</span> {tr['categories.desktop'] ?? 'Desktop'}
-          </button>
-          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="experiment">
-            <span aria-hidden="true">🧪</span> {tr['categories.experiment'] ?? 'Experiments'}
+          <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="extensions">
+            <span aria-hidden="true">🧩</span> {tr['categories.extensions'] ?? 'Extensions'}
           </button>
         </nav>
       </div>
@@ -128,7 +126,7 @@ const categoryIcons: Record<string, string> = {
                 <div class="col-links">
                   <span class="tracker-row__mobile-label">Links:</span>
                   <div class="tracker-links-group">
-                    {project.links.website && (
+                    {project.links.website && project.status !== 'wip' && (
                       <a href={project.links.website} class="tracker-link" title="Website" target="_blank" rel="noopener noreferrer">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         <span>Web</span>
@@ -140,12 +138,12 @@ const categoryIcons: Record<string, string> = {
                         <span>Code</span>
                       </a>
                     )}
-                    {project.links.chrome && (
+                    {project.links.chrome && project.status !== 'wip' && (
                       <a href={project.links.chrome} class="tracker-link" title="Chrome Store" target="_blank" rel="noopener noreferrer">
                         <span>Chrome</span>
                       </a>
                     )}
-                    {project.links.firefox && (
+                    {project.links.firefox && project.status !== 'wip' && (
                       <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" target="_blank" rel="noopener noreferrer">
                         <span>Firefox</span>
                       </a>
@@ -223,6 +221,9 @@ const categoryIcons: Record<string, string> = {
   .tracker-row--experimental {
     border-left: 4px solid hsl(35, 90%, 50%);
   }
+  .tracker-row--wip {
+    border-left: 4px solid hsl(25, 80%, 50%);
+  }
   .tracker-row--archived {
     border-left: 4px solid hsl(210, 10%, 60%);
     opacity: 0.7;
@@ -284,6 +285,10 @@ const categoryIcons: Record<string, string> = {
     background: hsla(35, 90%, 50%, 0.1);
     color: hsl(35, 90%, 70%);
   }
+  .status-pill--wip {
+    background: hsla(25, 80%, 50%, 0.1);
+    color: hsl(25, 80%, 70%);
+  }
   .status-pill--archived {
     background: hsla(210, 10%, 60%, 0.1);
     color: hsl(210, 10%, 75%);
@@ -298,6 +303,7 @@ const categoryIcons: Record<string, string> = {
   .status-dot--active { background-color: hsl(140, 70%, 50%); }
   .status-dot--early { background-color: hsl(260, 70%, 65%); }
   .status-dot--experimental { background-color: hsl(35, 90%, 55%); }
+  .status-dot--wip { background-color: hsl(25, 80%, 55%); }
   .status-dot--archived { background-color: hsl(210, 10%, 65%); }
 
   .updated-date {

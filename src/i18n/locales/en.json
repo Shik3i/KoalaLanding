@@ -1,7 +1,6 @@
 {
   "site.title": "KoalaStuff — Small open-source tools for real annoyances",
   "site.description": "Browser extensions, web tools, desktop utilities and experiments built around media, self-hosting, automation and everyday workflows. Made by a solo developer.",
-
   "nav.projects": "Projects",
   "nav.about": "About",
   "nav.faq": "FAQ",
@@ -14,7 +13,6 @@
   "nav.toggleTheme": "Toggle theme",
   "nav.switchToDark": "Switch to dark theme",
   "nav.switchToLight": "Switch to light theme",
-
   "hero.headline": "KoalaStuff",
   "hero.subheadline": "Small open-source tools for real annoyances.",
   "hero.body": "Browser extensions, web tools, desktop utilities and experiments built around media, self-hosting, automation and everyday workflows.",
@@ -22,18 +20,12 @@
   "hero.cta.github": "GitHub",
   "hero.cta.devto": "dev.to",
   "hero.note": "Made by Timo, a solo developer from Germany.",
-
   "categories.title": "Projects",
   "categories.intro": "All projects are open-source and built around real use cases. Some are polished, some are still early — but none are vaporware.",
-  "categories.browser-extension": "Browser Extensions",
-  "categories.browser-extension.desc": "Small browser tools that fix annoying workflows directly where they happen.",
-  "categories.web": "Web Apps & Websites",
+  "categories.web": "Web Apps",
   "categories.web.desc": "Hosted tools, dashboards and public websites in the KoalaStuff ecosystem.",
   "categories.desktop": "Desktop Apps",
   "categories.desktop.desc": "Local utilities for workflows that do not belong in the browser.",
-  "categories.experiment": "Experiments & Early Projects",
-  "categories.experiment.desc": "Early ideas, prototypes and things that may change a lot.",
-
   "featured.visitWebsite": "Visit website",
   "featured.viewOnGitHub": "View on GitHub",
   "featured.chromeStore": "Chrome Web Store",
@@ -41,18 +33,15 @@
   "featured.viewDocs": "Documentation",
   "featured.readDevlog": "Dev notes",
   "featured.selfHostable": "Self-hostable",
-
   "status.active": "Active",
   "status.experimental": "Experimental",
   "status.early": "Early",
   "status.archived": "Archived",
-
   "about.title": "About KoalaStuff",
   "about.body1": "KoalaStuff is where I collect small tools, browser extensions and experiments that solve problems I run into myself. Some are polished, some are still early, but the goal is always the same: useful tools without unnecessary accounts, tracking or SaaS fluff.",
   "about.body2": "Built by a solo developer, one feature at a time. All projects are open-source. If something is broken or missing a feature, GitHub issues are the right place.",
   "about.body3": "Some projects are polished, some are experimental, but all are built around real use cases.",
   "about.body4": "All projects are released under the MIT license.",
-
   "trust.title": "Why trust these projects?",
   "trust.opensource.title": "Open source",
   "trust.opensource.desc": "All projects are open source. You can read the code, report issues and suggest improvements on GitHub.",
@@ -62,11 +51,9 @@
   "trust.realusecases.desc": "These tools were built because I needed them myself. No fake demos, no stock-photo testimonials, no inflated user counts.",
   "trust.honest.title": "Honest about limitations",
   "trust.honest.desc": "Every project page clearly states what works, what does not, and what is still experimental. No promises we can't keep.",
-
   "devnotes.title": "Development notes",
   "devnotes.body": "I write occasional dev notes about KoalaStuff projects, browser extension edge cases, Web Audio, self-hosting and implementation details on dev.to.",
   "devnotes.cta": "Read dev notes",
-
   "faq.title": "FAQ",
   "faq.q1": "What is KoalaStuff?",
   "faq.a1": "KoalaStuff is a collection of small open-source tools, browser extensions, desktop apps and experiments built by a solo developer. The focus is on media, self-hosting, browser utilities and everyday automation.",
@@ -84,7 +71,6 @@
   "faq.a7": "Some projects like KoalaSync are designed to be self-hostable. Check the README of each project for self-hosting instructions.",
   "faq.q8": "Why are some projects marked experimental?",
   "faq.a8": "Experimental projects are working but may have rough edges, incomplete features, or may change significantly. They are shared publicly because they are useful, not because they are finished.",
-
   "footer.projects": "Projects",
   "footer.github": "GitHub",
   "footer.devto": "dev.to",
@@ -93,10 +79,11 @@
   "footer.madeBy": "Made by",
   "footer.rights": "Open source under the MIT License.",
   "footer.language": "Language",
-
   "privacy.title": "Privacy Policy",
   "privacy.meta": "Privacy policy for koalastuff.net — no tracking, no cookies, no third-party scripts.",
-
   "imprint.title": "Imprint",
-  "imprint.meta": "Legal imprint for koalastuff.net."
+  "imprint.meta": "Legal imprint for koalastuff.net.",
+  "categories.extensions": "Extensions",
+  "categories.extensions.desc": "Small browser tools that fix annoying workflows directly where they happen.",
+  "status.wip": "WIP"
 }

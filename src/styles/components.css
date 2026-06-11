@@ -570,7 +570,7 @@
   box-shadow: 0 8px 32px hsl(from var(--project-accent, var(--c-accent)) h s l / 0.15);
 }
 .featured-project:hover::before { opacity: 1; }
-.featured-project:last-child { margin-bottom: 0; }
+.featured-project:last-child { margin-bottom: var(--space-16); }
 .featured-project--reversed .featured-project__text { order: 2; }
 .featured-project--reversed .featured-project__visual { order: 1; }
 

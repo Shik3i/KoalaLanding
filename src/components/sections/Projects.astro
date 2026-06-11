@@ -16,17 +16,15 @@ const homepageProjects = getHomepageProjects();
 const nonFeatured = homepageProjects.filter((p) => !p.featured);
 
 const categories = [
-  'browser-extension',
-  'web',
   'desktop',
-  'experiment',
+  'web',
+  'extensions',
 ] as const;
 
 const categoryIcons: Record<string, string> = {
-  'browser-extension': '🧩',
-  'web': '🌐',
   'desktop': '🖥',
-  'experiment': '🧪',
+  'web': '🌐',
+  'extensions': '🧩',
 };
 ---
 

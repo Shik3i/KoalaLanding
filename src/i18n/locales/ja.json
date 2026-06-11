@@ -22,14 +22,10 @@
   "hero.note": "ドイツの個人開発者 Timo が作成しました。",
   "categories.title": "プロジェクト",
   "categories.intro": "すべてのプロジェクトはオープンソースであり、実際のユースケースに基づいて構築されています。完成度の高いものもあれば、まだ初期段階のものもありますが、机上の空論だけのプロジェクトはありません。",
-  "categories.browser-extension": "ブラウザ拡張機能",
-  "categories.browser-extension.desc": "面倒なワークフローを、それが発生する場所で直接解決する小さなブラウザツール。",
   "categories.web": "ウェブアプリ ＆ ウェブサイト",
   "categories.web.desc": "KoalaStuff エコシステム内のホスト型ツール、ダッシュボード、公開ウェブサイト。",
   "categories.desktop": "デスクトップアプリ",
   "categories.desktop.desc": "ブラウザ内には収まらないワークフローのためのローカルユーティリティ。",
-  "categories.experiment": "実験 ＆ 初期プロジェクト",
-  "categories.experiment.desc": "初期のアイデア、プロトタイプ、今後大きく変わる可能性のあるもの。",
   "featured.visitWebsite": "ウェブサイトを開く",
   "featured.viewOnGitHub": "GitHubで見る",
   "featured.chromeStore": "Chrome ウェブストア",
@@ -85,5 +81,8 @@
   "privacy.title": "プライバシーポリシー",
   "privacy.meta": "koalastuff.net のプライバシーポリシー — トラッキングなし、Cookieなし、外部スクリプトなし。",
   "imprint.title": "インプリント",
-  "imprint.meta": "koalastuff.net の法的表示。"
+  "imprint.meta": "koalastuff.net の法的表示。",
+  "categories.extensions": "ブラウザ拡張機能",
+  "categories.extensions.desc": "面倒なワークフローを、それが発生する場所で直接解決する小さなブラウザツール。",
+  "status.wip": "WIP"
 }
