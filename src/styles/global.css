@@ -394,6 +394,8 @@ ul, ol { list-style: none; }
 
 /* --- Buttons --- */
 .btn {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -750,3 +752,10 @@ html[data-transition-type="fade"]::view-transition-group(custom-fade) {
     align-items: center;
   }
 }
+
+
+/* Fix for Chromium SVG disappearing inside backdrop-filter */
+.btn svg, .tracker-link svg, .filter-btn svg, .icon-link svg {
+  transform: translateZ(0);
+}
+
