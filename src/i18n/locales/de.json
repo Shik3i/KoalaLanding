@@ -26,6 +26,7 @@
   "categories.web.desc": "Gehostete Tools, Dashboards und öffentliche Websites im KoalaStuff-Ökosystem.",
   "categories.desktop": "Desktop-Anwendungen",
   "categories.desktop.desc": "Lokale Utilities für Workflows, die nicht in den Browser gehören.",
+  "featured.label": "Hervorgehoben",
   "featured.visitWebsite": "Website besuchen",
   "featured.viewOnGitHub": "Auf GitHub ansehen",
   "featured.chromeStore": "Chrome Web Store",

@@ -230,5 +230,220 @@
       });
     };
     detectBrowserAndOptimizeLinks();
+
+    // Interactive Background Canvas Particle Grid
+    const initBgCanvas = () => {
+      const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      interface Particle {
+        x: number;
+        y: number;
+        x0: number;
+        y0: number;
+        vx: number;
+        vy: number;
+      }
+
+      let particles: Particle[] = [];
+      const spacing = 32;
+      const repulsionRadius = 120;
+      const repulsionStrength = 1.0;
+      const spring = 0.08;
+      const friction = 0.85;
+      const dotRadius = 1.2;
+
+      let mouse = { x: -1000, y: -1000, active: false };
+
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let isReducedMotion = motionQuery.matches;
+
+      // Listen for reduced motion preference changes
+      motionQuery.addEventListener('change', (e) => {
+        isReducedMotion = e.matches;
+        if (isReducedMotion) {
+          cancelAnimation();
+          drawStatic();
+        } else {
+          startAnimation();
+        }
+      });
+
+      let dotColor = 'rgba(255, 255, 255, 0.09)';
+      const updateColor = () => {
+        const isLight = document.documentElement.dataset.theme === 'light';
+        dotColor = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.09)';
+      };
+
+      const initGrid = () => {
+        particles = [];
+        const w = canvas.width;
+        const h = canvas.height;
+        const cols = Math.ceil(w / spacing) + 1;
+        const rows = Math.ceil(h / spacing) + 1;
+
+        for (let col = 0; col < cols; col++) {
+          for (let row = 0; row < rows; row++) {
+            const x = col * spacing;
+            const y = row * spacing;
+            particles.push({
+              x,
+              y,
+              x0: x,
+              y0: y,
+              vx: 0,
+              vy: 0
+            });
+          }
+        }
+      };
+
+      const resize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initGrid();
+        if (isReducedMotion) {
+          drawStatic();
+        }
+      };
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      // Mouse tracking
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.active = false;
+        mouse.x = -1000;
+        mouse.y = -1000;
+      });
+
+      // Touch tracking for mobile support
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          mouse.x = e.touches[0].clientX;
+          mouse.y = e.touches[0].clientY;
+          mouse.active = true;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        mouse.active = false;
+        mouse.x = -1000;
+        mouse.y = -1000;
+      });
+
+      let animationFrameId: number | null = null;
+
+      const drawStatic = () => {
+        updateColor();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = dotColor;
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          ctx.beginPath();
+          ctx.arc(p.x0, p.y0, dotRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      };
+
+      const animate = () => {
+        updateColor();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = dotColor;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          if (mouse.active) {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < repulsionRadius) {
+              const force = (repulsionRadius - dist) / repulsionRadius;
+              const angle = Math.atan2(dy, dx);
+              // Accelerate away
+              p.vx += Math.cos(angle) * force * repulsionStrength;
+              p.vy += Math.sin(angle) * force * repulsionStrength;
+            }
+          }
+
+          // Spring force back to home state
+          const ax = (p.x0 - p.x) * spring;
+          const ay = (p.y0 - p.y) * spring;
+
+          p.vx += ax;
+          p.vy += ay;
+
+          // Friction damping
+          p.vx *= friction;
+          p.vy *= friction;
+
+          // Update position
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Optimization: snap to home if motion is tiny to prevent floats accumulation
+          if (
+            Math.abs(p.x - p.x0) < 0.01 &&
+            Math.abs(p.y - p.y0) < 0.01 &&
+            Math.abs(p.vx) < 0.01 &&
+            Math.abs(p.vy) < 0.01
+          ) {
+            p.x = p.x0;
+            p.y = p.y0;
+            p.vx = 0;
+            p.vy = 0;
+          }
+
+          // Render particle
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        animationFrameId = requestAnimationFrame(animate);
+      };
+
+      const startAnimation = () => {
+        if (!animationFrameId && !isReducedMotion) {
+          animate();
+        }
+      };
+
+      const cancelAnimation = () => {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      };
+
+      // Watch dataset.theme on <html> to dynamically update colors when toggling themes in static mode
+      const themeObserver = new MutationObserver(() => {
+        if (isReducedMotion) {
+          drawStatic();
+        }
+      });
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+
+      if (!isReducedMotion) {
+        startAnimation();
+      } else {
+        drawStatic();
+      }
+    };
+    initBgCanvas();
   });
 })();

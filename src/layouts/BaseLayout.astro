@@ -115,10 +115,8 @@ const langCode = localeLangCodes[locale];
       <div class="blob blob-3"></div>
     </div>
 
-    <!-- Moving Grid Background (sharp, non-blurred) -->
-    <div class="bg-grid-container" aria-hidden="true">
-      <div class="bg-grid"></div>
-    </div>
+    <!-- Interactive Canvas Particle Grid -->
+    <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
 
     <!-- Skip link for keyboard users -->
     <a href="#main-content" class="skip-link">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>

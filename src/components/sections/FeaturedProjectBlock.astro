@@ -36,9 +36,9 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
 >
   <!-- Text side -->
   <div class="featured-project__text">
-    <p class="featured-project__label">
-      {tr[`categories.${project.category}`] ?? project.category}
-    </p>
+    <div class="featured-project__label-wrap">
+      <span class="featured-project__label-badge">{tr['featured.label'] ?? 'Featured'}</span>
+    </div>
 
     <h3 class="featured-project__title">{project.name}</h3>
 
@@ -76,15 +76,19 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
           {tr['featured.viewOnGitHub'] ?? 'View on GitHub'}
         </a>
       )}
-      {project.links.chrome && project.status !== 'wip' && (
-        <a href={project.links.chrome} class="btn btn-ghost" data-link-platform="chrome" rel="noopener noreferrer">
-          {tr['featured.chromeStore'] ?? 'Chrome Web Store'}
-        </a>
-      )}
-      {project.links.firefox && project.status !== 'wip' && (
-        <a href={project.links.firefox} class="btn btn-ghost" data-link-platform="firefox" rel="noopener noreferrer">
-          {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
-        </a>
+      {(project.links.chrome || project.links.firefox) && project.status !== 'wip' && (
+        <div class="featured-project__download-group">
+          {project.links.chrome && (
+            <a href={project.links.chrome} class="btn btn-ghost" data-link-platform="chrome" rel="noopener noreferrer">
+              {tr['featured.chromeStore'] ?? 'Chrome Web Store'}
+            </a>
+          )}
+          {project.links.firefox && (
+            <a href={project.links.firefox} class="btn btn-ghost" data-link-platform="firefox" rel="noopener noreferrer">
+              {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
+            </a>
+          )}
+        </div>
       )}
     </div>
   </div>

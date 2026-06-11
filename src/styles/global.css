@@ -145,31 +145,14 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Moving Grid Background (GPU-accelerated transform) --- */
-.bg-grid-container {
+/* --- Interactive Background Canvas --- */
+.bg-canvas {
   position: fixed;
   inset: 0;
   z-index: -3;
-  overflow: hidden;
   pointer-events: none;
-}
-
-.bg-grid {
-  position: absolute;
-  inset: -64px; /* bleed out to prevent gaps during animation */
-  background-image: radial-gradient(hsl(224, 15%, 18%) 1.2px, transparent 1.2px);
-  background-size: 32px 32px;
-  animation: gridMove 25s linear infinite;
-  will-change: transform;
-}
-
-[data-theme='light'] .bg-grid {
-  background-image: radial-gradient(hsl(220, 10%, 82%) 1.2px, transparent 1.2px);
-}
-
-@keyframes gridMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(32px, 32px); }
+  width: 100%;
+  height: 100%;
 }
 
 /* --- Ambient background glow blobs --- */
