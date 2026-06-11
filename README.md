@@ -114,29 +114,8 @@ git push
 
 ## 🔒 Security & Server Configuration
 
-### Caddyfile (Caddy v2 VPS Example)
+### Caddyfile Configuration
 
-```caddyfile
-koalastuff.net {
-    root * /srv/koalastuff.net/dist
-    encode zstd gzip
-    
-    file_server {
-        # Stream pre-compressed Gzip (.gz), ZStandard (.zst) or Brotli (.br) files directly
-        precompressed br zstd gzip
-    }
+For the recommended production configuration (including strict CSP, Zstandard compression, and immutable caching), please see the provided **[Caddyfile.example](./Caddyfile.example)** in the root of this repository.
 
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        X-Content-Type-Options "nosniff"
-        Referrer-Policy "strict-origin-when-cross-origin"
-        X-Frame-Options "DENY"
-        Permissions-Policy "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), usb=()"
-        Cross-Origin-Opener-Policy "same-origin"
-        Cross-Origin-Resource-Policy "same-origin"
-        
-        # Strict CSP configuration. Inline SHA-256 matches the head theme anti-flash block.
-        Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
-    }
-}
-```
+Copy and adapt it for your own domain!
