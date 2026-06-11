@@ -612,9 +612,9 @@ ul, ol { list-style: none; }
 }
 
 /* --- Vertical View Transitions (Legal Pages as Modals) --- */
-html[data-transition-type^="vertical-"]::view-transition-old(main),
-html[data-transition-type^="vertical-"]::view-transition-new(main),
-html[data-transition-type^="vertical-"]::view-transition-group(main) {
+html[data-transition-type^="vertical-"]::view-transition-old(*),
+html[data-transition-type^="vertical-"]::view-transition-new(*),
+html[data-transition-type^="vertical-"]::view-transition-group(*) {
   animation: none !important;
 }
 
