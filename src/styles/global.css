@@ -142,7 +142,7 @@ html {
   /* Global premium dot-grid background */
   background-image: radial-gradient(hsl(224, 15%, 16%) 1.2px, transparent 1.2px);
   background-size: 32px 32px;
-  animation: gridShift 160s linear infinite;
+  animation: gridShift 45s linear infinite;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -155,6 +155,74 @@ html {
 @keyframes gridShift {
   0% { background-position: 0 0; }
   100% { background-position: 32px 64px; }
+}
+
+/* --- Ambient background glow blobs --- */
+.bg-glow-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.9;
+  filter: blur(80px);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+[data-theme='light'] .blob {
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+.blob-1 {
+  background: radial-gradient(circle, hsla(212, 100%, 60%, 0.16) 0%, transparent 70%);
+  width: min(70vw, 700px);
+  height: min(70vw, 700px);
+  top: -15%;
+  left: -15%;
+  animation: float-blob-1 32s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  background: radial-gradient(circle, hsla(260, 80%, 60%, 0.12) 0%, transparent 70%);
+  width: min(60vw, 600px);
+  height: min(60vw, 600px);
+  bottom: -10%;
+  right: -10%;
+  animation: float-blob-2 36s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+  background: radial-gradient(circle, hsla(170, 85%, 50%, 0.08) 0%, transparent 70%);
+  width: min(50vw, 500px);
+  height: min(50vw, 500px);
+  top: 35%;
+  left: 45%;
+  animation: float-blob-3 40s ease-in-out infinite alternate;
+}
+
+@keyframes float-blob-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(100px, 80px) scale(1.1); }
+  100% { transform: translate(-50px, 150px) scale(0.95); }
+}
+@keyframes float-blob-2 {
+  0% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(-120px, -90px) scale(0.9); }
+  100% { transform: translate(60px, 60px) scale(1.1); }
+}
+@keyframes float-blob-3 {
+  0% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(80px, -140px) scale(1.15); }
+  100% { transform: translate(-80px, -50px) scale(1); }
 }
 
 body {
