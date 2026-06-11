@@ -784,13 +784,9 @@
   gap: var(--space-3);
 }
 
-.featured-project__visual:not(.featured-project__visual--mobile) {
-  display: flex;
+.featured-project__visual {
   align-items: center;
   justify-content: center;
-  position: relative;
-}
-.featured-project__visual--mobile {
   position: relative;
 }
 .featured-project__visual::after {
