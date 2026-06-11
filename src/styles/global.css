@@ -567,8 +567,6 @@ ul, ol { list-style: none; }
 
 .section__header {
   margin-bottom: var(--space-12);
-  max-width: 72rem;
-  margin-inline: auto;
 }
 
 .section__title {
