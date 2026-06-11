@@ -51,8 +51,8 @@
   "trust.honest.title": "坦诚局限性",
   "trust.honest.desc": "每个项目页面都清楚地说明了哪些功能可用，哪些不可用，以及哪些仍处于实验阶段。我们不做无法兑现的承诺。",
   "devnotes.title": "开发笔记",
-  "devnotes.body": "我偶尔会在 dev.to 上写一些关于 KoalaStuff 项目、浏览器扩展的边缘情况、Web Audio、自托管和具体实现细节的开发笔记。",
-  "devnotes.cta": "阅读开发笔记",
+  "devnotes.body": "我偶尔会在我们的博客上写关于 KoalaStuff 项目和更新的开发笔记。",
+  "devnotes.cta": "阅读笔记",
   "faq.title": "常见问题",
   "faq.q1": "什么是 KoalaStuff？",
   "faq.a1": "KoalaStuff 是一位独立开发者制作的小型开源工具、浏览器扩展、桌面应用及实验性项目的集合。专注于媒体、自托管、浏览器实用程序和日常自动化。",
@@ -84,5 +84,11 @@
   "imprint.meta": "koalastuff.net 的法律印记与合规声明。",
   "categories.extensions": "浏览器扩展",
   "categories.extensions.desc": "在日常工作流中直接解决烦人痛点的小型浏览器工具。",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "显示 WIP 和实验性项目",
+  "projects.showExperimentalShort": "显示实验性",
+  "projects.disclaimerTitle": "实验性和 WIP 项目",
+  "projects.disclaimerText": "这些项目未完成、处于实验阶段或已停止开发。为了透明度，它们在此列出。",
+  "blog.back": "返回概览",
+  "blog.toc": "目录"
 }

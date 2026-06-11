@@ -50,9 +50,9 @@
   "trust.realusecases.desc": "Deze tools zijn gebouwd omdat ik ze zelf nodig had. Geen nepdemonstaties, geen testimonials met stockfoto's, geen opgeblazen gebruikersaantallen.",
   "trust.honest.title": "Eerlijk over beperkingen",
   "trust.honest.desc": "Elke projectpagina geeft duidelijk aan wat werkt, wat nog niet werkt en wat nog experimenteel is. Geen beloftes die we niet kunnen nakomen.",
-  "devnotes.title": "Ontwikkelnotities",
-  "devnotes.body": "Ik schrijf af en toe ontwikkelnotities over KoalaStuff-projecten, edge cases bij browserextensies, Web Audio, zelf-hosten en implementatiedetails op dev.to.",
-  "devnotes.cta": "Lees ontwikkelnotities",
+  "devnotes.title": "Ontwikkelingsnotities",
+  "devnotes.body": "Ik schrijf af en toe ontwikkelingsnotities over KoalaStuff-projecten en updates op onze blog.",
+  "devnotes.cta": "Lees notities",
   "faq.title": "FAQ",
   "faq.q1": "Wat is KoalaStuff?",
   "faq.a1": "KoalaStuff is een verzameling kleine open-source tools, browserextensies, desktopapplicaties en experimenten gemaakt door een solo-ontwikkelaar. De focus ligt op media, zelf-hosten, browserhulpmiddelen en dagelijkse automatisering.",
@@ -84,5 +84,11 @@
   "imprint.meta": "Wettelijk colofon van koalastuff.net.",
   "categories.extensions": "Browserextensies",
   "categories.extensions.desc": "Kleine browsertools die vervelende workflows oplossen precies waar ze zich voordoen.",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "Toon WIP & Experimentele Projecten",
+  "projects.showExperimentalShort": "Toon Experimenteel",
+  "projects.disclaimerTitle": "Experimentele & WIP Projecten",
+  "projects.disclaimerText": "Deze projecten zijn onvoltooid, experimenteel of stopgezet. Ze worden hier ter transparantie vermeld.",
+  "blog.back": "Terug naar overzicht",
+  "blog.toc": "Inhoudsopgave"
 }

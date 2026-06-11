@@ -51,8 +51,8 @@
   "trust.honest.title": "한계에 대한 솔직함",
   "trust.honest.desc": "각 프로젝트 페이지에는 작동하는 부분, 작동하지 않는 부분, 실험적인 상태를 명확히 밝힙니다. 지키지 못할 약속은 하지 않습니다.",
   "devnotes.title": "개발 노트",
-  "devnotes.body": "KoalaStuff 프로젝트, 브라우저 확장 프로그램의 특이 케이스, Web Audio, 셀프 호스팅 및 구현 디테일에 관한 개발 노트를 dev.to에 비정기적으로 작성하고 있습니다.",
-  "devnotes.cta": "개발 노트 읽기",
+  "devnotes.body": "블로그에 KoalaStuff 프로젝트 및 업데이트에 대한 개발 노트를 가끔 씁니다.",
+  "devnotes.cta": "노트 읽기",
   "faq.title": "FAQ",
   "faq.q1": "KoalaStuff가 무엇인가요?",
   "faq.a1": "KoalaStuff는 1인 개발자가 만든 작은 오픈소스 도구, 브라우저 확장 프로그램, 데스크톱 앱 및 실험적 프로젝트의 모음입니다. 미디어, 셀프 호스팅, 브라우저 유틸리티, 일상적인 자동화에 집중하고 있습니다.",
@@ -84,5 +84,11 @@
   "imprint.meta": "koalastuff.net 법적 고지.",
   "categories.extensions": "브라우저 확장 프로그램",
   "categories.extensions.desc": "번거로운 작업 흐름을 발생한 위치에서 직접 해결해 주는 작은 브라우저 도구.",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "WIP 및 실험적 프로젝트 표시",
+  "projects.showExperimentalShort": "실험적 표시",
+  "projects.disclaimerTitle": "실험적 및 WIP 프로젝트",
+  "projects.disclaimerText": "이 프로젝트들은 미완성이거나 실험적이거나 중단된 것입니다. 투명성을 위해 여기에 나열됩니다.",
+  "blog.back": "개요로 돌아가기",
+  "blog.toc": "목차"
 }

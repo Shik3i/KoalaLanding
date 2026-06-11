@@ -51,8 +51,8 @@
   "trust.honest.title": "Honnête sur les limites",
   "trust.honest.desc": "Chaque page de projet indique clairement ce qui fonctionne, ce qui ne fonctionne pas encore, et ce qui est encore expérimental. Pas de promesses en l'air.",
   "devnotes.title": "Notes de développement",
-  "devnotes.body": "J'écris occasionnellement des notes de dev sur les projets KoalaStuff, les cas particuliers des extensions de navigateur, Web Audio, l'auto-hébergement et les détails d'implémentation sur dev.to.",
-  "devnotes.cta": "Lire les notes de dev",
+  "devnotes.body": "J'écris occasionnellement des notes de développement sur les projets KoalaStuff et des mises à jour sur notre blog.",
+  "devnotes.cta": "Lire les notes",
   "faq.title": "FAQ",
   "faq.q1": "C'est quoi KoalaStuff ?",
   "faq.a1": "KoalaStuff est une collection de petits outils open-source, extensions de navigateur, applications de bureau et expérimentations créés par un développeur solo. L'accent est mis sur les médias, l'auto-hébergement, les utilitaires de navigateur et l'automatisation du quotidien.",
@@ -84,5 +84,11 @@
   "imprint.meta": "Mentions légales de koalastuff.net.",
   "categories.extensions": "Extensions de navigateur",
   "categories.extensions.desc": "De petits outils de navigateur qui règlent les workflows agaçants directement là où ils se produisent.",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "Afficher les projets WIP & Expérimentaux",
+  "projects.showExperimentalShort": "Afficher Expérimental",
+  "projects.disclaimerTitle": "Projets Expérimentaux & WIP",
+  "projects.disclaimerText": "Ces projets sont inachevés, expérimentaux ou abandonnés. Ils sont listés ici par souci de transparence.",
+  "blog.back": "Retour à la vue d'ensemble",
+  "blog.toc": "Table des matières"
 }

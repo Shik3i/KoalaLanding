@@ -53,7 +53,7 @@
   "trust.honest.title": "Honest about limitations",
   "trust.honest.desc": "Every project page clearly states what works, what does not, and what is still experimental. No promises we can't keep.",
   "devnotes.title": "Development notes",
-  "devnotes.body": "I write occasional dev notes about KoalaStuff projects, browser extension edge cases, Web Audio, self-hosting and implementation details on dev.to.",
+  "devnotes.body": "I write occasional dev notes about KoalaStuff projects and updates on our blog.",
   "devnotes.cta": "Read dev notes",
   "faq.title": "FAQ",
   "faq.q1": "What is KoalaStuff?",
@@ -86,5 +86,11 @@
   "imprint.meta": "Legal imprint for koalastuff.net.",
   "categories.extensions": "Extensions",
   "categories.extensions.desc": "Small browser tools that fix annoying workflows directly where they happen.",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "Show WIP & Experimental Projects",
+  "projects.showExperimentalShort": "Show Experimental",
+  "projects.disclaimerTitle": "Experimental & WIP Projects",
+  "projects.disclaimerText": "These projects are either unfinished, experimental, or discontinued. They are listed here for transparency.",
+  "blog.back": "Back to Overview",
+  "blog.toc": "Table of Contents"
 }

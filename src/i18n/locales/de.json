@@ -52,9 +52,9 @@
   "trust.realusecases.desc": "Diese Tools wurden gebaut, weil ich sie selbst brauchte. Keine Fake-Demos, keine Stockfoto-Testimonials, keine aufgeblasenen Nutzerzahlen.",
   "trust.honest.title": "Ehrlich über Einschränkungen",
   "trust.honest.desc": "Jede Projektseite erklärt klar, was funktioniert, was nicht, und was noch experimentell ist. Keine Versprechen, die wir nicht halten können.",
-  "devnotes.title": "Entwicklungsnotizen",
-  "devnotes.body": "Ich schreibe gelegentliche Dev-Notizen über KoalaStuff-Projekte, Browser-Extension-Eigenheiten, Web Audio, Self-Hosting und Implementierungsdetails auf dev.to.",
-  "devnotes.cta": "Dev-Notizen lesen",
+  "devnotes.title": "Entwickler-Notizen",
+  "devnotes.body": "Ich schreibe gelegentlich Entwickler-Notizen über KoalaStuff-Projekte und Updates in unserem Blog.",
+  "devnotes.cta": "Notizen lesen",
   "faq.title": "FAQ",
   "faq.q1": "Was ist KoalaStuff?",
   "faq.a1": "KoalaStuff ist eine Sammlung kleiner Open-Source-Tools, Browser-Erweiterungen, Desktop-Apps und Experimente, die von einem Solo-Entwickler gebaut werden. Der Fokus liegt auf Medien, Self-Hosting, Browser-Utilities und alltäglicher Automatisierung.",
@@ -86,5 +86,11 @@
   "imprint.meta": "Rechtliches Impressum für koalastuff.net.",
   "categories.extensions": "Extensions",
   "categories.extensions.desc": "Kleine Browser-Tools, die nervige Workflows direkt dort beheben, wo sie passieren.",
-  "status.wip": "WiP"
+  "status.wip": "WiP",
+  "projects.showExperimental": "WIP & Experimentelle Projekte anzeigen",
+  "projects.showExperimentalShort": "Experimentell anzeigen",
+  "projects.disclaimerTitle": "Experimentelle & WIP Projekte",
+  "projects.disclaimerText": "Diese Projekte sind entweder unfertig, experimentell oder eingestellt. Sie werden hier aus Transparenzgründen aufgelistet.",
+  "blog.back": "Zurück zur Übersicht",
+  "blog.toc": "Inhaltsverzeichnis"
 }

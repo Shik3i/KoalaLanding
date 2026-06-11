@@ -50,9 +50,9 @@
   "trust.realusecases.desc": "Bu araçlar, kendim ihtiyaç duyduğum için yapıldı. Sahte demolar, stok fotoğraflı kullanıcı yorumları veya şişirilmiş kullanıcı sayıları yok.",
   "trust.honest.title": "Sınırlar konusunda dürüst",
   "trust.honest.desc": "Her proje sayfası neyin çalışıp neyin çalışmadığını ve nelerin deneysel olduğunu açıkça belirtir. Tutamayacağımız sözler vermeyiz.",
-  "devnotes.title": "Geliştirici notları",
-  "devnotes.body": "dev.to üzerinde zaman zaman KoalaStuff projeleri, tarayıcı eklentilerinin ince detayları, Web Audio, self-hosting ve uygulama detayları hakkında yazıyorum.",
-  "devnotes.cta": "Geliştirici notlarını oku",
+  "devnotes.title": "Geliştirme notları",
+  "devnotes.body": "Blogumuzda KoalaStuff projeleri ve güncellemeler hakkında ara sıra geliştirme notları yazıyorum.",
+  "devnotes.cta": "Notları oku",
   "faq.title": "SSS",
   "faq.q1": "KoalaStuff nedir?",
   "faq.a1": "KoalaStuff; medya, kendi sunucunda barındırma, tarayıcı araçları ve günlük otomasyon odaklı, bağımsız bir geliştirici tarafından yapılmış küçük açık kaynaklı araçlar, tarayıcı eklentileri, masaüstü uygulamaları ve deneyler koleksiyonudur.",
@@ -84,5 +84,11 @@
   "imprint.meta": "koalastuff.net için yasal künye.",
   "categories.extensions": "Tarayıcı Eklentileri",
   "categories.extensions.desc": "Can sıkıcı iş akışlarını doğrudan gerçekleştikleri yerde çözen küçük tarayıcı araçları.",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "WIP ve Deneysel Projeleri Göster",
+  "projects.showExperimentalShort": "Deneyselleri Göster",
+  "projects.disclaimerTitle": "Deneysel ve WIP Projeler",
+  "projects.disclaimerText": "Bu projeler ya tamamlanmamış, ya deneysel ya da sonlandırılmıştır. Şeffaflık amacıyla burada listelenmişlerdir.",
+  "blog.back": "Genel Bakışa Dön",
+  "blog.toc": "İçindekiler"
 }

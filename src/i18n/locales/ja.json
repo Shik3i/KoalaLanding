@@ -51,8 +51,8 @@
   "trust.honest.title": "限界について正直であること",
   "trust.honest.desc": "各プロジェクトのページには、何が機能し、何が機能しないか、何がまだ実験段階であるかが明記されています。守れない約束はしません。",
   "devnotes.title": "開発ノート",
-  "devnotes.body": "KoalaStuff のプロジェクト、ブラウザ拡張機能のニッチな仕様、Web Audio、セルフホスティング、実装の詳細について、不定期で dev.to に開発ノートを書いています。",
-  "devnotes.cta": "開発ノートを読む",
+  "devnotes.body": "ブログでKoalaStuffのプロジェクトや更新に関する開発ノートを時々書いています。",
+  "devnotes.cta": "ノートを読む",
   "faq.title": "FAQ",
   "faq.q1": "KoalaStuff とは何ですか？",
   "faq.a1": "KoalaStuff は、個人開発者が作成した小さなオープンソースツール、ブラウザ拡張機能、デスクトップアプリ、実験的プロジェクトのコレクションです。メディア、セルフホスティング、ブラウザユーティリティ、日常の自動化に焦点を当てています。",
@@ -84,5 +84,11 @@
   "imprint.meta": "koalastuff.net の法的表示。",
   "categories.extensions": "ブラウザ拡張機能",
   "categories.extensions.desc": "面倒なワークフローを、それが発生する場所で直接解決する小さなブラウザツール。",
-  "status.wip": "WIP"
+  "status.wip": "WIP",
+  "projects.showExperimental": "WIPおよび実験的プロジェクトを表示",
+  "projects.showExperimentalShort": "実験的プロジェクトを表示",
+  "projects.disclaimerTitle": "実験的およびWIPプロジェクト",
+  "projects.disclaimerText": "これらのプロジェクトは未完成、実験的、または開発中止されたものです。透明性のためにここにリストされています。",
+  "blog.back": "概要に戻る",
+  "blog.toc": "目次"
 }
