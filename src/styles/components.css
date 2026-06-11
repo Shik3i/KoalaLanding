@@ -938,6 +938,11 @@
   scrollbar-width: none;
 }
 
+[data-theme='light'] .project-filter {
+  background: hsla(0, 0%, 100%, 0.72);
+  box-shadow: var(--shadow-sm);
+}
+
 .project-filter::-webkit-scrollbar {
   display: none;
 }
@@ -960,6 +965,10 @@
 .filter-btn:hover {
   color: var(--c-text);
   background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme='light'] .filter-btn:hover {
+  background: hsla(224, 15%, 10%, 0.04);
 }
 
 .filter-btn.active {
