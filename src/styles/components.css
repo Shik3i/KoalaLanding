@@ -407,11 +407,11 @@
 
 @media (min-width: 1024px) {
   .hero {
-    min-height: auto;
+    min-height: calc(100dvh - 3.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block: var(--space-20);
+    padding-block: var(--space-12);
   }
   .hero > .container {
     width: 100%;
