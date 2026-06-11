@@ -1,0 +1,128 @@
+---
+import type { Locale } from '../../i18n/config';
+import type { Project } from '../../data/projects';
+import { getProjectDescription } from '../../data/projects';
+import { Picture } from 'astro:assets';
+
+export interface Props {
+  project: Project;
+  locale: Locale;
+  translations: Record<string, string>;
+  reversed?: boolean;
+}
+
+const { project, locale, translations: tr, reversed = false } = Astro.props;
+
+const statusClass = `badge--${project.status}`;
+const statusLabel = tr[`status.${project.status}`] ?? project.status;
+const description = getProjectDescription(project, locale, true);
+
+// Load images dynamically
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/**/*.{jpeg,jpg,png,gif,webp,svg}');
+
+const mascotPath = project.assets.mascot ? `/src${project.assets.mascot}` : null;
+const mascotImport = mascotPath ? images[mascotPath] : null;
+const mascotSrc = mascotImport ? (await mascotImport()).default : null;
+
+const iconPath = project.assets.icon ? `/src${project.assets.icon}` : null;
+const isIconSvg = project.assets.icon?.endsWith('.svg');
+const iconImport = iconPath ? images[iconPath] : null;
+const iconSrc = iconImport ? (await iconImport()).default : null;
+---
+
+<article
+  class={`featured-project${reversed ? ' featured-project--reversed' : ''}`}
+  style={`--project-accent: ${project.accentColor ?? 'var(--c-accent)'}`}
+>
+  <!-- Text side -->
+  <div class="featured-project__text">
+    <p class="featured-project__label">
+      {tr[`categories.${project.category}`] ?? project.category}
+    </p>
+
+    <h3 class="featured-project__title">{project.name}</h3>
+
+    <p class="featured-project__claim">
+      {getProjectDescription(project, locale, false)}
+    </p>
+
+    <p class="featured-project__desc">{description}</p>
+
+    <div class="featured-project__meta">
+      <span class={`badge ${statusClass}`}>
+        <svg width="6" height="6" viewBox="0 0 6 6" aria-hidden="true">
+          <circle cx="3" cy="3" r="3" fill="currentColor"/>
+        </svg>
+        {statusLabel}
+      </span>
+      <div class="tags">
+        {project.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="featured-project__links">
+      {project.links.website && (
+        <a href={project.links.website} class="btn btn-primary" rel="noopener noreferrer">
+          {tr['featured.visitWebsite'] ?? 'Visit website'}
+        </a>
+      )}
+      {project.links.github && (
+        <a href={project.links.github} class="btn btn-secondary" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          {tr['featured.viewOnGitHub'] ?? 'View on GitHub'}
+        </a>
+      )}
+      {project.links.chrome && (
+        <a href={project.links.chrome} class="btn btn-ghost" rel="noopener noreferrer">
+          {tr['featured.chromeStore'] ?? 'Chrome Web Store'}
+        </a>
+      )}
+      {project.links.firefox && (
+        <a href={project.links.firefox} class="btn btn-ghost" rel="noopener noreferrer">
+          {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Visual side -->
+  <div class="featured-project__visual" aria-hidden="true">
+    <div class="featured-project__image-wrap">
+      {mascotSrc ? (
+        <Picture
+          src={mascotSrc}
+          formats={['avif', 'webp']}
+          densities={[1, 2]}
+          alt=""
+          class="featured-project__mascot"
+          width={400}
+          height={400}
+        />
+      ) : isIconSvg && project.assets.icon ? (
+        <img
+          src={project.assets.icon}
+          alt=""
+          class="featured-project__icon-large"
+          width="128"
+          height="128"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : iconSrc ? (
+        <Picture
+          src={iconSrc}
+          formats={['avif', 'webp']}
+          densities={[1, 2]}
+          alt=""
+          class="featured-project__icon-large"
+          width={128}
+          height={128}
+        />
+      ) : null}
+    </div>
+  </div>
+</article>

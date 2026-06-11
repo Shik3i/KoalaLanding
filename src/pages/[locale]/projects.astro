@@ -1,0 +1,364 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getListedProjects } from '../../data/projects';
+import { loadTranslations } from '../../i18n/utils';
+import { locales, getLocalePath } from '../../i18n/config';
+import type { Locale } from '../../i18n/config';
+
+export async function getStaticPaths() {
+  // All locales except English (which is at /)
+  return locales
+    .filter((l) => l !== 'en')
+    .map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const tr = await loadTranslations(locale);
+const canonicalPath = getLocalePath(locale, 'projects');
+
+const projects = getListedProjects();
+
+// Sort projects by status and last updated date
+const sortedProjects = [...projects].sort((a, b) => {
+  const dateA = a.lastUpdated || '0000-00';
+  const dateB = b.lastUpdated || '0000-00';
+  return dateB.localeCompare(dateA);
+});
+
+const categoryIcons: Record<string, string> = {
+  'browser-extension': '🧩',
+  'web': '🌐',
+  'desktop': '🖥',
+  'experiment': '🧪',
+};
+---
+
+<BaseLayout
+  title={`${tr['nav.projects'] ?? 'Projects'} — KoalaStuff`}
+  description={tr['site.description'] ?? 'All browser extensions, web tools, desktop utilities and experiments built by KoalaStuff.'}
+  locale={locale}
+  canonicalPath={canonicalPath}
+>
+  <Header locale={locale} translations={tr} currentPath={canonicalPath} />
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <div class="section__header" style="margin-bottom: var(--space-12);">
+        <h1 class="section__title">{tr['nav.projects'] ?? 'Projects'}</h1>
+        <p class="section__subtitle">
+          A tracker-style log of all KoalaStuff tools, browser extensions, and experiments.
+        </p>
+      </div>
+
+      <!-- Tracker Table/Grid -->
+      <div class="projects-tracker">
+        <!-- Header -->
+        <div class="projects-tracker__header" aria-hidden="true">
+          <div class="col-project">Project</div>
+          <div class="col-category">Category</div>
+          <div class="col-status">Status</div>
+          <div class="col-updated">Last Updated</div>
+          <div class="col-links">Links</div>
+        </div>
+
+        <!-- Rows -->
+        <div class="projects-tracker__rows">
+          {sortedProjects.map((project) => {
+            const statusLabel = tr[`status.${project.status}`] ?? project.status;
+            const statusClass = `status-dot--${project.status}`;
+            
+            return (
+              <div class={`tracker-row tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`}>
+                <!-- Project Column -->
+                <div class="col-project">
+                  <div class="tracker-row__title-wrap">
+                    <span class="tracker-row__icon-fallback">{categoryIcons[project.category] || '📦'}</span>
+                    <h3 class="tracker-row__title">{project.name}</h3>
+                  </div>
+                  <p class="tracker-row__desc">
+                    {project.shortDescription[locale] ?? project.shortDescription.en}
+                  </p>
+                </div>
+
+                <!-- Category Column -->
+                <div class="col-category">
+                  <span class="tracker-row__mobile-label">Category:</span>
+                  <span class="category-tag">
+                    {categoryIcons[project.category]} {tr[`categories.${project.category}`] ?? project.category}
+                  </span>
+                </div>
+
+                <!-- Status Column -->
+                <div class="col-status">
+                  <span class="tracker-row__mobile-label">Status:</span>
+                  <span class={`status-pill status-pill--${project.status}`}>
+                    <span class={`status-dot ${statusClass}`} />
+                    {statusLabel}
+                  </span>
+                </div>
+
+                <!-- Last Updated Column -->
+                <div class="col-updated">
+                  <span class="tracker-row__mobile-label">Updated:</span>
+                  <span class="updated-date">
+                    {project.lastUpdated ? project.lastUpdated : '—'}
+                  </span>
+                </div>
+
+                <!-- Links Column -->
+                <div class="col-links">
+                  <span class="tracker-row__mobile-label">Links:</span>
+                  <div class="tracker-links-group">
+                    {project.links.website && (
+                      <a href={project.links.website} class="tracker-link" title="Website" target="_blank" rel="noopener noreferrer">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span>Web</span>
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a href={project.links.github} class="tracker-link" title="GitHub" target="_blank" rel="noopener noreferrer">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        <span>Code</span>
+                      </a>
+                    )}
+                    {project.links.chrome && (
+                      <a href={project.links.chrome} class="tracker-link" title="Chrome Store" target="_blank" rel="noopener noreferrer">
+                        <span>Chrome</span>
+                      </a>
+                    )}
+                    {project.links.firefox && (
+                      <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" target="_blank" rel="noopener noreferrer">
+                        <span>Firefox</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>
+
+<style>
+  /* Tracker Table styling */
+  .projects-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    backdrop-filter: blur(12px);
+  }
+
+  .projects-tracker__header {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 1.2fr;
+    gap: var(--space-4);
+    padding: 0 var(--space-4) var(--space-3);
+    border-bottom: 1px solid var(--border-glass);
+    color: var(--c-text-muted);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .projects-tracker__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .tracker-row {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 1.2fr;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-4);
+    background: hsla(var(--bg-card-raw), 0.3);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .tracker-row:hover {
+    transform: translateY(-1px);
+    background: hsla(var(--bg-card-raw), 0.6);
+    border-color: var(--row-accent);
+  }
+
+  /* Status-based Visual Distinctions */
+  .tracker-row--active {
+    border-left: 4px solid hsl(140, 70%, 45%);
+  }
+  .tracker-row--early {
+    border-left: 4px solid hsl(260, 70%, 60%);
+  }
+  .tracker-row--experimental {
+    border-left: 4px solid hsl(35, 90%, 50%);
+  }
+  .tracker-row--archived {
+    border-left: 4px solid hsl(210, 10%, 60%);
+    opacity: 0.7;
+  }
+
+  .tracker-row__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .tracker-row__icon-fallback {
+    font-size: var(--fs-md);
+  }
+
+  .tracker-row__title {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    color: var(--c-text-title);
+    margin: 0;
+  }
+
+  .tracker-row__desc {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .category-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+  }
+
+  /* Status Pill */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+  }
+
+  .status-pill--active {
+    background: hsla(140, 70%, 45%, 0.1);
+    color: hsl(140, 70%, 75%);
+  }
+  .status-pill--early {
+    background: hsla(260, 70%, 60%, 0.15);
+    color: hsl(260, 70%, 80%);
+  }
+  .status-pill--experimental {
+    background: hsla(35, 90%, 50%, 0.1);
+    color: hsl(35, 90%, 70%);
+  }
+  .status-pill--archived {
+    background: hsla(210, 10%, 60%, 0.1);
+    color: hsl(210, 10%, 75%);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .status-dot--active { background-color: hsl(140, 70%, 50%); }
+  .status-dot--early { background-color: hsl(260, 70%, 65%); }
+  .status-dot--experimental { background-color: hsl(35, 90%, 55%); }
+  .status-dot--archived { background-color: hsl(210, 10%, 65%); }
+
+  .updated-date {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    font-family: monospace;
+  }
+
+  .tracker-links-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tracker-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1-5) var(--space-2-5);
+    background: hsla(var(--bg-card-raw), 0.4);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .tracker-link:hover {
+    color: var(--row-accent);
+    border-color: var(--row-accent);
+    background: hsla(var(--bg-card-raw), 0.8);
+  }
+
+  .tracker-row__mobile-label {
+    display: none;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 992px) {
+    .projects-tracker__header {
+      display: none;
+    }
+
+    .tracker-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      padding: var(--space-5);
+      align-items: flex-start;
+    }
+
+    .tracker-row__mobile-label {
+      display: inline;
+      font-weight: 600;
+      color: var(--c-text-muted);
+      margin-right: var(--space-2);
+      font-size: var(--fs-sm);
+      min-width: 100px;
+    }
+
+    .col-project, .col-category, .col-status, .col-updated, .col-links {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .col-project {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .tracker-row__title-wrap {
+      width: 100%;
+    }
+
+    .tracker-links-group {
+      margin-top: var(--space-1);
+    }
+  }
+</style>

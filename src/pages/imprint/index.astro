@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { loadTranslations } from '../../i18n/utils';
+
+const locale = 'en' as const;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title="Imprint — KoalaStuff"
+  description="Legal imprint for koalastuff.net."
+  locale={locale}
+  canonicalPath="/imprint/"
+>
+  <Header locale={locale} translations={tr} currentPath="/imprint/" />
+
+  <main id="main-content">
+    <div class="container">
+      <article class="legal-content">
+        <h1>Imprint / Legal Notice</h1>
+
+        <p>This information is voluntarily provided for transparency. As a purely private, non-commercial hobby project, this website is not subject to the imprint obligation under German law (§ 5 DDG).</p>
+
+        <h2>Operator & Contact</h2>
+
+        <p>
+          Timo (KoalaDev) – Private Individual<br />
+          Germany
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          E-Mail: admin@koalastuff.net<br />
+          Mastodon: <a href="https://mastodon.social/@koalastuff" rel="noopener noreferrer" target="_blank">@koalastuff</a>
+        </p>
+
+        <h2>Responsible for Content</h2>
+        <p>
+          Timo (KoalaDev)<br />
+          Germany
+        </p>
+
+        <h2>Disclaimer</h2>
+        <p>
+          The content of this website has been created with great care. However, we cannot guarantee the accuracy, completeness, or timeliness of the information. Links to external websites are provided for information purposes only. We have no control over the content of linked sites.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>

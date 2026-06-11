@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Projects from '../components/sections/Projects.astro';
+import About from '../components/sections/About.astro';
+import Trust from '../components/sections/Trust.astro';
+import DevNotes from '../components/sections/DevNotes.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import { loadTranslations } from '../i18n/utils';
+import { defaultLocale } from '../i18n/config';
+
+const locale = defaultLocale;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title={tr['site.title'] ?? 'KoalaStuff — Small open-source tools for real annoyances'}
+  description={tr['site.description'] ?? 'Browser extensions, web tools, desktop utilities and experiments.'}
+  locale={locale}
+  canonicalPath="/"
+>
+  <Header locale={locale} translations={tr} currentPath="/" />
+
+  <main id="main-content">
+    <Hero locale={locale} translations={tr} />
+    <Projects locale={locale} translations={tr} />
+    <About translations={tr} />
+    <Trust translations={tr} />
+    <DevNotes translations={tr} />
+    <FAQ translations={tr} />
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>

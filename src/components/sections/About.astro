@@ -1,0 +1,19 @@
+---
+export interface Props {
+  translations: Record<string, string>;
+}
+const { translations: tr } = Astro.props;
+---
+
+<section class="section section--tight" id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="about-title">{tr['about.title'] ?? 'About KoalaStuff'}</h2>
+    </div>
+    <div class="about-block">
+      <p>{tr['about.body1'] ?? 'KoalaStuff is where I collect small tools, browser extensions and experiments that solve problems I run into myself.'}</p>
+      <p>{tr['about.body2'] ?? 'Built by a solo developer, one feature at a time.'}</p>
+      <p>{tr['about.body3'] ?? 'Some projects are polished, some are experimental, but all are built around real use cases.'}</p>
+    </div>
+  </div>
+</section>

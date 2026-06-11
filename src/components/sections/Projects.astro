@@ -1,0 +1,76 @@
+---
+import type { Locale } from '../../i18n/config';
+import { getFeaturedProjects, getHomepageProjects } from '../../data/projects';
+import FeaturedProjectBlock from './FeaturedProjectBlock.astro';
+import ProjectCard from '../ProjectCard.astro';
+
+export interface Props {
+  locale: Locale;
+  translations: Record<string, string>;
+}
+
+const { locale, translations: tr } = Astro.props;
+
+const featured = getFeaturedProjects();
+const homepageProjects = getHomepageProjects();
+const nonFeatured = homepageProjects.filter((p) => !p.featured);
+
+const categories = [
+  'browser-extension',
+  'web',
+  'desktop',
+  'experiment',
+] as const;
+
+const categoryIcons: Record<string, string> = {
+  'browser-extension': '🧩',
+  'web': '🌐',
+  'desktop': '🖥',
+  'experiment': '🧪',
+};
+---
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="projects-title">{tr['categories.title'] ?? 'Projects'}</h2>
+      <p class="section__subtitle">{tr['categories.intro'] ?? 'All projects are open-source and built around real use cases.'}</p>
+    </div>
+
+    <!-- Featured projects (large showcase) -->
+    <div aria-label="Featured projects">
+      {featured.map((project, i) => (
+        <FeaturedProjectBlock
+          project={project}
+          locale={locale}
+          translations={tr}
+          reversed={i % 2 !== 0}
+        />
+      ))}
+    </div>
+
+    <!-- Category sections for non-featured projects -->
+    {categories.map((cat) => {
+      const catProjects = nonFeatured.filter((p) => p.category === cat);
+      if (catProjects.length === 0) return null;
+      return (
+        <div style="margin-top: var(--space-16);">
+          <div class="category-header">
+            <h3 class="category-header__title">
+              <span aria-hidden="true">{categoryIcons[cat]}</span>
+              {tr[`categories.${cat}`] ?? cat}
+            </h3>
+            <p class="category-header__desc">
+              {tr[`categories.${cat}.desc`] ?? ''}
+            </p>
+          </div>
+          <div class="project-grid">
+            {catProjects.map((project) => (
+              <ProjectCard project={project} locale={locale} translations={tr} />
+            ))}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

@@ -1,0 +1,131 @@
+---
+import '../styles/global.css';
+import '../styles/components.css';
+import { locales, localeLangCodes, localeNames, getLocalePath, defaultLocale } from '../i18n/config';
+import type { Locale } from '../i18n/config';
+
+export interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalPath?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  locale,
+  canonicalPath = '/',
+  ogImage = '/assets/brand/og-preview.png',
+} = Astro.props;
+
+const siteUrl = 'https://koalastuff.net';
+const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
+const ogImageUrl = `${siteUrl}${ogImage}`;
+const langCode = localeLangCodes[locale];
+---
+
+<!doctype html>
+<html lang={langCode} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Timo (KoalaStuff)" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href={canonicalUrl} />
+    {locales.map((l) => (
+      <link
+        rel="alternate"
+        hreflang={localeLangCodes[l]}
+        href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de\/|fr\/|es\/|it\/|nl\/|pl\/|pt\/|tr\/|ja\/|ko\/|zh\/|uk\/)/, ''))}`}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${canonicalPath}`} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KoalaStuff" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={langCode.replace('-', '_')} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Font preloads (self-hosted Inter) -->
+    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- JSON-LD: WebSite + Person -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          "url": siteUrl,
+          "name": "KoalaStuff",
+          "description": "Small open-source tools for real annoyances.",
+          "inLanguage": "en",
+          "author": { "@id": `${siteUrl}/#person` }
+        },
+        {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          "name": "Timo",
+          "url": "https://github.com/Shik3i",
+          "sameAs": [
+            "https://github.com/Shik3i",
+            "https://dev.to/hungrykoala"
+          ]
+        }
+      ]
+    })} />
+
+    <!--
+      Anti-flash theme script (inline).
+      This is the ONLY inline script on the site.
+      The SHA-256 hash of this exact script must be added to the Caddy CSP.
+      See README.md for the computed hash value.
+      
+      Hash: sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw=
+      Add to Caddy CSP: script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='
+    -->
+    <script is:inline>
+      (function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var d=document.documentElement;if(t==='light'){d.dataset.theme='light'}else if(t==='dark'){d.dataset.theme='dark'}else if(window.matchMedia('(prefers-color-scheme: light)').matches){d.dataset.theme='light'}else{d.dataset.theme='dark'}})();
+    </script>
+  </head>
+  <body>
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
+
+    <slot />
+
+    <!-- Theme + UI script (Astro bundles this as a static asset) -->
+    <script>
+      import '../scripts/theme.ts';
+    </script>
+  </body>
+</html>

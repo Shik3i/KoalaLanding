@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { loadTranslations } from '../../../i18n/utils';
+
+const locale = 'de' as const;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title="Datenschutzerklärung — KoalaStuff"
+  description="Datenschutzerklärung für koalastuff.net — kein Tracking, keine Cookies, keine Drittanbieter-Skripte."
+  locale={locale}
+  canonicalPath="/de/datenschutz/"
+>
+  <Header locale={locale} translations={tr} currentPath="/de/datenschutz/" />
+
+  <main id="main-content">
+    <div class="container">
+      <article class="legal-content">
+        <h1>Datenschutzerklärung</h1>
+
+        <p>Stand: 10. Juni 2026</p>
+
+        <h2>1. Überblick</h2>
+        <p>
+          Diese Datenschutzerklärung gilt für die Website <strong>koalastuff.net</strong>. Die Website ist eine statische Seite ohne Backend, ohne Datenbank, ohne Analyse-Tools, ohne Tracking, ohne Cookies (außer freiwillige Speicherung der Theme-Einstellung) und ohne Drittanbieter-Skripte oder -Einbettungen.
+        </p>
+
+        <h2>2. Verantwortliche Stelle</h2>
+        <p>
+          Timo (KoalaDev)<br />
+          Deutschland<br />
+          E-Mail: admin@koalastuff.net
+        </p>
+
+        <h2>3. Welche Daten werden erhoben?</h2>
+        <p>Die Website selbst erhebt, speichert oder überträgt keine personenbezogenen Daten. Es gibt weder:</p>
+        <ul>
+          <li>Analyse- oder Tracking-Skripte</li>
+          <li>Cookies durch diese Website</li>
+          <li>Session-Identifier</li>
+          <li>Fingerprinting-Techniken</li>
+          <li>Drittanbieter-Einbettungen</li>
+          <li>Externe Schriften (alle Schriften sind selbst gehostet)</li>
+          <li>Externe Bilder oder CDN-Ressourcen</li>
+        </ul>
+
+        <h2>4. Lokaler Speicher (localStorage)</h2>
+        <p>
+          Diese Website kann Ihre Theme-Einstellung (dunkel oder hell) lokal in Ihrem Browser über <code>localStorage</code> speichern. Dieser Wert verlässt Ihr Gerät nicht und wird nicht für Tracking, Analysen oder andere Zwecke verwendet. Sie können ihn jederzeit durch Löschen des lokalen Speichers Ihres Browsers für diese Domain entfernen.
+        </p>
+
+        <h2>5. Serverprotokolle</h2>
+        <p>
+          Unser Webserver (Caddy) auf einem VPS erstellt standardmäßige Zugriffsprotokolle (z. B. IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs) zur Gewährleistung der Serverstabilität und Diagnose technischer Probleme. Diese Logs werden automatisch nach 7 Tagen gelöscht und nicht mit Personen verknüpft oder zur Nachverfolgung verwendet.
+        </p>
+
+        <h2>6. Externe Links</h2>
+        <p>
+          Die Website enthält Links zu externen Websites (GitHub, dev.to, Browser-Extension-Stores). Diese haben ihre eigenen Datenschutzrichtlinien. KoalaStuff ist nicht verantwortlich für die Datenschutzpraktiken dieser Seiten.
+        </p>
+
+        <h2>7. Ihre Rechte (DSGVO)</h2>
+        <p>
+          Sie haben das Recht auf Auskunft, Berichtigung oder Löschung Ihrer personenbezogenen Daten. Da wir keine Daten dauerhaft speichern, ist eine Zuordnung von IP-Adressen in temporären Logdateien zu bestimmten Personen technisch in der Regel unmöglich.
+        </p>
+        <p>
+          Sie haben außerdem das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren.
+        </p>
+
+        <h2>8. Kontakt</h2>
+        <p>
+          Bei datenschutzbezogenen Fragen: admin@koalastuff.net
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>

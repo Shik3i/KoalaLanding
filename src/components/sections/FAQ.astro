@@ -1,0 +1,62 @@
+---
+export interface Props {
+  translations: Record<string, string>;
+  compact?: boolean;
+}
+const { translations: tr, compact = false } = Astro.props;
+
+const questions = [
+  { q: 'faq.q1', a: 'faq.a1' },
+  { q: 'faq.q2', a: 'faq.a2' },
+  { q: 'faq.q3', a: 'faq.a3' },
+  { q: 'faq.q4', a: 'faq.a4' },
+  { q: 'faq.q5', a: 'faq.a5' },
+  { q: 'faq.q6', a: 'faq.a6' },
+  { q: 'faq.q7', a: 'faq.a7' },
+  { q: 'faq.q8', a: 'faq.a8' },
+];
+
+const displayed = compact ? questions.slice(0, 5) : questions;
+
+// JSON-LD for FAQPage (included only on full FAQ, not compact)
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": questions.map((item) => ({
+    "@type": "Question",
+    "name": tr[item.q] ?? item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": tr[item.a] ?? item.a,
+    },
+  })),
+};
+---
+
+<section class="section section--tight" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="faq-title">{tr['faq.title'] ?? 'FAQ'}</h2>
+    </div>
+
+    <div class="faq-list" role="list">
+      {displayed.map((item, i) => (
+        <details class="faq-item" role="listitem">
+          <summary>
+            {tr[item.q] ?? item.q}
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-item__body">
+            {tr[item.a] ?? item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  {!compact && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  )}
+</section>

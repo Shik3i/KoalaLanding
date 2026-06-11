@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { loadTranslations } from '../../../i18n/utils';
+
+const locale = 'de' as const;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title="Impressum — KoalaStuff"
+  description="Rechtliches Impressum für koalastuff.net."
+  locale={locale}
+  canonicalPath="/de/impressum/"
+>
+  <Header locale={locale} translations={tr} currentPath="/de/impressum/" />
+
+  <main id="main-content">
+    <div class="container">
+      <article class="legal-content">
+        <h1>Impressum / Rechtliche Informationen</h1>
+
+        <p>Diese Angaben erfolgen freiwillig zur Transparenz. Als rein privates, nicht-kommerzielles Hobbyprojekt unterliegt diese Website nicht der Impressumspflicht nach deutschem Recht (§ 5 DDG).</p>
+
+        <h2>Betreiber</h2>
+        <p>
+          Timo (KoalaDev) – Privatperson<br />
+          Deutschland
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+          E-Mail: admin@koalastuff.net<br />
+          Mastodon: <a href="https://mastodon.social/@koalastuff" rel="noopener noreferrer" target="_blank">@koalastuff</a>
+        </p>
+
+        <h2>Verantwortlich für den Inhalt</h2>
+        <p>
+          Timo (KoalaDev)<br />
+          Deutschland
+        </p>
+
+        <h2>Haftungsausschluss</h2>
+        <p>
+          Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Links zu externen Webseiten dienen lediglich der Information. Für die Inhalte verlinkter Seiten sind wir nicht verantwortlich.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>

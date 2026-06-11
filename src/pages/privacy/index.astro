@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { loadTranslations } from '../../i18n/utils';
+
+const locale = 'en' as const;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title="Privacy Policy — KoalaStuff"
+  description="Privacy policy for koalastuff.net — no tracking, no cookies, no third-party scripts."
+  locale={locale}
+  canonicalPath="/privacy/"
+>
+  <Header locale={locale} translations={tr} currentPath="/privacy/" />
+
+  <main id="main-content">
+    <div class="container">
+      <article class="legal-content">
+        <h1>Privacy Policy</h1>
+
+        <p>Last updated: June 10, 2026</p>
+
+        <h2>1. Overview</h2>
+        <p>
+          This privacy policy applies to the website <strong>koalastuff.net</strong> (the "Site"). The Site is a static website with no backend, no database, no server-side processing of personal data, no analytics, no tracking, no cookies (except voluntary theme persistence in local storage), and no third-party scripts or embeds.
+        </p>
+
+        <h2>2. Data Controller</h2>
+        <p>
+          Timo (KoalaDev)<br />
+          Germany<br />
+          Email: admin@koalastuff.net
+        </p>
+
+        <h2>3. What data is collected</h2>
+        <p>
+          The Site itself does not collect, store, or transmit any personal data. There are no:
+        </p>
+        <ul>
+          <li>Analytics or tracking scripts</li>
+          <li>Cookies set by this website</li>
+          <li>Session identifiers</li>
+          <li>Fingerprinting techniques</li>
+          <li>Third-party embeds</li>
+          <li>External fonts (all fonts are self-hosted)</li>
+          <li>External images or CDN resources</li>
+        </ul>
+
+        <h2>4. Local storage</h2>
+        <p>
+          This website may store your theme preference (dark or light) locally in your browser using <code>localStorage</code>. This value never leaves your device and is not used for tracking, analytics, or any other purpose. You can clear it at any time by clearing your browser's local storage for this domain.
+        </p>
+
+        <h2>5. Server logs</h2>
+        <p>
+          Our web server (Caddy) running on a VPS collects standard access logs (e.g. IP address, browser type, request time) to ensure server stability and diagnose technical issues. These logs are automatically deleted after 7 days and are not used for tracking or linked to individuals.
+        </p>
+
+        <h2>6. External links</h2>
+        <p>
+          The Site contains links to external websites (GitHub, dev.to, browser extension stores). These websites have their own privacy policies. KoalaStuff is not responsible for the privacy practices of those sites.
+        </p>
+
+        <h2>7. Children</h2>
+        <p>
+          The Site is not directed at children under the age of 16. No personal data of children is knowingly collected.
+        </p>
+
+        <h2>8. Your rights (GDPR)</h2>
+        <p>
+          You have the right to request access, rectification, or erasure of your personal data. Since we do not permanently store personal data, it is technically impossible to link IP addresses in temporary log files to individuals.
+        </p>
+
+        <h2>9. Contact</h2>
+        <p>
+          For privacy-related questions: admin@koalastuff.net
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>
