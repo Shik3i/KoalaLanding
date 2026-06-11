@@ -421,7 +421,8 @@
 .hero__content {
   position: relative;
   z-index: 1;
-  max-width: 50rem;
+  width: 100%;
+  max-width: clamp(50rem, 80vw, 72rem);
   margin-inline: auto;
 }
 
@@ -672,7 +673,7 @@
   overflow: hidden;
   margin-bottom: var(--space-12);
   margin-inline: auto;
-  max-width: 72rem;
+  width: 100%;
   transition: border-color var(--dur-base) var(--ease-out),
               box-shadow var(--dur-base) var(--ease-out);
   z-index: 1;
