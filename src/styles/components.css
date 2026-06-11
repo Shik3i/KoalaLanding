@@ -316,6 +316,12 @@
   align-items: center;
 }
 
+@media (min-width: 992px) {
+  .site-footer__links-group {
+    justify-content: flex-end;
+  }
+}
+
 .site-footer__links-group a {
   color: var(--c-text-muted);
   text-decoration: none;

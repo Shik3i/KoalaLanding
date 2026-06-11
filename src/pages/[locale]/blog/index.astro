@@ -40,7 +40,7 @@ const canonicalPath = getLocalePath(locale, 'blog');
 
       <div class="blog-grid">
         {sortedPosts.map(post => (
-          <a href={getLocalePath(locale, `blog/${post.slug}`)} class="blog-card card">
+          <a href={getLocalePath(locale, `blog/${post.id}`)} class="blog-card card">
             <h2 class="blog-card__title">{post.data.title}</h2>
             <div class="blog-card__meta">
               <time datetime={post.data.pubDate.toISOString()}>

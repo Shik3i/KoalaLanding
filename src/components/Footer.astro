@@ -47,12 +47,9 @@ try {
           <span>{tr['footer.madeBy'] ?? 'Made by'} <a href="https://github.com/Shik3i" rel="noopener noreferrer">Timo</a></span>
           <span class="sep" aria-hidden="true">·</span>
           <span>{tr['footer.rights'] ?? 'MIT License'}</span>
-          <span class="sep" aria-hidden="true">·</span>
-          <a href={privacyHref}>{tr['footer.privacy'] ?? 'Privacy'}</a>
-          <span class="sep" aria-hidden="true">·</span>
-          <a href={imprintHref}>{tr['footer.imprint'] ?? 'Imprint'}</a>
-          <span class="sep" aria-hidden="true">·</span>
-          <a href="https://ko-fi.com/A0A614YQ68" target="_blank" rel="noopener noreferrer">Support me on Ko-fi ☕</a>
+        </div>
+        <div class="site-footer__links-group site-footer__links-group--bottom">
+          <a href="https://ko-fi.com/koaladev" target="_blank" rel="noopener noreferrer">Ko-fi ☕</a>
           <span class="sep" aria-hidden="true">·</span>
           <span class="site-footer__version">
             <a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">
@@ -62,6 +59,10 @@ try {
               </svg>
             </a>
           </span>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href={privacyHref}>{tr['footer.privacy'] ?? 'Privacy'}</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href={imprintHref}>{tr['footer.imprint'] ?? 'Imprint'}</a>
         </div>
       </div>
     </div>
