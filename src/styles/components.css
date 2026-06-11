@@ -652,7 +652,7 @@
   display: inline-flex;
   gap: var(--space-3);
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .featured-project__title {
@@ -662,6 +662,7 @@
   line-height: 1.1;
   color: var(--c-text);
   margin-bottom: var(--space-4);
+  word-break: break-word;
 }
 
 .featured-project__claim {

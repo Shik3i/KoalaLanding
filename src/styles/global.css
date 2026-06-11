@@ -604,27 +604,35 @@ ul, ol { list-style: none; }
   }
 }
 
-@media (min-aspect-ratio: 32/9) {
+@media (min-width: 1920px) {
   :root {
-    --max-width: 110rem;
-    --max-width-text: 62rem;
+    --max-width: 96%;
+    --max-width-text: 72rem;
   }
 }
 
 /* --- Vertical View Transitions (Legal Pages as Modals) --- */
+html[data-transition-type="vertical-up"][data-astro-transition-fallback="old"] #main-content,
 html[data-transition-type="vertical-up"]::view-transition-old(main) {
   animation: scale-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
   z-index: 1;
 }
+html[data-transition-type="vertical-up"][data-astro-transition-fallback="new"] #main-content,
 html[data-transition-type="vertical-up"]::view-transition-new(main) {
   animation: slide-up-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
   z-index: 2;
 }
 
+html[data-transition-type="vertical-down"][data-astro-transition-fallback="old"] #main-content,
 html[data-transition-type="vertical-down"]::view-transition-old(main) {
   animation: slide-down-modal-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
   z-index: 2;
 }
+html[data-transition-type^="vertical-"]::view-transition-group(main) {
+  animation: none !important;
+}
+
+html[data-transition-type="vertical-down"][data-astro-transition-fallback="new"] #main-content,
 html[data-transition-type="vertical-down"]::view-transition-new(main) {
   animation: scale-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
   z-index: 1;
