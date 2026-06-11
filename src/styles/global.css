@@ -139,10 +139,22 @@ html {
   line-height: 1.6;
   color: var(--c-text);
   background-color: var(--c-bg);
+  /* Global premium dot-grid background */
+  background-image: radial-gradient(hsl(224, 15%, 16%) 1.2px, transparent 1.2px);
+  background-size: 32px 32px;
+  animation: gridShift 160s linear infinite;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+[data-theme='light'] html {
+  background-image: radial-gradient(hsl(220, 10%, 84%) 1.2px, transparent 1.2px);
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 32px 64px; }
 }
 
 body {

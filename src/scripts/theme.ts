@@ -90,21 +90,5 @@
         mobileBtn.setAttribute('aria-expanded', String(isOpen));
       });
     }
-
-    // Mouse-reactive background glow
-    const hero = document.querySelector('.hero') as HTMLElement | null;
-    if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let rafId: number;
-      document.addEventListener('mousemove', (e) => {
-        cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          const rect = hero.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          hero.style.setProperty('--mouse-x', `${x}%`);
-          hero.style.setProperty('--mouse-y', `${y}%`);
-        });
-      });
-    }
   });
 })();

@@ -342,46 +342,7 @@
   padding-block: var(--space-24);
   overflow: hidden;
   text-align: center;
-  /* Premium dot-grid background */
-  background-image: radial-gradient(hsl(224, 15%, 16%) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-[data-theme='light'] .hero {
-  background-image: radial-gradient(hsl(220, 10%, 86%) 1px, transparent 1px);
-}
-
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-}
-
-/* Mouse-reactive glow */
-.hero__glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--c-accent-glow), transparent 70%);
-  transform: translate(-50%, -50%);
-  left: var(--mouse-x);
-  top: var(--mouse-y);
-  pointer-events: none;
-  opacity: 0.8;
-  mix-blend-mode: screen;
-  transition: left 0.4s var(--ease-out), top 0.4s var(--ease-out);
-}
-[data-theme='light'] .hero__glow {
-  opacity: 0.3;
-  mix-blend-mode: multiply;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__glow { transition: none; }
+  z-index: 1;
 }
 
 .hero__content {
