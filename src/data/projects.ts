@@ -248,6 +248,31 @@ export const projects: Project[] = [
     assets: {},
   },
   {
+    id: 'koalasnap',
+    name: 'KoalaSnap',
+    category: 'web',
+    status: 'active',
+    featured: false,
+    listed: true,
+    homepage: true,
+    accentColor: 'hsl(25, 90%, 55%)',
+    lastUpdated: '2026-06',
+    shortDescription: {
+      en: 'A free chat mockup generator and social post simulator for WhatsApp, Discord, Telegram, and more. 100% privacy-friendly and client-side.',
+      de: 'Ein kostenloser Chat-Mockup-Generator und Social-Post-Simulator für WhatsApp, Discord, Telegram und mehr. 100% datenschutzfreundlich und clientseitig.',
+    },
+    longDescription: {
+      en: 'KoalaSnap is a free, open-source online utility designed to generate realistic mockup screenshots of various chat and social media platforms including WhatsApp, Discord, Telegram, Signal, iMessage, and X (Twitter). Modify contact names, statuses, bubbles, emojis, and avatars. All rendering is performed completely client-side in your local browser. No data is stored, tracked, or sent to any server.',
+      de: 'KoalaSnap ist ein kostenloses Open-Source-Online-Tool zur Erstellung realistischer Mockup-Screenshots von verschiedenen Chat- und Social-Media-Plattformen, darunter WhatsApp, Discord, Telegram, Signal, iMessage und X (Twitter). Ändern Sie Kontaktnamen, Status, Blasen, Emojis und Avatare. Das gesamte Rendering erfolgt vollständig clientseitig in Ihrem lokalen Browser. Es werden keine Daten gespeichert, verfolgt oder an einen Server gesendet.',
+    },
+    tags: ['Open Source', 'Web App', 'Design Tool', 'Privacy-first'],
+    links: {
+      website: 'https://snap.koalastuff.net',
+      github: 'https://github.com/Shik3i/KoalaSnap',
+    },
+    assets: {},
+  },
+  {
     id: 'koalanews',
     name: 'KoalaNews',
     category: 'web',
