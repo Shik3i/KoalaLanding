@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const locale = defaultLocale;
 ---
 
@@ -22,6 +22,8 @@ const locale = defaultLocale;
   canonicalPath={`/blog/${entry.id}`}
   pubDate={entry.data.pubDate}
   author={entry.data.author}
+  ogImage={`/og/${entry.id}.png`}
+  headings={headings}
 >
   <Content />
 </BlogLayout>
