@@ -184,14 +184,14 @@ html {
   z-index: -2;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.9;
-  filter: blur(80px);
+  opacity: 0.5;
+  filter: blur(110px);
 }
 
 @media (max-width: 768px) {
   .bg-glow-blobs {
-    filter: blur(40px);
-    opacity: 1;
+    filter: blur(60px);
+    opacity: 0.6;
   }
 }
 
@@ -204,11 +204,11 @@ html {
 
 [data-theme='light'] .blob {
   mix-blend-mode: multiply;
-  opacity: 0.6;
+  opacity: 0.3;
 }
 
 .blob-1 {
-  background: radial-gradient(circle, hsla(212, 100%, 60%, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, hsla(212, 100%, 60%, 0.08) 0%, transparent 70%);
   width: min(70vw, 700px);
   height: min(70vw, 700px);
   top: -15%;
@@ -217,7 +217,7 @@ html {
 }
 
 .blob-2 {
-  background: radial-gradient(circle, hsla(260, 80%, 60%, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, hsla(260, 80%, 60%, 0.05) 0%, transparent 70%);
   width: min(60vw, 600px);
   height: min(60vw, 600px);
   bottom: -10%;
@@ -226,7 +226,7 @@ html {
 }
 
 .blob-3 {
-  background: radial-gradient(circle, hsla(170, 85%, 50%, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, hsla(170, 85%, 50%, 0.035) 0%, transparent 70%);
   width: min(50vw, 500px);
   height: min(50vw, 500px);
   top: 35%;
