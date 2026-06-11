@@ -407,11 +407,11 @@
 
 @media (min-width: 1024px) {
   .hero {
-    min-height: calc(100dvh - 3.5rem);
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block: var(--space-12);
+    padding-block: var(--space-20);
   }
   .hero > .container {
     width: 100%;
@@ -472,7 +472,7 @@
   font-size: var(--text-lg);
   color: var(--c-text-muted);
   line-height: 1.7;
-  max-width: 42rem;
+  max-width: 60rem;
   margin-inline: auto;
   margin-bottom: var(--space-8);
 }
