@@ -19,10 +19,11 @@ const sortedProjects = [...projects].sort((a, b) => {
 });
 
 const categoryIcons: Record<string, string> = {
-  'desktop': '🖥',
-  'web': '🌐',
-  'extensions': '🧩',
+  'desktop': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>',
+  'web': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
+  'extensions': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.611c-.47.47-1.088.706-1.705.706s-1.233-.235-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.406 2.406 0 0 1 2 12c0-.638.25-1.278.706-1.704l1.568-1.568c.23-.23.338-.556.289-.878-.07-.493-.504-.84-.968-1.02a2.5 2.5 0 1 1 3.237-3.237c.18.464.527.894 1.02.967.322.049.648-.059.877-.289l1.568-1.568A2.406 2.406 0 0 1 12 2c.638 0 1.278.25 1.704.706l1.568 1.568c.23.23.556.338.878.289.493-.07.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"></path></svg>',
 };
+const defaultIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>';
 
 const jsonLdData = {
   "@context": "https://schema.org",
@@ -56,277 +57,219 @@ const jsonLdData = {
         </p>
       </div>
 
-
-
       <!-- Category Filter Tabs -->
-      <div class="project-filter-container" style="margin-bottom: var(--space-6);">
+      <div class="project-filter-container" style="margin-bottom: var(--space-8);">
         <nav class="project-filter" role="tablist" aria-label={tr['categories.title'] ?? 'Project categories'}>
           <button class="filter-btn active" role="tab" aria-selected="true" tabindex="0" aria-controls="projects-tracker-rows" data-category="all">{tr['categories.all'] ?? 'All'}</button>
           <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="desktop">
-            <span aria-hidden="true">🖥</span> {tr['categories.desktop'] ?? 'Desktop'}
+            <span aria-hidden="true" set:html={categoryIcons.desktop} style="display: flex;"></span> {tr['categories.desktop'] ?? 'Desktop'}
           </button>
           <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="web">
-            <span aria-hidden="true">🌐</span> {tr['categories.web'] ?? 'Web'}
+            <span aria-hidden="true" set:html={categoryIcons.web} style="display: flex;"></span> {tr['categories.web'] ?? 'Web'}
           </button>
           <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="projects-tracker-rows" data-category="extensions">
-            <span aria-hidden="true">🧩</span> {tr['categories.extensions'] ?? 'Extensions'}
+            <span aria-hidden="true" set:html={categoryIcons.extensions} style="display: flex;"></span> {tr['categories.extensions'] ?? 'Extensions'}
           </button>
         </nav>
       </div>
 
-      <!-- Tracker Table/Grid -->
-      <div class="projects-tracker">
-        <!-- Header -->
-        <div class="projects-tracker__header" aria-hidden="true">
-          <div class="col-project">Project</div>
-          <div class="col-category">Category</div>
-          <div class="col-status">Status</div>
-          <div class="col-updated">Last Updated</div>
-          <div class="col-links">Links</div>
-        </div>
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-tracker-rows">
+        {sortedProjects.map((project) => {
+          const statusLabel = tr[`status.${project.status}`] ?? project.status;
+          const statusClass = `status-dot--${project.status}`;
+          
+          return (
+            <div class={`project-card-v2 tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`} data-category={project.category}>
+              <div class="card-v2-header">
+                <div class="card-v2-icon" set:html={categoryIcons[project.category] || defaultIcon} />
+                <h3 class="card-v2-title">{project.name}</h3>
+                <div style="flex: 1"></div>
+                <span class={`status-pill status-pill--${project.status}`}>
+                  <span class={`status-dot ${statusClass}`} />
+                  {statusLabel}
+                </span>
+              </div>
+              
+              <div class="card-v2-body">
+                <p class="card-v2-desc">
+                  {project.shortDescription[locale] ?? project.shortDescription.en}
+                </p>
+              </div>
 
-        <!-- Rows -->
-        <div class="projects-tracker__rows" id="projects-tracker-rows">
-          {sortedProjects.map((project) => {
-            const statusLabel = tr[`status.${project.status}`] ?? project.status;
-            const statusClass = `status-dot--${project.status}`;
-            
-            return (
-              <div class={`tracker-row tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`} data-category={project.category}>
-                <!-- Project Column -->
-                <div class="col-project">
-                  <div class="tracker-row__title-wrap">
-                    <span class="tracker-row__icon-fallback">{categoryIcons[project.category] || '📦'}</span>
-                    <h3 class="tracker-row__title">{project.name}</h3>
-                  </div>
-                  <p class="tracker-row__desc">
-                    {project.shortDescription[locale] ?? project.shortDescription.en}
-                  </p>
+              <div class="card-v2-footer">
+                <div class="tracker-links-group">
+                  {project.links.website && project.status !== 'wip' && (
+                    <a href={project.links.website} class="tracker-link" title="Website" target="_blank" rel="noopener noreferrer">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                      <span>Web</span>
+                    </a>
+                  )}
+                  {project.links.github && (
+                    <a href={project.links.github} class="tracker-link" title="GitHub" target="_blank" rel="noopener noreferrer">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                      <span>Code</span>
+                    </a>
+                  )}
+                  {project.links.chrome && project.status !== 'wip' && (
+                    <a href={project.links.chrome} class="tracker-link" title="Chrome Store" data-link-platform="chrome" target="_blank" rel="noopener noreferrer">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+                        <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
+                      </svg>
+                      <span>Chrome</span>
+                    </a>
+                  )}
+                  {project.links.firefox && project.status !== 'wip' && (
+                    <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" data-link-platform="firefox" target="_blank" rel="noopener noreferrer">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+                        <path d="M8.824 7.287c.008 0 .004 0 0 0zm-2.8-1.4c.006 0 .003 0 0 0zm16.754 2.161c-.505-1.215-1.53-2.528-2.333-2.943.654 1.283 1.033 2.57 1.177 3.53l.002.02c-1.314-3.278-3.544-4.6-5.366-7.477-.091-.147-.184-.292-.273-.446a3.545 3.545 0 01-.13-.24 2.118 2.118 0 01-.172-.46.03.03 0 00-.027-.03.038.038 0 00-.021 0l-.006.001a.037.037 0 00-.01.005L15.624 0c-2.585 1.515-3.657 4.168-3.932 5.856a6.197 6.197 0 00-2.305.587.297.297 0 00-.147.37c.057.162.24.24.396.17a5.622 5.622 0 012.008-.523l.067-.005a5.847 5.847 0 011.957.222l.095.03a5.816 5.816 0 01.616.228c.08.036.16.073.238.112l.107.055a5.835 5.835 0 01.368.211 5.953 5.953 0 012.034 2.104c-.62-.437-1.733-.868-2.803-.681 4.183 2.09 3.06 9.292-2.737 9.02a5.164 5.164 0 01-1.513-.292 4.42 4.42 0 01-.538-.232c-1.42-.735-2.593-2.121-2.74-3.806 0 0 .537-2 3.845-2 .357 0 1.38-.998 1.398-1.287-.005-.095-2.029-.9-2.817-1.677-.422-.416-.622-.616-.8-.767a3.47 3.47 0 00-.301-.227 5.388 5.388 0 01-.032-2.842c-1.195.544-2.124 1.403-2.8 2.163h-.006c-.46-.584-.428-2.51-.402-2.913-.006-.025-.343.176-.389.206-.406.29-.787.616-1.136.974-.397.403-.76.839-1.085 1.303a9.816 9.816 0 00-1.562 3.52c-.003.013-.11.487-.19 1.073-.013.09-.026.181-.037.272a7.8 7.8 0 00-.069.667l-.002.034-.023.387-.001.06C.386 18.795 5.593 24 12.016 24c5.752 0 10.527-4.176 11.463-9.661.02-.149.035-.298.052-.448.232-1.994-.025-4.09-.753-5.844z"/>
+                      </svg>
+                      <span>Firefox</span>
+                    </a>
+                  )}
                 </div>
-
-                <!-- Category Column -->
-                <div class="col-category">
-                  <span class="tracker-row__mobile-label">Category:</span>
-                  <span class="category-tag">
-                    {categoryIcons[project.category]} {tr[`categories.${project.category}`] ?? project.category}
-                  </span>
-                </div>
-
-                <!-- Status Column -->
-                <div class="col-status">
-                  <span class="tracker-row__mobile-label">Status:</span>
-                  <span class={`status-pill status-pill--${project.status}`}>
-                    <span class={`status-dot ${statusClass}`} />
-                    {statusLabel}
-                  </span>
-                </div>
-
-                <!-- Last Updated Column -->
-                <div class="col-updated">
-                  <span class="tracker-row__mobile-label">Updated:</span>
-                  <span class="updated-date">
+                
+                <div class="card-v2-meta">
+                  <span class="github-last-updated" data-github-repo={project.links.github ? project.links.github.replace('https://github.com/', '') : ''}>
                     {project.lastUpdated ? project.lastUpdated : '—'}
                   </span>
                 </div>
-
-                <!-- Links Column -->
-                <div class="col-links">
-                  <span class="tracker-row__mobile-label">Links:</span>
-                  <div class="tracker-links-group">
-                    {project.links.website && project.status !== 'wip' && (
-                      <a href={project.links.website} class="tracker-link" title="Website" target="_blank" rel="noopener noreferrer">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <line x1="2" y1="12" x2="22" y2="12"></line>
-                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                        <span>Web</span>
-                      </a>
-                    )}
-                    {project.links.github && (
-                      <a href={project.links.github} class="tracker-link" title="GitHub" target="_blank" rel="noopener noreferrer">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        <span>Code</span>
-                      </a>
-                    )}
-                    {project.links.chrome && project.status !== 'wip' && (
-                      <a href={project.links.chrome} class="tracker-link" title="Chrome Store" data-link-platform="chrome" target="_blank" rel="noopener noreferrer">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
-                          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
-                        </svg>
-                        <span>Chrome</span>
-                      </a>
-                    )}
-                    {project.links.firefox && project.status !== 'wip' && (
-                      <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" data-link-platform="firefox" target="_blank" rel="noopener noreferrer">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
-                          <path d="M8.824 7.287c.008 0 .004 0 0 0zm-2.8-1.4c.006 0 .003 0 0 0zm16.754 2.161c-.505-1.215-1.53-2.528-2.333-2.943.654 1.283 1.033 2.57 1.177 3.53l.002.02c-1.314-3.278-3.544-4.6-5.366-7.477-.091-.147-.184-.292-.273-.446a3.545 3.545 0 01-.13-.24 2.118 2.118 0 01-.172-.46.03.03 0 00-.027-.03.038.038 0 00-.021 0l-.006.001a.037.037 0 00-.01.005L15.624 0c-2.585 1.515-3.657 4.168-3.932 5.856a6.197 6.197 0 00-2.305.587.297.297 0 00-.147.37c.057.162.24.24.396.17a5.622 5.622 0 012.008-.523l.067-.005a5.847 5.847 0 011.957.222l.095.03a5.816 5.816 0 01.616.228c.08.036.16.073.238.112l.107.055a5.835 5.835 0 01.368.211 5.953 5.953 0 012.034 2.104c-.62-.437-1.733-.868-2.803-.681 4.183 2.09 3.06 9.292-2.737 9.02a5.164 5.164 0 01-1.513-.292 4.42 4.42 0 01-.538-.232c-1.42-.735-2.593-2.121-2.74-3.806 0 0 .537-2 3.845-2 .357 0 1.38-.998 1.398-1.287-.005-.095-2.029-.9-2.817-1.677-.422-.416-.622-.616-.8-.767a3.47 3.47 0 00-.301-.227 5.388 5.388 0 01-.032-2.842c-1.195.544-2.124 1.403-2.8 2.163h-.006c-.46-.584-.428-2.51-.402-2.913-.006-.025-.343.176-.389.206-.406.29-.787.616-1.136.974-.397.403-.76.839-1.085 1.303a9.816 9.816 0 00-1.562 3.52c-.003.013-.11.487-.19 1.073-.013.09-.026.181-.037.272a7.8 7.8 0 00-.069.667l-.002.034-.023.387-.001.06C.386 18.795 5.593 24 12.016 24c5.752 0 10.527-4.176 11.463-9.661.02-.149.035-.298.052-.448.232-1.994-.025-4.09-.753-5.844z"/>
-                        </svg>
-                        <span>Firefox</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   </main>
+
+  <script>
+    async function fetchGithubDates() {
+      try {
+        const cacheKey = 'koalastuff_github_repos';
+        let data = null;
+        const cached = localStorage.getItem(cacheKey);
+        
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Date.now() - parsed.timestamp < 6 * 60 * 60 * 1000) {
+            data = parsed.data;
+          }
+        }
+
+        if (!data) {
+          const res = await fetch('https://api.github.com/users/Shik3i/repos?sort=updated&per_page=100');
+          if (!res.ok) return;
+          data = await res.json();
+          localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+        }
+
+        const repoDates = new Map();
+        data.forEach((repo: any) => {
+          repoDates.set(repo.full_name.toLowerCase(), new Date(repo.pushed_at || repo.updated_at));
+        });
+
+        document.querySelectorAll('.github-last-updated').forEach(el => {
+          const repoPath = el.getAttribute('data-github-repo');
+          if (!repoPath) return;
+          const date = repoDates.get(repoPath.toLowerCase());
+          if (date) {
+            const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
+            let text = '';
+            if (days === 0) text = 'Updated today';
+            else if (days === 1) text = 'Updated yesterday';
+            else if (days < 30) text = `Updated ${days}d ago`;
+            else if (days < 365) text = `Updated ${Math.floor(days/30)}mo ago`;
+            else text = `Updated ${Math.floor(days/365)}y ago`;
+            
+            el.innerHTML = `<span class="update-dot"></span>${text}`;
+            el.classList.add('has-fresh-data');
+          }
+        });
+      } catch (e) {
+        console.error('Failed to fetch github data', e);
+      }
+    }
+    document.addEventListener('astro:page-load', fetchGithubDates);
+  </script>
 
   <Footer locale={locale} translations={tr} />
 </BaseLayout>
 
 <style>
-  /* Tracker Table styling */
-  .projects-tracker {
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .project-card-v2 {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    background: var(--bg-glass);
+    background: hsla(var(--bg-card-raw), 0.3);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
     backdrop-filter: blur(12px);
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+    position: relative;
+    overflow: hidden;
   }
-
-  .projects-tracker__header {
-    display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr 1.2fr;
-    gap: var(--space-4);
-    padding: 0 var(--space-4) var(--space-3);
-    border-bottom: 1px solid var(--border-glass);
-    color: var(--c-text-muted);
-    font-weight: 600;
-    font-size: var(--fs-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .projects-tracker__rows {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .tracker-row {
-    display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr 1.2fr;
-    gap: var(--space-4);
-    align-items: center;
-    padding: var(--space-4);
-    background: hsla(var(--bg-card-raw), 0.3);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius-md);
-    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .tracker-row:hover {
-    transform: translateY(-1px);
+  .project-card-v2:hover {
+    transform: translateY(-4px);
     background: hsla(var(--bg-card-raw), 0.6);
     border-color: var(--row-accent);
+    box-shadow: 0 12px 32px hsla(224, 30%, 2%, 0.4), 0 0 0 1px var(--row-accent);
   }
 
-  /* Status-based Visual Distinctions */
-  .tracker-row--active {
-    border-left: 4px solid hsl(140, 70%, 45%);
-  }
-  .tracker-row--early {
-    border-left: 4px solid hsl(260, 70%, 60%);
-  }
-  .tracker-row--experimental {
-    border-left: 4px solid hsl(35, 90%, 50%);
-  }
-  .tracker-row--wip {
-    border-left: 4px solid hsl(25, 80%, 50%);
-  }
-  .tracker-row--archived {
-    border-left: 4px solid hsl(210, 10%, 60%);
-    opacity: 0.7;
-  }
-
-  .tracker-row__title-wrap {
+  .card-v2-header {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-1);
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
-  .tracker-row__icon-fallback {
-    font-size: var(--fs-md);
+  .card-v2-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: hsla(var(--bg-card-raw), 0.8);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    color: var(--row-accent);
   }
 
-  .tracker-row__title {
-    font-size: var(--fs-md);
+  .card-v2-title {
+    font-size: var(--fs-lg);
     font-weight: 700;
     color: var(--c-text-title);
     margin: 0;
   }
 
-  .tracker-row__desc {
+  .card-v2-body {
+    flex: 1;
+    margin-bottom: var(--space-6);
+  }
+
+  .card-v2-desc {
     font-size: var(--fs-sm);
     color: var(--c-text-muted);
+    line-height: 1.6;
     margin: 0;
-    line-height: 1.5;
   }
 
-  .category-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    font-size: var(--fs-sm);
-    color: var(--c-text-muted);
-  }
-
-  /* Status Pill */
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-1) var(--space-3);
-    border-radius: 9999px;
-    font-size: var(--fs-xs);
-    font-weight: 600;
-  }
-
-  .status-pill--active {
-    background: hsla(140, 70%, 45%, 0.1);
-    color: hsl(140, 70%, 75%);
-  }
-  .status-pill--early {
-    background: hsla(260, 70%, 60%, 0.15);
-    color: hsl(260, 70%, 80%);
-  }
-  .status-pill--experimental {
-    background: hsla(35, 90%, 50%, 0.1);
-    color: hsl(35, 90%, 70%);
-  }
-  .status-pill--wip {
-    background: hsla(25, 80%, 50%, 0.1);
-    color: hsl(25, 80%, 70%);
-  }
-  .status-pill--archived {
-    background: hsla(210, 10%, 60%, 0.1);
-    color: hsl(210, 10%, 75%);
-  }
-
-  .status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-  }
-
-  .status-dot--active { background-color: hsl(140, 70%, 50%); }
-  .status-dot--early { background-color: hsl(260, 70%, 65%); }
-  .status-dot--experimental { background-color: hsl(35, 90%, 55%); }
-  .status-dot--wip { background-color: hsl(25, 80%, 55%); }
-  .status-dot--archived { background-color: hsl(210, 10%, 65%); }
-
-  .updated-date {
-    font-size: var(--fs-sm);
-    color: var(--c-text-muted);
-    font-family: monospace;
+  .card-v2-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-glass);
   }
 
   .tracker-links-group {
@@ -356,49 +299,97 @@ const jsonLdData = {
     background: hsla(var(--bg-card-raw), 0.8);
   }
 
-  .tracker-row__mobile-label {
-    display: none;
+  .card-v2-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--fs-xs);
+    color: var(--c-text-faint);
+    font-family: monospace;
   }
 
-  /* Responsive styling */
-  @media (max-width: 992px) {
-    .projects-tracker__header {
-      display: none;
-    }
+  .github-last-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1-5);
+  }
 
-    .tracker-row {
-      grid-template-columns: 1fr;
-      gap: var(--space-3);
-      padding: var(--space-5);
-      align-items: flex-start;
-    }
+  .update-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--row-accent);
+    box-shadow: 0 0 8px var(--row-accent);
+    animation: pulse-dot 2s infinite ease-in-out;
+  }
 
-    .tracker-row__mobile-label {
-      display: inline;
-      font-weight: 600;
-      color: var(--c-text-muted);
-      margin-right: var(--space-2);
-      font-size: var(--fs-sm);
-      min-width: 100px;
-    }
+  @keyframes pulse-dot {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+  }
 
-    .col-project, .col-category, .col-status, .col-updated, .col-links {
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
+  /* Status Pill */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1-5);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
 
-    .col-project {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .status-pill--active {
+    background: hsla(140, 70%, 45%, 0.1);
+    color: hsl(140, 70%, 75%);
+  }
+  .status-pill--early {
+    background: hsla(260, 70%, 60%, 0.15);
+    color: hsl(260, 70%, 80%);
+  }
+  .status-pill--experimental {
+    background: hsla(35, 90%, 50%, 0.1);
+    color: hsl(35, 90%, 70%);
+  }
+  .status-pill--wip {
+    background: hsla(25, 80%, 50%, 0.1);
+    color: hsl(25, 80%, 70%);
+  }
+  .status-pill--archived {
+    background: hsla(210, 10%, 60%, 0.1);
+    color: hsl(210, 10%, 75%);
+  }
 
-    .tracker-row__title-wrap {
-      width: 100%;
-    }
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
 
-    .tracker-links-group {
-      margin-top: var(--space-1);
+  .status-dot--active { background-color: hsl(140, 70%, 50%); }
+  .status-dot--early { background-color: hsl(260, 70%, 65%); }
+  .status-dot--experimental { background-color: hsl(35, 90%, 55%); }
+  .status-dot--wip { background-color: hsl(25, 80%, 55%); }
+  .status-dot--archived { background-color: hsl(210, 10%, 65%); }
+
+  @supports (animation-timeline: view()) {
+    .project-card-v2 {
+      animation: fade-slide linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 25%;
+    }
+  }
+  @keyframes fade-slide {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 </style>

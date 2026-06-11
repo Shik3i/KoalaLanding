@@ -169,6 +169,13 @@ html {
   filter: blur(80px);
 }
 
+@media (max-width: 768px) {
+  .bg-glow-blobs {
+    filter: blur(40px);
+    opacity: 1;
+  }
+}
+
 .blob {
   position: absolute;
   border-radius: 40% 60% 70% 30% / 45% 45% 55% 55%;
