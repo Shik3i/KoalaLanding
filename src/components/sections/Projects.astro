@@ -13,7 +13,7 @@ const { locale, translations: tr } = Astro.props;
 
 const featured = getFeaturedProjects();
 const homepageProjects = getHomepageProjects();
-const nonFeatured = homepageProjects.filter((p) => !p.featured);
+const gridProjects = homepageProjects;
 
 const categories = [
   'desktop',
@@ -63,7 +63,7 @@ const categoryIcons: Record<string, string> = {
           {tr['categories.all'] ?? 'All'}
         </button>
         {categories.map((cat) => {
-          const catProjects = nonFeatured.filter((p) => p.category === cat);
+          const catProjects = gridProjects.filter((p) => p.category === cat);
           if (catProjects.length === 0) return null;
           return (
             <button
@@ -106,7 +106,7 @@ const categoryIcons: Record<string, string> = {
 
     <!-- Unified projects grid -->
     <div class="project-grid" id="homepage-project-grid">
-      {nonFeatured.map((project) => (
+      {gridProjects.map((project) => (
         <div class="project-grid-item" data-category={project.category} data-experimental={project.status !== 'active' ? 'true' : 'false'}>
           <ProjectCard project={project} locale={locale} translations={tr} />
         </div>

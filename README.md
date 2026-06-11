@@ -1,22 +1,32 @@
-# KoalaStuff Landing Page
+<div align="center">
+  <img src="./src/assets/brand/koalastuff-logo-128.png" alt="KoalaStuff Logo" width="128" />
+  <h1>KoalaStuff Landing Page</h1>
+  <p>The official landing page for <strong><a href="https://koalastuff.net">koalastuff.net</a></strong> — a highly curated, premium static hub introducing all KoalaStuff projects, browser utilities, and open-source applications.</p>
 
-The official landing page for **[koalastuff.net](https://koalastuff.net)** — a highly curated, premium static hub introducing all KoalaStuff projects, browser utilities, and open-source applications.
+  <p>
+    <a href="https://astro.build"><img src="https://img.shields.io/badge/Built%20with-Astro-ff5a03?style=for-the-badge&logo=astro&logoColor=white" alt="Built with Astro" /></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License MIT" /></a>
+    <img src="https://img.shields.io/badge/Tracking-Zero-success?style=for-the-badge" alt="Zero Tracking" />
+  </p>
+</div>
 
 > [!NOTE]
 > This site is engineered to be 100% static, fast, private, and fully compliant with strict Content Security Policies (CSP). It serves as the single source of truth for the KoalaStuff software universe.
 
 ---
 
-## 🚀 Technology Stack
+## 🚀 Technology Stack & Features
 
 The project is built on modern web APIs and best practices:
 
 *   **Framework**: [Astro v6](https://astro.build) configured in strict static mode (`output: 'static'`) with the new Content Layer API and `glob` loader.
-*   **Routing**: Native SPA-like navigation using Astro's `<ClientRouter />` (View Transitions) for instant page loads.
+*   **Routing**: Native SPA-like navigation using Astro's `<ClientRouter />` (View Transitions) with smooth slide animations.
+*   **Internationalization (i18n)**: Fully translated into 13 languages (`en`, `de`, `fr`, `es`, `it`, `nl`, `pl`, `pt`, `tr`, `ja`, `ko`, `zh`, `uk`).
 *   **Language**: Strict TypeScript with strict null checks and no `any` implicit types.
 *   **Styling**: Vanilla CSS utilizing modern HSL color tokens, CSS Grid, Flexbox, and Container Queries.
 *   **Performance**: Optimized responsive image pipeline, font preloads, and zero production runtime Node.js requirements.
-*   **Self-Hosted Assets**: Self-hosted Inter font variants, zero third-party CDNs, and zero tracking scripts/cookies.
+*   **Privacy & Social**: Self-hosted Inter font variants, zero third-party CDNs, zero tracking scripts/cookies. Verified Mastodon `rel="me"` integration.
 
 ---
 
@@ -34,7 +44,7 @@ The background consists of three floating glow blobs that dynamically rotate, tr
 ### 2. Interaction Design
 *   **MacOS App Mockups**: Featured projects are presented in simulated macOS window panels with interactive glassmorphism (`backdrop-filter`).
 *   **Mouse-Reactive spotlights**: Panels and cards feature dynamic, mouse-tracking radial gradients on pointer hover (de-activated on mobile touch devices via media queries to preserve INP).
-*   **Keyboard-accessible Roving Tab Navigation**: Interactive tab-based filters use custom roving keyboard index listeners for accessible screen-reader navigation.
+*   **Accessibility**: Keyboard-accessible Roving Tab Navigation, proper ARIA labels, and logical focus management.
 
 ---
 
@@ -63,6 +73,7 @@ Projects are dynamically classified into exactly three categories, mapped in `sr
 > Projects marked with `status: 'wip'` represent active, unreleased software. To prevent users from installing unfinished software:
 > 1. Download and live website links (`links.website`, `links.chrome`, and `links.firefox`) are automatically hidden from the UI (featured cards, grid cards, and tracker list).
 > 2. Only the GitHub repository link (if available) is displayed to invite contributions.
+> 3. Users can dynamically toggle these WIP projects directly in the UI.
 
 ### Client-Side Browser Prioritizing
 

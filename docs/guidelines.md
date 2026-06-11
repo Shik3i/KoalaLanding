@@ -30,6 +30,7 @@ The site strictly uses exactly three categories:
 ### 3. Work-In-Progress (WIP) Restrictions
 - For active development projects that aren't ready for distribution, set `status: 'wip'`.
 - Setting `status: 'wip'` will instruct the templates to filter out website and extension download links (`website`, `chrome`, `firefox`). Only code repositories are displayed.
+- A frontend toggle switch allows users to selectively show or hide these WIP and experimental projects directly from the UI.
 
 ### 4. Client Browser Link Optimization
 - Add `data-link-platform="chrome"` and `data-link-platform="firefox"` attributes on extension download links.
@@ -53,4 +54,4 @@ Ensure that:
 1. All 30 routes compile cleanly.
 2. Raster images are generated as AVIF/WebP in the build cache.
 3. No console type check errors exist.
-4. Outbound links preserve correct localized base paths (e.g., `/de/projects` vs `/projects`).
+4. Outbound links preserve correct localized base paths (e.g., `/de/projects`, `/de/blog` vs `/projects`, `/blog`).

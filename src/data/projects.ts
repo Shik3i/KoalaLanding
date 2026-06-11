@@ -98,7 +98,7 @@ export const projects: Project[] = [
     id: 'koalaclicker',
     name: 'KoalaClicker',
     category: 'extensions',
-    status: 'active',
+    status: 'wip',
     featured: false,
     listed: true,
     homepage: true,

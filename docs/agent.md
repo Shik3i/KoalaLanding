@@ -40,4 +40,5 @@ To ensure the landing page remains secure and fast, it is built to support a str
 - `/src/assets/`: Contains project logos, icons, mascots, and fonts.
 - `/src/data/projects.ts`: The central database containing project metadata, release dates, and links.
 - `/src/i18n/`: Hand-crafted translation modules for 13 locales.
-- `/src/pages/`: Page routing templates, including the dedicated `/projects/` tracker log.
+- `/src/pages/`: Page routing templates, including the dedicated `/projects/` tracker log and the `/blog/` MDX overview.
+- `/src/content/blog/`: MDX files for blog posts, automatically synced via Astro's Content Collections.
