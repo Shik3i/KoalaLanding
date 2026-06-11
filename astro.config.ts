@@ -6,6 +6,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   output: 'static',
+  prefetch: true,
   site: 'https://koalastuff.net',
   vite: {
     build: {
