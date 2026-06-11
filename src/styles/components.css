@@ -761,7 +761,6 @@
   display: inline-flex;
   gap: var(--space-3);
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .featured-project__title {
