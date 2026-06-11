@@ -170,6 +170,15 @@ const langCode = localeLangCodes[locale];
         }
       });
 
+      // CRITICAL: Astro removes custom attributes from <html> during the DOM swap
+      // because the new server-rendered HTML doesn't have them. We must copy them!
+      document.addEventListener('astro:before-swap', (event) => {
+        const type = document.documentElement.getAttribute('data-transition-type');
+        if (type) {
+          event.newDocument.documentElement.setAttribute('data-transition-type', type);
+        }
+      });
+
       document.addEventListener('astro:page-load', () => {
         if (pageObserver) pageObserver.disconnect();
         pageObserver = new IntersectionObserver((entries) => {
