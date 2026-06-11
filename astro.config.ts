@@ -1,9 +1,15 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import compressor from 'astro-compressor';
 
 export default defineConfig({
   output: 'static',
   site: 'https://koalastuff.net',
+  vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
+  },
   integrations: [
     sitemap({
       i18n: {
@@ -24,6 +30,10 @@ export default defineConfig({
           uk: 'uk',
         },
       },
+    }),
+    compressor({
+      gzip: true,
+      brotli: true,
     }),
   ],
   i18n: {

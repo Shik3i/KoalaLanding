@@ -51,7 +51,7 @@
   --c-accent-glow: hsl(218, 85%, 62%, 0.15);
 
   /* Typography */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
 
   /* Font sizes — fluid, clamped */

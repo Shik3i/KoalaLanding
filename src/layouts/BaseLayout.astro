@@ -104,18 +104,8 @@ const langCode = localeLangCodes[locale];
       ]
     })} />
 
-    <!--
-      Anti-flash theme script (inline).
-      This is the ONLY inline script on the site.
-      The SHA-256 hash of this exact script must be added to the Caddy CSP.
-      See README.md for the computed hash value.
-      
-      Hash: sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw=
-      Add to Caddy CSP: script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='
-    -->
-    <script is:inline>
-      (function(){var t=null;try{t=localStorage.getItem('koala-theme')}catch(e){}var d=document.documentElement;if(t==='light'){d.dataset.theme='light'}else if(t==='dark'){d.dataset.theme='dark'}else if(window.matchMedia('(prefers-color-scheme: light)').matches){d.dataset.theme='light'}else{d.dataset.theme='dark'}})();
-    </script>
+    <!-- Anti-flash theme script (loaded blocking from 'self' to prevent flash before render) -->
+    <script is:inline src="/anti-flash.js"></script>
   </head>
   <body>
     <!-- Skip link for keyboard users -->

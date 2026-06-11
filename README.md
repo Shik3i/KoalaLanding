@@ -59,7 +59,11 @@ npm run build
 koalastuff.net {
     root * /srv/koalastuff.net/dist
     encode zstd gzip
-    file_server
+    
+    file_server {
+        # Serve precompressed Brotli (.br) and Gzip (.gz) files compiled at build time
+        precompressed br gzip
+    }
 
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -69,40 +73,17 @@ koalastuff.net {
         Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), usb=(), web-share=(), xr-spatial-tracking=()"
         Cross-Origin-Opener-Policy "same-origin"
         Cross-Origin-Resource-Policy "same-origin"
-        Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests"
+        # Zero inline scripts are used on this site! Fully compatible with strict script-src 'self'
+        Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests"
     }
 }
 ```
 
-### CSP and the Anti-Flash Inline Script
+### Precompression & HTML Minification
 
-The site uses a single tiny inline script in `<head>` to prevent a flash-of-wrong-theme before JavaScript loads. This is the **only** inline script on the site.
+This project uses `astro-compressor` to automatically minify and pre-compress static assets (HTML, CSS, JS, SVG) into **Brotli (`.br`)** and **Gzip (`.gz`)** files during `npm run build`.
 
-To use a strict `script-src 'self'` CSP, you must add the SHA-256 hash of this script to the Caddy config.
-
-The anti-flash script hash is:
-
-```
-sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw=
-```
-
-Use in the Caddy CSP: `script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='`
-
-If you ever change the inline script in `src/layouts/BaseLayout.astro`, recompute the hash:
-
-```powershell
-# PowerShell:
-$script = "(function()...your script...)()"
-$bytes = [System.Text.Encoding]::UTF8.GetBytes($script)
-$sha256 = [System.Security.Cryptography.SHA256]::Create()
-$b64 = [Convert]::ToBase64String($sha256.ComputeHash($bytes))
-echo "sha256-$b64"
-```
-
-```bash
-# Linux/macOS:
-echo -n '(function(){...})();' | openssl dgst -sha256 -binary | base64
-```
+By configuring Caddy's `file_server` with the `precompressed br gzip` directive, the web server directly streams these pre-built binaries, completely bypassing on-the-fly compression CPU overhead.
 
 ---
 
