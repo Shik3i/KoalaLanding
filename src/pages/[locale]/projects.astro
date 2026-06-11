@@ -52,6 +52,25 @@ const categoryIcons: Record<string, string> = {
         </p>
       </div>
 
+      <!-- Category Filter Tabs -->
+      <div class="project-filter-container" style="margin-bottom: var(--space-6);">
+        <nav class="project-filter" aria-label={tr['categories.title'] ?? 'Project categories'}>
+          <button class="filter-btn active" data-category="all">{tr['categories.all'] ?? 'All'}</button>
+          <button class="filter-btn" data-category="browser-extension">
+            <span aria-hidden="true">🧩</span> {tr['categories.browser-extension'] ?? 'Extensions'}
+          </button>
+          <button class="filter-btn" data-category="web">
+            <span aria-hidden="true">🌐</span> {tr['categories.web'] ?? 'Web'}
+          </button>
+          <button class="filter-btn" data-category="desktop">
+            <span aria-hidden="true">🖥</span> {tr['categories.desktop'] ?? 'Desktop'}
+          </button>
+          <button class="filter-btn" data-category="experiment">
+            <span aria-hidden="true">🧪</span> {tr['categories.experiment'] ?? 'Experiments'}
+          </button>
+        </nav>
+      </div>
+
       <!-- Tracker Table/Grid -->
       <div class="projects-tracker">
         <!-- Header -->
@@ -70,7 +89,7 @@ const categoryIcons: Record<string, string> = {
             const statusClass = `status-dot--${project.status}`;
             
             return (
-              <div class={`tracker-row tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`}>
+              <div class={`tracker-row tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`} data-category={project.category}>
                 <!-- Project Column -->
                 <div class="col-project">
                   <div class="tracker-row__title-wrap">

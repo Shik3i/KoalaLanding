@@ -49,28 +49,46 @@ const categoryIcons: Record<string, string> = {
       ))}
     </div>
 
-    <!-- Category sections for non-featured projects -->
-    {categories.map((cat) => {
-      const catProjects = nonFeatured.filter((p) => p.category === cat);
-      if (catProjects.length === 0) return null;
-      return (
-        <div style="margin-top: var(--space-16);">
-          <div class="category-header">
-            <h3 class="category-header__title">
+    <!-- Category Filter Tabs -->
+    <div class="project-filter-container">
+      <nav class="project-filter" aria-label={tr['categories.title'] ?? 'Project categories'}>
+        <button
+          class="filter-btn active"
+          data-category="all"
+          data-desc={tr['categories.all.desc'] ?? 'All open-source tools and utilities built by KoalaStuff.'}
+        >
+          {tr['categories.all'] ?? 'All'}
+        </button>
+        {categories.map((cat) => {
+          const catProjects = nonFeatured.filter((p) => p.category === cat);
+          if (catProjects.length === 0) return null;
+          return (
+            <button
+              class="filter-btn"
+              data-category={cat}
+              data-desc={tr[`categories.${cat}.desc`] ?? ''}
+            >
               <span aria-hidden="true">{categoryIcons[cat]}</span>
               {tr[`categories.${cat}`] ?? cat}
-            </h3>
-            <p class="category-header__desc">
-              {tr[`categories.${cat}.desc`] ?? ''}
-            </p>
-          </div>
-          <div class="project-grid">
-            {catProjects.map((project) => (
-              <ProjectCard project={project} locale={locale} translations={tr} />
-            ))}
-          </div>
+            </button>
+          );
+        })}
+      </nav>
+      
+      <div class="category-header">
+        <p class="category-header__desc">
+          {tr['categories.all.desc'] ?? 'All open-source tools and utilities built by KoalaStuff.'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Unified projects grid -->
+    <div class="project-grid">
+      {nonFeatured.map((project) => (
+        <div class="project-grid-item" data-category={project.category}>
+          <ProjectCard project={project} locale={locale} translations={tr} />
         </div>
-      );
-    })}
+      ))}
+    </div>
   </div>
 </section>

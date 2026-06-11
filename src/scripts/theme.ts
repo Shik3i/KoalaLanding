@@ -90,5 +90,71 @@
         mobileBtn.setAttribute('aria-expanded', String(isOpen));
       });
     }
+
+    // Dynamic Hover Coordinates for Radial Glow Effect
+    const trackGlow = (e: MouseEvent, card: HTMLElement) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    const attachGlowListeners = () => {
+      document.querySelectorAll('.project-card, .featured-project, .tracker-row').forEach((card) => {
+        card.addEventListener('mousemove', (e) => trackGlow(e as MouseEvent, card as HTMLElement));
+      });
+    };
+    attachGlowListeners();
+
+    // Interactive Project Category Filter tabs
+    const filterContainer = document.querySelector('.project-filter');
+    const gridItems = document.querySelectorAll('.project-grid-item, .tracker-row');
+    const activeDesc = document.querySelector('.category-header__desc');
+
+    if (filterContainer) {
+      const buttons = filterContainer.querySelectorAll('.filter-btn');
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          buttons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.getAttribute('data-category') || 'all';
+
+          // Update active category description if element exists
+          const descText = btn.getAttribute('data-desc') || '';
+          if (activeDesc) {
+            activeDesc.textContent = descText;
+          }
+
+          gridItems.forEach((item) => {
+            const itemCat = item.getAttribute('data-category');
+            if (category === 'all' || itemCat === category) {
+              const htmlItem = item as HTMLElement;
+              htmlItem.style.display = '';
+              htmlItem.style.opacity = '0';
+              htmlItem.style.transform = 'scale(0.98)';
+              // Trigger reflow for transition
+              void htmlItem.offsetHeight;
+              htmlItem.style.transition = 'opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out)';
+              htmlItem.style.opacity = '1';
+              htmlItem.style.transform = 'scale(1)';
+            } else {
+              const htmlItem = item as HTMLElement;
+              htmlItem.style.opacity = '0';
+              htmlItem.style.transform = 'scale(0.98)';
+              htmlItem.style.transition = 'opacity var(--dur-fast) var(--ease-in), transform var(--dur-fast) var(--ease-in)';
+              
+              // Hide after transition
+              setTimeout(() => {
+                if (!btn.classList.contains('active') || (category !== 'all' && itemCat !== category)) {
+                  htmlItem.style.display = 'none';
+                }
+              }, 150);
+            }
+          });
+        });
+      });
+    }
   });
 })();
