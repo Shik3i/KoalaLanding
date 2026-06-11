@@ -46,7 +46,7 @@ const langCode = localeLangCodes[locale];
       <link
         rel="alternate"
         hreflang={localeLangCodes[l]}
-        href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de\/|fr\/|es\/|it\/|nl\/|pl\/|pt\/|tr\/|ja\/|ko\/|zh\/|uk\/)/, ''))}`}
+        href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''))}`}
       />
     ))}
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}${canonicalPath}`} />

@@ -39,6 +39,30 @@ export const localeLangCodes: Record<Locale, string> = {
 };
 
 export function getLocalePath(locale: Locale, path: string = ''): string {
+  // Normalize the input path to strip leading/trailing slashes for route matching
+  const cleanPath = path.replace(/^\/+/, '').replace(/\/+$/, '');
+
+  // Identify if the page is a legal/special page
+  const isPrivacy = cleanPath === 'privacy' || cleanPath === 'de/datenschutz' || cleanPath === 'datenschutz';
+  const isImprint = cleanPath === 'imprint' || cleanPath === 'de/impressum' || cleanPath === 'impressum';
+
+  if (isPrivacy) {
+    if (locale === 'de') {
+      return '/de/datenschutz/';
+    } else {
+      return '/privacy/'; // No localized prefix for other languages (e.g. /fr/privacy doesn't exist)
+    }
+  }
+
+  if (isImprint) {
+    if (locale === 'de') {
+      return '/de/impressum/';
+    } else {
+      return '/imprint/'; // No localized prefix for other languages
+    }
+  }
+
+  // Default routing for normal pages
   const base = locale === defaultLocale ? '' : `/${locale}`;
   return `${base}/${path}`.replace(/\/+/g, '/').replace(/\/$/, '') || '/';
 }
