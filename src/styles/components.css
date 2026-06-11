@@ -1008,3 +1008,28 @@
   border-color: hsl(40, 80%, 70%);
   color: hsl(40, 60%, 30%);
 }
+
+/* ---- BROWSER DETECT LINK HIGHLIGHTING ---- */
+.link-highlighted {
+  color: var(--c-accent) !important;
+  border-color: var(--c-accent) !important;
+  font-weight: 600 !important;
+}
+.btn.link-highlighted {
+  background: hsl(from var(--c-accent) h s l / 0.12) !important;
+  border: 1px solid var(--c-accent) !important;
+  box-shadow: 0 0 16px hsl(from var(--c-accent) h s l / 0.25) !important;
+}
+.link-subtle {
+  opacity: 0.55 !important;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+.btn.link-subtle {
+  opacity: 0.45 !important;
+  border-color: transparent !important;
+}
+.link-subtle:hover {
+  opacity: 0.8 !important;
+  transform: scale(1);
+}

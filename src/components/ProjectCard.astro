@@ -92,12 +92,12 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
         </a>
       )}
       {project.links.chrome && project.status !== 'wip' && (
-        <a href={project.links.chrome} class="link-icon" rel="noopener noreferrer">
+        <a href={project.links.chrome} class="link-icon" data-link-platform="chrome" rel="noopener noreferrer">
           Chrome
         </a>
       )}
       {project.links.firefox && project.status !== 'wip' && (
-        <a href={project.links.firefox} class="link-icon" rel="noopener noreferrer">
+        <a href={project.links.firefox} class="link-icon" data-link-platform="firefox" rel="noopener noreferrer">
           Firefox
         </a>
       )}

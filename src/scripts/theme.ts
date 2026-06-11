@@ -197,5 +197,38 @@
         }
       });
     }
+
+    // Browser client extension link optimization
+    const detectBrowserAndOptimizeLinks = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isFirefox = userAgent.includes('firefox');
+      const isChrome = userAgent.includes('chrome') || userAgent.includes('chromium');
+
+      if (!isFirefox && !isChrome) return;
+
+      const linkGroups = document.querySelectorAll(
+        '.featured-project__links, .project-card__links, .tracker-links-group'
+      );
+
+      linkGroups.forEach((group) => {
+        const chromeLink = group.querySelector('[data-link-platform="chrome"]') as HTMLElement | null;
+        const firefoxLink = group.querySelector('[data-link-platform="firefox"]') as HTMLElement | null;
+
+        if (chromeLink && firefoxLink) {
+          if (isFirefox) {
+            firefoxLink.classList.add('link-highlighted');
+            chromeLink.classList.add('link-subtle');
+            // Put Firefox before Chrome
+            chromeLink.parentNode?.insertBefore(firefoxLink, chromeLink);
+          } else if (isChrome) {
+            chromeLink.classList.add('link-highlighted');
+            firefoxLink.classList.add('link-subtle');
+            // Put Chrome before Firefox
+            firefoxLink.parentNode?.insertBefore(chromeLink, firefoxLink);
+          }
+        }
+      });
+    };
+    detectBrowserAndOptimizeLinks();
   });
 })();

@@ -2,7 +2,10 @@
 
 This document outlines the architectural rules, coding standards, and guidelines for maintaining the KoalaStuff Landing Page.
 
-## Technology Stack
+---
+
+## 🛠️ Technology Stack
+
 - **Astro v6**: Set up in strict static HTML generation mode.
 - **TypeScript**: Strict configurations, with `noImplicitAny` and strict null checking enabled.
 - **Vanilla CSS**: Kept framework-free (no TailwindCSS/Bootstrap). Layouts use CSS Grid, Flexbox, and HSL custom property mappings.
@@ -10,21 +13,38 @@ This document outlines the architectural rules, coding standards, and guidelines
 
 ---
 
-## Coding Guidelines
+## 📐 Coding Guidelines
 
 ### 1. Adding New Projects
-- Do not hardcode project cards in HTML/Astro. All additions must be made inside [`src/data/projects.ts`](file:///c:/Users/s3ish/Documents/Workspace/KoalaLanding/src/data/projects.ts).
+- Do not hardcode project cards in HTML/Astro. All additions must be made inside [`src/data/projects.ts`](file:///Users/koala/Documents/Workspaces/KoalaLanding/src/data/projects.ts).
 - Project icons and mascots must be placed in `src/assets/projects/` to be picked up by the automatic optimization pipeline.
 - Set `homepage: true` for curated standard homepage projects (e.g. KoalaPull, KoalaSnippets, KoalaWeb).
 - Set `homepage: false` for work-in-progress, experimental, or dashboard projects to restrict them to the tracker-style `/projects/` page.
 
-### 2. Privacy-First Principles
+### 2. Categories & Taxonomy
+The site strictly uses exactly three categories:
+- **`desktop`**: Desktop applications.
+- **`web`**: Web applications and websites.
+- **`extensions`**: Browser extensions and plug-ins.
+
+### 3. Work-In-Progress (WIP) Restrictions
+- For active development projects that aren't ready for distribution, set `status: 'wip'`.
+- Setting `status: 'wip'` will instruct the templates to filter out website and extension download links (`website`, `chrome`, `firefox`). Only code repositories are displayed.
+
+### 4. Client Browser Link Optimization
+- Add `data-link-platform="chrome"` and `data-link-platform="firefox"` attributes on extension download links.
+- The client-side JS script will automatically highlight the link matching the user's browser, make the other link subtle, and place the matched browser link first in the list.
+
+### 5. Privacy-First Principles
 - No cookies may be introduced.
 - No third-party scripts (e.g. Google Tag Manager, CDNs, external widgets) are permitted.
 - The site uses `localStorage` only to persist the user's color theme preference locally. This must be disclosed in the privacy policy.
 - Legal pages (privacy policy and imprint) must use plain, non-commercial German and English legal wording matching the private hobby status of the developer.
 
-### 3. Build & Deployment Checks
+---
+
+## 🚀 Build & Deployment Checks
+
 Before pushing to production, always run:
 ```bash
 npm run build

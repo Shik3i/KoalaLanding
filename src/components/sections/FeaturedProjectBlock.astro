@@ -77,12 +77,12 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
         </a>
       )}
       {project.links.chrome && project.status !== 'wip' && (
-        <a href={project.links.chrome} class="btn btn-ghost" rel="noopener noreferrer">
+        <a href={project.links.chrome} class="btn btn-ghost" data-link-platform="chrome" rel="noopener noreferrer">
           {tr['featured.chromeStore'] ?? 'Chrome Web Store'}
         </a>
       )}
       {project.links.firefox && project.status !== 'wip' && (
-        <a href={project.links.firefox} class="btn btn-ghost" rel="noopener noreferrer">
+        <a href={project.links.firefox} class="btn btn-ghost" data-link-platform="firefox" rel="noopener noreferrer">
           {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
         </a>
       )}

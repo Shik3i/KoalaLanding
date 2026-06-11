@@ -1,70 +1,110 @@
-# KoalaStuff Landing Page
+# 🐨 KoalaStuff Landing Page
 
-The official landing page for [koalastuff.net](https://koalastuff.net) — a central hub introducing all KoalaStuff projects, linking to their websites, stores, and repositories.
+The official landing page for **[koalastuff.net](https://koalastuff.net)** — a highly curated, premium static hub introducing all KoalaStuff projects, browser utilities, and open-source applications.
 
-## Tech Stack
+> [!NOTE]
+> This site is engineered to be 100% static, fast, private, and fully compliant with strict Content Security Policies (CSP). It serves as the single source of truth for the KoalaStuff software universe.
 
-- **[Astro](https://astro.build)** — static site generator with built-in i18n routing
-- **TypeScript** — strict mode, no `any`
-- **Plain CSS** — no Tailwind, no frameworks; CSS custom properties for theming
-- **Output** — 100% static HTML, no runtime server required
-- **Fonts** — self-hosted Inter (woff2), no external font providers
-- **Assets** — all images and fonts served from the repo, no CDN
+---
 
-## Requirements
+## 🚀 Technology Stack
 
-- Node.js 18+
-- npm 9+
+The project is built on modern web APIs and best practices:
 
-## Local Development
+*   **Framework**: [Astro v6](https://astro.build) configured in strict static mode (`output: 'static'`).
+*   **Language**: Strict TypeScript with strict null checks and no `any` implicit types.
+*   **Styling**: Vanilla CSS utilizing modern HSL color tokens, CSS Grid, Flexbox, and Container Queries.
+*   **Performance**: Optimized responsive image pipeline, font preloads, and zero production runtime Node.js requirements.
+*   **Self-Hosted Assets**: Self-hosted Inter font variants, zero third-party CDNs, and zero tracking scripts/cookies.
+
+---
+
+## 🎨 Design System & Visual Polish
+
+The landing page features high-end custom UI elements that combine visual excellence with fast rendering speeds:
+
+### 1. Morphing Ambient Background
+The background consists of three floating glow blobs that dynamically rotate, translate, and morph over time using asymmetric `border-radius` variables (`will-change: transform, border-radius` enabled for GPU hardware acceleration).
+*   **Blob 1**: Blue accent (`hsl(212, 100%, 60%)`), morphing over 20s.
+*   **Blob 2**: Purple accent (`hsl(260, 80%, 60%)`), morphing over 24s.
+*   **Blob 3**: Turquoise accent (`hsl(170, 85%, 50%)`), morphing over 28s.
+*   **Dot Grid Mask**: A slowly shifting background dot-grid mask layered on top of the gradient.
+
+### 2. Interaction Design
+*   **MacOS App Mockups**: Featured projects are presented in simulated macOS window panels with interactive glassmorphism (`backdrop-filter`).
+*   **Mouse-Reactive spotlights**: Panels and cards feature dynamic, mouse-tracking radial gradients on pointer hover (de-activated on mobile touch devices via media queries to preserve INP).
+*   **Keyboard-accessible Roving Tab Navigation**: Interactive tab-based filters use custom roving keyboard index listeners for accessible screen-reader navigation.
+
+---
+
+## 📦 Project Taxonomy & Lifecycle
+
+Projects are dynamically classified into exactly three categories, mapped in `src/data/projects.ts`:
+
+| Category | Identifier | Description | Icon |
+| :--- | :--- | :--- | :---: |
+| **Desktop-Anwendungen** | `desktop` | Native applications for offline workflows and tools. | 🖥️ |
+| **Webanwendungen** | `web` | Hosted web tools, blogs, and central dashboards. | 🌐 |
+| **Extensions** | `extensions` | Browser add-ons fixing workflows where they occur. | 🧩 |
+
+### Work-in-Progress (WIP) Rule
+
+> [!WARNING]
+> Projects marked with `status: 'wip'` represent active, unreleased software. To prevent users from installing unfinished software:
+> 1. Download and live website links (`links.website`, `links.chrome`, and `links.firefox`) are automatically hidden from the UI (featured cards, grid cards, and tracker list).
+> 2. Only the GitHub repository link (if available) is displayed to invite contributions.
+
+### Client-Side Browser Prioritizing
+
+For extension download buttons, the site automatically inspects the client browser at load time:
+- **Firefox Clients**: Highlight and scale the Firefox Add-ons link, slide it to the front of the list, and make the Chrome Store button subtler.
+- **Chrome/Chromium Clients**: Highlight and scale the Chrome Web Store link, slide it to the front of the list, and make the Firefox Add-ons button subtler.
+
+---
+
+## 🛠️ Local Development & Operations
+
+### Requirements
+- **Node.js** 18+
+- **npm** 9+
+
+### Commands
 
 ```bash
+# Install dependencies
 npm install
+
+# Start local dev server (default port 4321)
 npm run dev
-```
 
-Open [http://localhost:4321](http://localhost:4321).
-
-## Build
-
-```bash
+# Compile production bundles
 npm run build
-```
 
-Generates a static `dist/` directory. No Node.js runtime is needed in production.
-
-## Preview Built Site
-
-```bash
+# Preview production builds locally
 npm run preview
 ```
 
-Serves the `dist/` directory locally for a production-equivalent check.
+### Git & Push Operations
 
-## Deployment (Caddy on VPS)
-
-Since the `dist/` build output is tracked in git, the production build is executed locally before pushing. The VPS simply pulls the pre-built files and serves them.
-
-### Development Workflow (Before pushing):
+> [!IMPORTANT]
+> The VPS environment hosts the site by pulling the compiled production output (`dist/` directory) from this repository.
+> Therefore, you **MUST** run a production compile and stage changes before pushing to remote!
 
 ```bash
-# 1. Always run build to update dist/ output:
+# 1. Compile production output:
 npm run build
 
-# 2. Stage, commit, and push all files (including updated dist/):
+# 2. Stage, commit, and push:
 git add -A
-git commit -m "Commit message"
+git commit -m "Your commit message"
 git push
 ```
 
-### VPS Workflow:
+---
 
-```bash
-# On the VPS in the repository root directory:
-git pull          # Caddy serves dist/ directly — changes are live instantly!
-```
+## 🔒 Security & Server Configuration
 
-### Example Caddyfile
+### Caddyfile (Caddy v2 VPS Example)
 
 ```caddyfile
 koalastuff.net {
@@ -72,8 +112,8 @@ koalastuff.net {
     encode zstd gzip
     
     file_server {
-        # Serve precompressed Brotli (.br) and Gzip (.gz) files compiled at build time
-        precompressed br gzip
+        # Stream pre-compressed Gzip (.gz), ZStandard (.zst) or Brotli (.br) files directly
+        precompressed br zstd gzip
     }
 
     header {
@@ -81,134 +121,12 @@ koalastuff.net {
         X-Content-Type-Options "nosniff"
         Referrer-Policy "strict-origin-when-cross-origin"
         X-Frame-Options "DENY"
-        Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), usb=(), web-share=(), xr-spatial-tracking=()"
+        Permissions-Policy "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), usb=()"
         Cross-Origin-Opener-Policy "same-origin"
         Cross-Origin-Resource-Policy "same-origin"
-        # Zero inline scripts are used on this site! Fully compatible with strict script-src 'self'
-        Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests"
+        
+        # Strict CSP configuration. Inline SHA-256 matches the head theme anti-flash block.
+        Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'sha256-08Vb/IOCwmQ3F7ohGRxyjJteaJqilGy3MO2Xv0Y3dsw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
     }
 }
 ```
-
-### Precompression & HTML Minification
-
-This project uses `astro-compressor` to automatically minify and pre-compress static assets (HTML, CSS, JS, SVG) into **Brotli (`.br`)** and **Gzip (`.gz`)** files during `npm run build`.
-
-By configuring Caddy's `file_server` with the `precompressed br gzip` directive, the web server directly streams these pre-built binaries, completely bypassing on-the-fly compression CPU overhead.
-
----
-
-## How to Add a Project
-
-1. Open [`src/data/projects.ts`](src/data/projects.ts)
-2. Add a new entry to the `projects` array following the `Project` type
-3. Set `listed: true` to show it on the site, `listed: false` to keep it in the data only
-4. Set `featured: true` to show it as a large showcase block (max 2–3 featured)
-5. Set `homepage: true` to display it on the homepage, or `false` to display it only on `/projects/`
-6. Add translations to `src/i18n/locales/en.json` and `src/i18n/locales/de.json` (other locales fall back to English)
-7. Copy project assets to `src/assets/projects/<project-id>/` so the Astro build can optimize them automatically
-
-## How to Add Assets
-
-1. Copy files to `src/assets/projects/<project-id>/` or `src/assets/brand/`
-2. Astro will automatically optimize raster images (PNG, WebP, JPEG) into WebP/AVIF formats with 1x and 2x density variants.
-3. SVGs are served directly without processing.
-
-## How to Add or Update Translations
-
-1. Edit `src/i18n/locales/en.json` for English (source of truth)
-2. Edit `src/i18n/locales/de.json` for German
-3. For other languages, copy keys from `en.json` and translate values
-4. All 13 locale files exist in `src/i18n/locales/`:
-   `en`, `de`, `fr`, `es`, `it`, `nl`, `pl`, `pt`, `tr`, `ja`, `ko`, `zh`, `uk`
-5. Missing keys automatically fall back to English
-
-## How to Update Legal Pages
-
-Legal pages are in `src/pages/`:
-- `privacy/index.astro` — English privacy policy
-- `imprint/index.astro` — English imprint
-- `de/datenschutz/index.astro` — German Datenschutzerklärung (DSGVO)
-- `de/impressum/index.astro` — German Impressum (§ 5 DDG)
-
----
-
-## Security Notes
-
-### No External Dependencies in Production
-
-The built site has **zero external network requests**:
-- No external fonts (Inter is self-hosted in `src/assets/fonts/`)
-- No external scripts (all JS is bundled by Astro)
-- No external stylesheets
-- No analytics, tracking, or cookies
-- No external images or CDN resources
-
-### CSP Compatibility
-
-The site is designed for a strict Content Security Policy. The only exception is the anti-flash theme script (see above). All other JS is served from `'self'`.
-
-Avoid these patterns to maintain CSP compatibility:
-- No `onclick=""` or other inline event handlers
-- No `eval()`, `new Function()`, or dynamic script injection
-- No external embeds or iframes
-
-### localStorage Usage
-
-The theme toggle stores the user's preference in `localStorage` under the key `koala-theme`. This is:
-- A local storage value only — it never leaves the browser
-- Not transmitted anywhere
-- Not a cookie
-- Disclosed in the privacy policy and on legal pages
-
----
-
-## Project Structure
-
-```
-KoalaLanding/
-├── astro.config.ts        # Astro configuration (i18n, sitemap, static output)
-├── tsconfig.json          # TypeScript configuration
-├── public/                # Static assets served as-is (robots.txt, favicon.svg)
-├── src/
-│   ├── layouts/
-│   │   └── BaseLayout.astro   # Base HTML shell with SEO, hreflang, anti-flash
-│   ├── components/
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── ProjectCard.astro
-│   │   └── sections/
-│   │       ├── Hero.astro
-│   │       ├── Projects.astro
-│   │       ├── FeaturedProjectBlock.astro
-│   │       ├── About.astro
-│   │       ├── Trust.astro
-│   │       ├── DevNotes.astro
-│   │       └── FAQ.astro
-│   ├── assets/            # Project icons, mascots, brand assets (optimized at build)
-│   ├── data/
-│   │   └── projects.ts    # Project data (edit to add/update projects)
-│   ├── i18n/
-│   │   ├── config.ts      # Locale list, names, path helpers
-│   │   ├── utils.ts       # Translation loader with fallback
-│   │   └── locales/       # JSON translation files (en, de, fr, ...)
-│   ├── scripts/
-│   │   └── theme.ts       # Theme toggle, language switcher, mobile nav
-│   └── styles/
-│       ├── global.css     # CSS custom properties, resets, typography, utilities
-│       └── components.css # Header, footer, hero, cards, FAQ, etc.
-└── dist/                  # Build output (git-ignored, served by Caddy)
-```
-
-## Performance Notes
-
-- Fonts are preloaded with `<link rel="preload">` for LCP optimization
-- Images use `loading="lazy"` and `decoding="async"` except above-the-fold content
-- No heavy animation libraries — CSS animations only, with `prefers-reduced-motion` support
-- Minimal JavaScript — one bundled module (theme + UI interactions)
-- All CSS is inlined by Astro into a single hashed file
-
-## TODO Checklist Before Going Live
-
-- [ ] Add KoalaClicker store links when available
-- [ ] Add screenshots/visuals for project showcase blocks

@@ -139,12 +139,12 @@ const categoryIcons: Record<string, string> = {
                       </a>
                     )}
                     {project.links.chrome && project.status !== 'wip' && (
-                      <a href={project.links.chrome} class="tracker-link" title="Chrome Store" target="_blank" rel="noopener noreferrer">
+                      <a href={project.links.chrome} class="tracker-link" title="Chrome Store" data-link-platform="chrome" target="_blank" rel="noopener noreferrer">
                         <span>Chrome</span>
                       </a>
                     )}
                     {project.links.firefox && project.status !== 'wip' && (
-                      <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" target="_blank" rel="noopener noreferrer">
+                      <a href={project.links.firefox} class="tracker-link" title="Firefox Add-ons" data-link-platform="firefox" target="_blank" rel="noopener noreferrer">
                         <span>Firefox</span>
                       </a>
                     )}
