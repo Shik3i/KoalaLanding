@@ -161,10 +161,12 @@ const langCode = localeLangCodes[locale];
           } else {
             event.direction = toOrder > fromOrder ? 'forward' : 'back';
           }
-        } else if (toOrder === 99) {
+        } else if (toOrder === 99 && fromOrder !== 99) {
           doc.setAttribute('data-transition-type', 'vertical-up');
         } else if (fromOrder === 99 && toOrder < 99) {
           doc.setAttribute('data-transition-type', 'vertical-down');
+        } else if (fromOrder === 99 && toOrder === 99) {
+          doc.removeAttribute('data-transition-type');
         }
       });
 

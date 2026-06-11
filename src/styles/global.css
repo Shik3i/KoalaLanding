@@ -611,39 +611,43 @@ ul, ol { list-style: none; }
   }
 }
 
-/* --- Vertical View Transitions (Legal Pages) --- */
+/* --- Vertical View Transitions (Legal Pages as Modals) --- */
 html[data-transition-type="vertical-up"]::view-transition-old(main) {
-  animation: slide-up-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  animation: scale-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 1;
 }
 html[data-transition-type="vertical-up"]::view-transition-new(main) {
-  animation: slide-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  animation: slide-up-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 2;
 }
 
 html[data-transition-type="vertical-down"]::view-transition-old(main) {
-  animation: slide-down-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  animation: slide-down-modal-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 2;
 }
 html[data-transition-type="vertical-down"]::view-transition-new(main) {
-  animation: slide-down-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  animation: scale-up-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  z-index: 1;
 }
 
-@keyframes slide-up-out {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-40px); opacity: 0; }
+@keyframes scale-down-out {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.98); opacity: 0; }
 }
 
-@keyframes slide-up-in {
-  from { transform: translateY(60px); opacity: 0; }
+@keyframes slide-up-modal-in {
+  from { transform: translateY(100vh); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes slide-down-out {
+@keyframes slide-down-modal-out {
   from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(100vh); opacity: 0; }
 }
 
-@keyframes slide-down-in {
-  from { transform: translateY(-40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes scale-up-in {
+  from { transform: scale(0.98); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* --- Active Tab Indicator Transition --- */
