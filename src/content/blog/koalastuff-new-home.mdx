@@ -1,30 +1,93 @@
 ---
-title: "Welcome to the new KoalaStuff Hub"
-description: "Why we finally built a proper main domain for all our tools and browser extensions."
+title: "Why koalastuff.net is now a proper project hub"
+description: "I moved the main KoalaStuff domain from a personal startpage to a small hub for my projects, tools and devlogs."
 pubDate: 2026-06-11
 author: "Timo"
-tags: ["update", "seo", "koalastuff"]
+tags: ["update", "koalastuff", "devlog"]
 ---
 
-Welcome to the brand new home of KoalaStuff! 
+For a while, `koalastuff.net` was basically just my personal browser startpage.
 
-For a long time, all of our projects and browser extensions lived on their own separate subdomains. While this kept things nicely isolated from a development perspective, it became increasingly frustrating to manage from an SEO perspective.
+That was useful for me, but pretty confusing for everyone else.
 
-### The Search Console Nightmare
+Most KoalaStuff projects already had their own place somewhere: KoalaSync on its own subdomain, other tools in their own repositories, a few experiments half-visible on GitHub, and some things only linked from random profiles or extension listings.
 
-The main reason for this change comes down to how Google Search Console and Bing Webmaster Tools handle subdomains versus main domains. They strongly prefer a single, authoritative main domain when ranking pages.
+At some point that stopped making sense.
 
-It became almost impossible to properly verify and display subdomains nicely, especially when trying to link out to the Chrome Web Store extension pages for projects like KoalaSync. The SEO tools were practically begging for a centralized hub.
+If someone clicked my domain from a browser extension, GitHub profile, dev.to post or Chrome Web Store listing, they did not really land on a proper overview of what KoalaStuff actually is.
 
-### A Beautiful New Home
+So I rebuilt the main domain.
 
-Because of these technical necessities, I decided to build a beautiful, fast, and centralized landing page. 
+## What changed
 
-Here you'll find:
-- A complete tracker of all our projects (Web, Desktop, and Extensions).
-- Real-time updates directly fetched from GitHub.
-- Our new static blog for deep-dives and development logs.
+`koalastuff.net` is now a small project hub.
 
-This change not only makes the SEO gods happy but also gives you a much better overview of everything we are working on.
+It is not meant to replace the individual project pages. KoalaSync still has its own landing page, and bigger projects can still have their own dedicated sites.
 
-Stay tuned for more updates!
+The new main page is just the central place for answering:
+
+- what KoalaStuff is
+- which projects currently exist
+- which ones are browser extensions, web tools, desktop apps or experiments
+- where the GitHub repositories are
+- which projects are active, early or experimental
+
+Basically: less random collection of links, more proper overview.
+
+## Why I wanted this
+
+Part of the reason is practical.
+
+Managing everything only through separate subdomains gets annoying after a while. It makes project discovery worse, it makes profiles harder to link, and it is not great when someone just wants to see what else exists around KoalaStuff.
+
+There is also the boring SEO side of it.
+
+A proper root domain is easier to point people to, easier to verify, easier to index, and generally cleaner than pretending every subdomain is its own isolated thing.
+
+But the bigger reason is simpler:
+
+I wanted one place that actually feels like the front door to all of this.
+
+## What is on the new site
+
+The new hub currently includes:
+
+- a curated overview of the main projects
+- a bigger projects page with more experiments and work-in-progress tools
+- project categories for browser extensions, web tools, desktop apps and experiments
+- links to GitHub, dev.to and the individual project pages
+- a small static blog for devlogs and project updates
+
+The blog is probably where I will write first from now on.
+
+Some posts may later also go to dev.to, but I like the idea of having the original version on my own domain instead of only publishing everything somewhere else.
+
+## What happened to the old startpage?
+
+The old personal startpage is not gone.
+
+It will move to:
+
+`start.koalastuff.net`
+
+That makes more sense anyway. A personal browser dashboard should not be the first thing people see when they visit the main KoalaStuff domain.
+
+## Technical notes
+
+The new site is intentionally simple.
+
+It is a static Astro site, built into plain HTML, CSS and JavaScript, then served by Caddy. No backend, no database, no analytics, no cookies, no external CDNs.
+
+Images are optimized during the build, fonts are self-hosted, and the site is designed to work with a strict Content Security Policy.
+
+That is probably overkill for a small project hub, but I like having a fast and boring setup that is easy to deploy with a simple `git pull` and build.
+
+## What comes next
+
+I will keep adding projects and devlogs over time.
+
+Some KoalaStuff projects are polished enough to show prominently. Others are still experiments, prototypes or small tools I built for myself. The new hub should make that distinction clearer without hiding the messy parts completely.
+
+That is basically the goal:
+
+A cleaner front door for KoalaStuff, without pretending it is a giant company or some polished SaaS ecosystem.
