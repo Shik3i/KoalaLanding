@@ -68,6 +68,15 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
     {getProjectDescription(project, locale)}
   </p>
 
+  {project.backstory && (
+    <details class="project-card__backstory">
+      <summary>{tr['project.story'] ?? 'Backstory'}</summary>
+      <div class="project-card__backstory-content">
+        <p>{project.backstory[locale] ?? project.backstory.en}</p>
+      </div>
+    </details>
+  )}
+
   <div class="project-card__footer">
     <div class="tags">
       {project.tags.slice(0, 3).map((tag) => (
@@ -113,3 +122,34 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
     </div>
   </div>
 </article>
+
+<style>
+  .project-card__backstory {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--c-text-muted);
+    border-top: 1px solid var(--c-border-subtle);
+    padding-top: var(--space-3);
+  }
+  
+  .project-card__backstory summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--c-text);
+    user-select: none;
+    transition: color var(--dur-fast);
+  }
+  
+  .project-card__backstory summary:hover {
+    color: var(--c-accent);
+  }
+
+  .project-card__backstory-content {
+    margin-top: var(--space-3);
+    line-height: 1.6;
+    background: var(--c-surface-alt);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--c-border-subtle);
+  }
+</style>

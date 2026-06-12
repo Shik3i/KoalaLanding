@@ -17,6 +17,7 @@ export interface Project {
   accentColor?: string;
   shortDescription: Partial<Record<Locale, string>> & { en: string };
   longDescription?: Partial<Record<Locale, string>> & { en: string };
+  backstory?: Partial<Record<Locale, string>> & { en: string };
   tags: string[];
   lastUpdated?: string; // e.g. "2026-06"
   links: {
@@ -53,6 +54,10 @@ export const projects: Project[] = [
     longDescription: {
       en: 'KoalaShip is an open-source shopping and parcel-delivery simulation. It recreates the enjoyable parts of online shopping: browsing products, comparing prices, placing fictional orders, waiting for deliveries, unboxing purchases and displaying them in a personal collection. No real money, merchants or debt are involved.',
       de: 'KoalaShip ist eine Open-Source-Simulation für Online-Shopping und Paketlieferungen. Sie bildet die spaßigen Teile des Online-Shoppings nach: Produkte durchstöbern, Preise vergleichen, fiktive Bestellungen aufgeben, auf Lieferungen warten, Einkäufe auspacken und sie in einer persönlichen Sammlung ausstellen. Kein echtes Geld, keine Händler, keine Schulden.',
+    },
+    backstory: {
+      en: 'I read an article about "Dopamine sites" in South Korea (sites with fake shopping carts and fictional parcel tracking designed to release dopamine without spending money). I thought the idea was hilarious and wanted to see how hard it would be to build, while also testing Svelte as an alternative to Astro.',
+      de: 'Ich hatte einen Artikel über "Dopamine Sites" in Südkorea gelesen (Seiten mit Fake-Warenkörben und fiktiver Paketverfolgung, die Dopamin ausschütten sollen, ohne dass man Geld ausgibt). Ich fand die Idee extrem witzig und wollte schauen, wie schwer das umzusetzen ist – und gleichzeitig Svelte als Alternative zu Astro ausprobieren.',
     },
     tags: ['Svelte 5', 'TypeScript', 'Vite', 'Tailwind CSS', 'Leaflet', 'Open Source', 'Web App', 'Simulation'],
     links: {
