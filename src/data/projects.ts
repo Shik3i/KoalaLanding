@@ -42,7 +42,7 @@ export const projects: Project[] = [
     name: 'KoalaShip',
     category: 'web',
     status: 'active',
-    featured: true,
+    featured: false,
     listed: true,
     homepage: true,
     accentColor: 'hsl(170, 80%, 45%)',
