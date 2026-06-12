@@ -32,7 +32,7 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
       {isSvg && project.assets.icon ? (
         <img
           src={project.assets.icon}
-          alt=""
+          alt={`${project.name} icon`}
           class="project-card__icon"
           width="40"
           height="40"
@@ -44,7 +44,7 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
           src={imageSrc}
           formats={['avif', 'webp']}
           densities={[1, 2]}
-          alt=""
+          alt={`${project.name} icon`}
           class="project-card__icon"
           width={40}
           height={40}

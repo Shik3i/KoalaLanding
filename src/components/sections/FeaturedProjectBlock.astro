@@ -56,13 +56,13 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
           <span class="window-title">{project.name}</span>
         </div>
         <div class="window-body">
-          <div class="featured-project__image-wrap">
+          <figure class="featured-project__image-wrap" style="margin:0">
             {mascotSrc ? (
               <Picture
                 src={mascotSrc}
                 formats={['avif', 'webp']}
                 densities={[1, 2]}
-                alt=""
+                alt={`${project.name} mascot`}
                 class="featured-project__mascot"
                 width={643}
                 height={500}
@@ -70,7 +70,7 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
             ) : isIconSvg && project.assets.icon ? (
               <img
                 src={project.assets.icon}
-                alt=""
+                alt={`${project.name} icon`}
                 class="featured-project__icon-large"
                 width="96"
                 height="96"
@@ -82,13 +82,14 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
                 src={iconSrc}
                 formats={['avif', 'webp']}
                 densities={[1, 2]}
-                alt=""
+                alt={`${project.name} icon`}
                 class="featured-project__icon-large"
                 width={96}
                 height={96}
               />
             ) : null}
-          </div>
+            <figcaption class="visually-hidden" style="display:none">{project.name} interface or mascot</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -161,13 +162,13 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
         <span class="window-title">{project.name}</span>
       </div>
       <div class="window-body">
-        <div class="featured-project__image-wrap">
+        <figure class="featured-project__image-wrap" style="margin:0">
           {mascotSrc ? (
             <Picture
               src={mascotSrc}
               formats={['avif', 'webp']}
               densities={[1, 2]}
-              alt=""
+              alt={`${project.name} mascot`}
               class="featured-project__mascot"
               width={643}
               height={500}
@@ -175,7 +176,7 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
           ) : isIconSvg && project.assets.icon ? (
             <img
               src={project.assets.icon}
-              alt=""
+              alt={`${project.name} icon`}
               class="featured-project__icon-large"
               width="96"
               height="96"
@@ -187,13 +188,14 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
               src={iconSrc}
               formats={['avif', 'webp']}
               densities={[1, 2]}
-              alt=""
+              alt={`${project.name} icon`}
               class="featured-project__icon-large"
               width={96}
               height={96}
             />
           ) : null}
-        </div>
+          <figcaption class="visually-hidden" style="display:none">{project.name} interface or mascot</figcaption>
+        </figure>
       </div>
     </div>
   </div>
