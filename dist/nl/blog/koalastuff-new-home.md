@@ -1,0 +1,85 @@
+For a while, `koalastuff.net` was basically just my personal browser startpage.
+
+That was useful for me, but pretty confusing for everyone else.
+
+Most KoalaStuff projects already had their own place somewhere: KoalaSync on its own subdomain, other tools in their own repositories, a few experiments half-visible on GitHub, and some things only linked from random profiles or extension listings.
+
+At some point that stopped making sense.
+
+If someone clicked my domain from a browser extension, GitHub profile, dev.to post or Chrome Web Store listing, they did not really land on a proper overview of what KoalaStuff actually is.
+
+So I rebuilt the main domain.
+
+## What changed
+
+`koalastuff.net` is now a small project hub.
+
+It is not meant to replace the individual project pages. KoalaSync still has its own landing page, and bigger projects can still have their own dedicated sites.
+
+The new main page is just the central place for answering:
+
+- what KoalaStuff is
+- which projects currently exist
+- which ones are browser extensions, web tools, desktop apps or experiments
+- where the GitHub repositories are
+- which projects are active, early or experimental
+
+Basically: less random collection of links, more proper overview.
+
+## Why I wanted this
+
+Part of the reason is practical.
+
+Managing everything only through separate subdomains gets annoying after a while. It makes project discovery worse, it makes profiles harder to link, and it is not great when someone just wants to see what else exists around KoalaStuff.
+
+There is also the boring SEO side of it.
+
+A proper root domain is easier to point people to, easier to verify, easier to index, and generally cleaner than pretending every subdomain is its own isolated thing.
+
+But the bigger reason is simpler:
+
+I wanted one place that actually feels like the front door to all of this.
+
+## What is on the new site
+
+The new hub currently includes:
+
+- a curated overview of the main projects
+- a bigger projects page with more experiments and work-in-progress tools
+- project categories for browser extensions, web tools, desktop apps and experiments
+- links to GitHub, dev.to and the individual project pages
+- a small static blog for devlogs and project updates
+
+The blog is probably where I will write first from now on.
+
+Some posts may later also go to dev.to, but I like the idea of having the original version on my own domain instead of only publishing everything somewhere else.
+
+## What happened to the old startpage?
+
+The old personal startpage is not gone.
+
+It will move to:
+
+`start.koalastuff.net`
+
+That makes more sense anyway. A personal browser dashboard should not be the first thing people see when they visit the main KoalaStuff domain.
+
+## Technical notes
+
+The new site is intentionally simple.
+
+It is a static Astro site, built into plain HTML, CSS and JavaScript, then served by Caddy. No backend, no database, no analytics, no cookies, no external CDNs.
+
+Images are optimized during the build, fonts are self-hosted, and the site is designed to work with a strict Content Security Policy.
+
+That is probably overkill for a small project hub, but I like having a fast and boring setup that is easy to deploy with a simple `git pull` and build.
+
+## What comes next
+
+I will keep adding projects and devlogs over time.
+
+Some KoalaStuff projects are polished enough to show prominently. Others are still experiments, prototypes or small tools I built for myself. The new hub should make that distinction clearer without hiding the messy parts completely.
+
+That is basically the goal:
+
+A cleaner front door for KoalaStuff, without pretending it is a giant company or some polished SaaS ecosystem.

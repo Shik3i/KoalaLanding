@@ -64,10 +64,16 @@ const tr = await loadTranslations(locale);
                 {pubDate && author && <span class="meta-separator">•</span>}
                 {author && <span class="blog-author">{author}</span>}
               </div>
-              <button id="copy-link-btn" class="copy-link-btn" type="button" aria-label="Copy link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; display: inline-block; vertical-align: middle;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                <span>Copy Link</span>
-              </button>
+              <div style="display: flex; gap: 0.5rem;">
+                <button id="copy-md-btn" class="copy-link-btn" type="button" aria-label="Copy markdown">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; display: inline-block; vertical-align: middle;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  <span>Markdown</span>
+                </button>
+                <button id="copy-link-btn" class="copy-link-btn" type="button" aria-label="Copy link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 4px; display: inline-block; vertical-align: middle;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                  <span>Link</span>
+                </button>
+              </div>
               <div id="copy-status" class="sr-only" role="status" aria-live="polite"></div>
             </div>
           )}
@@ -338,7 +344,33 @@ const tr = await loadTranslations(locale);
     const signal = blogLayoutController.signal;
 
     const copyBtn = document.getElementById('copy-link-btn');
+    const copyMdBtn = document.getElementById('copy-md-btn');
     const copyStatus = document.getElementById('copy-status');
+    
+    if (copyMdBtn) {
+      copyMdBtn.addEventListener('click', async () => {
+        try {
+          const mdUrl = window.location.pathname.replace(/\/$/, '') + '.md';
+          const res = await fetch(mdUrl);
+          if (!res.ok) throw new Error('Failed to fetch markdown');
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
+          const span = copyMdBtn.querySelector('span');
+          if (span) {
+            const original = span.textContent;
+            span.textContent = ' Copied!';
+            if (copyStatus) copyStatus.textContent = 'Copied Markdown!';
+            setTimeout(() => {
+              span.textContent = original;
+              if (copyStatus) copyStatus.textContent = '';
+            }, 2000);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }, { signal });
+    }
+
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(window.location.href);
