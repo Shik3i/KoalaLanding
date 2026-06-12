@@ -29,14 +29,14 @@ const items = [
     <div class="section__header section__header--centered">
       <h2 class="section__title" id="trust-title">{tr['trust.title'] ?? 'Why trust these projects?'}</h2>
     </div>
-    <div class="trust-grid">
+    <dl class="trust-grid" style="margin: 0; padding: 0;">
       {items.map((item) => (
         <div class="trust-item">
           <div class="trust-item__icon" set:html={item.icon} aria-hidden="true"></div>
-          <h3 class="trust-item__title">{tr[`trust.${item.key}.title`] ?? item.key}</h3>
-          <p class="trust-item__desc">{tr[`trust.${item.key}.desc`] ?? ''}</p>
+          <dt class="trust-item__title">{tr[`trust.${item.key}.title`] ?? item.key}</dt>
+          <dd class="trust-item__desc" style="margin: 0;">{tr[`trust.${item.key}.desc`] ?? ''}</dd>
         </div>
       ))}
-    </div>
+    </dl>
   </div>
 </section>
