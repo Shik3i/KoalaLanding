@@ -300,7 +300,7 @@ This part is not required, but I like it.
 
 Instead of boring error pages, I use a tiny error handler with http.cat:
 
-![http.cat error example](https://i.imgur.com/myRVDCc.png)
+![http.cat error example](/assets/blog/http-cat-example.png)
 
 ```caddyfile
 (cat_errors) {
