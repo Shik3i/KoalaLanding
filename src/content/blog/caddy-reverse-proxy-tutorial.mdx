@@ -314,7 +314,7 @@ Instead of boring error pages, I use a tiny error handler with http.cat:
 (cat_errors) {
     handle_errors {
         header Content-Type "text/html; charset=utf-8"
-        respond "<body style='margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;'><img src='https://http.cat/{http.error.status_code}'></body>" {http.error.status_code}
+        respond "<body style='margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;'><img src='https://http.cat/{http.error.status_code}' alt='HTTP Cat Status' title='HTTP Cat Status'></body>" {http.error.status_code}
     }
 }
 ```
@@ -951,7 +951,7 @@ Putting the ideas together, a bigger setup can look like this:
 (cat_errors) {
     handle_errors {
         header Content-Type "text/html; charset=utf-8"
-        respond "<body style='margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;'><img src='https://http.cat/{http.error.status_code}'></body>" {http.error.status_code}
+        respond "<body style='margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;'><img src='https://http.cat/{http.error.status_code}' alt='HTTP Cat Status' title='HTTP Cat Status'></body>" {http.error.status_code}
     }
 }
 

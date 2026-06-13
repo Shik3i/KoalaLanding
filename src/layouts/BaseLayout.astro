@@ -101,7 +101,8 @@ const defaultLocalePath = getLocalePath(
           "logo": `${siteUrl}/favicon.svg`,
           "sameAs": [
             "https://github.com/Shik3i",
-            "https://dev.to/hungrykoala"
+            "https://dev.to/hungrykoala",
+            "https://mastodon.social/@koalastuff"
           ]
         },
         {
@@ -110,7 +111,7 @@ const defaultLocalePath = getLocalePath(
           "url": siteUrl,
           "name": "KoalaStuff",
           "description": "Small open-source tools for real annoyances.",
-          "inLanguage": "en",
+          "inLanguage": langCode,
           "publisher": { "@id": `${siteUrl}/#organization` },
           "author": { "@id": `${siteUrl}/#person` }
         },
@@ -121,7 +122,8 @@ const defaultLocalePath = getLocalePath(
           "url": "https://github.com/Shik3i",
           "sameAs": [
             "https://github.com/Shik3i",
-            "https://dev.to/hungrykoala"
+            "https://dev.to/hungrykoala",
+            "https://mastodon.social/@koalastuff"
           ]
         }
       ]
@@ -142,7 +144,7 @@ const defaultLocalePath = getLocalePath(
     <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true" transition:persist="background-canvas"></canvas>
 
     <!-- Skip link for keyboard users -->
-    <a href="#main-content" class="skip-link">{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
+    <a href="#main-content" class="skip-link" title={locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}>{locale === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}</a>
 
     <slot />
 

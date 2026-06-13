@@ -16,7 +16,7 @@ const { locale, translations: tr } = Astro.props;
         <h2 id="devnotes-title" style="font-size: var(--text-lg); margin-bottom: var(--space-2);">{tr['devnotes.title'] ?? 'Development notes'}</h2>
         <p style="font-size: var(--text-sm);">{tr['devnotes.body'] ?? 'I write occasional dev notes about KoalaStuff projects and updates on our blog.'}</p>
       </div>
-      <a href={getLocalePath(locale, 'blog')} class="btn btn-secondary" style="font-size: var(--text-xs); padding: var(--space-2) var(--space-4);">
+      <a href={getLocalePath(locale, 'blog')} class="btn btn-secondary" style="font-size: var(--text-xs); padding: var(--space-2) var(--space-4);" title={tr['devnotes.cta'] ?? 'Read dev notes'}>
         {tr['devnotes.cta'] ?? 'Read dev notes'}
       </a>
     </div>

@@ -30,10 +30,22 @@ const jsonLdData = {
   "@graph": sortedProjects.map(project => ({
     "@type": "SoftwareApplication",
     "name": project.name,
-    "description": project.shortDescription.en,
+    "description": project.shortDescription[locale] ?? project.shortDescription.en,
     "applicationCategory": project.category === 'desktop' ? 'DesktopApplication' : project.category === 'web' ? 'WebApplication' : 'BrowserApplication',
     "operatingSystem": "All",
-    ...(project.links.website && project.status !== 'wip' ? { "url": project.links.website } : {})
+    "author": {
+      "@type": "Person",
+      "@id": "https://koalastuff.net/#person"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://koalastuff.net/#organization"
+    },
+    ...(project.links.website && project.status !== 'wip' ? { "url": project.links.website } : {}),
+    ...(project.links.github ? { "codeRepository": project.links.github } : {}),
+    ...(project.links.chrome || project.links.firefox || project.links.website ? {
+      "downloadUrl": project.links.chrome || project.links.firefox || project.links.website
+    } : {})
   }))
 };
 ---

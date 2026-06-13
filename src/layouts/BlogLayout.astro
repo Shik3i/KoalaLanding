@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import type { Locale } from '../i18n/config';
 import { loadTranslations } from '../i18n/utils';
-import { getLocalePath } from '../i18n/config';
+import { getLocalePath, localeLangCodes } from '../i18n/config';
 
 export interface Props {
   title: string;
@@ -19,6 +19,10 @@ export interface Props {
 
 const { title, description, locale, canonicalPath, pubDate, author, ogImage, headings = [] } = Astro.props;
 const tr = await loadTranslations(locale);
+const langCode = localeLangCodes[locale];
+const siteUrl = 'https://koalastuff.net';
+const ogImageUrl = `${siteUrl}${ogImage || '/assets/brand/og-preview.png'}`;
+const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
 ---
 
 <BaseLayout
@@ -37,7 +41,7 @@ const tr = await loadTranslations(locale);
 
     <div class="container container--blog">
       
-      <a href={getLocalePath(locale, 'blog')} class="btn btn-ghost blog-back-link">
+      <a href={getLocalePath(locale, 'blog')} class="btn btn-ghost blog-back-link" title="Back to blog">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
@@ -91,7 +95,7 @@ const tr = await loadTranslations(locale);
                 <ul>
                   {headings.filter(h => h.depth > 1 && h.depth < 4).map(h => (
                     <li class={`toc-depth-${h.depth}`}>
-                      <a href={`#${h.slug}`}>{h.text}</a>
+                      <a href={`#${h.slug}`} title={h.text}>{h.text}</a>
                     </li>
                   ))}
                 </ul>
@@ -109,9 +113,27 @@ const tr = await loadTranslations(locale);
         "datePublished": pubDate ? pubDate.toISOString() : undefined,
         "author": {
           "@type": "Person",
+          "@id": "https://koalastuff.net/#person",
           "name": author ?? "Timo",
-          "url": "https://koalastuff.net"
-        }
+          "url": "https://github.com/Shik3i",
+          "sameAs": [
+            "https://github.com/Shik3i",
+            "https://dev.to/hungrykoala",
+            "https://mastodon.social/@koalastuff"
+          ]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://koalastuff.net/#organization",
+          "name": "KoalaStuff",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://koalastuff.net/favicon.svg"
+          }
+        },
+        "inLanguage": langCode,
+        "mainEntityOfPage": canonicalUrl,
+        "image": ogImageUrl
       })} />
 
     </div>

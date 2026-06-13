@@ -33,6 +33,7 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
         <img
           src={project.assets.icon}
           alt={`${project.name} ${tr['featured.icon'] ?? 'icon'}`}
+          title={`${project.name} ${tr['featured.icon'] ?? 'icon'}`}
           class="project-card__icon"
           width="40"
           height="40"

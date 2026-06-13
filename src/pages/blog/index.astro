@@ -41,7 +41,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 
       <div class="blog-grid">
         {sortedPosts.map(post => (
-          <a href={`/blog/${post.id}`} class="blog-card card reveal-on-scroll">
+          <a href={`/blog/${post.id}`} class="blog-card card reveal-on-scroll" title={post.data.title}>
             <h2 class="blog-card__title">{post.data.title}</h2>
             <div class="blog-card__meta">
               <time datetime={post.data.pubDate.toISOString()}>
