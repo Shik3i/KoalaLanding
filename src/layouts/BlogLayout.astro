@@ -217,7 +217,7 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
 
   .blog-layout-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--space-12);
   }
 
@@ -355,6 +355,8 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
   .blog-content :global(img) {
     border-radius: 4px;
     margin-bottom: var(--space-4);
+    max-width: 100%;
+    height: auto;
   }
 </style>
 

@@ -739,6 +739,7 @@
 .featured-project__visual {
   position: relative;
   z-index: 1;
+  min-width: 0;
 }
 
 .featured-project__label-wrap {
@@ -761,6 +762,7 @@
   display: inline-flex;
   gap: var(--space-3);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .featured-project__title {
@@ -880,6 +882,10 @@
   color: var(--c-text-faint);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .window-body {
