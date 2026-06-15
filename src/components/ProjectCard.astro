@@ -71,7 +71,7 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
 
   {project.backstory && (
     <details class="project-card__backstory">
-      <summary>{tr['project.story'] ?? 'Backstory'}</summary>
+      <summary>{tr['project.story']}</summary>
       <div class="project-card__backstory-content">
         <p>{project.backstory[locale] ?? project.backstory.en}</p>
       </div>

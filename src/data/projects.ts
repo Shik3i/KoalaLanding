@@ -84,7 +84,7 @@ export const projects: Project[] = [
       en: 'KoalaSync is a browser extension and self-hostable relay server for synchronized video playback on almost any website with a video element. Works with YouTube, Twitch, Netflix, Amazon Prime, Disney+, Emby, Jellyfin, Plex and more. Includes smart audio compression, episode auto-sync, and invitation links. No account required — just install, create a room, and share the link.',
       de: 'KoalaSync ist eine Browser-Erweiterung und ein selbst hostbarer Relay-Server für synchronisierte Videowiedergabe auf fast jeder Website mit einem Video-Element. Funktioniert mit YouTube, Twitch, Netflix, Amazon Prime, Disney+, Emby, Jellyfin, Plex und mehr. Enthält smarte Audio-Kompression, Episode Auto-Sync und Einladungslinks. Kein Account erforderlich — einfach installieren, Raum erstellen und Link teilen.',
     },
-    tags: ['JavaScript', 'Node.js', 'Web Audio API', 'Open Source', 'Browser Extension', 'Self-hostable', 'Free', 'Watch Party'],
+    tags: ['JavaScript', 'Node.js', 'WebSocket', 'Web Audio API', 'Open Source', 'Browser Extension', 'Self-hostable', 'Free', 'Watch Party'],
     links: {
       website: 'https://sync.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaSync',
@@ -138,7 +138,7 @@ export const projects: Project[] = [
       en: 'A privacy-first auto-clicker for idle games and repetitive web tasks. Zero tracking, zero permissions beyond the active tab.',
       de: 'Ein datenschutzorientierter Auto-Clicker für Idle-Games und sich wiederholende Web-Aufgaben. Kein Tracking, keine Berechtigungen über den aktiven Tab hinaus.',
     },
-    tags: ['JavaScript', 'Open Source', 'Browser Extension', 'Free', 'Privacy-first'],
+    tags: ['JavaScript', 'Open Source', 'Browser Extension', 'Free', 'Privacy-first', 'Automation', 'Idle Games'],
     links: {
       website: 'https://clicker.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaClicker',
@@ -160,7 +160,7 @@ export const projects: Project[] = [
       en: 'A lightweight cookie manager extension to view, edit, block, and export HTTP cookies with ease.',
       de: 'Eine schlanke Cookie-Manager-Erweiterung zum einfachen Anzeigen, Bearbeiten, Blockieren und Exportieren von HTTP-Cookies.',
     },
-    tags: ['JavaScript', 'Open Source', 'Browser Extension', 'Privacy-first', 'WIP'],
+    tags: ['JavaScript', 'Open Source', 'Browser Extension', 'Privacy-first', 'Cookie Manager', 'Developer Tools', 'WIP'],
     links: {
       github: 'https://github.com/Shik3i/KoalaCookies',
     },
@@ -224,7 +224,7 @@ export const projects: Project[] = [
       en: 'A personal bento-box dashboard linking KoalaStuff projects, server status and daily tools. Moving to startpage.koalastuff.net.',
       de: 'Ein persönliches Bento-Box-Dashboard mit Links zu KoalaStuff-Projekten, Serverstatus und täglichen Tools. Zieht um zu startpage.koalastuff.net.',
     },
-    tags: ['Svelte', 'Tailwind CSS', 'Open Source', 'Web App', 'Dashboard', 'Self-hosted'],
+    tags: ['Svelte', 'TypeScript', 'Tailwind CSS', 'Open Source', 'Web App', 'Dashboard', 'Self-hosted'],
     links: {
       website: 'https://start.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaStartpage',
@@ -270,7 +270,7 @@ export const projects: Project[] = [
       en: 'Shared online timer application for synchronized countdowns and session tracking.',
       de: 'Gemeinsame Online-Timer-Anwendung für synchronisierte Countdowns und Sitzungsverfolgung.',
     },
-    tags: ['JavaScript', 'Node.js', 'Open Source', 'Web App', 'Developer Tools', 'Shared Timer'],
+    tags: ['JavaScript', 'Node.js', 'WebSocket', 'Open Source', 'Web App', 'Self-hostable', 'Developer Tools', 'Shared Timer'],
     links: {
       website: 'https://timer.koalastuff.net',
       github: 'https://github.com/Shik3i/Antigrav',
@@ -316,7 +316,7 @@ export const projects: Project[] = [
       en: 'Early news-related experiment. More details will be added once the project is ready to be shown publicly.',
       de: 'Frühes Nachrichten-Experiment. Details werden ergänzt, sobald das Projekt bereit ist, öffentlich gezeigt zu werden.',
     },
-    tags: ['Svelte', 'Tailwind CSS', 'Experiment', 'Early'],
+    tags: ['Svelte', 'Tailwind CSS', 'RSS', 'News Aggregator', 'Open Source', 'Web App', 'Early'],
     links: {
       website: 'https://news.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaNews',
@@ -324,6 +324,54 @@ export const projects: Project[] = [
     assets: {
       icon: '/assets/projects/koalanews/icon.webp',
     },
+  },
+  {
+    id: 'koalaworld',
+    name: 'KoalaWorld',
+    category: 'web',
+    status: 'early',
+    featured: false,
+    listed: true,
+    homepage: true,
+    accentColor: 'hsl(200, 80%, 50%)',
+    lastUpdated: '2026-06',
+    shortDescription: {
+      en: 'A self-hosted 3D geo-visualization globe with real-time earthquakes, wildfires, weather, air quality and ISS tracking.',
+      de: 'Ein selbst hostbarer 3D-Geo-Visualisierungs-Globus mit Echtzeit-Erdbeben, Waldbränden, Wetter, Luftqualität und ISS-Tracking.',
+    },
+    longDescription: {
+      en: 'KoalaWorld renders an interactive 3D globe in the browser using Three.js and overlays real-time geospatial data from USGS, NASA FIRMS, Open-Meteo and others. Fully self-hostable via Docker with a Go backend and SQLite — no external databases required.',
+      de: 'KoalaWorld rendert einen interaktiven 3D-Globus im Browser mit Three.js und überlagert Echtzeit-Geodaten von USGS, NASA FIRMS, Open-Meteo und anderen. Vollständig selbst hostbar via Docker mit einem Go-Backend und SQLite — keine externen Datenbanken nötig.',
+    },
+    tags: ['Go', 'TypeScript', 'Three.js', 'Vite', 'Docker', 'SQLite', 'Open Source', 'Self-hostable', 'Geo-Visualization', 'Web App', 'Early'],
+    links: {
+      github: 'https://github.com/Shik3i/KoalaWorld',
+    },
+    assets: {},
+  },
+  {
+    id: 'koalabye',
+    name: 'KoalaBye',
+    category: 'web',
+    status: 'early',
+    featured: false,
+    listed: true,
+    homepage: true,
+    accentColor: 'hsl(340, 70%, 50%)',
+    lastUpdated: '2026-06',
+    shortDescription: {
+      en: 'A privacy-first, self-hosted platform for uninstall feedback and anonymous surveys. No tracking, 100% free.',
+      de: 'Eine datenschutzorientierte, selbst hostbare Plattform für Deinstallations-Feedback und anonyme Umfragen. Kein Tracking, 100% kostenlos.',
+    },
+    longDescription: {
+      en: 'KoalaBye is a Go-based platform for collecting privacy-first feedback when users uninstall your extension or app. Features anonymous surveys, cookie-free public pages, multi-organization tenancy, role-based access, CSV/JSON exports, and invite-only registration. No external CDNs, analytics, or tracking. Self-hostable via Docker with SQLite.',
+      de: 'KoalaBye ist eine Go-basierte Plattform für datenschutzorientiertes Feedback, wenn Nutzer deine Erweiterung oder App deinstallieren. Bietet anonyme Umfragen, cookiefreie öffentliche Seiten, Multi-Organisations-Mandantenfähigkeit, rollenbasierte Zugriffe, CSV/JSON-Exporte und einladungsbasierte Registrierung. Keine externen CDNs, Analytics oder Tracking. Selbst hostbar via Docker mit SQLite.',
+    },
+    tags: ['Go', 'Templ', 'HTMX', 'SQLite', 'Docker', 'Open Source', 'Self-hostable', 'Privacy-first', 'Web App', 'Survey Tool', 'Early'],
+    links: {
+      github: 'https://github.com/Shik3i/KoalaBye',
+    },
+    assets: {},
   },
 ];
 

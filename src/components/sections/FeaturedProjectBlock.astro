@@ -97,6 +97,15 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
 
     <p class="featured-project__desc">{description}</p>
 
+    {project.backstory && (
+      <details class="featured-project__backstory">
+        <summary>{tr['project.story']}</summary>
+        <div class="featured-project__backstory-content">
+          <p>{project.backstory[locale] ?? project.backstory.en}</p>
+        </div>
+      </details>
+    )}
+
     <div class="featured-project__meta">
       <span class={`badge ${statusClass}`}>
         <svg width="6" height="6" viewBox="0 0 6 6" aria-hidden="true">
@@ -131,7 +140,7 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
         </a>
       )}
       {(project.links.chrome || project.links.firefox) && project.status !== 'wip' && (
-        <div class="featured-project__download-group">
+        <>
           {project.links.chrome && (
             <a href={project.links.chrome} class="btn btn-ghost" data-link-platform="chrome" rel="noopener noreferrer" title={tr['featured.chromeStore'] ?? 'Chrome Web Store'}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -148,7 +157,7 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
               {tr['featured.firefoxAddons'] ?? 'Firefox Add-ons'}
             </a>
           )}
-        </div>
+        </>
       )}
     </div>
   </div>

@@ -758,13 +758,6 @@
   color: var(--project-accent, var(--c-accent));
   border: 1px solid hsl(from var(--project-accent, var(--c-accent)) h s l / 0.25);
 }
-.featured-project__download-group {
-  display: inline-flex;
-  gap: var(--space-3);
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 .featured-project__title {
   font-size: var(--text-4xl);
   font-weight: 800;
@@ -789,6 +782,31 @@
   line-height: 1.75;
   margin-bottom: var(--space-6);
   max-width: 36rem;
+}
+
+.featured-project__backstory {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--c-text-muted);
+  border-left: 3px solid var(--project-accent);
+  padding-left: var(--space-4);
+}
+
+.featured-project__backstory summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--c-text);
+  user-select: none;
+  transition: color var(--dur-fast);
+}
+
+.featured-project__backstory summary:hover {
+  color: var(--c-accent);
+}
+
+.featured-project__backstory-content {
+  margin-top: var(--space-3);
+  line-height: 1.6;
 }
 
 .featured-project__meta {
