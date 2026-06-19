@@ -5,6 +5,8 @@ import { locales, localeLangCodes, localeNames, getLocalePath, defaultLocale } f
 import type { Locale } from '../i18n/config';
 import { ClientRouter } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
+import { loadTranslations } from '../i18n/utils';
+import { getListedProjects, getProjectDescription, getProjectSlug } from '../data/projects';
 
 export interface Props {
   title: string;
@@ -30,6 +32,148 @@ const defaultLocalePath = getLocalePath(
   defaultLocale,
   canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''),
 );
+
+const isHomepage = canonicalPath === '/' || locales.some((l) => canonicalPath === `/${l}` || canonicalPath === `/${l}/`);
+const isProjectsPage = canonicalPath.endsWith('/projects') || canonicalPath.endsWith('/projects/');
+
+const tr = await loadTranslations(locale);
+
+const graph: any[] = [
+  {
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    "name": "KoalaStuff",
+    "url": siteUrl,
+    "logo": `${siteUrl}/favicon.svg`,
+    "sameAs": [
+      "https://github.com/Shik3i",
+      "https://dev.to/hungrykoala",
+      "https://mastodon.social/@koalastuff"
+    ]
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    "url": siteUrl,
+    "name": "KoalaStuff",
+    "description": "Small open-source tools for real annoyances.",
+    "inLanguage": langCode,
+    "publisher": { "@id": `${siteUrl}/#organization` },
+    "author": { "@id": `${siteUrl}/#person` }
+  },
+  {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    "name": "Timo",
+    "url": "https://github.com/Shik3i",
+    "sameAs": [
+      "https://github.com/Shik3i",
+      "https://dev.to/hungrykoala",
+      "https://mastodon.social/@koalastuff"
+    ]
+  }
+];
+
+if (isHomepage) {
+  graph.push({
+    "@type": "FAQPage",
+    "@id": `${siteUrl}${canonicalPath}#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": tr["faq.q1"] ?? "What is KoalaStuff?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a1"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q2"] ?? "Who builds KoalaStuff?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a2"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q3"] ?? "Are the projects open source?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a3"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q4"] ?? "Are the projects free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a4"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q5"] ?? "Where can I report bugs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a5"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q6"] ?? "Do you use tracking or cookies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a6"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q7"] ?? "Can I self-host KoalaStuff projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a7"] ?? ""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": tr["faq.q8"] ?? "Why are some projects marked experimental?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": tr["faq.a8"] ?? ""
+        }
+      }
+    ].filter(q => q.name && q.acceptedAnswer.text)
+  });
+}
+
+if (isProjectsPage) {
+  const listedProjects = getListedProjects();
+  graph.push({
+    "@type": "ItemList",
+    "@id": `${siteUrl}${canonicalPath}#project-list`,
+    "name": tr["nav.projects"] ?? "Projects",
+    "description": tr["categories.all.desc"] ?? "All open-source tools and utilities",
+    "numberOfItems": listedProjects.length,
+    "itemListElement": listedProjects.map((project, idx) => {
+      const slug = getProjectSlug(project);
+      const projectUrl = `${siteUrl}${getLocalePath(locale, `projects/${slug}`)}`;
+      return {
+        "@type": "ListItem",
+        "position": idx + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "@id": `${projectUrl}#software`,
+          "name": project.name,
+          "description": getProjectDescription(project, locale),
+          "applicationCategory": project.category === 'desktop' ? 'DesktopApplication' : project.category === 'web' ? 'WebApplication' : 'BrowserApplication',
+          "operatingSystem": "All",
+          "url": projectUrl
+        }
+      };
+    })
+  });
+}
 ---
 
 <!doctype html>
@@ -43,6 +187,9 @@ const defaultLocalePath = getLocalePath(
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta name="author" content="Timo (KoalaStuff)" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark light" />
@@ -50,8 +197,14 @@ const defaultLocalePath = getLocalePath(
     <meta name="darkreader-lock" />
     <ClientRouter />
 
-    <!-- Canonical, hreflang & RSS -->
+    <!-- Geotargeting -->
+    <meta name="geo.region" content="DE" />
+    <meta name="geo.position" content="51.165691;10.451526" />
+    <meta name="ICBM" content="51.165691, 10.451526" />
+
+    <!-- Canonical, hreflang, Sitemap & RSS -->
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <link rel="alternate" type="application/rss+xml" title="KoalaStuff Blog" href={`${siteUrl}/rss.xml`} />
     {locales.map((l) => (
       <link
@@ -89,44 +242,10 @@ const defaultLocalePath = getLocalePath(
     <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
-    <!-- JSON-LD: WebSite + Person + Organization -->
+    <!-- JSON-LD: WebSite + Person + Organization (+ FAQ/Projects if applicable) -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": `${siteUrl}/#organization`,
-          "name": "KoalaStuff",
-          "url": siteUrl,
-          "logo": `${siteUrl}/favicon.svg`,
-          "sameAs": [
-            "https://github.com/Shik3i",
-            "https://dev.to/hungrykoala",
-            "https://mastodon.social/@koalastuff"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": `${siteUrl}/#website`,
-          "url": siteUrl,
-          "name": "KoalaStuff",
-          "description": "Small open-source tools for real annoyances.",
-          "inLanguage": langCode,
-          "publisher": { "@id": `${siteUrl}/#organization` },
-          "author": { "@id": `${siteUrl}/#person` }
-        },
-        {
-          "@type": "Person",
-          "@id": `${siteUrl}/#person`,
-          "name": "Timo",
-          "url": "https://github.com/Shik3i",
-          "sameAs": [
-            "https://github.com/Shik3i",
-            "https://dev.to/hungrykoala",
-            "https://mastodon.social/@koalastuff"
-          ]
-        }
-      ]
+      "@graph": graph
     })} />
 
     <!-- Anti-flash theme script (loaded blocking from 'self' to prevent flash before render) -->
