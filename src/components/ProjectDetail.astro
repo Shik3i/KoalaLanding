@@ -1,0 +1,292 @@
+---
+import type { Locale } from '../i18n/config';
+import { getLocalePath } from '../i18n/config';
+import type { Project } from '../data/projects';
+import { getProjectDescription } from '../data/projects';
+import { Picture } from 'astro:assets';
+
+export interface Props {
+  project: Project;
+  locale: Locale;
+  translations: Record<string, string>;
+}
+
+const { project, locale, translations: tr } = Astro.props;
+const statusLabel = tr[`status.${project.status}`] ?? project.status;
+const categoryLabel = tr[`categories.${project.category}`] ?? project.category;
+const backHref = getLocalePath(locale, 'projects');
+const longDescription = getProjectDescription(project, locale, true);
+const shortDescription = getProjectDescription(project, locale);
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/**/*.{jpeg,jpg,png,gif,webp,svg}');
+const assetPath = project.assets.icon ? `/src${project.assets.icon}` : null;
+const isSvg = project.assets.icon?.endsWith('.svg');
+const imageImport = assetPath ? images[assetPath] : null;
+const imageSrc = imageImport ? (await imageImport()).default : null;
+
+const primaryLinks = [
+  project.links.website && project.status !== 'wip'
+    ? { href: project.links.website, label: tr['featured.visitWebsite'] ?? 'Visit website', variant: 'primary' }
+    : null,
+  project.links.github
+    ? { href: project.links.github, label: tr['featured.viewOnGitHub'] ?? 'View on GitHub', variant: 'secondary' }
+    : null,
+  project.links.docs
+    ? { href: project.links.docs, label: tr['featured.viewDocs'] ?? 'Docs', variant: 'ghost' }
+    : null,
+  project.links.devlog
+    ? { href: project.links.devlog, label: tr['featured.readDevlog'] ?? 'Devlog', variant: 'ghost' }
+    : null,
+].filter(Boolean) as { href: string; label: string; variant: string }[];
+---
+
+<article class="project-detail" style={`--project-accent: ${project.accentColor ?? 'var(--c-accent)'}`}>
+  <a href={backHref} class="btn btn-ghost project-detail__back" title={tr['nav.projects'] ?? 'Projects'}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    {tr['nav.projects'] ?? 'Projects'}
+  </a>
+
+  <header class="project-detail__hero">
+    <div class="project-detail__copy">
+      <div class="project-detail__eyebrow">
+        <span>{categoryLabel}</span>
+        <span class={`badge badge--${project.status}`}>{statusLabel}</span>
+      </div>
+
+      <h1>{project.name}</h1>
+      <p class="project-detail__lead">{shortDescription}</p>
+
+      {primaryLinks.length > 0 && (
+        <div class="project-detail__actions">
+          {primaryLinks.map((link) => (
+            <a href={link.href} class={`btn btn-${link.variant}`} target="_blank" rel="noopener noreferrer" title={link.label}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="project-detail__visual" aria-hidden="true">
+      {isSvg && project.assets.icon ? (
+        <img src={project.assets.icon} alt="" class="project-detail__icon" width="112" height="112" loading="eager" decoding="async" />
+      ) : imageSrc ? (
+        <Picture src={imageSrc} formats={['avif', 'webp']} densities={[1, 2]} alt="" class="project-detail__icon" width={112} height={112} loading="eager" />
+      ) : (
+        <div class="project-detail__icon project-detail__icon--fallback">
+          <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+            <path d="M8 9h8M8 12h8M8 15h5"></path>
+          </svg>
+        </div>
+      )}
+    </div>
+  </header>
+
+  <div class="project-detail__grid">
+    <section class="project-detail__section" aria-labelledby="project-overview">
+      <h2 id="project-overview">{tr['project.overview'] ?? 'Overview'}</h2>
+      <p>{longDescription}</p>
+    </section>
+
+    <aside class="project-detail__aside" aria-label="Project facts">
+      <div class="project-detail__fact">
+        <span>{tr['project.category'] ?? 'Category'}</span>
+        <strong>{categoryLabel}</strong>
+      </div>
+      <div class="project-detail__fact">
+        <span>{tr['project.status'] ?? 'Status'}</span>
+        <strong>{statusLabel}</strong>
+      </div>
+      {project.lastUpdated && (
+        <div class="project-detail__fact">
+          <span>{tr['project.updated'] ?? 'Updated'}</span>
+          <strong>{project.lastUpdated}</strong>
+        </div>
+      )}
+    </aside>
+  </div>
+
+  {project.backstory && (
+    <section class="project-detail__section" aria-labelledby="project-story">
+      <h2 id="project-story">{tr['project.story'] ?? 'Backstory'}</h2>
+      <p>{project.backstory[locale] ?? project.backstory.en}</p>
+    </section>
+  )}
+
+  <section class="project-detail__section" aria-labelledby="project-stack">
+    <h2 id="project-stack">{tr['project.stack'] ?? 'Stack'}</h2>
+    <div class="tags" aria-label={project.tags.join(', ')}>
+      {project.tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))}
+    </div>
+  </section>
+</article>
+
+<style>
+  .project-detail {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .project-detail__back {
+    width: fit-content;
+    padding-left: 0;
+  }
+
+  .project-detail__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-8);
+    align-items: center;
+    padding: var(--space-8);
+    border: 1px solid var(--c-border-subtle);
+    border-radius: var(--radius-xl);
+    background:
+      radial-gradient(480px circle at 92% 12%, color-mix(in srgb, var(--project-accent) 18%, transparent), transparent 70%),
+      hsla(224, 25%, 6%, 0.42);
+    backdrop-filter: blur(12px);
+  }
+
+  .project-detail__copy {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .project-detail__eyebrow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    color: var(--project-accent);
+    font-size: var(--text-sm);
+    font-weight: 700;
+  }
+
+  .project-detail h1 {
+    margin: 0;
+    color: var(--c-text-title);
+    font-size: var(--text-5xl);
+    line-height: 1;
+  }
+
+  .project-detail__lead {
+    max-width: 760px;
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: var(--text-xl);
+    line-height: 1.6;
+  }
+
+  .project-detail__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .project-detail__visual {
+    display: grid;
+    place-items: center;
+    width: 10rem;
+    height: 10rem;
+    border: 1px solid color-mix(in srgb, var(--project-accent) 38%, transparent);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--project-accent) 12%, transparent);
+    box-shadow: 0 18px 48px color-mix(in srgb, var(--project-accent) 18%, transparent);
+  }
+
+  .project-detail__icon {
+    width: 7rem;
+    height: 7rem;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+  }
+
+  .project-detail__icon--fallback {
+    display: grid;
+    place-items: center;
+    color: var(--project-accent);
+  }
+
+  .project-detail__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem);
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .project-detail__section,
+  .project-detail__aside {
+    border: 1px solid var(--c-border-subtle);
+    border-radius: var(--radius-lg);
+    background: hsla(var(--bg-card-raw), 0.32);
+    padding: var(--space-6);
+  }
+
+  .project-detail__section h2 {
+    margin: 0 0 var(--space-4);
+    color: var(--c-text-title);
+    font-size: var(--text-2xl);
+  }
+
+  .project-detail__section p {
+    margin: 0;
+    color: var(--c-text-muted);
+    line-height: 1.75;
+  }
+
+  .project-detail__aside {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .project-detail__fact {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .project-detail__fact span {
+    color: var(--c-text-faint);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-detail__fact strong {
+    color: var(--c-text);
+    font-size: var(--text-sm);
+  }
+
+  @media (max-width: 760px) {
+    .project-detail__hero,
+    .project-detail__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-detail__hero {
+      padding: var(--space-6);
+    }
+
+    .project-detail h1 {
+      font-size: var(--text-4xl);
+    }
+
+    .project-detail__lead {
+      font-size: var(--text-lg);
+    }
+
+    .project-detail__visual {
+      width: 100%;
+      height: 8rem;
+    }
+
+    .project-detail__icon {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+</style>

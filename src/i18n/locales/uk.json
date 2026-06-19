@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Експериментальні та WIP проекти",
   "projects.disclaimerText": "Ці проекти є незавершеними, експериментальними або припиненими. Вони перелічені тут для прозорості.",
   "blog.back": "Назад до огляду",
-  "blog.toc": "Зміст"
+  "blog.toc": "Зміст",
+  "project.details": "Деталі",
+  "project.overview": "Огляд",
+  "project.category": "Категорія",
+  "project.status": "Статус",
+  "project.updated": "Оновлено",
+  "project.stack": "Стек"
 }

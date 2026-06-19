@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Progetti Sperimentali e WIP",
   "projects.disclaimerText": "Questi progetti sono incompiuti, sperimentali o interrotti. Sono elencati qui per trasparenza.",
   "blog.back": "Torna alla panoramica",
-  "blog.toc": "Sommario"
+  "blog.toc": "Sommario",
+  "project.details": "Dettagli",
+  "project.overview": "Panoramica",
+  "project.category": "Categoria",
+  "project.status": "Stato",
+  "project.updated": "Aggiornato",
+  "project.stack": "Tecnologie"
 }

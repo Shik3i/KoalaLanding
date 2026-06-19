@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Proyectos experimentales y WIP",
   "projects.disclaimerText": "Estos proyectos están inacabados, son experimentales o han sido discontinuados. Se enumeran aquí por transparencia.",
   "blog.back": "Volver a la vista general",
-  "blog.toc": "Tabla de contenido"
+  "blog.toc": "Tabla de contenido",
+  "project.details": "Detalles",
+  "project.overview": "Resumen",
+  "project.category": "Categoría",
+  "project.status": "Estado",
+  "project.updated": "Actualizado",
+  "project.stack": "Tecnologías"
 }

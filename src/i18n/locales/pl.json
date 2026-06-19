@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Projekty eksperymentalne i WIP",
   "projects.disclaimerText": "Te projekty są nieukończone, eksperymentalne lub porzucone. Są tu wymienione w celach przejrzystości.",
   "blog.back": "Wróć do przeglądu",
-  "blog.toc": "Spis treści"
+  "blog.toc": "Spis treści",
+  "project.details": "Szczegóły",
+  "project.overview": "Przegląd",
+  "project.category": "Kategoria",
+  "project.status": "Status",
+  "project.updated": "Zaktualizowano",
+  "project.stack": "Technologie"
 }

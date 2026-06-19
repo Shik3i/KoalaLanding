@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Experimental & WIP Projects",
   "projects.disclaimerText": "These projects are either unfinished, experimental, or discontinued. They are listed here for transparency.",
   "blog.back": "Back to Overview",
-  "blog.toc": "Table of Contents"
+  "blog.toc": "Table of Contents",
+  "project.details": "Details",
+  "project.overview": "Overview",
+  "project.category": "Category",
+  "project.status": "Status",
+  "project.updated": "Updated",
+  "project.stack": "Stack"
 }

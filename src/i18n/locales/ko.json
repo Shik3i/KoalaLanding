@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "실험적 및 WIP 프로젝트",
   "projects.disclaimerText": "이 프로젝트들은 미완성이거나 실험적이거나 중단된 것입니다. 투명성을 위해 여기에 나열됩니다.",
   "blog.back": "개요로 돌아가기",
-  "blog.toc": "목차"
+  "blog.toc": "목차",
+  "project.details": "세부 정보",
+  "project.overview": "개요",
+  "project.category": "카테고리",
+  "project.status": "상태",
+  "project.updated": "업데이트됨",
+  "project.stack": "기술 스택"
 }

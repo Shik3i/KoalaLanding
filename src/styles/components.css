@@ -637,6 +637,15 @@
   letter-spacing: -0.01em;
 }
 
+.project-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card__title a:hover {
+  color: var(--project-accent, var(--c-accent));
+}
+
 .project-card__desc {
   font-size: var(--text-sm);
   color: var(--c-text-muted);
@@ -1286,4 +1295,3 @@
   opacity: 0.8 !important;
   transform: scale(1);
 }
-

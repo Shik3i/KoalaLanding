@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "实验性和 WIP 项目",
   "projects.disclaimerText": "这些项目未完成、处于实验阶段或已停止开发。为了透明度，它们在此列出。",
   "blog.back": "返回概览",
-  "blog.toc": "目录"
+  "blog.toc": "目录",
+  "project.details": "详情",
+  "project.overview": "概览",
+  "project.category": "类别",
+  "project.status": "状态",
+  "project.updated": "更新时间",
+  "project.stack": "技术栈"
 }

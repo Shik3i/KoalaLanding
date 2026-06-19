@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Experimentelle & WIP Projekte",
   "projects.disclaimerText": "Diese Projekte sind entweder unfertig, experimentell oder eingestellt. Sie werden hier aus Transparenzgründen aufgelistet.",
   "blog.back": "Zurück zur Übersicht",
-  "blog.toc": "Inhaltsverzeichnis"
+  "blog.toc": "Inhaltsverzeichnis",
+  "project.details": "Details",
+  "project.overview": "Überblick",
+  "project.category": "Kategorie",
+  "project.status": "Status",
+  "project.updated": "Aktualisiert",
+  "project.stack": "Technologien"
 }

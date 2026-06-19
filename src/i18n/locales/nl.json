@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Experimentele & WIP Projecten",
   "projects.disclaimerText": "Deze projecten zijn onvoltooid, experimenteel of stopgezet. Ze worden hier ter transparantie vermeld.",
   "blog.back": "Terug naar overzicht",
-  "blog.toc": "Inhoudsopgave"
+  "blog.toc": "Inhoudsopgave",
+  "project.details": "Details",
+  "project.overview": "Overzicht",
+  "project.category": "Categorie",
+  "project.status": "Status",
+  "project.updated": "Bijgewerkt",
+  "project.stack": "Technologieën"
 }

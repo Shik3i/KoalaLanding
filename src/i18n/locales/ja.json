@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "実験的およびWIPプロジェクト",
   "projects.disclaimerText": "これらのプロジェクトは未完成、実験的、または開発中止されたものです。透明性のためにここにリストされています。",
   "blog.back": "概要に戻る",
-  "blog.toc": "目次"
+  "blog.toc": "目次",
+  "project.details": "詳細",
+  "project.overview": "概要",
+  "project.category": "カテゴリ",
+  "project.status": "ステータス",
+  "project.updated": "更新日",
+  "project.stack": "技術スタック"
 }

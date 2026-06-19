@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { getListedProjects, getProjectDescription } from '../data/projects';
+import { getListedProjects, getProjectDescription, getProjectSlug } from '../data/projects';
 import { loadTranslations } from '../i18n/utils';
 import { defaultLocale } from '../i18n/config';
 
@@ -90,12 +90,13 @@ const jsonLdData = {
         {sortedProjects.map((project) => {
           const statusLabel = tr[`status.${project.status}`] ?? project.status;
           const statusClass = `status-dot--${project.status}`;
+          const detailHref = `/projects/${getProjectSlug(project)}`;
           
           return (
             <div class={`project-card-v2 tracker-row--${project.status}`} style={`--row-accent: ${project.accentColor ?? 'var(--c-accent)'}`} data-category={project.category}>
               <div class="card-v2-header">
                 <div class="card-v2-icon" set:html={categoryIcons[project.category] || defaultIcon} />
-                <h3 class="card-v2-title">{project.name}</h3>
+                <h3 class="card-v2-title"><a href={detailHref}>{project.name}</a></h3>
                 <div style="flex: 1"></div>
                 <span class={`status-pill status-pill--${project.status}`}>
                   <span class={`status-dot ${statusClass}`} />
@@ -117,6 +118,14 @@ const jsonLdData = {
 
               <div class="card-v2-footer">
                 <div class="tracker-links-group">
+                  <a href={detailHref} class="tracker-link" title={`${project.name} ${tr['project.details'] ?? 'details'}`}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+                      <path d="M14 3h7v7"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+                    </svg>
+                    <span>{tr['project.details'] ?? 'Details'}</span>
+                  </a>
                   {project.links.website && project.status !== 'wip' && (
                     <a href={project.links.website} class="tracker-link" title="Website" target="_blank" rel="noopener noreferrer">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
@@ -298,6 +307,15 @@ const jsonLdData = {
     margin: 0;
   }
 
+  .card-v2-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-v2-title a:hover {
+    color: var(--row-accent);
+  }
+
   .card-v2-body {
     flex: 1;
     margin-bottom: var(--space-6);
@@ -449,5 +467,3 @@ const jsonLdData = {
     }
   }
 </style>
-
-

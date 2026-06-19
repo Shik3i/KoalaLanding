@@ -99,5 +99,11 @@
   "projects.disclaimerTitle": "Deneysel ve WIP Projeler",
   "projects.disclaimerText": "Bu projeler ya tamamlanmamış, ya deneysel ya da sonlandırılmıştır. Şeffaflık amacıyla burada listelenmişlerdir.",
   "blog.back": "Genel Bakışa Dön",
-  "blog.toc": "İçindekiler"
+  "blog.toc": "İçindekiler",
+  "project.details": "Detaylar",
+  "project.overview": "Genel bakış",
+  "project.category": "Kategori",
+  "project.status": "Durum",
+  "project.updated": "Güncellendi",
+  "project.stack": "Teknolojiler"
 }

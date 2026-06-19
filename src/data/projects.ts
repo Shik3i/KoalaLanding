@@ -5,6 +5,7 @@ export type ProjectStatus = 'active' | 'wip' | 'experimental' | 'early' | 'archi
 
 export interface Project {
   id: string;
+  slug?: string;
   name: string;
   category: ProjectCategory;
   status: ProjectStatus;
@@ -65,6 +66,38 @@ export const projects: Project[] = [
       github: 'https://github.com/Shik3i/KoalaShip',
     },
     assets: {},
+  },
+  {
+    id: 'flatlandtd',
+    slug: 'flatland-td',
+    name: 'Flatland TD',
+    category: 'web',
+    status: 'active',
+    featured: false,
+    listed: true,
+    homepage: true,
+    accentColor: 'hsl(185, 85%, 52%)',
+    lastUpdated: '2026-06',
+    shortDescription: {
+      en: 'A local-first neon cyber idle tower defense game. Deploy towers, survive geometric enemies, refine Alloy and keep progressing offline.',
+      de: 'Ein local-first Neon-Cyber-Idle-Tower-Defense-Spiel. Türme einsetzen, geometrische Gegner überstehen, Alloy veredeln und offline weiter Fortschritt machen.',
+    },
+    longDescription: {
+      en: 'Flatland TD is a playable open-source idle tower defense game built with SvelteKit, Svelte 5, TypeScript and PixiJS v8/WebGL. Normal play works without login, analytics or backend availability once loaded. It includes permanent Forge upgrades, Field overclocks, Research Deck projects, Front progression, Schematics, achievements, procedural Web Audio and an installable offline-ready PWA shell. Optional online features run through the same Node server with SQLite.',
+      de: 'Flatland TD ist ein spielbares Open-Source-Idle-Tower-Defense-Spiel, gebaut mit SvelteKit, Svelte 5, TypeScript und PixiJS v8/WebGL. Normales Spielen funktioniert nach dem Laden ohne Login, Analytics oder verfügbares Backend. Enthalten sind permanente Forge-Upgrades, Field-Overclocks, Research-Deck-Projekte, Front-Fortschritt, Schematics, Achievements, prozedurales Web Audio und eine installierbare offlinefähige PWA. Optionale Online-Funktionen laufen über denselben Node-Server mit SQLite.',
+    },
+    backstory: {
+      en: 'Flatland TD started as a self-contained browser game experiment: a tower defense loop that respects local saves first, keeps the backend optional, and still feels like a complete little neon war-room.',
+      de: 'Flatland TD entstand als eigenständiges Browsergame-Experiment: ein Tower-Defense-Loop, der lokale Spielstände priorisiert, das Backend optional hält und sich trotzdem wie ein vollständiger kleiner Neon-Kommandoraum anfühlt.',
+    },
+    tags: ['SvelteKit', 'Svelte 5', 'TypeScript', 'PixiJS', 'WebGL', 'IndexedDB', 'PWA', 'Open Source', 'Game', 'Idle Tower Defense', 'Local-first'],
+    links: {
+      website: 'https://tower.koalastuff.net',
+      github: 'https://github.com/Shik3i/KoalaTower',
+    },
+    assets: {
+      icon: '/assets/projects/flatlandtd/icon.png',
+    },
   },
   {
     id: 'koalasync',
@@ -377,6 +410,14 @@ export const projects: Project[] = [
 
 export function getListedProjects(): Project[] {
   return projects.filter((p) => p.listed);
+}
+
+export function getProjectSlug(project: Project): string {
+  return project.slug ?? project.id;
+}
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => getProjectSlug(project) === slug);
 }
 
 export function getHomepageProjects(): Project[] {

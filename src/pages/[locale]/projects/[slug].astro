@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ProjectDetail from '../../../components/ProjectDetail.astro';
+import { getListedProjects, getProjectDescription, getProjectSlug } from '../../../data/projects';
+import { loadTranslations } from '../../../i18n/utils';
+import { getLocalePath, locales } from '../../../i18n/config';
+import type { Locale } from '../../../i18n/config';
+
+export async function getStaticPaths() {
+  const activeLocales = locales.filter((l) => l !== 'en');
+  const projects = getListedProjects();
+
+  return activeLocales.flatMap((locale) =>
+    projects.map((project) => ({
+      params: { locale, slug: getProjectSlug(project) },
+      props: { project },
+    })),
+  );
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const { project } = Astro.props;
+const tr = await loadTranslations(locale);
+const slug = getProjectSlug(project);
+const canonicalPath = getLocalePath(locale, `projects/${slug}`);
+const description = getProjectDescription(project, locale);
+const siteUrl = 'https://koalastuff.net';
+
+const jsonLdData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${siteUrl}${canonicalPath}#software`,
+  name: project.name,
+  description,
+  applicationCategory: project.category === 'desktop' ? 'DesktopApplication' : project.category === 'web' ? 'WebApplication' : 'BrowserApplication',
+  operatingSystem: 'All',
+  url: `${siteUrl}${canonicalPath}`,
+  sameAs: [
+    project.links.website,
+    project.links.github,
+  ].filter(Boolean),
+  author: {
+    '@type': 'Person',
+    '@id': `${siteUrl}/#person`,
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+  },
+  ...(project.links.github ? { codeRepository: project.links.github } : {}),
+  ...(project.links.website && project.status !== 'wip' ? { downloadUrl: project.links.website } : {}),
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+  isAccessibleForFree: true,
+  keywords: project.tags.join(', '),
+};
+---
+
+<BaseLayout
+  title={`${project.name} — KoalaStuff`}
+  description={description}
+  locale={locale}
+  canonicalPath={canonicalPath}
+>
+  <Header locale={locale} translations={tr} currentPath={canonicalPath} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdData)} />
+
+  <main id="main-content" class="section">
+    <div class="container">
+      <ProjectDetail project={project} locale={locale} translations={tr} />
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>

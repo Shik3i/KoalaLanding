@@ -1,7 +1,8 @@
 ---
 import type { Locale } from '../../i18n/config';
 import type { Project } from '../../data/projects';
-import { getProjectDescription } from '../../data/projects';
+import { getProjectDescription, getProjectSlug } from '../../data/projects';
+import { getLocalePath } from '../../i18n/config';
 import { Picture } from 'astro:assets';
 
 export interface Props {
@@ -16,6 +17,7 @@ const { project, locale, translations: tr, reversed = false } = Astro.props;
 const statusClass = `badge--${project.status}`;
 const statusLabel = tr[`status.${project.status}`] ?? project.status;
 const description = getProjectDescription(project, locale, true);
+const detailHref = getLocalePath(locale, `projects/${getProjectSlug(project)}`);
 
 // Load images dynamically
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/**/*.{jpeg,jpg,png,gif,webp,svg}');
@@ -121,6 +123,14 @@ const iconSrc = iconImport ? (await iconImport()).default : null;
     </div>
 
     <div class="featured-project__links">
+      <a href={detailHref} class="btn btn-secondary" title={`${project.name} ${tr['project.details'] ?? 'details'}`}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3h7v7"></path>
+          <path d="M10 14 21 3"></path>
+          <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+        </svg>
+        {tr['project.details'] ?? 'Details'}
+      </a>
       {project.links.website && project.status !== 'wip' && (
         <a href={project.links.website} class="btn btn-primary" rel="noopener noreferrer" title={tr['featured.visitWebsite'] ?? 'Visit website'}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
