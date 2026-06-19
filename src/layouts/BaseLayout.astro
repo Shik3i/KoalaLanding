@@ -30,7 +30,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
 const langCode = localeLangCodes[locale];
 const defaultLocalePath = getLocalePath(
   defaultLocale,
-  canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''),
+  canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt-BR|pt|tr|ru|ja|ko|zh|uk)(\/|$)/, ''),
 );
 
 const isHomepage = canonicalPath === '/' || locales.some((l) => canonicalPath === `/${l}` || canonicalPath === `/${l}/`);
@@ -210,7 +210,7 @@ if (isProjectsPage) {
       <link
         rel="alternate"
         hreflang={localeLangCodes[l]}
-        href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, ''))}`}
+        href={`${siteUrl}${getLocalePath(l, canonicalPath.replace(/^\/?(de|fr|es|it|nl|pl|pt-BR|pt|tr|ru|ja|ko|zh|uk)(\/|$)/, ''))}`}
       />
     ))}
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}${defaultLocalePath}`} />

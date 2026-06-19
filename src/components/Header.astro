@@ -13,7 +13,7 @@ export interface Props {
 
 const { locale, translations: tr, currentPath = '/' } = Astro.props;
 
-const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt|tr|ja|ko|zh|uk)(\/|$)/, '/').replace(/\/$/, '') || '/';
+const basePath = currentPath.replace(/^\/(de|fr|es|it|nl|pl|pt-BR|pt|tr|ru|ja|ko|zh|uk)(\/|$)/, '/').replace(/\/$/, '') || '/';
 ---
 
 <header class="site-header" role="banner">

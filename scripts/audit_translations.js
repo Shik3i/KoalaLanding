@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const locales = ['en', 'de', 'fr', 'es', 'it', 'nl', 'pl', 'pt', 'tr', 'ja', 'ko', 'zh', 'uk'];
+const locales = ['en', 'de', 'fr', 'es', 'it', 'nl', 'pl', 'pt', 'pt-BR', 'tr', 'ru', 'ja', 'ko', 'zh', 'uk'];
 
 const stopWords = {
   en: ['the', 'and', 'of', 'to', 'is', 'for', 'with', 'that', 'this', 'have'],
@@ -47,7 +47,7 @@ function detectIssue(text, expectedLang, englishText) {
   const lower = cleanText.toLowerCase();
 
   // Check for placeholders/TODOs using word boundaries, ignoring "todo" for Spanish/Portuguese
-  const regexTodo = ['es', 'pt'].includes(expectedLang)
+  const regexTodo = ['es', 'pt', 'pt-BR'].includes(expectedLang)
     ? /\b(temp|draft|fallback|placeholder|tbd)\b/i
     : /\b(todo|temp|draft|fallback|placeholder|tbd)\b/i;
   const regexBracket = /\[insert/i;
