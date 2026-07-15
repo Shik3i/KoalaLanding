@@ -1,60 +1,401 @@
 # KoalaStuff
 
-> Small open-source tools for real annoyances. No tracking, no SaaS fluff, no accounts. Developed by Timo.
+> Small open-source tools for real annoyances. Browser extensions, web tools, desktop utilities and experiments developed by Timo.
 
-## Useful Links
+KoalaStuff is the central project hub for a growing collection of independent open-source software. The projects focus on privacy, local-first workflows, self-hosting, useful automation and small problems that are underserved by commercial software.
+
+This document describes the complete public project catalog. It is generated from `src/data/projects.ts`, so project pages, structured metadata and this machine-readable overview stay synchronized.
+
+## Quick fit assessment
+
+KoalaStuff is a good fit for people who:
+
+- prefer open-source tools that can be inspected and self-hosted
+- want local-first or privacy-conscious alternatives to account-heavy SaaS products
+- use browser extensions, small web applications and desktop utilities to remove workflow friction
+- accept that experimental and early projects may change quickly
+
+KoalaStuff is not a single bundled product, hosted account platform or commercial software suite. Each project has its own scope, maturity, installation path and repository.
+
+## Project lifecycle
+
+- `active`: usable and actively maintained
+- `early`: functional early-stage software whose interfaces or architecture may still change
+- `wip`: work in progress; download and production links may intentionally be hidden
+- `experimental`: a proof of concept or narrowly scoped experiment
+- `archived`: retained for reference but no longer actively developed
+
+## Privacy and licensing
+
+- The hub itself has no advertising, analytics, tracking pixels or third-party telemetry.
+- Most projects are designed around local processing, self-hosting or minimal data collection.
+- Exact privacy behavior, permissions and licenses are documented in each project repository.
+- A project appearing in this catalog does not imply that every project has identical capabilities, maturity or deployment requirements.
+
+## Main links
 - Website: https://koalastuff.net
 - GitHub: https://github.com/Shik3i
-- Dev.to: https://dev.to/hungrykoala
+- Blog: https://koalastuff.net/blog/
+- RSS: https://koalastuff.net/rss.xml
 - Mastodon: https://mastodon.social/@koalastuff
+- Support: https://ko-fi.com/koaladev
 
-## Overview
-KoalaStuff is a project hub and blog featuring browser extensions, web tools, and desktop applications designed to solve real-world problems. All tools are open-source (MIT licensed) and focused on maximum user privacy, self-hostability, and local-first execution.
+# Complete project catalog (21 projects)
 
----
+## KoalaShip
 
-## Active Projects
+KoalaShip is an open-source shopping and parcel-delivery simulation. It recreates the enjoyable parts of online shopping: browsing products, comparing prices, placing fictional orders, waiting for deliveries, unboxing purchases and displaying them in a personal collection. No real money, merchants or debt are involved.
 
-### KoalaSync (Browser Extension)
-- **Description:** Browser watch parties for any video. Syncs video playback (play, pause, seeking) across YouTube, Netflix, Emby, Jellyfin, Plex, and more. Features local Web Audio API dynamics compression for normalizing audio volume (quiet dialogue vs. loud explosions).
-- **Web App:** https://sync.koalastuff.net
-- **GitHub Repository:** https://github.com/Shik3i/KoalaSync
-- **Chrome Web Store:** https://chromewebstore.google.com/detail/koalasync/obbnmkmlaaddodakcbdljknjpagklifc
-- **Firefox Add-ons:** https://addons.mozilla.org/de/firefox/addon/koalasync/
+### Why it exists
 
-### KoalaShip (Web Application)
-- **Description:** An open-source parcel-delivery and online shopping simulation. Recreates browsing, shopping, tracking, and unboxing without spending real money.
-- **Website:** https://ship.koalastuff.net
-- **GitHub Repository:** https://github.com/Shik3i/KoalaShip
+I read an article about "Dopamine sites" in South Korea (sites with fake shopping carts and fictional parcel tracking designed to release dopamine without spending money). I thought the idea was hilarious and wanted to see how hard it would be to build, while also testing Svelte as an alternative to Astro.
 
-### KoalaPull (Desktop Application)
-- **Description:** A native cross-platform desktop download manager (macOS, Windows, Linux) built on top of yt-dlp and ffmpeg. Features automatic setup of dependencies, format selection, preset management, and a queue. Local-only, no telemetry.
-- **Website:** https://pull.koalastuff.net
-- **GitHub Repository:** https://github.com/Shik3i/KoalaPull
+### Project profile
 
-### KoalaStartpage (Web Application)
-- **Description:** A personal bento-box startpage and server dashboard.
-- **Website:** https://start.koalastuff.net
-- **GitHub Repository:** https://github.com/Shik3i/KoalaStartpage
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: Svelte 5, TypeScript, Vite, Tailwind CSS, Leaflet, Open Source, Web App, Simulation
+- Project page: https://koalastuff.net/projects/koalaship/
+- Website: https://ship.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaShip
 
-### KoalaSnippets (Web Application)
-- **Description:** A self-hostable Svelte/Tailwind developer code snippet manager.
-- **GitHub Repository:** https://github.com/Shik3i/KoalaSnippets
+## Flatland TD
 
----
+Flatland TD is a playable open-source idle tower defense game built with SvelteKit, Svelte 5, TypeScript and PixiJS v8/WebGL. Normal play works without login, analytics or backend availability once loaded. It includes permanent Forge upgrades, Field overclocks, Research Deck projects, Front progression, Schematics, achievements, procedural Web Audio and an installable offline-ready PWA shell. Optional online features run through the same Node server with SQLite.
 
-## Other Projects & Experiments
+### Why it exists
 
-- **KoalaClicker (WIP Browser Extension):** Privacy-first auto-clicker for active browser tabs. [GitHub Repository](https://github.com/Shik3i/KoalaClicker)
-- **KoalaCookies (WIP Browser Extension):** Lightweight cookie editor and manager. [GitHub Repository](https://github.com/Shik3i/KoalaCookies)
-- **KoalaFlyff (WIP Browser Extension):** Forward keystrokes to a background tab to play two game accounts concurrently. [GitHub Repository](https://github.com/Shik3i/FlyffUniverseHelper)
-- **KoalaSound (Experimental Browser Extension):** Real-time Chromium audio processing presets. [GitHub Repository](https://github.com/Shik3i/KoalaSound)
+Flatland TD was heavily inspired by the game 'The Tower'. It really annoyed me that it wasn't playable on PC, which is why I turned it into a responsive web app. Also, the pay-to-win system of the developers got on my nerves – they simply became way too greedy.
 
----
+### Project profile
 
-## Blog & Articles
-KoalaStuff includes a static blog hosting dev logs and technical guides. Main articles include:
-- **caddy-reverse-proxy-tutorial:** Setting up a Caddy reverse proxy for local developer domains.
-- **local-audio-compressor:** Implementation details of building a browser DynamicsCompressorNode.
-- **vibe-coding-saved-me:** Thoughts on generative AI pair programming.
-- **koalastuff-new-home:** Why koalastuff.net was rebuilt into a project hub.
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: SvelteKit, Svelte 5, TypeScript, PixiJS, WebGL, IndexedDB, PWA, Open Source, Game, Idle Tower Defense, Local-first
+- Project page: https://koalastuff.net/projects/flatland-td/
+- Website: https://tower.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaTower
+
+## KoalaSync
+
+KoalaSync is a browser extension and self-hostable relay server for synchronized video playback on almost any website with a video element. Works with YouTube, Twitch, Netflix, Amazon Prime, Disney+, Emby, Jellyfin, Plex and more. Includes smart audio compression, episode auto-sync, and invitation links. No account required — just install, create a room, and share the link.
+
+### Why it exists
+
+KoalaSync was born out of frustration that popular watch party alternatives like Teleparty do not support self-hosted platforms (e.g., Emby). I wanted to create a privacy-first solution that remains permanently free, ad-free, and fully self-hostable.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: JavaScript, Node.js, WebSocket, Web Audio API, Open Source, Browser Extension, Self-hostable, Free, Watch Party
+- Project page: https://koalastuff.net/projects/koalasync/
+- Website: https://sync.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaSync
+- Chrome Web Store: https://chromewebstore.google.com/detail/koalasync/obbnmkmlaaddodakcbdljknjpagklifc
+- Firefox Add-ons: https://addons.mozilla.org/de/firefox/addon/koalasync/
+
+## KoalaPull
+
+KoalaPull wraps yt-dlp and ffmpeg in a native desktop UI for macOS, Windows and Linux. Zero-config setup — it automatically downloads and configures its own engine binaries on first run. Features a metadata preview, format selection, download queue, presets and history. Privacy-first: local-only, no telemetry, no cloud, no accounts.
+
+### Why it exists
+
+Tired of searching for a new, working graphical user interface every time I wanted to use yt-dlp, I decided to build my own clean, native desktop UI.
+
+### Project profile
+
+- Category: desktop
+- Lifecycle status: active
+- Catalog updated: 2026-05
+- Technologies and focus: Python, Flet, yt-dlp, ffmpeg, Open Source, Desktop App, Free, Local-first, Privacy-first
+- Project page: https://koalastuff.net/projects/koalapull/
+- Website: https://pull.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaPull
+
+## KoalaClicker
+
+A privacy-first auto-clicker for idle games and repetitive web tasks. Zero tracking, zero permissions beyond the active tab.
+
+### Why it exists
+
+While playing Cookie Clicker, I wanted an easy, safe way to quickly automate clicks without having to install untrustworthy browser extensions or external scripts.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: wip
+- Catalog updated: 2026-04
+- Technologies and focus: JavaScript, Open Source, Browser Extension, Free, Privacy-first, Automation, Idle Games
+- Project page: https://koalastuff.net/projects/koalaclicker/
+- Website: https://clicker.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaClicker
+
+## KoalaCookies
+
+A privacy-first browser extension that automatically rejects cookie-consent banners across common providers, with gentle and aggressive modes.
+
+### Why it exists
+
+I found existing cookie managers to be bloated or invasive. I wanted a minimal, privacy-focused extension that provided only the necessary tools for managing cookies locally.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: wip
+- Technologies and focus: JavaScript, Open Source, Browser Extension, Privacy-first, Cookie Consent, Automation, Zero Dependencies, WIP
+- Project page: https://koalastuff.net/projects/koalacookies/
+- GitHub: https://github.com/Shik3i/KoalaCookies
+
+## KoalaFlyff
+
+Helper extension for Flyff Universe to play two accounts simultaneously by forwarding keystrokes from the active tab to a secondary background tab (e.g., to trigger heals).
+
+### Why it exists
+
+Playing two characters in Flyff Universe manually is tedious. I built this extension to automate the boring support tasks by syncing inputs between tabs.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: wip
+- Technologies and focus: JavaScript, Open Source, Browser Extension, Gaming, WIP
+- Project page: https://koalastuff.net/projects/koalaflyff/
+- Website: https://multibox.koalastuff.net
+- GitHub: https://github.com/Shik3i/FlyffUniverseHelper
+
+## KoalaSound
+
+Real-time audio processing for browser video tabs. Compressor and EQ presets. Chromium-only proof of concept.
+
+### Why it exists
+
+Modern movies often have extreme volume fluctuations between quiet dialogue and loud action scenes, forcing constant volume adjustments. KoalaSound was built as a proof of concept to solve this, with the goal of eventually integrating it directly into KoalaSync.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: experimental
+- Catalog updated: 2026-03
+- Technologies and focus: JavaScript, Web Audio API, Open Source, Browser Extension, Free, Audio, Experimental
+- Project page: https://koalastuff.net/projects/koalasound/
+- GitHub: https://github.com/Shik3i/KoalaSound
+
+## KoalaStartpage
+
+A personal bento-box dashboard linking KoalaStuff projects, server status and daily tools. Moving to startpage.koalastuff.net.
+
+### Why it exists
+
+I needed a personalized new tab page that immediately links to all my key projects and servers to speed up my daily workflow. It also shows the local weather conditions at a glance.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: JavaScript, Vanilla CSS, PWA, Open Source, Web App, Dashboard, Self-hosted, Zero Dependencies
+- Project page: https://koalastuff.net/projects/koalastartpage/
+- Website: https://start.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaStartpage
+
+## KoalaSnippets
+
+A polished self-hosted code snippet manager to capture, organize, and share code snippets easily.
+
+### Why it exists
+
+I was frustrated by the chaos of keeping hundreds of unsaved tabs open in Notepad++ just to store SQL queries and code snippets. Since the popular alternative 'snippet-box' hadn't been updated in years, I built KoalaSnippets as a modern self-hosted replacement.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: Next.js 16, TypeScript, Tailwind CSS 4, SQLite, Drizzle, Shiki, Open Source, Self-hostable, Developer Tools
+- Project page: https://koalastuff.net/projects/koalasnippets/
+- Website: https://snippets.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaSnippets
+
+## KoalaWeb
+
+Shared online timer application for synchronized countdowns and session tracking.
+
+### Why it exists
+
+KoalaWeb started with the idea of a synchronized online timer to coordinate regular 30-minute breaks with a friend without having to ask how much time was left. It later expanded to include League of Legends esports trackers, betting games with play money, and other fun features.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-05
+- Technologies and focus: JavaScript, Node.js, WebSocket, Open Source, Web App, Self-hostable, Developer Tools, Shared Timer
+- Project page: https://koalastuff.net/projects/koalaweb/
+- Website: https://timer.koalastuff.net
+- GitHub: https://github.com/Shik3i/Antigrav
+
+## KoalaSnap
+
+KoalaSnap is a free, open-source online utility designed to generate realistic mockup screenshots of various chat and social media platforms including WhatsApp, Discord, Telegram, Signal, iMessage, and X (Twitter). Modify contact names, statuses, bubbles, emojis, and avatars. All rendering is performed completely client-side in your local browser. No data is stored, tracked, or sent to any server.
+
+### Why it exists
+
+This project was built as a proof of concept. After seeing someone on Reddit charge money for a chat mockup generator, I wanted to prove that a similar tool could be built in just one or two hours using a free AI model (DeepSeek).
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-06
+- Technologies and focus: Svelte, Tailwind CSS, Open Source, Web App, Design Tool, Privacy-first
+- Project page: https://koalastuff.net/projects/koalasnap/
+- Website: https://snap.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaSnap
+
+## KoalaEdit
+
+KoalaEdit is an early web and desktop-oriented Markdown editor built with Svelte 5, Vite, CodeMirror 6 and a sanitized unified/rehype rendering pipeline. Notes are stored locally through localforage, with a sidebar for quick switching, auto-save, light/dark themes and a split editor/preview layout.
+
+### Why it exists
+
+I wanted a small, fast Markdown workspace that keeps drafts local by default and does not require accounts, sync services or a heavyweight writing suite.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-06
+- Technologies and focus: Svelte 5, TypeScript, Vite, CodeMirror, Markdown, Local-first, PWA, Web App, Early
+- Project page: https://koalastuff.net/projects/koalaedit/
+- GitHub: https://github.com/Shik3i/KoalaEdit
+
+## KoalaNews
+
+KoalaNews has moved from the old Next.js/Prisma stack to a Go service with chi, sqlc and pure-Go SQLite. The static SvelteKit 5 frontend is embedded into the Go binary, while a server-side sync worker fetches RSS feeds, deduplicates articles and serves cached images from the app origin to avoid browser-side hotlinking. The current app includes public feeds, user accounts, per-user feed management, categories, smart feeds, read state, OPML import/export, appearance preferences, admin statistics and GFS backups.
+
+### Why it exists
+
+I wanted to create a privacy-focused RSS reader and aggregator that allows me to simply open a single page and scroll through all my news feeds in one place without any tracking.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-06
+- Technologies and focus: Go, SvelteKit, TypeScript, Tailwind CSS, SQLite, sqlc, RSS, Docker, Open Source, Self-hostable, Privacy-first, Web App, Early
+- Project page: https://koalastuff.net/projects/koalanews/
+- Website: https://news.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaNews
+
+## KoalaWorld
+
+KoalaWorld renders an interactive 3D globe in the browser using Three.js and overlays real-time geospatial data from USGS, NASA FIRMS, Open-Meteo and others. Fully self-hostable via Docker with a Go backend and SQLite — no external databases required.
+
+### Why it exists
+
+KoalaWorld was a proof of concept to evaluate the capabilities of local AI models. I wanted to see if they could generate a smooth WebGL 3D rendering of Earth that visualizes real-time geospatial data from various open APIs.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-06
+- Technologies and focus: Go, TypeScript, Three.js, Vite, Docker, SQLite, Open Source, Self-hostable, Geo-Visualization, Web App, Early
+- Project page: https://koalastuff.net/projects/koalaworld/
+- GitHub: https://github.com/Shik3i/KoalaWorld
+
+## KoalaBye
+
+KoalaBye is a Go-based platform for collecting privacy-first feedback when users uninstall your extension or app. Features anonymous surveys, cookie-free public pages, multi-organization tenancy, role-based access, CSV/JSON exports, and invite-only registration. No external CDNs, analytics, or tracking. Self-hostable via Docker with SQLite.
+
+### Why it exists
+
+To understand why users uninstall KoalaSync, I needed a privacy-focused survey tool. I wanted to avoid paying external providers and, most importantly, keep my users' data safe by not redirecting them to third-party platforms with questionable privacy policies.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-06
+- Technologies and focus: Go, Templ, HTMX, SQLite, Docker, Open Source, Self-hostable, Privacy-first, Web App, Survey Tool, Early
+- Project page: https://koalastuff.net/projects/koalabye/
+- Website: https://bye.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaBye
+
+## KoalaFinance
+
+A self-hosted, end-to-end encrypted personal finance tracker. Track budgets and expenses manually without bank APIs, telemetry, or SaaS dependencies.
+
+### Why it exists
+
+I wanted a personal finance tool that doesn't connect to banks or rely on external services. Every existing solution either requires full bank API access or runs on someone else's servers. KoalaFinance is my attempt at a self-hosted, encrypted, manual-budgeting alternative where only the user holds the keys.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-06
+- Technologies and focus: Go, TypeScript, Svelte, SQLite, E2EE, Self-hostable, Privacy-first, Web App, Early
+- Project page: https://koalastuff.net/projects/koalafinance/
+- GitHub: https://github.com/Shik3i/KoalaFinance
+
+## KoalaTrade
+
+A privacy-first paper-trading desk for stocks, ETFs, crypto, commodities and live eSports prediction markets — using virtual cash only.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-07
+- Technologies and focus: Go, Svelte 5, TypeScript, SQLite, IndexedDB, PWA, Docker, Paper Trading, Privacy-first
+- Project page: https://koalastuff.net/projects/koalatrade/
+- GitHub: https://github.com/Shik3i/KoalaTrade
+
+## KoalaFi
+
+Endless procedural lo-fi music and ambient noise generated locally in the browser, with offline support and no accounts, tracking or external audio assets.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-07
+- Technologies and focus: SvelteKit, Tone.js, TypeScript, IndexedDB, PWA, Canvas 2D, Local-first, Privacy-first
+- Project page: https://koalastuff.net/projects/koalafi/
+- Website: https://lofi.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaFi
+
+## KoalaTranslate
+
+A self-hosted visual translation portal that lets non-technical contributors localize KoalaStuff projects in context instead of editing raw JSON files.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-07
+- Technologies and focus: Go, SvelteKit, TypeScript, SQLite, Docker, i18n, Self-hostable, Translation Tools, Early
+- Project page: https://koalastuff.net/projects/koalatranslate/
+- GitHub: https://github.com/Shik3i/KoalaTranslate
+
+## KoalaNotes
+
+A privacy-first, local-first TTRPG campaign notebook. Capture session notes, NPCs, and world lore offline with optional end-to-end encrypted sync.
+
+### Why it exists
+
+Existing TTRPG campaign tools are either bloated with features I don't need or require accounts and cloud storage. I wanted a simple, local-first notebook that works offline, keeps player data private, and optionally syncs when I choose — without lock-in or subscriptions.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: wip
+- Catalog updated: 2026-06
+- Technologies and focus: Svelte, Go, SQLite, Local-first, PWA, E2EE, Privacy-first, Web App, WIP
+- Project page: https://koalastuff.net/projects/koalanotes/
+- GitHub: https://github.com/Shik3i/KoalaNotes

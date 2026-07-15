@@ -7,7 +7,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/postbuild.js",
+    "audit:translations": "node scripts/audit_translations.js",
+    "audit:catalog": "node scripts/audit_project_catalog.mjs",
+    "check": "npm run audit:translations && npm run audit:catalog",
+    "build": "npm run audit:translations && astro build && node scripts/postbuild.js",
     "preview": "astro preview",
     "astro": "astro"
   },

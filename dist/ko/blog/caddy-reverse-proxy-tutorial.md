@@ -6,7 +6,7 @@ But the nice part is: you do not have to start with all of that.
 
 You can start with this:
 
-```caddyfile
+```text
 my.domain.com {
     reverse_proxy my-app:3000
 }
@@ -30,13 +30,13 @@ In my setup, that shared Docker network is called `caddy_net`.
 
 That part matters because it decides whether you can use Docker container names like this:
 
-```caddyfile
+```text
 reverse_proxy ghost_blog:2368
 ```
 
 or whether you need to use an IP address instead:
 
-```caddyfile
+```text
 reverse_proxy 192.168.178.50:2368
 ```
 
@@ -54,7 +54,7 @@ A `Caddyfile` is not YAML. It just uses blocks with `{ }`, which can make it loo
 
 The simplest useful Caddy reverse proxy looks like this:
 
-```caddyfile
+```text
 my.domain.com {
     reverse_proxy my-app:3000
 }
@@ -71,7 +71,7 @@ For a lot of small self-hosted apps, that is already enough.
 
 For example, if you run something like Uptime Kuma in Docker and the service is called `uptime-kuma`, your Caddy block might be:
 
-```caddyfile
+```text
 status.example.com {
     reverse_proxy uptime-kuma:3001
 }
@@ -85,7 +85,7 @@ This is probably the most common beginner mistake.
 
 This works:
 
-```caddyfile
+```text
 my.domain.com {
     reverse_proxy my-app:3000
 }
@@ -131,7 +131,7 @@ In my case, I use one shared Docker network called `caddy_net` and attach the se
 
 Then Caddy can use names like:
 
-```caddyfile
+```text
 reverse_proxy ghost_blog:2368
 reverse_proxy uptime-kuma:3001
 reverse_proxy casdoor:8000
@@ -139,7 +139,7 @@ reverse_proxy casdoor:8000
 
 If your app is not in the same Docker network, use an IP address:
 
-```caddyfile
+```text
 my.domain.com {
     reverse_proxy 192.168.178.50:3000
 }
@@ -151,7 +151,7 @@ There is nothing wrong with that. Docker names are just cleaner when everything 
 
 The next small upgrade is compression.
 
-```caddyfile
+```text
 my.domain.com {
     encode zstd gzip
     reverse_proxy my-app:3000
@@ -168,7 +168,7 @@ You can also let Caddy add HTTP headers.
 
 A small baseline could look like this:
 
-```caddyfile
+```text
 my.domain.com {
     encode zstd gzip
 
@@ -201,7 +201,7 @@ For a first setup, keep it simple.
 
 If you have one domain, this is fine:
 
-```caddyfile
+```text
 my.domain.com {
     encode zstd gzip
 
@@ -225,7 +225,7 @@ A snippet is a reusable block in your Caddyfile.
 
 It looks like this:
 
-```caddyfile
+```text
 (base) {
     encode zstd gzip
 
@@ -242,7 +242,7 @@ It looks like this:
 
 Then you can import it into a site:
 
-```caddyfile
+```text
 my.domain.com {
     import base
     reverse_proxy my-app:3000
@@ -253,7 +253,7 @@ This is one of the main reasons my Caddyfile is still readable.
 
 Most of my domains start with something like this:
 
-```caddyfile
+```text
 some.koalastuff.net {
     import json_log some-name
     import base
@@ -265,7 +265,7 @@ The site block stays short, and the shared defaults live in one place.
 
 You can also import snippets inside snippets themselves, for example:
 
-```caddyfile
+```text
 (base) {
     import cat_errors
     encode zstd gzip
@@ -300,9 +300,9 @@ This part is not required, but I like it.
 
 Instead of boring error pages, I use a tiny error handler with http.cat:
 
-![http.cat error example](/assets/blog/http-cat-example.png)
+![http.cat error example](/assets/blog/http-cat-example.webp)
 
-```caddyfile
+```text
 (cat_errors) {
     handle_errors {
         header Content-Type "text/html; charset=utf-8"
@@ -313,7 +313,7 @@ Instead of boring error pages, I use a tiny error handler with http.cat:
 
 The interesting part is this placeholder:
 
-```caddyfile
+```text
 {http.error.status_code}
 ```
 
@@ -345,7 +345,7 @@ So if you use the http.cat error handler, remember to add `https://http.cat` to 
 
 For logs, I use another snippet:
 
-```caddyfile
+```text
 (json_log) {
     log {
         output file /var/log/caddy/{args.0}.access.log {
@@ -361,7 +361,7 @@ The `{args.0}` part is useful.
 
 It lets me import the snippet with a name:
 
-```caddyfile
+```text
 blog.example.com {
     import json_log blog
     import base
@@ -377,7 +377,7 @@ That creates a log file like:
 
 For another site:
 
-```caddyfile
+```text
 status.example.com {
     import json_log status
     import base
@@ -393,7 +393,7 @@ That gets:
 
 I also limit log file size:
 
-```caddyfile
+```text
 roll_size 15mb
 roll_keep 3
 ```
@@ -410,7 +410,7 @@ Some of my KoalaStuff pages are exactly that. This could be a simple, handwritte
 
 A simple static site block looks like this:
 
-```caddyfile
+```text
 sync.example.com {
     import base
     root * /var/www/sync
@@ -440,7 +440,7 @@ This is great for small frontends, documentation pages, landing pages, tools and
 
 For static sites, I use a snippet for file handling and asset caching:
 
-```caddyfile
+```text
 (static_assets) {
     file_server {
         hide .*
@@ -465,7 +465,7 @@ The `@static` matcher selects common static assets like CSS, JS, images and font
 
 Then this line adds long-term caching:
 
-```caddyfile
+```text
 header @static Cache-Control "public, max-age=31536000, immutable"
 ```
 
@@ -486,7 +486,7 @@ One file I do not want to cache forever is the service worker.
 
 For example:
 
-```caddyfile
+```text
 @sw path /sw.js
 header @sw Cache-Control "no-cache, no-store, must-revalidate"
 ```
@@ -499,7 +499,7 @@ The service worker should usually be checked more carefully.
 
 That is why my static asset snippet excludes `/sw.js`:
 
-```caddyfile
+```text
 not path /sw.js
 ```
 
@@ -521,7 +521,7 @@ Without a fallback, refreshing that URL can cause a 404.
 
 For that, I use this snippet:
 
-```caddyfile
+```text
 (spa) {
     try_files {path} {path}/index.html {path}.html {path}/
 }
@@ -529,7 +529,7 @@ For that, I use this snippet:
 
 Then a static frontend can look like this:
 
-```caddyfile
+```text
 sync.example.com {
     import json_log sync
     import base
@@ -554,7 +554,7 @@ For those, I use `reverse_proxy`.
 
 A Ghost blog could look like this:
 
-```caddyfile
+```text
 blog.example.com {
     import json_log blog
     import base
@@ -564,7 +564,7 @@ blog.example.com {
 
 Uptime Kuma:
 
-```caddyfile
+```text
 status.example.com {
     import json_log status
     import base
@@ -574,7 +574,7 @@ status.example.com {
 
 An auth service:
 
-```caddyfile
+```text
 auth.example.com {
     import json_log auth
     import base
@@ -590,7 +590,7 @@ That is why I like Caddy for small projects. A new subdomain is often just four 
 
 Sometimes I explicitly pass headers to the upstream app:
 
-```caddyfile
+```text
 timer.example.com {
     import base
 
@@ -614,7 +614,7 @@ The reason is simple: different apps need different rules.
 
 A very simple static site can have a strict policy:
 
-```caddyfile
+```text
 header {
     Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none';"
 }
@@ -624,13 +624,13 @@ But another app may need external images, WebSocket connections, iframes, maps o
 
 For example, a timer/watch-party app might need YouTube or Twitch frames:
 
-```caddyfile
+```text
 frame-src 'self' https://player.twitch.tv https://www.youtube.com;
 ```
 
 A map-based app might need map tiles:
 
-```caddyfile
+```text
 img-src 'self' data: blob: https://*.basemaps.cartocdn.com;
 ```
 
@@ -646,7 +646,7 @@ Caddy can also proxy small API routes. I use this when a frontend should call my
 
 For example, a small weather endpoint could look like this:
 
-```caddyfile
+```text
 rewrite /api/weather /v1/forecast?latitude=52.37&longitude=9.73&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=3
 
 reverse_proxy /v1/forecast* https://api.open-meteo.com {
@@ -664,7 +664,7 @@ Caddy takes that request and sends it to the external weather API. The frontend 
 
 A nice side effect is that this also helps with security. If the browser only calls my own domain, I can keep my Content Security Policy much stricter. For example, the frontend may only need this:
 
-```caddyfile
+```text
 header {
     Content-Security-Policy "default-src 'self'; connect-src 'self';"
 }
@@ -674,7 +674,7 @@ Without the proxy, I would have to allow the external API directly in `connect-s
 
 This pattern is also useful for frontend-only projects where you do not want to put API keys into the JavaScript bundle. Instead of shipping the key to every visitor, Caddy can add it on the server side:
 
-```caddyfile
+```text
 reverse_proxy /api/example* https://api.example.com {
     header_up Host {upstream_hostport}
     header_up Authorization "Bearer {$EXAMPLE_API_KEY}"
@@ -691,7 +691,7 @@ For my small ship/map simulation, I use `handle_path` for route and tile proxyin
 
 A simplified route proxy looks like this:
 
-```caddyfile
+```text
 handle_path /api/route/* {
     rewrite * /route/v1/driving{uri}
 
@@ -715,7 +715,7 @@ Caddy rewrites it and proxies it to OSRM.
 
 For map tiles, the pattern is similar:
 
-```caddyfile
+```text
 handle_path /api/tiles/light/* {
     rewrite * /light_all{uri}
 
@@ -744,7 +744,7 @@ Redirects are also very simple in Caddy.
 
 Redirect `www` to the root domain:
 
-```caddyfile
+```text
 www.example.com {
     redir https://example.com
 }
@@ -752,7 +752,7 @@ www.example.com {
 
 Redirect an old subdomain to a new one:
 
-```caddyfile
+```text
 old.example.com {
     redir https://new.example.com
 }
@@ -760,7 +760,7 @@ old.example.com {
 
 Redirect multiple subdomains to the same target:
 
-```caddyfile
+```text
 support.example.com, donate.example.com {
     redir https://ko-fi.com/yourname
 }
@@ -768,7 +768,7 @@ support.example.com, donate.example.com {
 
 Keep the original path with `{uri}`:
 
-```caddyfile
+```text
 google.example.com {
     redir https://google.com{uri}
 }
@@ -792,7 +792,7 @@ Redirects are one of those small things that make Caddy really comfortable for p
 
 At the top of my Caddyfile, I also have a global options block:
 
-```caddyfile
+```text
 {
     admin localhost:2019
 
@@ -818,7 +818,7 @@ If you are just starting, I would not begin with the full setup.
 
 Start with something like this:
 
-```caddyfile
+```text
 my.domain.com {
     encode zstd gzip
 
@@ -840,7 +840,7 @@ Then add more only when you actually need it.
 
 Once you have multiple subdomains, move repeated config into snippets:
 
-```caddyfile
+```text
 (json_log) {
     log {
         output file /var/log/caddy/{args.0}.access.log {
@@ -880,7 +880,7 @@ This is the point where your Caddyfile starts feeling organized instead of copy-
 
 For a static frontend app:
 
-```caddyfile
+```text
 (static_assets) {
     file_server {
         hide .*
@@ -923,7 +923,7 @@ This is the setup I would use for many small static apps:
 
 Putting the ideas together, a bigger setup can look like this:
 
-```caddyfile
+```text
 {
     metrics {
         per_host
@@ -1029,7 +1029,7 @@ Do not try to write the final version on day one.
 
 Start with:
 
-```caddyfile
+```text
 my.domain.com {
     reverse_proxy my-app:3000
 }

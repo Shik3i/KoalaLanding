@@ -28,7 +28,7 @@
 <p>That does not mean it is only useful for tiny setups. My KoalaStuff server uses Caddy for static sites, Docker apps, redirects, custom headers, access logs, API proxying, service worker caching and a few other little quality-of-life things.</p>
 <p>But the nice part is: you do not have to start with all of that.</p>
 <p>You can start with this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>And that is already a working reverse proxy with HTTPS.</p>
@@ -44,9 +44,9 @@
 </ul>
 <p>In my setup, that shared Docker network is called <code>caddy_net</code>.</p>
 <p>That part matters because it decides whether you can use Docker container names like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>reverse_proxy ghost_blog:2368</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>reverse_proxy ghost_blog:2368</span></span></code></pre>
 <p>or whether you need to use an IP address instead:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>reverse_proxy 192.168.178.50:2368</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>reverse_proxy 192.168.178.50:2368</span></span></code></pre>
 <p>If Caddy and the app are in the same Docker network, Caddy can reach the app by its container or service name.</p>
 <p>If they are not in the same Docker network, Caddy has no idea what <code>ghost_blog</code> is. In that case, use the local IP address and port instead.</p>
 <h2 id="caddyfile-is-not-yaml">Caddyfile is not YAML</h2>
@@ -54,7 +54,7 @@
 <p>A <code>Caddyfile</code> is not YAML. It just uses blocks with <code>{ }</code>, which can make it look a little bit YAML-ish if you squint at it.</p>
 <h2 id="the-smallest-useful-reverse-proxy">The smallest useful reverse proxy</h2>
 <p>The simplest useful Caddy reverse proxy looks like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>If your DNS points <code>my.domain.com</code> to your server and Caddy can reach <code>my-app:3000</code>, this already does the important stuff:</p>
@@ -66,14 +66,14 @@
 </ul>
 <p>For a lot of small self-hosted apps, that is already enough.</p>
 <p>For example, if you run something like Uptime Kuma in Docker and the service is called <code>uptime-kuma</code>, your Caddy block might be:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>status.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>status.example.com {</span></span>
 <span class="line"><span>    reverse_proxy uptime-kuma:3001</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>That is the part I like about Caddy. You do not need a giant config file just to put one app behind HTTPS.</p>
 <h2 id="docker-names-vs-ip-addresses">Docker names vs IP addresses</h2>
 <p>This is probably the most common beginner mistake.</p>
 <p>This works:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>But only if Caddy can resolve <code>my-app</code>.</p>
@@ -108,17 +108,17 @@
 <span class="line"><span style="color:#85E89D">  caddy_config</span><span style="color:#E1E4E8">:</span></span></code></pre>
 <p>In my case, I use one shared Docker network called <code>caddy_net</code> and attach the services that should be reachable by Caddy.</p>
 <p>Then Caddy can use names like:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>reverse_proxy ghost_blog:2368</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>reverse_proxy ghost_blog:2368</span></span>
 <span class="line"><span>reverse_proxy uptime-kuma:3001</span></span>
 <span class="line"><span>reverse_proxy casdoor:8000</span></span></code></pre>
 <p>If your app is not in the same Docker network, use an IP address:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    reverse_proxy 192.168.178.50:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>There is nothing wrong with that. Docker names are just cleaner when everything runs on the same Docker host.</p>
 <h2 id="adding-compression">Adding compression</h2>
 <p>The next small upgrade is compression.</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
@@ -127,7 +127,7 @@
 <h2 id="adding-basic-security-headers">Adding basic security headers</h2>
 <p>You can also let Caddy add HTTP headers.</p>
 <p>A small baseline could look like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    header {</span></span>
@@ -148,7 +148,7 @@
 <p>For a first setup, keep it simple.</p>
 <h2 id="the-problem-with-repeating-yourself">The problem with repeating yourself</h2>
 <p>If you have one domain, this is fine:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    header {</span></span>
@@ -164,7 +164,7 @@
 <h2 id="snippets-reusable-caddy-blocks">Snippets: reusable Caddy blocks</h2>
 <p>A snippet is a reusable block in your Caddyfile.</p>
 <p>It looks like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(base) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(base) {</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    header {</span></span>
@@ -177,20 +177,20 @@
 <span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Then you can import it into a site:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>This is one of the main reasons my Caddyfile is still readable.</p>
 <p>Most of my domains start with something like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>some.koalastuff.net {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>some.koalastuff.net {</span></span>
 <span class="line"><span>    import json_log some-name</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy service-name:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>The site block stays short, and the shared defaults live in one place.</p>
 <p>You can also import snippets inside snippets themselves, for example:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(base) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(base) {</span></span>
 <span class="line"><span>    import cat_errors</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span></span></span>
@@ -216,15 +216,15 @@
 <h2 id="custom-error-pages-with-httpcat">Custom error pages with http.cat</h2>
 <p>This part is not required, but I like it.</p>
 <p>Instead of boring error pages, I use a tiny error handler with http.cat:</p>
-<p><img src="/assets/blog/http-cat-example.png" alt="http.cat error example"/></p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(cat_errors) {</span></span>
+<p><img src="/assets/blog/http-cat-example.webp" alt="http.cat error example"/></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(cat_errors) {</span></span>
 <span class="line"><span>    handle_errors {</span></span>
 <span class="line"><span>        header Content-Type "text/html; charset=utf-8"</span></span>
 <span class="line"><span>        respond "&#x3C;body style='margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;'>&#x3C;img src='https://http.cat/{http.error.status_code}' alt='HTTP Cat Status' title='HTTP Cat Status'>&#x3C;/body>" {http.error.status_code}</span></span>
 <span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>The interesting part is this placeholder:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{http.error.status_code}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>{http.error.status_code}</span></span></code></pre>
 <p>If the error is <code>404</code>, it shows the 404 cat.</p>
 <p>If it is <code>502</code>, it shows the 502 cat.</p>
 <p>It is not some serious enterprise error page. It is just a small thing that makes my sites feel a little more like mine.</p>
@@ -237,7 +237,7 @@
 <p>So if you use the http.cat error handler, remember to add <code>https://http.cat</code> to every <code>img-src</code> directive where the custom error page should work.</p>
 <h2 id="json-access-logs">JSON access logs</h2>
 <p>For logs, I use another snippet:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(json_log) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(json_log) {</span></span>
 <span class="line"><span>    log {</span></span>
 <span class="line"><span>        output file /var/log/caddy/{args.0}.access.log {</span></span>
 <span class="line"><span>            roll_size 15mb</span></span>
@@ -248,7 +248,7 @@
 <span class="line"><span>}</span></span></code></pre>
 <p>The <code>{args.0}</code> part is useful.</p>
 <p>It lets me import the snippet with a name:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>blog.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>blog.example.com {</span></span>
 <span class="line"><span>    import json_log blog</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy ghost_blog:2368</span></span>
@@ -256,7 +256,7 @@
 <p>That creates a log file like:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>/var/log/caddy/blog.access.log</span></span></code></pre>
 <p>For another site:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>status.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>status.example.com {</span></span>
 <span class="line"><span>    import json_log status</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy uptime-kuma:3001</span></span>
@@ -264,7 +264,7 @@
 <p>That gets:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>/var/log/caddy/status.access.log</span></span></code></pre>
 <p>I also limit log file size:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>roll_size 15mb</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>roll_size 15mb</span></span>
 <span class="line"><span>roll_keep 3</span></span></code></pre>
 <p>That way logs do not just grow forever.</p>
 <p>You do not need JSON logs on day one. But once you run a few services, separate logs per subdomain are very nice to have.</p>
@@ -272,7 +272,7 @@
 <p>Not every project needs a backend container. Oftentimes, you just want to serve a website that consists entirely of static files without any backend logic at all.</p>
 <p>Some of my KoalaStuff pages are exactly that. This could be a simple, handwritten landing page or documentation. But this is also how you host the output of modern static site generators. If you build slightly more complex sites using frameworks like <a href="https://astro.build/">Astro</a> or <a href="https://svelte.dev/">Svelte</a> (with their static adapters), you also end up with a simple folder of static files that just need to be served.</p>
 <p>A simple static site block looks like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sync.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>sync.example.com {</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    root * /var/www/sync</span></span>
 <span class="line"><span>    file_server</span></span>
@@ -286,7 +286,7 @@
 <p>This is great for small frontends, documentation pages, landing pages, tools and static builds.</p>
 <h2 id="static-asset-caching">Static asset caching</h2>
 <p>For static sites, I use a snippet for file handling and asset caching:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(static_assets) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(static_assets) {</span></span>
 <span class="line"><span>    file_server {</span></span>
 <span class="line"><span>        hide .*</span></span>
 <span class="line"><span>        precompressed zstd br gzip</span></span>
@@ -303,7 +303,7 @@
 <p><code>precompressed zstd br gzip</code> lets Caddy serve already-compressed files if they exist.</p>
 <p>The <code>@static</code> matcher selects common static assets like CSS, JS, images and fonts.</p>
 <p>Then this line adds long-term caching:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>header @static Cache-Control "public, max-age=31536000, immutable"</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>header @static Cache-Control "public, max-age=31536000, immutable"</span></span></code></pre>
 <p>That tells the browser it can keep those assets for a long time.</p>
 <p>This works best when your build output uses hashed file names like:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>app.8f3a2c.js</span></span>
@@ -312,13 +312,13 @@
 <h2 id="do-not-cache-your-service-worker-forever">Do not cache your service worker forever</h2>
 <p>One file I do not want to cache forever is the service worker.</p>
 <p>For example:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@sw path /sw.js</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>@sw path /sw.js</span></span>
 <span class="line"><span>header @sw Cache-Control "no-cache, no-store, must-revalidate"</span></span></code></pre>
 <p>Service workers can be annoying if the browser keeps an old version around for too long.</p>
 <p>Normal assets can be cached aggressively.</p>
 <p>The service worker should usually be checked more carefully.</p>
 <p>That is why my static asset snippet excludes <code>/sw.js</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>not path /sw.js</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>not path /sw.js</span></span></code></pre>
 <p>And then I handle <code>/sw.js</code> separately.</p>
 <h2 id="static-sites-with-spa-routing">Static sites with SPA routing</h2>
 <p>Many modern frontend apps have client-side routes.</p>
@@ -327,11 +327,11 @@
 <p>There may not be a real <code>/settings</code> file on disk. The frontend app handles that route in the browser.</p>
 <p>Without a fallback, refreshing that URL can cause a 404.</p>
 <p>For that, I use this snippet:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(spa) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(spa) {</span></span>
 <span class="line"><span>    try_files {path} {path}/index.html {path}.html {path}/</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Then a static frontend can look like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sync.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>sync.example.com {</span></span>
 <span class="line"><span>    import json_log sync</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    import static_assets</span></span>
@@ -346,19 +346,19 @@
 <p>Some projects are not static files. They are actual web apps running in containers.</p>
 <p>For those, I use <code>reverse_proxy</code>.</p>
 <p>A Ghost blog could look like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>blog.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>blog.example.com {</span></span>
 <span class="line"><span>    import json_log blog</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy ghost_blog:2368</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Uptime Kuma:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>status.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>status.example.com {</span></span>
 <span class="line"><span>    import json_log status</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy uptime-kuma:3001</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>An auth service:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>auth.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>auth.example.com {</span></span>
 <span class="line"><span>    import json_log auth</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span>    reverse_proxy auth-service:8000</span></span>
@@ -367,7 +367,7 @@
 <p>That is why I like Caddy for small projects. A new subdomain is often just four lines.</p>
 <h2 id="forwarded-headers">Forwarded headers</h2>
 <p>Sometimes I explicitly pass headers to the upstream app:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>timer.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>timer.example.com {</span></span>
 <span class="line"><span>    import base</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    reverse_proxy timer-service:3001 {</span></span>
@@ -382,21 +382,21 @@
 <p>I do not put my Content Security Policy into the global <code>base</code> snippet.</p>
 <p>The reason is simple: different apps need different rules.</p>
 <p>A very simple static site can have a strict policy:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>header {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>header {</span></span>
 <span class="line"><span>    Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none';"</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>But another app may need external images, WebSocket connections, iframes, maps or API calls.</p>
 <p>For example, a timer/watch-party app might need YouTube or Twitch frames:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>frame-src 'self' https://player.twitch.tv https://www.youtube.com;</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>frame-src 'self' https://player.twitch.tv https://www.youtube.com;</span></span></code></pre>
 <p>A map-based app might need map tiles:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>img-src 'self' data: blob: https://*.basemaps.cartocdn.com;</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>img-src 'self' data: blob: https://*.basemaps.cartocdn.com;</span></span></code></pre>
 <p>That is why CSP should not be treated as one universal copy-paste block.</p>
 <p>My base snippet handles the simple shared headers.</p>
 <p>CSP stays close to the app that actually needs it.</p>
 <h2 id="proxying-external-apis-through-caddy">Proxying external APIs through Caddy</h2>
 <p>Caddy can also proxy small API routes. I use this when a frontend should call my own domain, while Caddy forwards the request to an external API in the background.</p>
 <p>For example, a small weather endpoint could look like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>rewrite /api/weather /v1/forecast?latitude=52.37&#x26;longitude=9.73&#x26;current=temperature_2m,weather_code&#x26;daily=weather_code,temperature_2m_max,temperature_2m_min&#x26;timezone=auto&#x26;forecast_days=3</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>rewrite /api/weather /v1/forecast?latitude=52.37&#x26;longitude=9.73&#x26;current=temperature_2m,weather_code&#x26;daily=weather_code,temperature_2m_max,temperature_2m_min&#x26;timezone=auto&#x26;forecast_days=3</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>reverse_proxy /v1/forecast* https://api.open-meteo.com {</span></span>
 <span class="line"><span>    header_up Host {upstream_hostport}</span></span>
@@ -405,12 +405,12 @@
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>/api/weather</span></span></code></pre>
 <p>Caddy takes that request and sends it to the external weather API. The frontend does not need to know the full external URL, and the JavaScript code stays a bit cleaner because it only talks to my own domain.</p>
 <p>A nice side effect is that this also helps with security. If the browser only calls my own domain, I can keep my Content Security Policy much stricter. For example, the frontend may only need this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>header {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>header {</span></span>
 <span class="line"><span>    Content-Security-Policy "default-src 'self'; connect-src 'self';"</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Without the proxy, I would have to allow the external API directly in <code>connect-src</code>. That is not always a huge problem, but I prefer keeping the browser-facing side as small and strict as possible.</p>
 <p>This pattern is also useful for frontend-only projects where you do not want to put API keys into the JavaScript bundle. Instead of shipping the key to every visitor, Caddy can add it on the server side:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>reverse_proxy /api/example* https://api.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>reverse_proxy /api/example* https://api.example.com {</span></span>
 <span class="line"><span>    header_up Host {upstream_hostport}</span></span>
 <span class="line"><span>    header_up Authorization "Bearer {$EXAMPLE_API_KEY}"</span></span>
 <span class="line"><span>}</span></span></code></pre>
@@ -419,7 +419,7 @@
 <h2 id="api-route-example-with-handle_path">API route example with handle_path</h2>
 <p>For my small ship/map simulation, I use <code>handle_path</code> for route and tile proxying.</p>
 <p>A simplified route proxy looks like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>handle_path /api/route/* {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>handle_path /api/route/* {</span></span>
 <span class="line"><span>    rewrite * /route/v1/driving{uri}</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    reverse_proxy https://router.project-osrm.org {</span></span>
@@ -434,7 +434,7 @@
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>/api/route/</span></span></code></pre>
 <p>Caddy rewrites it and proxies it to OSRM.</p>
 <p>For map tiles, the pattern is similar:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>handle_path /api/tiles/light/* {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>handle_path /api/tiles/light/* {</span></span>
 <span class="line"><span>    rewrite * /light_all{uri}</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    reverse_proxy https://a.basemaps.cartocdn.com {</span></span>
@@ -456,19 +456,19 @@
 <h2 id="redirects">Redirects</h2>
 <p>Redirects are also very simple in Caddy.</p>
 <p>Redirect <code>www</code> to the root domain:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>www.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>www.example.com {</span></span>
 <span class="line"><span>    redir https://example.com</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Redirect an old subdomain to a new one:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>old.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>old.example.com {</span></span>
 <span class="line"><span>    redir https://new.example.com</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Redirect multiple subdomains to the same target:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>support.example.com, donate.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>support.example.com, donate.example.com {</span></span>
 <span class="line"><span>    redir https://ko-fi.com/yourname</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Keep the original path with <code>{uri}</code>:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>google.example.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>google.example.com {</span></span>
 <span class="line"><span>    redir https://google.com{uri}</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>So:</p>
@@ -478,7 +478,7 @@
 <p>Redirects are one of those small things that make Caddy really comfortable for personal projects.</p>
 <h2 id="global-options">Global options</h2>
 <p>At the top of my Caddyfile, I also have a global options block:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>{</span></span>
 <span class="line"><span>    admin localhost:2019</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    metrics {</span></span>
@@ -493,7 +493,7 @@
 <h2 id="a-clean-beginner-caddyfile">A clean beginner Caddyfile</h2>
 <p>If you are just starting, I would not begin with the full setup.</p>
 <p>Start with something like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    encode zstd gzip</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    header {</span></span>
@@ -508,7 +508,7 @@
 <p>Then add more only when you actually need it.</p>
 <h2 id="a-more-reusable-caddyfile">A more reusable Caddyfile</h2>
 <p>Once you have multiple subdomains, move repeated config into snippets:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(json_log) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(json_log) {</span></span>
 <span class="line"><span>    log {</span></span>
 <span class="line"><span>        output file /var/log/caddy/{args.0}.access.log {</span></span>
 <span class="line"><span>            roll_size 15mb</span></span>
@@ -542,7 +542,7 @@
 <p>This is the point where your Caddyfile starts feeling organized instead of copy-pasted.</p>
 <h2 id="a-static-frontend-example">A static frontend example</h2>
 <p>For a static frontend app:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>(static_assets) {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>(static_assets) {</span></span>
 <span class="line"><span>    file_server {</span></span>
 <span class="line"><span>        hide .*</span></span>
 <span class="line"><span>        precompressed zstd br gzip</span></span>
@@ -580,7 +580,7 @@
 </ul>
 <h2 id="a-more-real-world-example">A more real-world example</h2>
 <p>Putting the ideas together, a bigger setup can look like this:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>{</span></span>
 <span class="line"><span>    metrics {</span></span>
 <span class="line"><span>        per_host</span></span>
 <span class="line"><span>    }</span></span>
@@ -679,7 +679,7 @@
 <p>That is the main trick.</p>
 <p>Do not try to write the final version on day one.</p>
 <p>Start with:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>my.domain.com {</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>my.domain.com {</span></span>
 <span class="line"><span>    reverse_proxy my-app:3000</span></span>
 <span class="line"><span>}</span></span></code></pre>
 <p>Then add compression, headers, snippets, logs, static asset handling.</p>
@@ -724,4 +724,4 @@ Debugging is much easier when <code>blog</code>, <code>status</code>, <code>app<
 </ul>
 <h2 id="final-thought">Final thought</h2>
 <p>The reason I like Caddy is not only that the first setup is easy.</p>
-<p>It is that the simple setup can grow into a real one without turning into an unreadable nightmare you cannot easily expand on.</p></div><aside class="blog-sidebar" data-astro-cid-4ee7rn3o><div class="blog-toc" data-astro-cid-4ee7rn3o><h3 class="blog-toc__title" data-astro-cid-4ee7rn3o>Inhaltsverzeichnis</h3><ul data-astro-cid-4ee7rn3o><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#first-what-this-tutorial-assumes" title="First: what this tutorial assumes" data-astro-cid-4ee7rn3o>First: what this tutorial assumes</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#caddyfile-is-not-yaml" title="Caddyfile is not YAML" data-astro-cid-4ee7rn3o>Caddyfile is not YAML</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#the-smallest-useful-reverse-proxy" title="The smallest useful reverse proxy" data-astro-cid-4ee7rn3o>The smallest useful reverse proxy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#docker-names-vs-ip-addresses" title="Docker names vs IP addresses" data-astro-cid-4ee7rn3o>Docker names vs IP addresses</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#adding-compression" title="Adding compression" data-astro-cid-4ee7rn3o>Adding compression</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#adding-basic-security-headers" title="Adding basic security headers" data-astro-cid-4ee7rn3o>Adding basic security headers</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#the-problem-with-repeating-yourself" title="The problem with repeating yourself" data-astro-cid-4ee7rn3o>The problem with repeating yourself</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#snippets-reusable-caddy-blocks" title="Snippets: reusable Caddy blocks" data-astro-cid-4ee7rn3o>Snippets: reusable Caddy blocks</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#custom-error-pages-with-httpcat" title="Custom error pages with http.cat" data-astro-cid-4ee7rn3o>Custom error pages with http.cat</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#json-access-logs" title="JSON access logs" data-astro-cid-4ee7rn3o>JSON access logs</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#serving-static-sites-with-caddy" title="Serving static sites with Caddy" data-astro-cid-4ee7rn3o>Serving static sites with Caddy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#static-asset-caching" title="Static asset caching" data-astro-cid-4ee7rn3o>Static asset caching</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#do-not-cache-your-service-worker-forever" title="Do not cache your service worker forever" data-astro-cid-4ee7rn3o>Do not cache your service worker forever</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#static-sites-with-spa-routing" title="Static sites with SPA routing" data-astro-cid-4ee7rn3o>Static sites with SPA routing</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#reverse-proxying-real-docker-services" title="Reverse proxying real Docker services" data-astro-cid-4ee7rn3o>Reverse proxying real Docker services</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#forwarded-headers" title="Forwarded headers" data-astro-cid-4ee7rn3o>Forwarded headers</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#content-security-policy-per-site" title="Content Security Policy per site" data-astro-cid-4ee7rn3o>Content Security Policy per site</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#proxying-external-apis-through-caddy" title="Proxying external APIs through Caddy" data-astro-cid-4ee7rn3o>Proxying external APIs through Caddy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#api-route-example-with-handle_path" title="API route example with handle_path" data-astro-cid-4ee7rn3o>API route example with handle_path</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#redirects" title="Redirects" data-astro-cid-4ee7rn3o>Redirects</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#global-options" title="Global options" data-astro-cid-4ee7rn3o>Global options</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-clean-beginner-caddyfile" title="A clean beginner Caddyfile" data-astro-cid-4ee7rn3o>A clean beginner Caddyfile</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-more-reusable-caddyfile" title="A more reusable Caddyfile" data-astro-cid-4ee7rn3o>A more reusable Caddyfile</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-static-frontend-example" title="A static frontend example" data-astro-cid-4ee7rn3o>A static frontend example</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-more-real-world-example" title="A more real-world example" data-astro-cid-4ee7rn3o>A more real-world example</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#best-practices-i-would-actually-recommend" title="Best practices I would actually recommend" data-astro-cid-4ee7rn3o>Best practices I would actually recommend</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#final-thought" title="Final thought" data-astro-cid-4ee7rn3o>Final thought</a></li></ul></div></aside></div></article><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Caddy as a Reverse Proxy: From 3 Lines to a Real Setup","description":"Caddy is probably the easiest reverse proxy I have used so far. A tutorial from zero to a production-ready Caddyfile.","datePublished":"2026-06-13T00:00:00.000Z","author":{"@type":"Person","@id":"https://koalastuff.net/#person","name":"Timo","url":"https://github.com/Shik3i","sameAs":["https://github.com/Shik3i","https://dev.to/hungrykoala","https://mastodon.social/@koalastuff"]},"publisher":{"@type":"Organization","@id":"https://koalastuff.net/#organization","name":"KoalaStuff","logo":{"@type":"ImageObject","url":"https://koalastuff.net/favicon.svg"}},"inLanguage":"de","mainEntityOfPage":"https://koalastuff.net/de/blog/caddy-reverse-proxy-tutorial","image":"https://koalastuff.net/og/caddy-reverse-proxy-tutorial.png"}</script></div></main><footer class="site-footer reveal-on-scroll" role="contentinfo"><div class="container"><div class="site-footer__inner"><div class="site-footer__brand-group"><div class="site-footer__brand"><span class="site-footer__logo" aria-hidden="true"><picture><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif, /_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif 1x, /_astro/koalastuff-logo-128.CMEzCEwC_Z1XAXzQ.avif 2x" type="image/avif"><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp, /_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp 1x, /_astro/koalastuff-logo-128.CMEzCEwC_wOUGo.webp 2x" type="image/webp"><img src="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png" srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png 1x, /_astro/koalastuff-logo-128.CMEzCEwC_ZjGjCv.png 2x" alt loading="lazy" decoding="async" width="20" height="20"></picture></span><span>KoalaStuff</span></div><p class="site-footer__tagline">Small open-source tools for real annoyances. Browser extensions, web tools, desktop utilities and experiments.</p></div><div class="site-footer__info-group"><div class="site-footer__links-group"><span>© 2026 KoalaStuff</span><span class="sep" aria-hidden="true">·</span><span>Erstellt von <a href="https://github.com/Shik3i" rel="noopener noreferrer" title="Timo's GitHub">Timo</a></span><span class="sep" aria-hidden="true">·</span><span>Open Source unter der MIT-Lizenz.</span></div><div class="site-footer__links-group site-footer__links-group--bottom"><a href="https://ko-fi.com/koaladev" target="_blank" rel="noopener noreferrer" title="Support me on Ko-fi">Ko-fi ☕</a><span class="sep" aria-hidden="true">·</span><a href="/de/datenschutz/" title="Datenschutz">Datenschutz</a><span class="sep" aria-hidden="true">·</span><a href="/de/impressum/" title="Impressum">Impressum</a><span class="sep" aria-hidden="true">·</span><span class="site-footer__version"><a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">Build: <code>d13a93e8</code><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg></a></span></div></div></div></div></footer><button id="back-to-top" class="back-to-top" aria-label="Scroll back to top" title="Scroll back to top" type="button" data-astro-cid-vy5be4ad><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad><line x1="12" y1="19" x2="12" y2="5" data-astro-cid-vy5be4ad></line><polyline points="5 12 12 5 19 12" data-astro-cid-vy5be4ad></polyline></svg></button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.D8435SOc.js"></script><!-- Theme + UI script (Astro bundles this as a static asset) --><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.4Q_-dmGA.js"></script><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_1_lang._wcNm8F5.js"></script></body></html><script type="module" src="/_astro/BlogLayout.astro_astro_type_script_index_0_lang.-H--eX03.js"></script>
+<p>It is that the simple setup can grow into a real one without turning into an unreadable nightmare you cannot easily expand on.</p></div><aside class="blog-sidebar" data-astro-cid-4ee7rn3o><div class="blog-toc" data-astro-cid-4ee7rn3o><h3 class="blog-toc__title" data-astro-cid-4ee7rn3o>Inhaltsverzeichnis</h3><ul data-astro-cid-4ee7rn3o><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#first-what-this-tutorial-assumes" title="First: what this tutorial assumes" data-astro-cid-4ee7rn3o>First: what this tutorial assumes</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#caddyfile-is-not-yaml" title="Caddyfile is not YAML" data-astro-cid-4ee7rn3o>Caddyfile is not YAML</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#the-smallest-useful-reverse-proxy" title="The smallest useful reverse proxy" data-astro-cid-4ee7rn3o>The smallest useful reverse proxy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#docker-names-vs-ip-addresses" title="Docker names vs IP addresses" data-astro-cid-4ee7rn3o>Docker names vs IP addresses</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#adding-compression" title="Adding compression" data-astro-cid-4ee7rn3o>Adding compression</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#adding-basic-security-headers" title="Adding basic security headers" data-astro-cid-4ee7rn3o>Adding basic security headers</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#the-problem-with-repeating-yourself" title="The problem with repeating yourself" data-astro-cid-4ee7rn3o>The problem with repeating yourself</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#snippets-reusable-caddy-blocks" title="Snippets: reusable Caddy blocks" data-astro-cid-4ee7rn3o>Snippets: reusable Caddy blocks</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#custom-error-pages-with-httpcat" title="Custom error pages with http.cat" data-astro-cid-4ee7rn3o>Custom error pages with http.cat</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#json-access-logs" title="JSON access logs" data-astro-cid-4ee7rn3o>JSON access logs</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#serving-static-sites-with-caddy" title="Serving static sites with Caddy" data-astro-cid-4ee7rn3o>Serving static sites with Caddy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#static-asset-caching" title="Static asset caching" data-astro-cid-4ee7rn3o>Static asset caching</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#do-not-cache-your-service-worker-forever" title="Do not cache your service worker forever" data-astro-cid-4ee7rn3o>Do not cache your service worker forever</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#static-sites-with-spa-routing" title="Static sites with SPA routing" data-astro-cid-4ee7rn3o>Static sites with SPA routing</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#reverse-proxying-real-docker-services" title="Reverse proxying real Docker services" data-astro-cid-4ee7rn3o>Reverse proxying real Docker services</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#forwarded-headers" title="Forwarded headers" data-astro-cid-4ee7rn3o>Forwarded headers</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#content-security-policy-per-site" title="Content Security Policy per site" data-astro-cid-4ee7rn3o>Content Security Policy per site</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#proxying-external-apis-through-caddy" title="Proxying external APIs through Caddy" data-astro-cid-4ee7rn3o>Proxying external APIs through Caddy</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#api-route-example-with-handle_path" title="API route example with handle_path" data-astro-cid-4ee7rn3o>API route example with handle_path</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#redirects" title="Redirects" data-astro-cid-4ee7rn3o>Redirects</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#global-options" title="Global options" data-astro-cid-4ee7rn3o>Global options</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-clean-beginner-caddyfile" title="A clean beginner Caddyfile" data-astro-cid-4ee7rn3o>A clean beginner Caddyfile</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-more-reusable-caddyfile" title="A more reusable Caddyfile" data-astro-cid-4ee7rn3o>A more reusable Caddyfile</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-static-frontend-example" title="A static frontend example" data-astro-cid-4ee7rn3o>A static frontend example</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#a-more-real-world-example" title="A more real-world example" data-astro-cid-4ee7rn3o>A more real-world example</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#best-practices-i-would-actually-recommend" title="Best practices I would actually recommend" data-astro-cid-4ee7rn3o>Best practices I would actually recommend</a></li><li class="toc-depth-2" data-astro-cid-4ee7rn3o><a href="#final-thought" title="Final thought" data-astro-cid-4ee7rn3o>Final thought</a></li></ul></div></aside></div></article><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Caddy as a Reverse Proxy: From 3 Lines to a Real Setup","description":"Caddy is probably the easiest reverse proxy I have used so far. A tutorial from zero to a production-ready Caddyfile.","datePublished":"2026-06-13T00:00:00.000Z","author":{"@type":"Person","@id":"https://koalastuff.net/#person","name":"Timo","url":"https://github.com/Shik3i","sameAs":["https://github.com/Shik3i","https://dev.to/hungrykoala","https://mastodon.social/@koalastuff"]},"publisher":{"@type":"Organization","@id":"https://koalastuff.net/#organization","name":"KoalaStuff","logo":{"@type":"ImageObject","url":"https://koalastuff.net/favicon.svg"}},"inLanguage":"de","mainEntityOfPage":"https://koalastuff.net/de/blog/caddy-reverse-proxy-tutorial","image":"https://koalastuff.net/og/caddy-reverse-proxy-tutorial.png"}</script></div></main><footer class="site-footer reveal-on-scroll" role="contentinfo"><div class="container"><div class="site-footer__inner"><div class="site-footer__brand-group"><div class="site-footer__brand"><span class="site-footer__logo" aria-hidden="true"><picture><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif, /_astro/koalastuff-logo-128.CMEzCEwC_1799rF.avif 1x, /_astro/koalastuff-logo-128.CMEzCEwC_Z1XAXzQ.avif 2x" type="image/avif"><source srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp, /_astro/koalastuff-logo-128.CMEzCEwC_Z1rB551.webp 1x, /_astro/koalastuff-logo-128.CMEzCEwC_wOUGo.webp 2x" type="image/webp"><img src="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png" srcset="/_astro/koalastuff-logo-128.CMEzCEwC_Z2j8koU.png 1x, /_astro/koalastuff-logo-128.CMEzCEwC_ZjGjCv.png 2x" alt loading="lazy" decoding="async" width="20" height="20"></picture></span><span>KoalaStuff</span></div><p class="site-footer__tagline">Small open-source tools for real annoyances. Browser extensions, web tools, desktop utilities and experiments.</p></div><div class="site-footer__info-group"><div class="site-footer__links-group"><span>© 2026 KoalaStuff</span><span class="sep" aria-hidden="true">·</span><span>Erstellt von <a href="https://github.com/Shik3i" rel="noopener noreferrer" title="Timo's GitHub">Timo</a></span><span class="sep" aria-hidden="true">·</span><span>Open Source unter der MIT-Lizenz.</span></div><div class="site-footer__links-group site-footer__links-group--bottom"><a href="https://ko-fi.com/koaladev" target="_blank" rel="noopener noreferrer" title="Support me on Ko-fi">Ko-fi ☕</a><span class="sep" aria-hidden="true">·</span><a href="/de/datenschutz/" title="Datenschutz">Datenschutz</a><span class="sep" aria-hidden="true">·</span><a href="/de/impressum/" title="Impressum">Impressum</a><span class="sep" aria-hidden="true">·</span><span class="site-footer__version"><a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">Source<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg></a></span></div></div></div></div></footer><button id="back-to-top" class="back-to-top" aria-label="Scroll back to top" title="Scroll back to top" type="button" data-astro-cid-vy5be4ad><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-vy5be4ad><line x1="12" y1="19" x2="12" y2="5" data-astro-cid-vy5be4ad></line><polyline points="5 12 12 5 19 12" data-astro-cid-vy5be4ad></polyline></svg></button><script type="module" src="/_astro/BackToTop.astro_astro_type_script_index_0_lang.D8435SOc.js"></script><!-- Theme + UI script (Astro bundles this as a static asset) --><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.4Q_-dmGA.js"></script><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_1_lang._wcNm8F5.js"></script></body></html><script type="module" src="/_astro/BlogLayout.astro_astro_type_script_index_0_lang.-H--eX03.js"></script>

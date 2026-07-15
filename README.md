@@ -20,9 +20,9 @@
 
 The project is built on modern web APIs and best practices:
 
-*   **Framework**: [Astro v6](https://astro.build) configured in strict static mode (`output: 'static'`) with the new Content Layer API and `glob` loader.
+*   **Framework**: [Astro v7](https://astro.build) configured in strict static mode (`output: 'static'`) with the Content Layer API and `glob` loader.
 *   **Routing**: Native SPA-like navigation using Astro's `<ClientRouter />` (View Transitions) with smooth slide animations.
-*   **Internationalization (i18n)**: Fully translated into 13 languages (`en`, `de`, `fr`, `es`, `it`, `nl`, `pl`, `pt`, `tr`, `ja`, `ko`, `zh`, `uk`).
+*   **Internationalization (i18n)**: Localized into 15 variants (`en`, `de`, `fr`, `es`, `it`, `nl`, `pl`, `pt`, `pt-BR`, `tr`, `ru`, `ja`, `ko`, `zh`, `uk`).
 *   **Language**: Strict TypeScript with strict null checks and no `any` implicit types.
 *   **Styling**: Vanilla CSS utilizing modern HSL color tokens, CSS Grid, Flexbox, and Container Queries.
 *   **Performance**: Optimized responsive image pipeline, font preloads, and zero production runtime Node.js requirements.
@@ -86,8 +86,8 @@ For extension download buttons, the site automatically inspects the client brows
 ## 🛠️ Local Development & Operations
 
 ### Requirements
-- **Node.js** 18+
-- **npm** 9+
+- **Node.js** 22.12+
+- **npm** 10+
 
 ### Commands
 
@@ -100,6 +100,9 @@ npm run dev
 
 # Compile production bundles
 npm run build
+
+# Validate translations and the public GitHub project catalog
+npm run check
 
 # Preview production builds locally
 npm run preview

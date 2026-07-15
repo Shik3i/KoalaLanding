@@ -64,9 +64,7 @@ const jsonLdData = {
     <div class="container">
       <div class="section__header" style="margin-bottom: var(--space-12);">
         <h1 class="section__title">{tr['nav.projects'] ?? 'Projects'}</h1>
-        <p class="section__subtitle">
-          A tracker-style log of all KoalaStuff tools, browser extensions, and experiments.
-        </p>
+        <p class="section__subtitle">{tr['categories.intro'] ?? 'Open-source tools, apps and experiments from KoalaStuff.'}</p>
       </div>
 
       <!-- Category Filter Tabs -->
@@ -234,12 +232,10 @@ const jsonLdData = {
           const date = repoDates.get(repoPath.toLowerCase());
           if (date) {
             const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
-            let text = '';
-            if (days === 0) text = 'Updated today';
-            else if (days === 1) text = 'Updated yesterday';
-            else if (days < 30) text = `Updated ${days}d ago`;
-            else if (days < 365) text = `Updated ${Math.floor(days/30)}mo ago`;
-            else text = `Updated ${Math.floor(days/365)}y ago`;
+            const formatter = new Intl.RelativeTimeFormat(document.documentElement.lang || 'en', { numeric: 'auto' });
+            let text = formatter.format(-days, 'day');
+            if (days >= 30 && days < 365) text = formatter.format(-Math.floor(days / 30), 'month');
+            else if (days >= 365) text = formatter.format(-Math.floor(days / 365), 'year');
             
             el.innerHTML = `<span class="update-dot"></span>${text}`;
             el.classList.add('has-fresh-data');
