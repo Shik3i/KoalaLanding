@@ -140,7 +140,7 @@ A privacy-first browser extension that automatically rejects cookie-consent bann
 
 ### Why it exists
 
-I found existing cookie managers to be bloated or invasive. I wanted a minimal, privacy-focused extension that provided only the necessary tools for managing cookies locally.
+Cookie banners interrupt almost every site with repetitive consent prompts. I built KoalaCookies to reject common providers automatically, keep every decision local, and offer an aggressive mode plus custom selectors for difficult sites.
 
 ### Project profile
 
@@ -275,7 +275,7 @@ I wanted a small, fast Markdown workspace that keeps drafts local by default and
 
 ## KoalaNews
 
-KoalaNews has moved from the old Next.js/Prisma stack to a Go service with chi, sqlc and pure-Go SQLite. The static SvelteKit 5 frontend is embedded into the Go binary, while a server-side sync worker fetches RSS feeds, deduplicates articles and serves cached images from the app origin to avoid browser-side hotlinking. The current app includes public feeds, user accounts, per-user feed management, categories, smart feeds, read state, OPML import/export, appearance preferences, admin statistics and GFS backups.
+KoalaNews is a privacy-focused RSS reader built as a Go service with chi, sqlc and SQLite, plus an embedded SvelteKit 5 frontend. It includes feed synchronization, cached images, accounts, categories, smart feeds, read state, OPML import and export, appearance settings, admin statistics and GFS backups.
 
 ### Why it exists
 

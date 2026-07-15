@@ -3,7 +3,6 @@ import type { Locale } from '../i18n/config';
 import { getLocalePath } from '../i18n/config';
 import footerLogo from '../assets/brand/koalastuff-logo-128.png';
 import { Picture } from 'astro:assets';
-import { buildYear } from '../utils/buildInfo';
 
 export interface Props {
   locale: Locale;
@@ -11,6 +10,7 @@ export interface Props {
 }
 
 const { locale, translations: tr } = Astro.props;
+const copyrightYear = 2026;
 
 const privacyHref = locale === 'de'
   ? '/de/datenschutz/'
@@ -38,7 +38,7 @@ const imprintHref = locale === 'de'
 
       <div class="site-footer__info-group">
         <div class="site-footer__links-group">
-          <span>© {buildYear} KoalaStuff</span>
+          <span>© {copyrightYear} KoalaStuff</span>
           <span class="sep" aria-hidden="true">·</span>
           <span>{tr['footer.madeBy'] ?? 'Made by'} <a href="https://github.com/Shik3i" rel="noopener noreferrer" title="Timo's GitHub">Timo</a></span>
           <span class="sep" aria-hidden="true">·</span>

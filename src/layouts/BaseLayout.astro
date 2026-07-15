@@ -7,7 +7,6 @@ import { ClientRouter } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
 import { loadTranslations } from '../i18n/utils';
 import { getListedProjects, getProjectDescription, getProjectSlug } from '../data/projects';
-import { buildDate } from '../utils/buildInfo';
 
 export interface Props {
   title: string;
@@ -216,7 +215,6 @@ if (isProjectsPage) {
     ))}
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}${defaultLocalePath}`} />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="date" content={buildDate} />
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />

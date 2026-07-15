@@ -202,12 +202,9 @@ async function runAudit() {
           totalErrors++;
         }
 
-        // Short descriptions appear in every project listing and must support every locale.
-        // Longer optional copy may intentionally fall back to English while a project is early.
-        const localesToCheck = field === 'shortDescription'
-          ? locales
-          : locales.filter((locale) => fieldData[locale]);
-        for (const locale of localesToCheck) {
+        // Every published text field must support every locale. Optional means the
+        // whole field may be absent, not that individual translations may be absent.
+        for (const locale of locales) {
           const val = fieldData[locale];
           if (!val) {
             console.error(`[ERROR] Project ${project.name} -> ${field}: Missing translation for locale "${locale}"`);
