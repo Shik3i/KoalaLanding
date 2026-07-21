@@ -421,7 +421,9 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/Shik3i/KoalaCookies',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalacookies/icon.png',
+    },
   },
   {
     id: 'koalaflyff',
