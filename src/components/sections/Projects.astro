@@ -107,7 +107,7 @@ const categoryIcons: Record<string, string> = {
     <!-- Unified projects grid -->
     <div class="project-grid" id="homepage-project-grid">
       {gridProjects.map((project) => (
-        <div class="project-grid-item" data-category={project.category} data-experimental={['early', 'wip', 'experimental'].includes(project.status) ? 'true' : 'false'}>
+        <div class="project-grid-item" data-category={project.category} data-experimental={['wip', 'experimental'].includes(project.status) ? 'true' : 'false'}>
           <ProjectCard project={project} locale={locale} translations={tr} />
         </div>
       ))}
