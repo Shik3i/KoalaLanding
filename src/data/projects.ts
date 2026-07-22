@@ -1078,7 +1078,9 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/Shik3i/KoalaFinance',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalafinance/icon.png',
+    },
   },
   {
     id: 'koalatrade',
