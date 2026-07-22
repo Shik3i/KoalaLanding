@@ -1365,7 +1365,9 @@ export const projects: Project[] = [
       website: 'https://party.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaParty',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalaparty/icon.png',
+    },
   },
 ];
 

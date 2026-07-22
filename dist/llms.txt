@@ -40,7 +40,7 @@ KoalaStuff is not a single bundled product, hosted account platform or commercia
 - Mastodon: https://mastodon.social/@koalastuff
 - Support: https://ko-fi.com/koaladev
 
-# Complete project catalog (21 projects)
+# Complete project catalog (23 projects)
 
 ## KoalaShip
 
@@ -399,3 +399,39 @@ Existing TTRPG campaign tools are either bloated with features I don't need or r
 - Technologies and focus: Svelte, Go, SQLite, Local-first, PWA, E2EE, Privacy-first, Web App, WIP
 - Project page: https://koalastuff.net/projects/koalanotes/
 - GitHub: https://github.com/Shik3i/KoalaNotes
+
+## KoalaData
+
+KoalaData is a self-hosted open-analytics platform built for browser-extension developers. Import store statistics, track active users, installations, uninstalls, page views and impressions, then explore responsive charts, public extension profiles and dynamic growth leaderboards. It stays lightweight, privacy-respecting and easy to run with Docker.
+
+### Why it exists
+
+KoalaData grew out of the need for a focused analytics workspace for browser extensions. Instead of sending sensitive product metrics to a large SaaS platform, it keeps the service self-hosted and turns imported store data into useful charts, public profiles and growth comparisons.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-07
+- Technologies and focus: SvelteKit, Svelte 5, TypeScript, SQLite, ECharts, Docker, Analytics, Privacy-first, Open Source
+- Project page: https://koalastuff.net/projects/koaladata/
+- Website: https://data.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaData
+
+## KoalaParty
+
+KoalaParty creates shared YouTube rooms where everyone can watch together, control playback, add videos, reorder the queue, vote, and reconnect without losing the room. Unlisted rooms work without an account, while optional accounts add persistent rooms, invitations, friends, and cross-device access. The self-hostable Go and SvelteKit application uses WebSockets and SQLite, with no ads, analytics, tracking pixels, or browser fingerprinting.
+
+### Why it exists
+
+KoalaParty grew from the need for a permanent, privacy-first alternative to temporary watch-party links. The goal was to make shared YouTube viewing feel like a dependable digital living room, with synchronized playback and a collaborative queue while keeping unlisted rooms usable without accounts.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-07
+- Technologies and focus: SvelteKit, TypeScript, Go, WebSockets, SQLite, Docker, Open Source, Privacy-first, Watch Party
+- Project page: https://koalastuff.net/projects/koalaparty/
+- Website: https://party.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaParty
