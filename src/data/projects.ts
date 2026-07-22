@@ -1177,7 +1177,9 @@ export const projects: Project[] = [
     },
     tags: ['Go', 'SvelteKit', 'TypeScript', 'SQLite', 'Docker', 'i18n', 'Self-hostable', 'Translation Tools', 'Early'],
     links: { github: 'https://github.com/Shik3i/KoalaTranslate' },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalatranslate/icon.png',
+    },
   },
   {
     id: 'koalanotes',
