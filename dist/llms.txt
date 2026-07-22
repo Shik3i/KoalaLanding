@@ -53,7 +53,7 @@ I read an article about "Dopamine sites" in South Korea (sites with fake shoppin
 ### Project profile
 
 - Category: web
-- Lifecycle status: active
+- Lifecycle status: wip
 - Catalog updated: 2026-06
 - Technologies and focus: Svelte 5, TypeScript, Vite, Tailwind CSS, Leaflet, Open Source, Web App, Simulation
 - Project page: https://koalastuff.net/projects/koalaship/
@@ -249,7 +249,7 @@ This project was built as a proof of concept. After seeing someone on Reddit cha
 ### Project profile
 
 - Category: web
-- Lifecycle status: active
+- Lifecycle status: early
 - Catalog updated: 2026-06
 - Technologies and focus: Svelte, Tailwind CSS, Open Source, Web App, Design Tool, Privacy-first
 - Project page: https://koalastuff.net/projects/koalasnap/
@@ -267,7 +267,7 @@ I wanted a small, fast Markdown workspace that keeps drafts local by default and
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: wip
 - Catalog updated: 2026-06
 - Technologies and focus: Svelte 5, TypeScript, Vite, CodeMirror, Markdown, Local-first, PWA, Web App, Early
 - Project page: https://koalastuff.net/projects/koalaedit/
@@ -302,7 +302,7 @@ KoalaWorld was a proof of concept to evaluate the capabilities of local AI model
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: wip
 - Catalog updated: 2026-06
 - Technologies and focus: Go, TypeScript, Three.js, Vite, Docker, SQLite, Open Source, Self-hostable, Geo-Visualization, Web App, Early
 - Project page: https://koalastuff.net/projects/koalaworld/
@@ -319,7 +319,7 @@ To understand why users uninstall KoalaSync, I needed a privacy-focused survey t
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: active
 - Catalog updated: 2026-06
 - Technologies and focus: Go, Templ, HTMX, SQLite, Docker, Open Source, Self-hostable, Privacy-first, Web App, Survey Tool, Early
 - Project page: https://koalastuff.net/projects/koalabye/
@@ -337,7 +337,7 @@ I wanted a personal finance tool that doesn't connect to banks or rely on extern
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: wip
 - Catalog updated: 2026-06
 - Technologies and focus: Go, TypeScript, Svelte, SQLite, E2EE, Self-hostable, Privacy-first, Web App, Early
 - Project page: https://koalastuff.net/projects/koalafinance/
@@ -350,7 +350,7 @@ A privacy-first paper-trading desk for stocks, ETFs, crypto, commodities and liv
 ### Project profile
 
 - Category: web
-- Lifecycle status: active
+- Lifecycle status: early
 - Catalog updated: 2026-07
 - Technologies and focus: Go, Svelte 5, TypeScript, SQLite, IndexedDB, PWA, Docker, Paper Trading, Privacy-first
 - Project page: https://koalastuff.net/projects/koalatrade/
@@ -363,7 +363,7 @@ Endless procedural lo-fi music and ambient noise generated locally in the browse
 ### Project profile
 
 - Category: web
-- Lifecycle status: active
+- Lifecycle status: wip
 - Catalog updated: 2026-07
 - Technologies and focus: SvelteKit, Tone.js, TypeScript, IndexedDB, PWA, Canvas 2D, Local-first, Privacy-first
 - Project page: https://koalastuff.net/projects/koalafi/
@@ -377,7 +377,7 @@ A self-hosted visual translation portal that lets non-technical contributors loc
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: wip
 - Catalog updated: 2026-07
 - Technologies and focus: Go, SvelteKit, TypeScript, SQLite, Docker, i18n, Self-hostable, Translation Tools, Early
 - Project page: https://koalastuff.net/projects/koalatranslate/
@@ -411,7 +411,7 @@ KoalaData grew out of the need for a focused analytics workspace for browser ext
 ### Project profile
 
 - Category: web
-- Lifecycle status: active
+- Lifecycle status: early
 - Catalog updated: 2026-07
 - Technologies and focus: SvelteKit, Svelte 5, TypeScript, SQLite, ECharts, Docker, Analytics, Privacy-first, Open Source
 - Project page: https://koalastuff.net/projects/koaladata/
@@ -429,7 +429,7 @@ KoalaParty grew from the need for a permanent, privacy-first alternative to temp
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: active
 - Catalog updated: 2026-07
 - Technologies and focus: SvelteKit, TypeScript, Go, WebSockets, SQLite, Docker, Open Source, Privacy-first, Watch Party
 - Project page: https://koalastuff.net/projects/koalaparty/
