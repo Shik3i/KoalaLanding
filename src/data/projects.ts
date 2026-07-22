@@ -752,7 +752,9 @@ export const projects: Project[] = [
       website: 'https://snap.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaSnap',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalasnap/icon.png',
+    },
   },
   {
     id: 'koalaedit',
