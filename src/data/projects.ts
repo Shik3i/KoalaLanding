@@ -892,7 +892,7 @@ export const projects: Project[] = [
       github: 'https://github.com/Shik3i/KoalaNews',
     },
     assets: {
-      icon: '/assets/projects/koalanews/icon.webp',
+      icon: '/assets/projects/koalanews/icon.png',
     },
   },
   {
