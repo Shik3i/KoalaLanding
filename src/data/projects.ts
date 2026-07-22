@@ -1144,7 +1144,9 @@ export const projects: Project[] = [
     },
     tags: ['SvelteKit', 'Tone.js', 'TypeScript', 'IndexedDB', 'PWA', 'Canvas 2D', 'Local-first', 'Privacy-first'],
     links: { website: 'https://lofi.koalastuff.net', github: 'https://github.com/Shik3i/KoalaFi' },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalafi/icon.png',
+    },
   },
   {
     id: 'koalatranslate',
