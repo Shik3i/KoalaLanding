@@ -1109,7 +1109,9 @@ export const projects: Project[] = [
     },
     tags: ['Go', 'Svelte 5', 'TypeScript', 'SQLite', 'IndexedDB', 'PWA', 'Docker', 'Paper Trading', 'Privacy-first'],
     links: { github: 'https://github.com/Shik3i/KoalaTrade' },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalatrade/icon.png',
+    },
   },
   {
     id: 'koalafi',
