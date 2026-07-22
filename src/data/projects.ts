@@ -1229,7 +1229,9 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/Shik3i/KoalaNotes',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalanotes/icon.png',
+    },
   },
   {
     id: 'koaladata',
