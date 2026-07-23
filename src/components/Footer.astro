@@ -15,9 +15,7 @@ const copyrightYear = 2026;
 const privacyHref = locale === 'de'
   ? '/de/datenschutz/'
   : '/privacy/';
-const imprintHref = locale === 'de'
-  ? '/de/impressum/'
-  : '/imprint/';
+const legalHref = 'https://koalastuff.net/legal';
 
 ---
 
@@ -49,7 +47,7 @@ const imprintHref = locale === 'de'
           <span class="sep" aria-hidden="true">·</span>
           <a href={privacyHref} title={tr['footer.privacy'] ?? 'Privacy'}>{tr['footer.privacy'] ?? 'Privacy'}</a>
           <span class="sep" aria-hidden="true">·</span>
-          <a href={imprintHref} title={tr['footer.imprint'] ?? 'Imprint'}>{tr['footer.imprint'] ?? 'Imprint'}</a>
+          <a href={legalHref} title={tr['footer.imprint'] ?? 'Legal Notice'}>{tr['footer.imprint'] ?? 'Legal Notice'}</a>
           <span class="sep" aria-hidden="true">·</span>
           <span class="site-footer__version">
             <a href="https://github.com/Shik3i/KoalaLanding" target="_blank" rel="noopener noreferrer" title="View repository on GitHub">

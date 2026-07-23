@@ -48,7 +48,7 @@ export function getLocalePath(locale: Locale, path: string = ''): string {
 
   // Identify if the page is a legal/special page
   const isPrivacy = cleanPath === 'privacy' || cleanPath === 'de/datenschutz' || cleanPath === 'datenschutz';
-  const isImprint = cleanPath === 'imprint' || cleanPath === 'de/impressum' || cleanPath === 'impressum';
+  const isLegal = cleanPath === 'legal' || cleanPath === 'imprint' || cleanPath === 'de/impressum' || cleanPath === 'impressum';
 
   if (isPrivacy) {
     if (locale === 'de') {
@@ -58,12 +58,8 @@ export function getLocalePath(locale: Locale, path: string = ''): string {
     }
   }
 
-  if (isImprint) {
-    if (locale === 'de') {
-      return '/de/impressum/';
-    } else {
-      return '/imprint/'; // No localized prefix for other languages
-    }
+  if (isLegal) {
+    return '/legal/';
   }
 
   // Default routing for normal pages
