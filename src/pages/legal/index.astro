@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { loadTranslations } from '../../i18n/utils';
+
+const locale = 'en' as const;
+const tr = await loadTranslations(locale);
+---
+
+<BaseLayout
+  title="Legal Notice | KoalaStuff"
+  description="Operator, contact, project, liability, licensing, user-content, privacy, and dispute-resolution information for KoalaStuff projects."
+  locale={locale}
+  canonicalPath="/legal/"
+>
+  <Header locale={locale} translations={tr} currentPath="/legal/" />
+
+  <main id="main-content" transition:name="main" transition:animate="slide">
+    <div class="container">
+      <article class="legal-content">
+        <h1>Legal Notice</h1>
+        <p><strong>Last updated:</strong> July 2026</p>
+
+        <h2>Scope</h2>
+        <p>This legal notice applies to KoalaStuff and the websites, browser extensions, applications, APIs, and other services operated by Timo Schmidt under the KoalaStuff name and the <code>koalastuff.net</code> domain, unless a project explicitly provides different operator information.</p>
+        <p>KoalaStuff is an independent collection of personal open-source projects. It is not a registered company, association, foundation, or other separate legal entity.</p>
+
+        <h2>Operator and responsible person</h2>
+        <p><strong>Timo Schmidt</strong><br />Germany</p>
+
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> <a href="mailto:admin@koalastuff.net">admin@koalastuff.net</a></p>
+        <p>
+          <strong>GitHub:</strong> <a href="https://github.com/Shik3i" target="_blank" rel="noopener noreferrer">Shik3i</a><br />
+          <strong>Mastodon:</strong> <a href="https://mastodon.social/@koalastuff" target="_blank" rel="me noopener noreferrer">@koalastuff@mastodon.social</a><br />
+          <strong>Reddit:</strong> <a href="https://www.reddit.com/user/Shik3i/" target="_blank" rel="noopener noreferrer">u/Shik3i</a>
+        </p>
+        <p>For ordinary bug reports and feature requests, please use the issue tracker of the relevant GitHub repository. Security vulnerabilities should not be reported publicly. Please use the private reporting method documented by the affected project or contact the email address above.</p>
+
+        <h2>Project information</h2>
+        <p>KoalaStuff contains independently developed browser extensions, web applications, desktop utilities, self-hosted services, games, experiments, and related documentation.</p>
+        <p>Most KoalaStuff projects are provided free of charge and as open-source software. The applicable license is stated in the respective source-code repository. A reference to the MIT License on one project does not automatically apply to every other project or to all names, logos, illustrations, website content, and other non-code assets.</p>
+        <p>KoalaStuff does not claim ownership of third-party product names, trademarks, services, or logos referenced for compatibility, comparison, or informational purposes. Those remain the property of their respective owners.</p>
+
+        <h2>User-submitted content</h2>
+        <p>Some KoalaStuff services may allow users to submit project information, links, statistics, feedback, text, images, or other content.</p>
+        <p>Users remain responsible for the content they submit and must have the necessary rights to publish it. Content that is unlawful, infringes third-party rights, contains malware, impersonates others, or abuses the service may be restricted or removed.</p>
+        <p>Reports concerning allegedly unlawful or rights-infringing content can be sent to the contact address above. Please identify the affected content, its location, and the reason for the report as precisely as possible.</p>
+
+        <h2>Liability for content</h2>
+        <p>The contents of KoalaStuff websites and services are prepared with care. However, no guarantee is given that information is complete, accurate, current, or suitable for a particular purpose.</p>
+        <p>Open-source software and experimental services may contain defects, change substantially, lose data, or become unavailable. Unless required by applicable law, no guarantee is given regarding permanent availability, maintenance, support, compatibility, data preservation, or future development.</p>
+        <p>The license and warranty terms included with each software project remain authoritative for that project.</p>
+
+        <h2>External links</h2>
+        <p>KoalaStuff websites and applications may contain links to third-party websites and services. Their content and data processing are controlled by their respective operators.</p>
+        <p>External links are reviewed when added where reasonably possible. KoalaStuff cannot continuously monitor every linked page. Links to unlawful content will be removed when a sufficiently specific report is received and the issue can be verified.</p>
+
+        <h2>Privacy and terms</h2>
+        <p>Data processing differs between KoalaStuff projects. The privacy policy displayed or linked by the relevant project applies to that service.</p>
+        <p>Projects that provide accounts, uploads, public submissions, hosted data, or other interactive features may also provide their own terms of use. Project-specific policies take precedence where they contain more specific provisions.</p>
+
+        <h2>Consumer dispute resolution</h2>
+        <p>I am neither willing nor obliged to participate in dispute-resolution proceedings before a consumer arbitration board.</p>
+      </article>
+    </div>
+  </main>
+
+  <Footer locale={locale} translations={tr} />
+</BaseLayout>
