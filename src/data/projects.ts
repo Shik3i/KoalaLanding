@@ -1422,7 +1422,9 @@ export const projects: Project[] = [
       website: 'https://cast.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaCast',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalacast/icon.png',
+    },
   },
 ];
 
