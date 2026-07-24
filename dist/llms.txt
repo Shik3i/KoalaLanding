@@ -40,7 +40,7 @@ KoalaStuff is not a single bundled product, hosted account platform or commercia
 - Mastodon: https://mastodon.social/@koalastuff
 - Support: https://ko-fi.com/koaladev
 
-# Complete project catalog (23 projects)
+# Complete project catalog (24 projects)
 
 ## KoalaShip
 
@@ -435,3 +435,17 @@ KoalaParty grew from the need for a permanent, privacy-first alternative to temp
 - Project page: https://koalastuff.net/projects/koalaparty/
 - Website: https://party.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaParty
+
+## KoalaCast
+
+KoalaCast is a podcast website and app in early development for discovering shows, listening to episodes and keeping subscriptions in one focused place. It is designed to make podcast browsing feel clear and lightweight, with a calm interface that can grow as the service comes online.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: early
+- Catalog updated: 2026-07
+- Technologies and focus: Podcast, Web App, Audio, Subscriptions, Open Source
+- Project page: https://koalastuff.net/projects/koalacast/
+- Website: https://cast.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaCast

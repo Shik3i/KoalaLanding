@@ -9,6 +9,7 @@ const ignoredRepos = new Set([
   'koalalanding',
   'javascriptsammlung',
   'lf6',
+  'shik3i',
   'tuttasesp32',
 ]);
 
