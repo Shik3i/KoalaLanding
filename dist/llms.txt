@@ -129,7 +129,7 @@ While playing Cookie Clicker, I wanted an easy, safe way to quickly automate cli
 - Category: extensions
 - Lifecycle status: wip
 - Catalog updated: 2026-04
-- Technologies and focus: JavaScript, Open Source, Browser Extension, Free, Privacy-first, Automation, Idle Games
+- Technologies and focus: JavaScript, WebExtensions API, CSS, Open Source, Browser Extension, Free, Privacy-first, Automation, Idle Games
 - Project page: https://koalastuff.net/projects/koalaclicker/
 - Website: https://clicker.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaClicker
@@ -146,7 +146,7 @@ Cookie banners interrupt almost every site with repetitive consent prompts. I bu
 
 - Category: extensions
 - Lifecycle status: wip
-- Technologies and focus: JavaScript, Open Source, Browser Extension, Privacy-first, Cookie Consent, Automation, Zero Dependencies, WIP
+- Technologies and focus: JavaScript, WebExtensions API, CSS, Open Source, Browser Extension, Privacy-first, Cookie Consent, Automation, Zero Dependencies, WIP
 - Project page: https://koalastuff.net/projects/koalacookies/
 - GitHub: https://github.com/Shik3i/KoalaCookies
 
@@ -162,7 +162,7 @@ Playing two characters in Flyff Universe manually is tedious. I built this exten
 
 - Category: extensions
 - Lifecycle status: wip
-- Technologies and focus: JavaScript, Open Source, Browser Extension, Gaming, WIP
+- Technologies and focus: JavaScript, WebExtensions API, CSS, Open Source, Browser Extension, Gaming, WIP
 - Project page: https://koalastuff.net/projects/koalaflyff/
 - Website: https://multibox.koalastuff.net
 - GitHub: https://github.com/Shik3i/FlyffUniverseHelper
@@ -180,7 +180,7 @@ Modern movies often have extreme volume fluctuations between quiet dialogue and 
 - Category: extensions
 - Lifecycle status: experimental
 - Catalog updated: 2026-03
-- Technologies and focus: JavaScript, Web Audio API, Open Source, Browser Extension, Free, Audio, Experimental
+- Technologies and focus: JavaScript, Web Audio API, CSS, Open Source, Browser Extension, Free, Audio, Experimental
 - Project page: https://koalastuff.net/projects/koalasound/
 - GitHub: https://github.com/Shik3i/KoalaSound
 
@@ -251,7 +251,7 @@ This project was built as a proof of concept. After seeing someone on Reddit cha
 - Category: web
 - Lifecycle status: early
 - Catalog updated: 2026-06
-- Technologies and focus: Svelte, Tailwind CSS, Open Source, Web App, Design Tool, Privacy-first
+- Technologies and focus: JavaScript, Vite, Tailwind CSS 4, Open Source, Web App, Design Tool, Privacy-first
 - Project page: https://koalastuff.net/projects/koalasnap/
 - Website: https://snap.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaSnap
@@ -347,6 +347,10 @@ I wanted a personal finance tool that doesn't connect to banks or rely on extern
 
 A privacy-first paper-trading desk for stocks, ETFs, crypto, commodities and live eSports prediction markets — using virtual cash only.
 
+### Why it exists
+
+I wanted a way to learn how markets behave without risking real money or handing a trading platform personal data. KoalaTrade grew from that idea into one private paper-trading desk for traditional markets and live eSports predictions.
+
 ### Project profile
 
 - Category: web
@@ -359,6 +363,10 @@ A privacy-first paper-trading desk for stocks, ETFs, crypto, commodities and liv
 ## KoalaFi
 
 Endless procedural lo-fi music and ambient noise generated locally in the browser, with offline support and no accounts, tracking or external audio assets.
+
+### Why it exists
+
+I wanted background music that never repeats the same recording and does not depend on a streaming service. KoalaFi became an experiment in generating the music, ambience and visuals entirely inside the browser.
 
 ### Project profile
 
@@ -373,6 +381,10 @@ Endless procedural lo-fi music and ambient noise generated locally in the browse
 ## KoalaTranslate
 
 A self-hosted visual translation portal that lets non-technical contributors localize KoalaStuff projects in context instead of editing raw JSON files.
+
+### Why it exists
+
+Maintaining many locale files by hand made it too easy to lose context and too hard for non-technical contributors to help. KoalaTranslate turns that workflow into a visual editor with a reviewable pull-request process.
 
 ### Project profile
 
@@ -440,12 +452,16 @@ KoalaParty grew from the need for a permanent, privacy-first alternative to temp
 
 KoalaCast is a podcast website and app in early development for discovering shows, listening to episodes and keeping subscriptions in one focused place. It is designed to make podcast browsing feel clear and lightweight, with a calm interface that can grow as the service comes online.
 
+### Why it exists
+
+Podcast apps often combine noisy discovery, mandatory accounts, tracking or platform lock-in. I wanted a calmer player built around open RSS, local-first use and optional self-hosted sync, so KoalaCast started as that focused alternative.
+
 ### Project profile
 
 - Category: web
 - Lifecycle status: early
 - Catalog updated: 2026-07
-- Technologies and focus: Podcast, Web App, Audio, Subscriptions, Open Source
+- Technologies and focus: Go, SvelteKit, TypeScript, SQLite, IndexedDB, RSS, Docker, Open Source, Podcast, Local-first, Privacy-first
 - Project page: https://koalastuff.net/projects/koalacast/
 - Website: https://cast.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaCast

@@ -13,7 +13,7 @@ const { locale, translations: tr } = Astro.props;
 
 const featured = getFeaturedProjects();
 const homepageProjects = getHomepageProjects();
-const gridProjects = homepageProjects;
+const gridProjects = homepageProjects.filter((project) => !project.featured);
 
 const categories = [
   'desktop',

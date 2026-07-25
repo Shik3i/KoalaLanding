@@ -80,8 +80,17 @@ function detectIssue(text, expectedLang, englishText) {
     if (expectedLang === 'ja' && cleanText.length > 10 && !hasJapanese(cleanText) && hasCJK(cleanText)) {
       return 'Expected Japanese but contains no Kana (only Hanzi/Chinese characters)';
     }
+    if (expectedLang === 'ja' && hasKorean(cleanText)) {
+      return 'Japanese translation contains Hangul';
+    }
     if (expectedLang === 'ko' && !hasKorean(cleanText)) {
       return 'Expected Korean but contains no Hangul characters';
+    }
+    if (expectedLang === 'ko' && hasJapanese(cleanText)) {
+      return 'Korean translation contains Japanese Kana';
+    }
+    if (expectedLang === 'zh' && (hasJapanese(cleanText) || hasKorean(cleanText))) {
+      return 'Chinese translation contains Japanese Kana or Hangul';
     }
 
     // Heuristic: English stopword count vs target stopword count
@@ -182,6 +191,11 @@ async function runAudit() {
     const { projects } = await import('./temp_projects.js');
     fs.unlinkSync(tempFilePath);
 
+    const seenIds = new Set();
+    const seenSlugs = new Set();
+    const validCategories = new Set(['desktop', 'web', 'extensions']);
+    const validStatuses = new Set(['active', 'wip', 'experimental', 'early', 'archived']);
+
     for (const project of projects) {
       console.log(`Checking project: ${project.name} (${project.id})`);
 
@@ -189,7 +203,7 @@ async function runAudit() {
       for (const field of textFields) {
         const fieldData = project[field];
         if (!fieldData) {
-          if (field === 'shortDescription') {
+          if (field === 'shortDescription' || field === 'backstory') {
             console.error(`[ERROR] Project ${project.name} is missing required field ${field}`);
             totalErrors++;
           }
@@ -217,6 +231,76 @@ async function runAudit() {
             console.error(`[ERROR] Project ${project.name} -> ${field} -> locale "${locale}": ${issue}\n  Value: "${val.substring(0, 80)}..."`);
             totalErrors++;
           }
+        }
+      }
+
+      const slug = project.slug || project.id;
+      if (seenIds.has(project.id)) {
+        console.error(`[ERROR] Duplicate project id: ${project.id}`);
+        totalErrors++;
+      }
+      if (seenSlugs.has(slug)) {
+        console.error(`[ERROR] Duplicate project slug: ${slug}`);
+        totalErrors++;
+      }
+      seenIds.add(project.id);
+      seenSlugs.add(slug);
+
+      if (!validCategories.has(project.category)) {
+        console.error(`[ERROR] Project ${project.name} has invalid category: ${project.category}`);
+        totalErrors++;
+      }
+      if (!validStatuses.has(project.status)) {
+        console.error(`[ERROR] Project ${project.name} has invalid status: ${project.status}`);
+        totalErrors++;
+      }
+      if (project.homepage && !project.listed) {
+        console.error(`[ERROR] Project ${project.name} is on the homepage but not listed`);
+        totalErrors++;
+      }
+      if (project.featured && !project.homepage) {
+        console.error(`[ERROR] Project ${project.name} is featured but not on the homepage`);
+        totalErrors++;
+      }
+      if (project.lastUpdated && !/^\d{4}-(0[1-9]|1[0-2])$/.test(project.lastUpdated)) {
+        console.error(`[ERROR] Project ${project.name} has invalid lastUpdated: ${project.lastUpdated}`);
+        totalErrors++;
+      }
+
+      if (!Array.isArray(project.technologies) || project.technologies.length !== 3) {
+        console.error(`[ERROR] Project ${project.name} must define exactly 3 card technologies`);
+        totalErrors++;
+      } else {
+        const uniqueTechnologies = new Set(project.technologies);
+        if (uniqueTechnologies.size !== project.technologies.length) {
+          console.error(`[ERROR] Project ${project.name} has duplicate card technologies`);
+          totalErrors++;
+        }
+        for (const technology of project.technologies) {
+          if (!project.tags?.includes(technology)) {
+            console.error(`[ERROR] Project ${project.name} card technology "${technology}" is missing from tags`);
+            totalErrors++;
+          }
+        }
+      }
+
+      if (!Array.isArray(project.tags) || project.tags.length === 0) {
+        console.error(`[ERROR] Project ${project.name} must define tags`);
+        totalErrors++;
+      } else if (new Set(project.tags).size !== project.tags.length) {
+        console.error(`[ERROR] Project ${project.name} has duplicate tags`);
+        totalErrors++;
+      }
+
+      const links = Object.values(project.links || {}).filter(Boolean);
+      if (project.listed && links.length === 0) {
+        console.error(`[ERROR] Listed project ${project.name} has no links`);
+        totalErrors++;
+      }
+      for (const link of links) {
+        if (!/^https:\/\//.test(link)) {
+          console.error(`[ERROR] Project ${project.name} has a non-HTTPS link: ${link}`);
+          totalErrors++;
         }
       }
     }
