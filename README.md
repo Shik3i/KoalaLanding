@@ -36,7 +36,7 @@ The landing page features high-end custom UI elements that combine visual excell
 
 ### 1. Morphing Ambient Background
 The background consists of three floating glow blobs that dynamically rotate, translate, and morph over time using asymmetric `border-radius` variables (`will-change: transform, border-radius` enabled for GPU hardware acceleration).
-*   **Blob 1**: Blue accent (`hsl(212, 100%, 60%)`), morphing over 20s.
+*   **Blob 1**: Eucalyptus green accent (`oklch(0.68 0.13 150)`), morphing over 20s.
 *   **Blob 2**: Purple accent (`hsl(260, 80%, 60%)`), morphing over 24s.
 *   **Blob 3**: Turquoise accent (`hsl(170, 85%, 50%)`), morphing over 28s.
 *   **Dot Grid Mask**: A slowly shifting background dot-grid mask layered on top of the gradient.

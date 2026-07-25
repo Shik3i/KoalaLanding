@@ -56,8 +56,10 @@
   --c-text:        hsl(220, 20%, 96%);
   --c-text-muted:  hsl(220, 10%, 70%);
   --c-text-faint:  hsl(220, 10%, 55%);
-  --c-accent:      hsl(212, 100%, 60%);
-  --c-accent-glow: hsl(212, 100%, 60%, 0.15);
+  --c-accent:      oklch(0.68 0.13 150);
+  --c-accent-hover: oklch(0.75 0.13 150);
+  --c-on-accent:   oklch(0.14 0.02 90);
+  --c-accent-glow: oklch(0.68 0.13 150 / 0.15);
 
   /* Typography */
   --font-sans: 'Twemoji Country Flags', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -128,8 +130,10 @@
   --c-text:        hsl(224, 25%, 8%);
   --c-text-muted:  hsl(224, 15%, 35%);
   --c-text-faint:  hsl(224, 10%, 50%);
-  --c-accent:      hsl(212, 100%, 48%);
-  --c-accent-glow: hsl(212, 100%, 48%, 0.1);
+  --c-accent:      oklch(0.52 0.12 150);
+  --c-accent-hover: oklch(0.58 0.12 150);
+  --c-on-accent:   hsl(0, 0%, 100%);
+  --c-accent-glow: oklch(0.52 0.12 150 / 0.1);
   --shadow-sm:  0 1px 3px hsl(220, 20%, 60%, 0.1);
   --shadow-md:  0 4px 16px hsl(220, 20%, 60%, 0.15);
   --shadow-lg:  0 8px 32px hsl(220, 20%, 60%, 0.2);
@@ -217,7 +221,7 @@ html {
 }
 
 .blob-1 {
-  background: radial-gradient(circle, hsla(212, 100%, 60%, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, oklch(0.68 0.13 150 / 0.08) 0%, transparent 70%);
   width: min(70vw, 700px);
   height: min(70vw, 700px);
   top: -15%;
@@ -418,14 +422,14 @@ ul, ol { list-style: none; }
 
 .btn-primary {
   background: var(--c-accent);
-  color: hsl(0, 0%, 100%);
+  color: var(--c-on-accent);
   box-shadow: 0 2px 12px var(--c-accent-glow);
 }
 .btn-primary:hover {
-  background: hsl(218, 85%, 56%);
+  background: var(--c-accent-hover);
   box-shadow: 0 4px 20px var(--c-accent-glow);
   text-decoration: none;
-  color: hsl(0, 0%, 100%);
+  color: var(--c-on-accent);
 }
 
 .btn-secondary {

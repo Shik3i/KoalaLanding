@@ -36,8 +36,8 @@ export async function GET({ props }) {
     <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #0b0c10; padding: 80px; font-family: 'Inter';">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 60px;">
         <div style="display: flex; align-items: center;">
-          <img src="${koalaLogoBase64}" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid #66fcf1;" />
-          <span style="display: flex; font-size: 32px; font-weight: 700; color: #66fcf1; margin-left: 24px; letter-spacing: -1px;">KoalaStuff Blog</span>
+          <img src="${koalaLogoBase64}" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid #56ae6c;" />
+          <span style="display: flex; font-size: 32px; font-weight: 700; color: #56ae6c; margin-left: 24px; letter-spacing: -1px;">KoalaStuff Blog</span>
         </div>
         <span style="display: flex; font-size: 28px; color: #c5c6c7;">${authorStr}</span>
       </div>
@@ -45,12 +45,12 @@ export async function GET({ props }) {
         <h1 style="display: flex; font-size: 72px; font-weight: 700; color: #ffffff; line-height: 1.1; margin: 0; letter-spacing: -2px;">
           ${post.data.title}
         </h1>
-        ${truncatedDesc ? `<p style="display: flex; font-size: 36px; color: #c5c6c7; margin-top: 32px; line-height: 1.4;">${truncatedDesc}</p>` : ''}
+        <p style="display: flex; font-size: 36px; color: #c5c6c7; margin-top: 32px; line-height: 1.4;">${truncatedDesc}</p>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: flex-end;">
         <div style="display: flex; align-items: center;">
-          <div style="display: flex; width: 24px; height: 24px; border-radius: 50%; background-color: #45a29e; margin-right: 16px;"></div>
-          <span style="display: flex; font-size: 28px; color: #45a29e; font-weight: 600;">koalastuff.net</span>
+          <div style="display: flex; width: 24px; height: 24px; border-radius: 50%; background-color: #56ae6c; margin-right: 16px;"></div>
+          <span style="display: flex; font-size: 28px; color: #56ae6c; font-weight: 600;">koalastuff.net</span>
         </div>
         <span style="display: flex; font-size: 28px; color: #c5c6c7;">
           ${dateStr}

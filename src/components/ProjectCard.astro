@@ -64,9 +64,9 @@ const imageSrc = imageImport ? (await imageImport()).default : null;
     <span class={`badge ${statusClass}`}>{statusLabel}</span>
   </div>
 
-  <h4 class="project-card__title">
+  <h3 class="project-card__title">
     <a href={detailHref}>{project.name}</a>
-  </h4>
+  </h3>
 
   <p class="project-card__desc">
     {getProjectDescription(project, locale)}

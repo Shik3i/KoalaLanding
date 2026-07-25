@@ -141,14 +141,25 @@
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav');
     if (mobileBtn && mobileNav) {
+      const updateMobileMenuLabel = (isOpen: boolean) => {
+        const label = isOpen
+          ? mobileBtn.dataset.labelClose
+          : mobileBtn.dataset.labelOpen;
+        if (label) {
+          mobileBtn.setAttribute('aria-label', label);
+          mobileBtn.setAttribute('title', label);
+        }
+      };
       mobileBtn.addEventListener('click', () => {
         const isOpen = mobileNav.classList.toggle('is-open');
         mobileBtn.setAttribute('aria-expanded', String(isOpen));
+        updateMobileMenuLabel(isOpen);
       }, { signal });
       mobileNav.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           mobileNav.classList.remove('is-open');
           mobileBtn.setAttribute('aria-expanded', 'false');
+          updateMobileMenuLabel(false);
           mobileBtn.focus();
         }
       }, { signal });
@@ -353,15 +364,15 @@
       const updateColors = () => {
         isLight = document.documentElement.dataset.theme === 'light';
         if (isLight) {
-          dotColor = 'hsla(212, 100%, 48%, 0.15)';
-          lineColor = 'hsla(212, 100%, 48%, 0.08)';
-          tetherColor = 'hsla(212, 100%, 48%, '; // to append opacity
-          activeDotColor = 'hsla(212, 100%, 48%, 0.8)';
+          dotColor = 'rgba(40, 124, 66, 0.15)';
+          lineColor = 'rgba(40, 124, 66, 0.08)';
+          tetherColor = 'rgba(40, 124, 66, '; // to append opacity
+          activeDotColor = 'rgba(40, 124, 66, 0.8)';
         } else {
-          dotColor = 'hsla(212, 100%, 65%, 0.2)';
-          lineColor = 'hsla(212, 100%, 60%, 0.1)';
-          tetherColor = 'hsla(212, 100%, 60%, '; // to append opacity
-          activeDotColor = 'hsla(212, 100%, 75%, 0.85)';
+          dotColor = 'rgba(86, 174, 108, 0.2)';
+          lineColor = 'rgba(86, 174, 108, 0.1)';
+          tetherColor = 'rgba(86, 174, 108, '; // to append opacity
+          activeDotColor = 'rgba(108, 197, 129, 0.85)';
         }
       };
 
@@ -511,8 +522,8 @@
                   const dist = Math.sqrt(distSq);
                   const opacity = (1 - dist / maxConnectDist) * 0.15;
                   ctx.strokeStyle = isLight
-                    ? `hsla(212, 100%, 48%, ${opacity * 0.75})`
-                    : `hsla(212, 100%, 65%, ${opacity * 1.1})`;
+                    ? `rgba(40, 124, 66, ${opacity * 0.75})`
+                    : `rgba(86, 174, 108, ${opacity * 1.1})`;
                   ctx.beginPath();
                   ctx.moveTo(p1.x, p1.y);
                   ctx.lineTo(p2.x, p2.y);
