@@ -40,7 +40,7 @@ KoalaStuff is not a single bundled product, hosted account platform or commercia
 - Mastodon: https://mastodon.social/@koalastuff
 - Support: https://ko-fi.com/koaladev
 
-# Complete project catalog (24 projects)
+# Complete project catalog (25 projects)
 
 ## KoalaShip
 
@@ -447,6 +447,24 @@ KoalaParty grew from the need for a permanent, privacy-first alternative to temp
 - Project page: https://koalastuff.net/projects/koalaparty/
 - Website: https://party.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaParty
+
+## KoalaGithub
+
+A curated hub for GitHub profile visualizers, contribution graphs and README animations, with live previews and clear setup guides.
+
+### Why it exists
+
+GitHub profile effects are scattered across many repositories, and their setup instructions are often incomplete or easy to misread. I built KoalaGithub to collect the useful options in one searchable place, preview them with a real username and explain when a GitHub Actions workflow is required.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: active
+- Catalog updated: 2026-07
+- Technologies and focus: Go, SvelteKit, TypeScript, SQLite, Docker, GitHub, README, Open Source
+- Project page: https://koalastuff.net/projects/koalagithub/
+- Website: https://github.koalastuff.net
+- GitHub: https://github.com/Shik3i/KoalaGithub
 
 ## KoalaCast
 

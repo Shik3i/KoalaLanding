@@ -7,6 +7,7 @@ const catalogRepos = new Set(
 
 const ignoredRepos = new Set([
   'koalalanding',
+  'koalamusic',
   'javascriptsammlung',
   'lf6',
   'shik3i',
