@@ -423,7 +423,7 @@ KoalaData grew out of the need for a focused analytics workspace for browser ext
 ### Project profile
 
 - Category: web
-- Lifecycle status: early
+- Lifecycle status: active
 - Catalog updated: 2026-07
 - Technologies and focus: SvelteKit, Svelte 5, TypeScript, SQLite, ECharts, Docker, Analytics, Privacy-first, Open Source
 - Project page: https://koalastuff.net/projects/koaladata/

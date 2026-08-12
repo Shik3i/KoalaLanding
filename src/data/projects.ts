@@ -39,6 +39,26 @@ export interface Project {
   };
 }
 
+const projectStatusPriority: Record<ProjectStatus, number> = {
+  active: 0,
+  early: 1,
+  wip: 2,
+  experimental: 3,
+  archived: 4,
+};
+
+export function sortProjectsByStatusAndDate(projectsToSort: readonly Project[]): Project[] {
+  return [...projectsToSort].sort((a, b) => {
+    const statusDifference = projectStatusPriority[a.status] - projectStatusPriority[b.status];
+    if (statusDifference !== 0) return statusDifference;
+
+    const dateDifference = (b.lastUpdated || '0000-00').localeCompare(a.lastUpdated || '0000-00');
+    if (dateDifference !== 0) return dateDifference;
+
+    return a.name.localeCompare(b.name);
+  });
+}
+
 export const projects: Project[] = [
   {
     id: 'koalaship',
@@ -1311,7 +1331,7 @@ export const projects: Project[] = [
     id: 'koaladata',
     name: 'KoalaData',
     category: 'web',
-    status: 'early',
+    status: 'active',
     featured: false,
     listed: true,
     homepage: true,
