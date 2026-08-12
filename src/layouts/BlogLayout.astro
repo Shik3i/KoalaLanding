@@ -105,7 +105,7 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
         </div>
       </article>
 
-      <script type="application/ld+json" set:html={JSON.stringify({
+      <script is:inline type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": title,
@@ -366,7 +366,7 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`.replace(/\/$/, '') || siteUrl;
 </style>
 
 <script>
-  let blogLayoutController = null;
+  let blogLayoutController: AbortController | null = null;
   document.addEventListener('astro:page-load', () => {
     if (blogLayoutController) blogLayoutController.abort();
     blogLayoutController = new AbortController();

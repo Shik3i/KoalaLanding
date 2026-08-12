@@ -68,7 +68,7 @@ const jsonLdData = {
   canonicalPath={canonicalPath}
 >
   <Header locale={locale} translations={tr} currentPath={canonicalPath} />
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLdData)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdData)} />
 
   <main id="main-content" class="section">
     <div class="container">

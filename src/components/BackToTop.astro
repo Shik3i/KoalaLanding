@@ -56,7 +56,7 @@
 </style>
 
 <script>
-  let backToTopController = null;
+  let backToTopController: AbortController | null = null;
   document.addEventListener('astro:page-load', () => {
     if (backToTopController) backToTopController.abort();
     backToTopController = new AbortController();

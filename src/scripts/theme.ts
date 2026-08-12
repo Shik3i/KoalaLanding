@@ -357,7 +357,6 @@
       // Colors matching user preference dataset.theme
       let isLight = document.documentElement.dataset.theme === 'light';
       let dotColor = '';
-      let lineColor = '';
       let tetherColor = '';
       let activeDotColor = '';
 
@@ -365,12 +364,10 @@
         isLight = document.documentElement.dataset.theme === 'light';
         if (isLight) {
           dotColor = 'rgba(40, 124, 66, 0.15)';
-          lineColor = 'rgba(40, 124, 66, 0.08)';
           tetherColor = 'rgba(40, 124, 66, '; // to append opacity
           activeDotColor = 'rgba(40, 124, 66, 0.8)';
         } else {
           dotColor = 'rgba(86, 174, 108, 0.2)';
-          lineColor = 'rgba(86, 174, 108, 0.1)';
           tetherColor = 'rgba(86, 174, 108, '; // to append opacity
           activeDotColor = 'rgba(108, 197, 129, 0.85)';
         }

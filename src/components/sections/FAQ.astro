@@ -40,7 +40,7 @@ const faqJsonLd = {
     </div>
 
     <div class="faq-list" role="list">
-      {displayed.map((item, i) => (
+      {displayed.map((item) => (
         <details class="faq-item" role="listitem">
           <summary>
             {tr[item.q] ?? item.q}
@@ -57,6 +57,6 @@ const faqJsonLd = {
   </div>
 
   {!compact && (
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   )}
 </section>

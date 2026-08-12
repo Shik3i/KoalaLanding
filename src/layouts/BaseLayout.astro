@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/components.css';
-import { locales, localeLangCodes, localeNames, getLocalePath, defaultLocale } from '../i18n/config';
+import { locales, localeLangCodes, getLocalePath, defaultLocale } from '../i18n/config';
 import type { Locale } from '../i18n/config';
 import { ClientRouter } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
@@ -242,7 +242,7 @@ if (isProjectsPage) {
     <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
     <!-- JSON-LD: WebSite + Person + Organization (+ FAQ/Projects if applicable) -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": graph
     })} />
@@ -273,13 +273,13 @@ if (isProjectsPage) {
       import '../scripts/theme.ts';
     </script>
     <script>
-      let pageObserver = null;
+      let pageObserver: IntersectionObserver | null = null;
       let isInitialLoad = true;
       document.addEventListener('astro:before-preparation', (event) => {
         const fromPath = event.from.pathname || new URL(event.from, location.href).pathname;
         const toPath = event.to.pathname || new URL(event.to, location.href).pathname;
 
-        const getOrder = (p) => {
+        const getOrder = (p: string) => {
           if (p === '/' || p.match(/^\/[a-z]{2}\/?$/)) return 0;
           if (p.includes('/projects')) return 1;
           if (p.includes('/blog')) return 2;
@@ -323,12 +323,12 @@ if (isProjectsPage) {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-revealed');
-              pageObserver.unobserve(entry.target);
+              pageObserver?.unobserve(entry.target);
             }
           });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => pageObserver.observe(el));
+        document.querySelectorAll<HTMLElement>('.reveal-on-scroll').forEach(el => pageObserver?.observe(el));
 
         // Move focus to main content after view transitions
         const main = document.getElementById('main-content');

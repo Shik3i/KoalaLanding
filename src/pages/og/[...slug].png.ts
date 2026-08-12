@@ -1,9 +1,13 @@
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { APIRoute } from 'astro';
 import satori from 'satori';
 import { html } from 'satori-html';
 import { Resvg } from '@resvg/resvg-js';
 import fs from 'node:fs';
 import path from 'node:path';
+
+type OgProps = { post: CollectionEntry<'blog'> };
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,7 +17,7 @@ export async function getStaticPaths() {
   }));
 }
 
-export async function GET({ props }) {
+export const GET: APIRoute<OgProps> = async ({ props }) => {
   const { post } = props;
 
   // Load fonts
@@ -75,9 +79,9 @@ export async function GET({ props }) {
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  return new Response(pngBuffer, {
+  return new Response(new Uint8Array(pngBuffer), {
     headers: {
       'Content-Type': 'image/png',
     },
   });
-}
+};
