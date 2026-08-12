@@ -40,7 +40,7 @@ KoalaStuff is not a single bundled product, hosted account platform or commercia
 - Mastodon: https://mastodon.social/@koalastuff
 - Support: https://ko-fi.com/koaladev
 
-# Complete project catalog (25 projects)
+# Complete project catalog (26 projects)
 
 ## KoalaShip
 
@@ -465,6 +465,23 @@ GitHub profile effects are scattered across many repositories, and their setup i
 - Project page: https://koalastuff.net/projects/koalagithub/
 - Website: https://github.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaGithub
+
+## KoalaPet
+
+KoalaPet is an early Godot project for a transparent desktop companion. Its foundation covers content packs, local saves, offline time, feature gates and future care, evolution and habitat systems without accounts or telemetry.
+
+### Why it exists
+
+I wanted a small companion that could stay local and grow from a classic care loop into a deeper simulation without turning the desktop into a permanent full-screen game. KoalaPet captures that direction.
+
+### Project profile
+
+- Category: desktop
+- Lifecycle status: early
+- Catalog updated: 2026-08
+- Technologies and focus: Godot 4, Godot, GDScript, Python, Windows, Desktop, Virtual Pet, Local-first, Open Source
+- Project page: https://koalastuff.net/projects/koalapet/
+- GitHub: https://github.com/Shik3i/KoalaPet
 
 ## KoalaCast
 
