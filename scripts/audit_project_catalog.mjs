@@ -12,6 +12,10 @@ const ignoredRepos = new Set([
   'lf6',
   'shik3i',
   'tuttasesp32',
+  'koalabattle',
+  'koalasand',
+  'koalasandpaper',
+  'koalashelf',
 ]);
 
 const headers = {

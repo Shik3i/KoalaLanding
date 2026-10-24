@@ -134,22 +134,6 @@ While playing Cookie Clicker, I wanted an easy, safe way to quickly automate cli
 - Website: https://clicker.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaClicker
 
-## KoalaCookies
-
-A privacy-first browser extension that automatically rejects cookie-consent banners across common providers, with gentle and aggressive modes.
-
-### Why it exists
-
-Cookie banners interrupt almost every site with repetitive consent prompts. I built KoalaCookies to reject common providers automatically, keep every decision local, and offer an aggressive mode plus custom selectors for difficult sites.
-
-### Project profile
-
-- Category: extensions
-- Lifecycle status: wip
-- Technologies and focus: JavaScript, WebExtensions API, CSS, Open Source, Browser Extension, Privacy-first, Cookie Consent, Automation, Zero Dependencies, WIP
-- Project page: https://koalastuff.net/projects/koalacookies/
-- GitHub: https://github.com/Shik3i/KoalaCookies
-
 ## KoalaFlyff
 
 Helper extension for Flyff Universe to play two accounts simultaneously by forwarding keystrokes from the active tab to a secondary background tab (e.g., to trigger heals).
@@ -375,7 +359,6 @@ I wanted background music that never repeats the same recording and does not dep
 - Catalog updated: 2026-07
 - Technologies and focus: SvelteKit, Tone.js, TypeScript, IndexedDB, PWA, Canvas 2D, Local-first, Privacy-first
 - Project page: https://koalastuff.net/projects/koalafi/
-- Website: https://lofi.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaFi
 
 ## KoalaTranslate
@@ -500,3 +483,22 @@ Podcast apps often combine noisy discovery, mandatory accounts, tracking or plat
 - Project page: https://koalastuff.net/projects/koalacast/
 - Website: https://cast.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaCast
+
+## KoalaShot
+
+KoalaShot is an open-source, privacy-first browser extension for Chromium and Firefox that captures full vertical webpages and lets you annotate them locally. It features overlap-aware vertical stitching, smart memory limits, and a built-in offline editor with redaction, blur, shapes, and crop tools.
+
+### Why it exists
+
+Most screenshot extensions upload images to third-party servers or inject telemetry. I built KoalaShot to ensure all captures and pixel edits remain entirely on the local device without accounts or cloud tracking.
+
+### Project profile
+
+- Category: extensions
+- Lifecycle status: active
+- Catalog updated: 2026-10
+- Technologies and focus: JavaScript, WebExtensions API, Canvas API, Chrome Extension, Firefox Addon, Privacy-first, Screenshot, Editor, Open Source, Local-first
+- Project page: https://koalastuff.net/projects/koalashot/
+- GitHub: https://github.com/Shik3i/KoalaShot
+- Chrome Web Store: https://chromewebstore.google.com/detail/koalashot/ohdhaimfgkjcnggkhggomgajclnhhbfk
+- Firefox Add-ons: https://addons.mozilla.org/firefox/addon/koalashot/
