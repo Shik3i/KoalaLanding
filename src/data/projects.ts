@@ -69,7 +69,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(170, 80%, 45%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'An open-source shopping and parcel-delivery simulation. Experience the fun of online shopping without spending real money.',
       de: 'Eine Open-Source-Simulation für Online-Shopping und Paketlieferungen. Erlebe den Spaß am Online-Shopping ohne echtes Geld auszugeben.',
@@ -127,7 +127,9 @@ export const projects: Project[] = [
       website: 'https://ship.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaShip',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalaship/icon.png',
+    },
   },
   {
     id: 'flatlandtd',
@@ -139,7 +141,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(185, 85%, 52%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A local-first neon cyber idle tower defense game. Deploy towers, survive geometric enemies, refine Alloy and keep progressing offline.',
       de: 'Ein local-first Neon-Cyber-Idle-Tower-Defense-Spiel. Türme einsetzen, geometrische Gegner überstehen, Alloy veredeln und offline weiter Fortschritt machen.',
@@ -210,7 +212,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(210, 90%, 55%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'Browser watch parties for any video. Sync playback across YouTube, Netflix, Emby, Jellyfin, Plex and more.',
       de: 'Browser-Watch-Partys für jedes Video. Synchronisierte Wiedergabe auf YouTube, Netflix, Emby, Jellyfin, Plex und mehr.',
@@ -285,7 +287,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(260, 65%, 58%)',
-    lastUpdated: '2026-05',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A native desktop download manager for yt-dlp. Download videos, audio and playlists from hundreds of sites — without using a terminal.',
       de: 'Ein nativer Desktop-Download-Manager für yt-dlp. Videos, Audio und Playlists von hunderten Sites herunterladen — ohne Terminal.',
@@ -356,7 +358,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(330, 70%, 55%)',
-    lastUpdated: '2026-04',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A privacy-first auto-clicker for idle games and repetitive web tasks. Zero tracking, zero permissions beyond the active tab.',
       de: 'Ein datenschutzorientierter Auto-Clicker für Idle-Games und sich wiederholende Web-Aufgaben. Kein Tracking, keine Berechtigungen über den aktiven Tab hinaus.',
@@ -515,7 +517,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(160, 60%, 45%)',
-    lastUpdated: '2026-03',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'Real-time audio processing for browser video tabs. Compressor and EQ presets. Chromium-only proof of concept.',
       de: 'Echtzeit-Audioverarbeitung für Browser-Video-Tabs. Kompressor- und EQ-Presets. Nur für Chromium, Proof of Concept.',
@@ -568,7 +570,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(220, 80%, 55%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A personal bento-box dashboard linking KoalaStuff projects, server status and daily tools. Moving to startpage.koalastuff.net.',
       de: 'Ein persönliches Bento-Box-Dashboard mit Links zu KoalaStuff-Projekten, Serverstatus und täglichen Tools. Zieht um zu startpage.koalastuff.net.',
@@ -622,7 +624,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(45, 80%, 50%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A polished self-hosted code snippet manager to capture, organize, and share code snippets easily.',
       de: 'Ein ausgereifter, selbst gehosteter Code-Snippet-Manager zum einfachen Erfassen, Organisieren und Teilen von Code-Snippets.',
@@ -799,7 +801,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(265, 80%, 58%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A local-first Markdown editor with a split CodeMirror workspace, live preview and browser-stored notes.',
       de: 'Ein local-first Markdown-Editor mit geteilter CodeMirror-Arbeitsfläche, Live-Vorschau und lokal im Browser gespeicherten Notizen.',
@@ -869,7 +871,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(30, 80%, 50%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A privacy-focused RSS reader with accounts, custom feeds, read state, OPML, i18n, local image caching and SQLite persistence.',
       de: 'Ein datenschutzfreundlicher RSS-Reader mit Accounts, eigenen Feeds, Lesestatus, OPML, i18n, lokalem Bildcache und SQLite-Persistenz.',
@@ -1008,7 +1010,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(340, 70%, 50%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A privacy-first, self-hosted platform for uninstall feedback and anonymous surveys. No tracking, 100% free.',
       de: 'Eine datenschutzorientierte, selbst hostbare Plattform für Deinstallations-Feedback und anonyme Umfragen. Kein Tracking, 100% kostenlos.',
@@ -1066,7 +1068,9 @@ export const projects: Project[] = [
       website: 'https://bye.koalastuff.net',
       github: 'https://github.com/Shik3i/KoalaBye',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalabye/icon.png',
+    },
   },
   {
     id: 'koalafinance',
@@ -1077,7 +1081,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(120, 55%, 40%)',
-    lastUpdated: '2026-06',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A self-hosted, end-to-end encrypted personal finance tracker. Track budgets and expenses manually without bank APIs, telemetry, or SaaS dependencies.',
       de: 'Ein selbst gehosteter, Ende-zu-Ende-verschlüsselter Finanztracker. Budgets und Ausgaben manuell verwalten – ohne Bank-APIs, Telemetrie oder SaaS-Abhängigkeiten.',
@@ -1130,7 +1134,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(145, 70%, 45%)',
-    lastUpdated: '2026-07',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A privacy-first paper-trading desk for stocks, ETFs, crypto, commodities and live eSports prediction markets — using virtual cash only.',
       de: 'Ein datenschutzfreundliches Paper-Trading-Desk für Aktien, ETFs, Krypto, Rohstoffe und Live-eSports-Prognosemärkte – ausschließlich mit virtuellem Geld.',
@@ -1167,7 +1171,8 @@ export const projects: Project[] = [
     },
     technologies: ['Go', 'Svelte 5', 'TypeScript'],
     tags: ['Go', 'Svelte 5', 'TypeScript', 'SQLite', 'IndexedDB', 'PWA', 'Docker', 'Paper Trading', 'Privacy-first'],
-    links: { github: 'https://github.com/Shik3i/KoalaTrade' },
+    links: { website: 'https://trade.koalastuff.net',
+      github: 'https://github.com/Shik3i/KoalaTrade', },
     assets: {
       icon: '/assets/projects/koalatrade/icon.png',
     },
@@ -1336,7 +1341,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(170, 72%, 42%)',
-    lastUpdated: '2026-07',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A self-hosted open-analytics platform for browser-extension metrics, dashboards, and growth leaderboards.',
       de: 'Eine selbst hostbare Open-Analytics-Plattform für Browser-Erweiterungsmetriken, Dashboards und Wachstumsranglisten.',
@@ -1407,7 +1412,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(155, 55%, 42%)',
-    lastUpdated: '2026-07',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'Privacy-first shared YouTube rooms with synchronized playback and a collaborative queue, without ads, analytics, fingerprinting, or required accounts.',
       de: 'Datenschutzfreundliche gemeinsame YouTube-Räume mit synchronisierter Wiedergabe und gemeinsamer Warteschlange, ohne Werbung, Analytics, Fingerprinting oder Pflichtkonto.',
@@ -1478,7 +1483,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(168, 65%, 43%)',
-    lastUpdated: '2026-07',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A curated hub for GitHub profile visualizers, contribution graphs and README animations, with live previews and clear setup guides.',
       de: 'Ein kuratierter Hub für GitHub-Profilvisualisierungen, Beitragsgraphen und README-Animationen mit Live-Vorschauen und verständlichen Anleitungen.',
@@ -1532,7 +1537,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: false,
     accentColor: 'hsl(145, 55%, 46%)',
-    lastUpdated: '2026-08',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A Windows-first local desktop virtual-pet foundation built around one persistent companion and data-driven progression.',
       de: 'Eine Windows-orientierte lokale Desktop-Virtual-Pet-Grundlage rund um einen persistenten Begleiter und datengetriebenen Fortschritt.',
@@ -1589,7 +1594,9 @@ export const projects: Project[] = [
     links: {
       github: 'https://github.com/Shik3i/KoalaPet',
     },
-    assets: {},
+    assets: {
+      icon: '/assets/projects/koalapet/icon.png',
+    },
   },
   {
     id: 'koalacast',
@@ -1600,7 +1607,7 @@ export const projects: Project[] = [
     listed: true,
     homepage: true,
     accentColor: 'hsl(190, 75%, 48%)',
-    lastUpdated: '2026-07',
+    lastUpdated: '2026-10',
     shortDescription: {
       en: 'A focused podcast hub for discovering, listening to and organizing shows in one calm, privacy-minded web app.',
       de: 'Ein fokussierter Podcast-Hub zum Entdecken, Hören und Organisieren von Sendungen in einer ruhigen, datenschutzfreundlichen Web-App.',
@@ -1732,6 +1739,76 @@ export const projects: Project[] = [
     },
     assets: {
       icon: '/assets/projects/koalashot/icon.png',
+    },
+  },
+  {
+    id: 'koalashelf',
+    name: 'KoalaShelf',
+    category: 'web',
+    status: 'wip',
+    featured: false,
+    listed: true,
+    homepage: true,
+    accentColor: 'hsl(28, 85%, 52%)',
+    lastUpdated: '2026-10',
+    shortDescription: {
+      en: 'A fast, private, self-hostable client for Audiobookshelf with a vinyl record player design, available as a PWA, Android and desktop app.',
+      de: 'Ein schneller, privater Audiobookshelf-Client im Schallplatten-Design, verfügbar als Web-App (PWA), Android- und Desktop-Anwendung.',
+      fr: 'Un client Audiobookshelf rapide et privé au design vinyle, disponible en application web (PWA), Android et pour le bureau.',
+      es: 'Un cliente rápido y privado para Audiobookshelf con diseño de vinilo, disponible como aplicación web (PWA), Android y escritorio.',
+      it: 'Un client rapido e privato per Audiobookshelf con design a vinile, disponibile come web app (PWA), Android e desktop.',
+      nl: 'Een snelle en privacygerichte Audiobookshelf-client met een vinyl-ontwerp, beschikbaar als webapp (PWA), Android en desktop.',
+      pl: 'Szybki i dbający o prywatność klient Audiobookshelf w stylu płyt winylowych, dostępny jako aplikacja webowa (PWA), na Androida i pulpit.',
+      pt: 'Um cliente rápido e privado para Audiobookshelf com design em vinil, disponível como aplicação web (PWA), Android e desktop.',
+      'pt-BR': 'Um cliente rápido e privado para Audiobookshelf com design em vinil, disponível como aplicativo web (PWA), Android e desktop.',
+      tr: 'Plak çalar tasarımına sahip, PWA, Android ve masaüstü uygulaması olarak kullanılabilen hızlı ve gizlilik odaklı bir Audiobookshelf istemcisi.',
+      ru: 'Быстрый и приватный клиент для Audiobookshelf в стиле винилового проигрывателя, доступный как веб-приложение (PWA), Android и десктоп.',
+      ja: 'レコードプレーヤーをモチーフにした、PWA、Android、デスクトップ対応の高速でプライベートなAudiobookshelfクライアント。',
+      ko: '바이닐 레코드 플레이어 디자인을 갖춘, PWA, Android 및 데스크톱 앱으로 제공되는 빠르고 안전한 Audiobookshelf 클라이언트.',
+      zh: '一款快速、注重隐私的 Audiobookshelf 客户端，采用黑胶唱片风格设计，支持 PWA、Android 和桌面应用。',
+      uk: 'Швидкий і приватний клієнт для Audiobookshelf у стилі вінілового програвача, доступний як вебзастосунок (PWA), Android та десктоп.',
+    },
+    longDescription: {
+      en: 'KoalaShelf is a dedicated client for Audiobookshelf servers that leaves your media server untouched while delivering an enhanced listening experience. It features smart sleep timers, offline downloads, bookmarks, playback speed tuning, and a tactile vinyl-inspired design across web, mobile, and desktop.',
+      de: 'KoalaShelf ist ein spezialisierter Client für Audiobookshelf-Server, der das Hörerlebnis mit smartem Sleeptimer, Offline-Downloads, Lesezeichen und präziser Temposteuerung erweitert. Das taktile Schallplatten-Design verbindet Web, Android und Desktop in einer durchdachten Oberfläche.',
+      fr: 'KoalaShelf est un client dédié pour Audiobookshelf qui améliore l’écoute sans modifier votre serveur. Il propose une minuterie de sommeil intelligente, des téléchargements hors ligne, des signets et une interface tactile inspirée des vinyles sur le web, mobile et bureau.',
+      es: 'KoalaShelf es un cliente dedicado para Audiobookshelf que mejora la reproducción sin alterar tu servidor. Ofrece temporizador inteligente, descargas sin conexión, marcadores y una interfaz táctil inspirada en vinilos para web, móvil y escritorio.',
+      it: 'KoalaShelf è un client dedicato per Audiobookshelf che migliora l’ascolto senza modificare il server. Include timer di spegnimento intelligente, download offline, segnalibri e un design tattile ispirato ai vinili per web, mobile e desktop.',
+      nl: 'KoalaShelf is een speciale client voor Audiobookshelf die het luisteren verrijkt zonder je server aan te passen. Het biedt slimme slaaptimers, offline downloads, bladwijzers en een tactiel vinyl-ontwerp voor web, mobiel en desktop.',
+      pl: 'KoalaShelf to dedykowany klient Audiobookshelf, który wzbogaca wrażenia ze słuchania bez modyfikowania Twojego serwera. Oferuje inteligentny wyłącznik czasowy, pobieranie offline, zakładki oraz interfejs inspirowany płytami winylowymi na web, Androida i pulpit.',
+      pt: 'KoalaShelf é um cliente dedicado para Audiobookshelf que melhora a experiência sem alterar o servidor. Oferece temporizador inteligente, transferências offline, marcadores e uma interface tátil inspirada em vinis para web, telemóvel e desktop.',
+      'pt-BR': 'KoalaShelf é um cliente dedicado para Audiobookshelf que aprimora a experiência sem alterar o servidor. Oferece temporizador inteligente, downloads offline, marcadores e uma interface tátil inspirada em vinis para web, celular e desktop.',
+      tr: 'KoalaShelf, sunucunuzu değiştirmeden dinleme deneyimini geliştiren özel bir Audiobookshelf istemcisidir. Akıllı uyku zamanlayıcıları, çevrimdışı indirmeler, yer imleri ve web, mobil ile masaüstünde vinil esintili bir tasarım sunar.',
+      ru: 'KoalaShelf — это клиент для серверов Audiobookshelf, который улучшает воспроизведение, не требуя изменений на сервере. Включает умный таймер сна, офлайн-загрузку, закладки и виниловый интерфейс для веб, Android и десктопа.',
+      ja: 'KoalaShelfは、サーバー本体に変更を加えることなくリスニング体験を向上させるAudiobookshelf専用クライアントです。スマートスリープタイマー、オフラインダウンロード、ブックマーク、温かみのあるレコードデザインを備えています。',
+      ko: 'KoalaShelf는 서버 설정 변경 없이 청취 경험을 극대화하는 Audiobookshelf 전용 클라이언트입니다. 스마트 수면 타이머, 오프라인 다운로드, 북마크, 바이닐 디자인을 웹, 모바일, 데스크톱에서 제공합니다.',
+      zh: 'KoalaShelf 是一款专为 Audiobookshelf 服务器打造的客户端，无需改动现有服务器即可带来更出色的有声书收听体验。支持智能睡眠定时、离线下载、书签以及跨平台黑胶质感界面。',
+      uk: 'KoalaShelf — це спеціалізований клієнт для Audiobookshelf, який покращує процес прослуховування без змін на сервері. Пропонує розумний таймер сну, офлайн-завантаження, закладки та вініловий дизайн для веб, Android і десктопа.',
+    },
+    backstory: {
+      en: 'Standard audiobook interfaces often feel utilitarian and cluttered. I built KoalaShelf to make listening to audiobooks feel like browsing records in a personal crate, with analog warmth and complete offline autonomy.',
+      de: 'Klassische Hörbuch-Apps wirken oft überladen und technisch. Ich habe KoalaShelf entwickelt, damit sich das Entdecken und Hören wie das Stöbern in einer persönlichen Plattensammlung anfühlt – mit analoger Wärme und voller Offline-Freiheit.',
+      fr: 'Les applications de livres audio sont souvent austères et encombrées. J’ai conçu KoalaShelf pour que l’écoute ressemble au plaisir de feuilleter des vinyles dans un bac personnel, avec de la chaleur analogique et une autonomie hors ligne totale.',
+      es: 'Las aplicaciones de audiolibros suelen ser frías y recargadas. Creé KoalaShelf para que escuchar un libro se sienta como buscar discos en una colección propia, con calidez analógica y total autonomía sin conexión.',
+      it: 'Le app per audiolibri spesso risultano fredde e caotiche. Ho creato KoalaShelf per far sembrare l’ascolto come lo sfogliare dischi in una collezione personale, con calore analogico e completa autonomia offline.',
+      nl: 'Traditionele luisterboek-apps voelen vaak technisch en vol aan. Ik bouwde KoalaShelf zodat luisteren aanvoelt als bladeren door platen in een persoonlijke kist, met analoge warmte en volledige offline vrijheid.',
+      pl: 'Tradycyjne aplikacje do audiobooków bywają przeładowane i surowe. Stworzyłem KoalaShelf, aby słuchanie książek przypominało przeglądanie płyt winylowych w prywatnej kolekcji, z analogowym ciepłem i pełną swobodą offline.',
+      pt: 'As aplicações de audiolivros costumam ser impessoais e pesadas. Criei o KoalaShelf para que ouvir um livro pareça escolher um disco numa coleção pessoal, com calor analógico e total autonomia offline.',
+      'pt-BR': 'Os aplicativos de audiolivros costumam ser impessoais e pesados. Criei o KoalaShelf para que ouvir um livro pareça escolher um disco em uma coleção pessoal, com calor analógico e total autonomia offline.',
+      tr: 'Sesli kitap uygulamaları genelde karmaşık ve soğuk hissettirir. Dinleme deneyimini kişisel bir plak koleksiyonunu karıştırmak gibi hissettirmek için, analog sıcaklık ve tam çevrimdışı özgürlük sunan KoalaShelf’i geliştirdim.',
+      ru: 'Приложения для аудиокниг часто выглядят перегруженными. Я создал KoalaShelf, чтобы прослушивание книг напоминало выбор пластинки из личной коллекции винила — с аналоговым теплом и полной автономностью.',
+      ja: 'オーディオブックアプリは無機質で雑然としがちです。個人のレコード棚でお気に入りの一枚を探すような感覚で本を楽しめるよう、温もりとオフラインの自由度を大切にしてKoalaShelfを作りました。',
+      ko: '기존 오디오북 앱은 다소 딱딱하고 복잡한 경우가 많습니다. 개인 레코드 상자에서 LP를 고르는 듯한 아날로그 감성과 온전한 오프라인 자유를 누릴 수 있도록 KoalaShelf를 만들었습니다.',
+      zh: '大多数有声书应用的界面往往显得呆板而杂乱。我开发 KoalaShelf，希望让找书与听书的过程如同在私人唱片箱中翻找黑胶一般惬意，兼具模拟温暖感与纯粹的离线自主性。',
+      uk: 'Звичайні додатки для аудіокниг часто виглядають перевантаженими та сухими. Я створив KoalaShelf, щоб прослуховування нагадувало перебирання платівок у власній колекції, з аналоговим теплом і повною автономністю.',
+    },
+    technologies: ['SvelteKit', 'TypeScript', 'Tailwind CSS'],
+    tags: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Audiobookshelf', 'PWA', 'Android', 'Desktop', 'Open Source', 'Local-first', 'Privacy-first'],
+    links: {
+      github: 'https://github.com/Shik3i/KoalaShelf',
+    },
+    assets: {
+      icon: '/assets/projects/koalashelf/icon.png',
     },
   },
 ];

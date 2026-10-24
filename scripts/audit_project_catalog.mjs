@@ -15,7 +15,6 @@ const ignoredRepos = new Set([
   'koalabattle',
   'koalasand',
   'koalasandpaper',
-  'koalashelf',
 ]);
 
 const headers = {

@@ -40,7 +40,7 @@ KoalaStuff is not a single bundled product, hosted account platform or commercia
 - Mastodon: https://mastodon.social/@koalastuff
 - Support: https://ko-fi.com/koaladev
 
-# Complete project catalog (26 projects)
+# Complete project catalog (27 projects)
 
 ## KoalaShip
 
@@ -54,7 +54,7 @@ I read an article about "Dopamine sites" in South Korea (sites with fake shoppin
 
 - Category: web
 - Lifecycle status: wip
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Svelte 5, TypeScript, Vite, Tailwind CSS, Leaflet, Open Source, Web App, Simulation
 - Project page: https://koalastuff.net/projects/koalaship/
 - Website: https://ship.koalastuff.net
@@ -72,7 +72,7 @@ Flatland TD was heavily inspired by the game 'The Tower'. It really annoyed me t
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: SvelteKit, Svelte 5, TypeScript, PixiJS, WebGL, IndexedDB, PWA, Open Source, Game, Idle Tower Defense, Local-first
 - Project page: https://koalastuff.net/projects/flatland-td/
 - Website: https://tower.koalastuff.net
@@ -90,7 +90,7 @@ KoalaSync was born out of frustration that popular watch party alternatives like
 
 - Category: extensions
 - Lifecycle status: active
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: JavaScript, Node.js, WebSocket, Web Audio API, Open Source, Browser Extension, Self-hostable, Free, Watch Party
 - Project page: https://koalastuff.net/projects/koalasync/
 - Website: https://sync.koalastuff.net
@@ -110,7 +110,7 @@ Tired of searching for a new, working graphical user interface every time I want
 
 - Category: desktop
 - Lifecycle status: active
-- Catalog updated: 2026-05
+- Catalog updated: 2026-10
 - Technologies and focus: Python, Flet, yt-dlp, ffmpeg, Open Source, Desktop App, Free, Local-first, Privacy-first
 - Project page: https://koalastuff.net/projects/koalapull/
 - Website: https://pull.koalastuff.net
@@ -128,7 +128,7 @@ While playing Cookie Clicker, I wanted an easy, safe way to quickly automate cli
 
 - Category: extensions
 - Lifecycle status: wip
-- Catalog updated: 2026-04
+- Catalog updated: 2026-10
 - Technologies and focus: JavaScript, WebExtensions API, CSS, Open Source, Browser Extension, Free, Privacy-first, Automation, Idle Games
 - Project page: https://koalastuff.net/projects/koalaclicker/
 - Website: https://clicker.koalastuff.net
@@ -163,7 +163,7 @@ Modern movies often have extreme volume fluctuations between quiet dialogue and 
 
 - Category: extensions
 - Lifecycle status: experimental
-- Catalog updated: 2026-03
+- Catalog updated: 2026-10
 - Technologies and focus: JavaScript, Web Audio API, CSS, Open Source, Browser Extension, Free, Audio, Experimental
 - Project page: https://koalastuff.net/projects/koalasound/
 - GitHub: https://github.com/Shik3i/KoalaSound
@@ -180,7 +180,7 @@ I needed a personalized new tab page that immediately links to all my key projec
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: JavaScript, Vanilla CSS, PWA, Open Source, Web App, Dashboard, Self-hosted, Zero Dependencies
 - Project page: https://koalastuff.net/projects/koalastartpage/
 - Website: https://start.koalastuff.net
@@ -198,7 +198,7 @@ I was frustrated by the chaos of keeping hundreds of unsaved tabs open in Notepa
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Next.js 16, TypeScript, Tailwind CSS 4, SQLite, Drizzle, Shiki, Open Source, Self-hostable, Developer Tools
 - Project page: https://koalastuff.net/projects/koalasnippets/
 - Website: https://snippets.koalastuff.net
@@ -252,7 +252,7 @@ I wanted a small, fast Markdown workspace that keeps drafts local by default and
 
 - Category: web
 - Lifecycle status: wip
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Svelte 5, TypeScript, Vite, CodeMirror, Markdown, Local-first, PWA, Web App, Early
 - Project page: https://koalastuff.net/projects/koalaedit/
 - GitHub: https://github.com/Shik3i/KoalaEdit
@@ -269,7 +269,7 @@ I wanted to create a privacy-focused RSS reader and aggregator that allows me to
 
 - Category: web
 - Lifecycle status: early
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Go, SvelteKit, TypeScript, Tailwind CSS, SQLite, sqlc, RSS, Docker, Open Source, Self-hostable, Privacy-first, Web App, Early
 - Project page: https://koalastuff.net/projects/koalanews/
 - Website: https://news.koalastuff.net
@@ -304,7 +304,7 @@ To understand why users uninstall KoalaSync, I needed a privacy-focused survey t
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Go, Templ, HTMX, SQLite, Docker, Open Source, Self-hostable, Privacy-first, Web App, Survey Tool, Early
 - Project page: https://koalastuff.net/projects/koalabye/
 - Website: https://bye.koalastuff.net
@@ -322,7 +322,7 @@ I wanted a personal finance tool that doesn't connect to banks or rely on extern
 
 - Category: web
 - Lifecycle status: wip
-- Catalog updated: 2026-06
+- Catalog updated: 2026-10
 - Technologies and focus: Go, TypeScript, Svelte, SQLite, E2EE, Self-hostable, Privacy-first, Web App, Early
 - Project page: https://koalastuff.net/projects/koalafinance/
 - GitHub: https://github.com/Shik3i/KoalaFinance
@@ -339,9 +339,10 @@ I wanted a way to learn how markets behave without risking real money or handing
 
 - Category: web
 - Lifecycle status: early
-- Catalog updated: 2026-07
+- Catalog updated: 2026-10
 - Technologies and focus: Go, Svelte 5, TypeScript, SQLite, IndexedDB, PWA, Docker, Paper Trading, Privacy-first
 - Project page: https://koalastuff.net/projects/koalatrade/
+- Website: https://trade.koalastuff.net
 - GitHub: https://github.com/Shik3i/KoalaTrade
 
 ## KoalaFi
@@ -407,7 +408,7 @@ KoalaData grew out of the need for a focused analytics workspace for browser ext
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-07
+- Catalog updated: 2026-10
 - Technologies and focus: SvelteKit, Svelte 5, TypeScript, SQLite, ECharts, Docker, Analytics, Privacy-first, Open Source
 - Project page: https://koalastuff.net/projects/koaladata/
 - Website: https://data.koalastuff.net
@@ -425,7 +426,7 @@ KoalaParty grew from the need for a permanent, privacy-first alternative to temp
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-07
+- Catalog updated: 2026-10
 - Technologies and focus: SvelteKit, TypeScript, Go, WebSockets, SQLite, Docker, Open Source, Privacy-first, Watch Party
 - Project page: https://koalastuff.net/projects/koalaparty/
 - Website: https://party.koalastuff.net
@@ -443,7 +444,7 @@ GitHub profile effects are scattered across many repositories, and their setup i
 
 - Category: web
 - Lifecycle status: active
-- Catalog updated: 2026-07
+- Catalog updated: 2026-10
 - Technologies and focus: Go, SvelteKit, TypeScript, SQLite, Docker, GitHub, README, Open Source
 - Project page: https://koalastuff.net/projects/koalagithub/
 - Website: https://github.koalastuff.net
@@ -461,7 +462,7 @@ I wanted a small companion that could stay local and grow from a classic care lo
 
 - Category: desktop
 - Lifecycle status: early
-- Catalog updated: 2026-08
+- Catalog updated: 2026-10
 - Technologies and focus: Godot 4, Godot, GDScript, Python, Windows, Desktop, Virtual Pet, Local-first, Open Source
 - Project page: https://koalastuff.net/projects/koalapet/
 - GitHub: https://github.com/Shik3i/KoalaPet
@@ -478,7 +479,7 @@ Podcast apps often combine noisy discovery, mandatory accounts, tracking or plat
 
 - Category: web
 - Lifecycle status: early
-- Catalog updated: 2026-07
+- Catalog updated: 2026-10
 - Technologies and focus: Go, SvelteKit, TypeScript, SQLite, IndexedDB, RSS, Docker, Open Source, Podcast, Local-first, Privacy-first
 - Project page: https://koalastuff.net/projects/koalacast/
 - Website: https://cast.koalastuff.net
@@ -502,3 +503,20 @@ Most screenshot extensions upload images to third-party servers or inject teleme
 - GitHub: https://github.com/Shik3i/KoalaShot
 - Chrome Web Store: https://chromewebstore.google.com/detail/koalashot/ohdhaimfgkjcnggkhggomgajclnhhbfk
 - Firefox Add-ons: https://addons.mozilla.org/firefox/addon/koalashot/
+
+## KoalaShelf
+
+KoalaShelf is a dedicated client for Audiobookshelf servers that leaves your media server untouched while delivering an enhanced listening experience. It features smart sleep timers, offline downloads, bookmarks, playback speed tuning, and a tactile vinyl-inspired design across web, mobile, and desktop.
+
+### Why it exists
+
+Standard audiobook interfaces often feel utilitarian and cluttered. I built KoalaShelf to make listening to audiobooks feel like browsing records in a personal crate, with analog warmth and complete offline autonomy.
+
+### Project profile
+
+- Category: web
+- Lifecycle status: wip
+- Catalog updated: 2026-10
+- Technologies and focus: SvelteKit, TypeScript, Tailwind CSS, Audiobookshelf, PWA, Android, Desktop, Open Source, Local-first, Privacy-first
+- Project page: https://koalastuff.net/projects/koalashelf/
+- GitHub: https://github.com/Shik3i/KoalaShelf
